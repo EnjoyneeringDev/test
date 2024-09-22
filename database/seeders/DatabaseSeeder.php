@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\RuanganPuskesmas;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +24,10 @@ class DatabaseSeeder extends Seeder
         // seeder
         $this->call([
             IdentitasPuskesmasSeeder::class,
+            WilayahKerjaPuskesmasSeeder::class,
+            SumberDayaPuskesmasSeeder::class,
+            RuanganPuskesmasSeeder::class,
+            KetersediaanRuanganPuskesmasSeeder::class,
             UserSeeder::class,
         ]);
     }
