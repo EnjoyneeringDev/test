@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('kota')->nullable();
             $table->string('provinsi')->nullable();
             $table->string('kodePos')->nullable();
-            $table->string('telp')->nullable();
+            $table->string('telepon')->nullable();
             $table->string('fax')->nullable();
             $table->string('email')->nullable();
             $table->string('koordinat_lu')->nullable();
