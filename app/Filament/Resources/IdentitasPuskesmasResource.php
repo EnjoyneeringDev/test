@@ -6,6 +6,7 @@ use App\Filament\Resources\IdentitasPuskesmasResource\Pages;
 use App\Filament\Resources\IdentitasPuskesmasResource\RelationManagers;
 use App\Models\IdentitasPuskesmas;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -24,50 +25,60 @@ class IdentitasPuskesmasResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_puskesmas')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kode_registrasi_puskesmas')
-                    ->required()
-                    ->maxLength(255),
-                Select::make('status_akreditasi')->options([
-                    'telah_terakreditasi' => 'Telah Terakreditasi',
-                    'sedang_proses_akreditasi' => 'Sedang Proses Akreditasi',
-                    'belum_proses_akreditasi' => 'Belum Proses Akreditasi'
+                Fieldset::make('Data Dasar Puskesmas')->schema([
+                    Forms\Components\TextInput::make('nama_puskesmas')
+                        ->required()
+                        ->maxLength(255)->columnSpanFull(),
+                    Forms\Components\TextInput::make('kode_registrasi_puskesmas')
+                        ->required()
+                        ->maxLength(255)->columnSpanFull(),
+                    Select::make('kategori_puskesmas')->options(['perkotaan' => 'Perkotaan', 'pedesaan' => 'Pedesaan', 'terpencil' => 'Terpencil', 'sangat_terpencil' => "Sangat Terpencil"])->columnSpanFull(),
+                    Select::make('kemampuan_penyelenggaraan_puskesmas')->options(["rawat_inap" => "Rawat Inap", "non_rawat_inap" => "Non Rawat Inap"])->columnSpanFull()
                 ]),
-                Forms\Components\TextInput::make('tahun_akreditasi')
-                    ->numeric(),
-                Select::make('jenis_akreditasi')->options(['dasar' => "Dasar", 'madya' => "Madya", 'utama' => "Utama", 'paripurna' => "Paripurna"]),
-                Forms\Components\TextInput::make('jalan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('desa')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kelurahan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kecamatan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kota')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('provinsi')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kodePos')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('telepon')
-                    ->tel()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('fax')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('koordinat_lu')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('koordinat_ls')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('koordinat_bt')
-                    ->maxLength(255),
-                Select::make('kategori_puskesmas')->options(['perkotaan' => 'Perkotaan', 'pedesaan' => 'Pedesaan', 'terpencil' => 'Terpencil', 'sangat_terpencil' => "Sangat Terpencil"]),
-                Select::make('kemampuan_penyelenggaraan_puskesmas')->options(["rawat_inap" => "Rawat Inap", "non_rawat_inap" => "Non Rawat Inap"])
+                Fieldset::make('Akreditasi Puskesmas')->schema([
+                    Select::make('status_akreditasi')->options([
+                        'telah_terakreditasi' => 'Telah Terakreditasi',
+                        'sedang_proses_akreditasi' => 'Sedang Proses Akreditasi',
+                        'belum_proses_akreditasi' => 'Belum Proses Akreditasi'
+                    ]),
+                    Forms\Components\TextInput::make('tahun_akreditasi')
+                        ->numeric(),
+                    Select::make('jenis_akreditasi')->options(['dasar' => "Dasar", 'madya' => "Madya", 'utama' => "Utama", 'paripurna' => "Paripurna"]),
+                ])->columns(3),
+                Fieldset::make('Alamat Puskesmas')->schema([
+                    Forms\Components\TextInput::make('jalan')
+                        ->maxLength(255)->columnSpanFull(),
+                    Forms\Components\TextInput::make('desa')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('kelurahan')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('kecamatan')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('kota')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('provinsi')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('kodePos')
+                        ->maxLength(255),
+                    Fieldset::make('Koordinat Puskemas')->schema([
+                        Forms\Components\TextInput::make('koordinat_lu')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('koordinat_ls')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('koordinat_bt')
+                            ->maxLength(255),
+                    ])->columns(3),
+                ]),
+                Fieldset::make('Kontak Puskesmas')->schema([
+                    Forms\Components\TextInput::make('telepon')
+                        ->tel()
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('fax')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('email')
+                        ->email()
+                        ->maxLength(255),
+                ])->columns(3),
             ]);
     }
 
