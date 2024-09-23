@@ -32,4 +32,9 @@ class SumberDayaManusia extends Model
     {
         return $this->hasMany(RiwayatJabatanKedudukan::class);
     }
+
+    public function pelatihanJabatanPenjenjangan(): HasMany
+    {
+        return $this->hasMany(PelatihanJabatanPenjenjangan::class);
+    }
 }

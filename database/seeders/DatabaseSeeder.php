@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
             SumberDayaManusiaSeeder::class,
             RiwayatKepangkatanDanGolonganSeeder::class,
             RiwayatPendidikanSeeder::class,
-            RiwayatJabatanKedudukanSeeder::class
+            RiwayatJabatanKedudukanSeeder::class,
+            PelatihanJabatanPenjenjanganSeeder::class
         ]);
     }
 }
