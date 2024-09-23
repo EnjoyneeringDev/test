@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class SumberDayaManusia extends Model
 {
@@ -15,5 +16,10 @@ class SumberDayaManusia extends Model
     public function identitasPuskesmas(): BelongsTo
     {
         return $this->belongsTo(IdentitasPuskesmas::class);
+    }
+
+    public function riwayatKepangkatanDanGolongan(): HasMany
+    {
+        return $this->hasMany(RiwayatKepangkatanDanGolongan::class);
     }
 }
