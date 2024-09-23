@@ -31,4 +31,9 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(KetersediaanRuanganPuskesmas::class);
     }
+
+    public function sumberDayaManusia(): HasMany
+    {
+        return $this->hasMany(SumberDayaManusia::class);
+    }
 }

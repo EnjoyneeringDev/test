@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\RuanganPuskesmas;
+use App\Models\SumberDayaManusia;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
             RuanganPuskesmasSeeder::class,
             KetersediaanRuanganPuskesmasSeeder::class,
             UserSeeder::class,
+            SumberDayaManusiaSeeder::class,
         ]);
     }
 }
