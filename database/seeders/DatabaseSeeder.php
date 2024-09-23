@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
             KetersediaanRuanganPuskesmasSeeder::class,
             UserSeeder::class,
             SumberDayaManusiaSeeder::class,
-            RiwayatKepangkatanDanGolonganSeeder::class
+            RiwayatKepangkatanDanGolonganSeeder::class,
+            RiwayatPendidikanSeeder::class
         ]);
     }
 }
