@@ -21,12 +21,12 @@ return new class extends Migration
             $table->boolean('lokakarya_mini_bulanan')->nullable();
             $table->boolean('lokakarya_mini_triwulan')->nullable();
             $table->boolean('dokumen_pkp')->nullable();
-            $table->integer('hasil_pelayanan_kesehatan')->nullable();
-            $table->integer('hasil_manajemen')->nullable();
+            $table->enum('hasil_pelayanan_kesehatan', ['baik', 'cukup', 'kurang'])->nullable();
+            $table->enum('hasil_manajemen', ['baik', 'cukup', 'kurang'])->nullable();
             $table->boolean('feedback_dinkes_yang_diterima')->nullable();
             $table->boolean('dokumen_pkp_dinkes_kota')->nullable();
-            $table->integer('hasil_pelayanan_kesehatan_dinkes_kota')->nullable();
-            $table->integer('hasil_manajemen_dinkes_kota')->nullable();
+            $table->enum('hasil_pelayanan_kesehatan_dinkes_kota', ['baik', 'cukup', 'kurang'])->nullable();
+            $table->enum('hasil_manajemen_dinkes_kota', ['baik', 'cukup', 'kurang'])->nullable();
             $table->boolean('pelayanan_promosi_kesehatan')->nullable();
             $table->boolean('pelayanan_kesehatan_lingkungan')->nullable();
             $table->boolean('pelayanan_kia')->nullable();
