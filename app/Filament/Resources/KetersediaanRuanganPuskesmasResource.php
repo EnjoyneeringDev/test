@@ -16,6 +16,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class KetersediaanRuanganPuskesmasResource extends Resource
 {
+    protected static ?int $navigationSort = 4;
+
+    protected static ?string $navigationLabel = 'III. KETERSEDIAAN RUANGAN PUSKESMAS';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR';
+
     protected static ?string $model = KetersediaanRuanganPuskesmas::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -24,11 +30,9 @@ class KetersediaanRuanganPuskesmasResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
+                Select::make('identitas_puskesmas_id')->relationship(name: 'identitasPuskesmas', titleAttribute: 'nama_puskesmas')->label('Puskesmas'),
                 Forms\Components\Select::make('ruangan_puskesmas_id')
-                    ->relationship('ruanganPuskesmas', 'id')
+                    ->relationship('ruanganPuskesmas', 'nama_ruangan')
                     ->required(),
                 Forms\Components\Toggle::make('ketersediaan'),
                 Forms\Components\TextInput::make('tahun_pendirian')

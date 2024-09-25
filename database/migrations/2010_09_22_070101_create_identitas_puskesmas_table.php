@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("nama_puskesmas");
             $table->string('kode_registrasi_puskesmas');
             $table->enum('status_akreditasi', ['telah_terakreditasi', 'sedang_proses_akreditasi', 'belum_proses_akreditasi'])->nullable();
-            $table->integer('tahun_akreditasi')->nullable();
             $table->enum('jenis_akreditasi', ['dasar', 'madya', 'utama', 'paripurna'])->nullable();
             $table->string('jalan')->nullable();
             $table->string('desa')->nullable();
