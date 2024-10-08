@@ -109,11 +109,8 @@ class SumberDayaManusiaResource extends Resource
                             Forms\Components\TextInput::make('provinsi')
                                 ->maxLength(255)->label('7) Provinsi'),
                         ]),
-
                     ])
                 ]),
-
-
             ]);
     }
 
