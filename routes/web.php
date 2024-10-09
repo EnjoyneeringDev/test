@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/identitas-puskesmas/download-pdf', [PdfController::class, 'downloadIdentitasPuskesmasPdf'])
+Route::get('/admin/identitas-puskesmas/download-pdf/{id}', [PdfController::class, 'downloadIdentitasPuskesmasPdf'])
     ->name('download.identitas.puskesmas.pdf');

@@ -11,12 +11,12 @@ use setasign\Fpdi\PdfReader;
 
 class PdfController extends Controller
 {
-    public function downloadIdentitasPuskesmasPdf()
+    public function downloadIdentitasPuskesmasPdf($id)
     {
         \Log::info('downloadIdentitasPuskesmasPdf method called');
 
         $identitasPuskesmas = (object) [
-            'nama' => 'Puskesmas Sehat Sentosa',
+            'nama' => 'Puskesmas Sehat Sentosa' . $id,
             'noRegis' => '2asq4qafaf1234124',
             'akreditasi' => 1,
             'tahunAkreditasi' => 2018,
