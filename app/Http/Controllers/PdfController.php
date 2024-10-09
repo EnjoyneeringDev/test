@@ -9,14 +9,18 @@ use Illuminate\Http\Response;
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdi\PdfReader;
 
+use App\Models\IdentitasPuskesmas;
+
 class PdfController extends Controller
 {
     public function downloadIdentitasPuskesmasPdf($id)
     {
         \Log::info('downloadIdentitasPuskesmasPdf method called');
 
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
         $identitasPuskesmas = (object) [
-            'nama' => 'Puskesmas Sehat Sentosa' . $id,
+            'dataDasar' => $dataDasarPuskesmas,
             'noRegis' => '2asq4qafaf1234124',
             'akreditasi' => 1,
             'tahunAkreditasi' => 2018,

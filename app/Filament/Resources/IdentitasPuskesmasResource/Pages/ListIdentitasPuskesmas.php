@@ -25,7 +25,7 @@ class ListIdentitasPuskesmas extends ListRecords
                 ->label('Download PDF')
                 ->color('primary')
                 ->action(function () {
-                    return redirect()->route('download.identitas.puskesmas.pdf', ['id' => 10]);
+                    return redirect()->route('download.identitas.puskesmas.pdf', ['id' => 1]);
                 }),
         ];
     }

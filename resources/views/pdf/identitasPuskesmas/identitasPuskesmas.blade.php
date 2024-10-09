@@ -107,12 +107,12 @@
             <tr>
                 <td class="column5">1</td>
                 <td class="column40">Nama puskesmas</td>
-                <td class="column55">{{ $identitasPuskesmas->nama }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->nama_puskesmas }}</td>
             </tr>
             <tr>
                 <td class="column5">2</td>
                 <td class="column40">Kode registrasi puskesmas</td>
-                <td class="column55">{{ $identitasPuskesmas->noRegis }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->kode_registrasi_puskesmas }}</td>
             </tr>
         </tbody>
     </table>
@@ -134,20 +134,20 @@
             <tr>
                 <td class="column5">1</td>
                 <td class="column40">Nama puskesmas</td>
-                <td class="column55">{{ $identitasPuskesmas->nama }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->nama_puskesmas }}</td>
             </tr>
             <tr>
                 <td class="column5">2</td>
                 <td class="column40">Kode registrasi puskesmas</td>
-                <td class="column55">{{ $identitasPuskesmas->noRegis }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->kode_registrasi_puskesmas }}</td>
             </tr>
             <tr>
                 <td class="column5">3</td>
                 <td class="column40">Status akreditasi </td>
                 <td class="column55">
-                    @if ($identitasPuskesmas->akreditasi === 1)
+                    @if ($identitasPuskesmas->dataDasar->status_akreditasi === "telah_terakreditasi")
                         Telah akreditasi, terakhir tahun {{ $identitasPuskesmas->tahunAkreditasi }}
-                    @elseif ($identitasPuskesmas->akreditasi === 2)
+                    @elseif ($identitasPuskesmas->dataDasar->status_akreditasi === "sedang_proses_akreditasi")
                         Sedang dalam proses akreditasi
                     @else
                         Belum proses akreditasi
@@ -162,17 +162,17 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column40">a.  Jalan / komplek</td>
-                <td class="column55">{{ $identitasPuskesmas->alamat }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->jalan }}</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column40">b.  Desa/kelurahan</td>
-                <td class="column55">{{ $identitasPuskesmas->kelurahan }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->kelurahan }}</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column40">c.  Kecamatan</td>
-                <td class="column55">{{ $identitasPuskesmas->kecamatan }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->kecamatan }}</td>
             </tr>
             <tr>
                 <td class="column5"></td>
@@ -187,37 +187,37 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column40">f.  Kode pos</td>
-                <td class="column55">{{ $identitasPuskesmas->kodePos }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->kodePos }}</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column40">g.  Telepon</td>
-                <td class="column55">{{ $identitasPuskesmas->telepon }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->telepon }}</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column40">h.  Fax</td>
-                <td class="column55">{{ $identitasPuskesmas->fax }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->fax }}</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column40">i.  Email</td>
-                <td class="column55">{{ $identitasPuskesmas->email }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->email }}</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column40">j. Titik koordinat  (LU/LS/BT)</td>
-                <td class="column55">{{ $identitasPuskesmas->koordinat }}</td>
+                <td class="column55">{{ $identitasPuskesmas->dataDasar->koordinat_lu }},{{ $identitasPuskesmas->dataDasar->koordinat_ls }},{{ $identitasPuskesmas->dataDasar->koordinat_bt }}</td>
             </tr>
             <tr>
                 <td class="column5">5</td>
                 <td class="column40">Kategori puskesmas berdasarkan karakteristik wilayah</td>
                 <td class="column55">
-                    @if ($identitasPuskesmas->Puskesmas_wilayah === 1)
+                    @if ($identitasPuskesmas->dataDasar->kategori_puskesmas === "perkotaan")
                         Perkotaan
-                    @elseif ($identitasPuskesmas->Puskesmas_wilayah === 2)
+                    @elseif ($identitasPuskesmas->dataDasar->kategori_puskesmas === "pedesaan")
                         Perdesaan
-                    @elseif ($identitasPuskesmas->Puskesmas_wilayah === 3)
+                    @elseif ($identitasPuskesmas->dataDasar->kategori_puskesmas === "terpencil")
                         Terpencil
                     @else
                         Sangat terpencil
@@ -228,7 +228,7 @@
                 <td class="column5">6</td>
                 <td class="column40">Kategori puskesmas berdasarkan kemampuan penyelenggaraan</td>
                 <td class="column55">
-                    @if ($identitasPuskesmas->Puskesmas_kemampuan_penyelengaraan === 1)
+                    @if ($identitasPuskesmas->dataDasar->kemampuan_penyelenggaraan_puskesmas === "rawat_inap")
                         Rawat Inap
                     @else
                         No Rawat Inap
