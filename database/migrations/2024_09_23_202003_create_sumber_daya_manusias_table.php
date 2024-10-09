@@ -26,6 +26,7 @@ return new class extends Migration
             $table->enum('agama', ['islam', 'kristen', 'katolik', 'hindu', 'budha', 'khonghucu'])->nullable();
             $table->enum('status_perkawinan', ['belum_kawin', 'kawin', 'cerai_hidup', 'cerai_mati'])->nullable();
             $table->string('alamat')->nullable();
+            $table->string('email')->nullable();
             $table->string('telepon')->nullable();
             $table->date('tanggal_berlaku_str')->nullable();
             $table->date('tanggal_berlaku_sip')->nullable();

@@ -15,6 +15,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RuanganPuskesmasResource extends Resource
 {
+    protected static ?int $navigationSort = 3;
+
+    protected static ?string $navigationLabel = 'III. RUANGAN PUSKESMAS';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR';
+
     protected static ?string $model = RuanganPuskesmas::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
