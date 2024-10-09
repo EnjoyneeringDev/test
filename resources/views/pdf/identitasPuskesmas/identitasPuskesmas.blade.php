@@ -146,7 +146,7 @@
                 <td class="column40">Status akreditasi </td>
                 <td class="column55">
                     @if ($identitasPuskesmas->dataDasar->status_akreditasi === "telah_terakreditasi")
-                        Telah akreditasi, terakhir tahun {{ $identitasPuskesmas->tahunAkreditasi }}
+                        Telah akreditasi
                     @elseif ($identitasPuskesmas->dataDasar->status_akreditasi === "sedang_proses_akreditasi")
                         Sedang dalam proses akreditasi
                     @else
@@ -255,31 +255,31 @@
             <tr>
                 <td class="column5">1</td>
                 <td class="column55">Luas wilayah kerja (km<sup>2</sup>)</td>
-                <td class="column15">{{ $identitasPuskesmas->luas_wilayah_kerja }}</td>
+                <td class="column15">{{ $identitasPuskesmas->wilayahKerja->luas_wilayah_kerja ?? 0 }}</td>
                 <td class="column25">km<sup>2</sup></td>
             </tr>
             <tr>
                 <td class="column5">2</td>
                 <td class="column55">Jumlah penduduk (jiwa) </td>
-                <td class="column15">{{ number_format($identitasPuskesmas->jumlah_penduduk, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->wilayahKerja->jumlah_penduduk ?? 0 , 0, ',', '.') }}</td>
                 <td class="column25">jiwa</td>
             </tr>
             <tr>
                 <td class="column5">3</td>
                 <td class="column55">Jumlah keluarga</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->jumlah_keluarga, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->wilayahKerja->jumlah_keluarga ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">keluarga</td>
             </tr>
             <tr>
                 <td class="column5">4</td>
                 <td class="column55">Jumlah keluarga miskin</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->jumlah_keluarga_miskin, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->wilayahKerja->jumlah_keluarga_miskin ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">keluarga</td>
             </tr>
             <tr>
                 <td class="column5">5</td>
                 <td class="column55">Jumlah desa (seluruhnya) </td>
-                <td class="column15">{{ number_format($identitasPuskesmas->jumlah_desa, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->wilayahKerja->jumlah_desa ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">desa/ kelurahan</td>
             </tr>
             <tr>
@@ -291,7 +291,7 @@
                 <td class="column5"></td>
                 <td class="column55">a.  Perumnas</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->perumnas === 1)
+                    @if ($identitasPuskesmas->wilayahKerja->perumnas === 1)
                         Ada
                     @else
                         Tidak ada
@@ -302,7 +302,7 @@
                 <td class="column5"></td>
                 <td class="column55">b.  Kawasan transmigrasi</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->kawasan_transmigrasi === 1)
+                    @if ($identitasPuskesmas->wilayahKerja->kawasan_transmigrasi === 1)
                         Ada
                     @else
                         Tidak ada
@@ -313,7 +313,7 @@
                 <td class="column5"></td>
                 <td class="column55">c.  Kawasan perkebunan inti rakyat</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->kawasan_perkebunan_inti_rakyat === 1)
+                    @if ($identitasPuskesmas->wilayahKerja->kawasan_perkebunan_inti_rakyat === 1)
                         Ada
                     @else
                         Tidak ada
@@ -324,7 +324,7 @@
                 <td class="column5"></td>
                 <td class="column55">d.  Kawasan nelayan</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->kawasan_nelayan === 1)
+                    @if ($identitasPuskesmas->wilayahKerja->kawasan_nelayan === 1)
                         Ada
                     @else
                         Tidak ada
@@ -335,7 +335,7 @@
                 <td class="column5"></td>
                 <td class="column55">e.  Kawasan industri</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->kawasan_industri === 1)
+                    @if ($identitasPuskesmas->wilayahKerja->kawasan_industri === 1)
                         Ada
                     @else
                         Tidak ada
@@ -346,7 +346,7 @@
                 <td class="column5"></td>
                 <td class="column55">f.  Pariwisata</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->pariwisata === 1)
+                    @if ($identitasPuskesmas->wilayahKerja->pariwisata === 1)
                         Ada
                     @else
                         Tidak ada
@@ -357,7 +357,7 @@
                 <td class="column5"></td>
                 <td class="column55">g.  Kawasan kepulauan</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->kawasan_kepulauan === 1)
+                    @if ($identitasPuskesmas->wilayahKerja->kawasan_kepulauan === 1)
                         Ada
                     @else
                         Tidak ada
@@ -368,7 +368,7 @@
                 <td class="column5"></td>
                 <td class="column55">h.  Kawasan perbatasan negara</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->kawasan_perbatasan_negara === 1)
+                    @if ($identitasPuskesmas->wilayahKerja->kawasan_perbatasan_negara === 1)
                         Ada
                     @else
                         Tidak ada
@@ -383,25 +383,25 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column55">a. Desa/Kelurahan Siaga Aktif Pratama</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->desa_siaga_aktf_pertama, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->wilayahKerja->desa_siaga_aktf_pertama ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">buah</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55">b. Desa/Kelurahan Siaga Aktif Madya</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->desa_siaga_aktf_madya, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->wilayahKerja->desa_siaga_aktf_madya ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">buah</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55">c. Desa/Kelurahan Siaga Aktif Purnama</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->desa_siaga_aktf_purnama, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->wilayahKerja->desa_siaga_aktf_purnama ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">buah</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55">d. Desa/Kelurahan Siaga Aktif Mandiri</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->desa_siaga_aktf_mandiri, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->wilayahKerja->desa_siaga_aktf_mandiri ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">buah</td>
             </tr>
         </tbody>

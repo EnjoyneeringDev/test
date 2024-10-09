@@ -10,47 +10,20 @@ use setasign\Fpdi\Fpdi;
 use setasign\Fpdi\PdfReader;
 
 use App\Models\IdentitasPuskesmas;
+use App\Models\WilayahKerjaPuskesmas;
 
 class PdfController extends Controller
 {
     public function downloadIdentitasPuskesmasPdf($id)
     {
-        \Log::info('downloadIdentitasPuskesmasPdf method called');
-
         $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+        $wilayahKerja = WilayahKerjaPuskesmas::where('identitas_puskesmas_id', $id)->get();
+
+        \Log::info("data tes -> " . $wilayahKerja);
 
         $identitasPuskesmas = (object) [
             'dataDasar' => $dataDasarPuskesmas,
-            'noRegis' => '2asq4qafaf1234124',
-            'akreditasi' => 1,
-            'tahunAkreditasi' => 2018,
-            'alamat' => 'Jl. Kesehatan No. 123',
-            'kelurahan' => 'kelurahan',
-            'kecamatan' => 'kecamatan',
-            'kodePos' => 53212,
-            'telepon' => '021-1234567',
-            'fax' => '021-1234567',
-            'email' => 'info@puskesmas-sehat.co.id',
-            'koordinat' => '214124, 124124124',
-            'Puskesmas_wilayah' => 1,
-            'Puskesmas_kemampuan_penyelengaraan' => 1,
-            'luas_wilayah_kerja' => 70,
-            'jumlah_penduduk' => 15000,
-            'jumlah_keluarga' => 4500,
-            'jumlah_keluarga_miskin' => 500,
-            'jumlah_desa' => 30,
-            'perumnas' => 2,
-            'kawasan_transmigrasi' => 1,
-            'kawasan_perkebunan_inti_rakyat' => 1,
-            'kawasan_nelayan' => 2,
-            'kawasan_industri' => 1,
-            'pariwisata' => 1,
-            'kawasan_kepulauan' => 2,
-            'kawasan_perbatasan_negara' => 2,
-            'desa_siaga_aktf_pertama' => 2,
-            'desa_siaga_aktf_madya' => 2,
-            'desa_siaga_aktf_purnama' => 2,
-            'desa_siaga_aktf_mandiri' => 2,
+            'wilayahKerja' => $wilayahKerja[0],
             'sumber_daya_puskesmas' => [
                 [
                     'rencana_lima_tahunan' => 1,
