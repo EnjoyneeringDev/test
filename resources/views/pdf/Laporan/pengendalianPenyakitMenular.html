@@ -119,6 +119,37 @@
     .head p {
       margin: 0;
     }
+
+    .headerForm {
+      border: none !important;
+    }
+
+    .headerForm .left,
+    .headerForm .right,
+    .headerForm .dataLeft,
+    .headerForm .dataRight {
+      border: none !important;
+    }
+
+    .headerForm .left {
+      width: 50vw;
+    }
+
+    .headerForm .right {
+      width: 30vw;
+      padding-left: 20vw;
+    }
+
+    .headerForm .dataLeft {
+      /* background: blue; */
+      width: 30%;
+      min-width: 115px;
+    }
+
+    .headerForm .dataRight {
+      /* background: red; */
+      border: 1px solid black !important;
+    }
   </style>
 </head>
 
@@ -127,6 +158,57 @@
     <p>Formulir 6</p>
     <p>LAPORAN BULANAN PENGENDALIAN PENYAKIT MENULAR </p>
   </div>
+
+  <table class="headerForm">
+    <tr>
+      <td class="left">
+        <table class="itemHeader">
+          <tr>
+            <td class="dataLeft">Kode</td>
+            <td class="dataRight">1</td>
+            <td class="dataRight">2</td>
+            <td class="dataRight">3</td>
+            <td class="dataRight">4</td>
+            <td class="dataRight">5</td>
+            <td class="dataRight">6</td>
+            <td class="dataRight">7</td>
+            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
+            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
+            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
+            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
+            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
+          </tr>
+        </table>
+      </td>
+      <td class="right">
+        <table class="itemHeader">
+          <tr>
+            <td class="dataLeft" style="min-width: 50px;">Bulan</td>
+            <td class="dataRight">1</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td class="left">
+        <table class="itemHeader">
+          <tr>
+            <td class="dataLeft">Puskesmas</td>
+            <td class="dataRight">1</td>
+          </tr>
+        </table>
+      </td>
+      <td class="right">
+        <table class="itemHeader">
+          <tr>
+            <td class="dataLeft" style="min-width: 50px;">Tahun</td>
+            <td class="dataRight">1</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
   <table>
     <thead>
       <tr>
