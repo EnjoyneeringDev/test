@@ -6,6 +6,7 @@ use App\Filament\Resources\RiwayatKepangkatanDanGolonganResource\Pages;
 use App\Filament\Resources\RiwayatKepangkatanDanGolonganResource\RelationManagers;
 use App\Models\RiwayatKepangkatanDanGolongan;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -15,6 +16,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RiwayatKepangkatanDanGolonganResource extends Resource
 {
+
+    protected static ?string $navigationLabel = 'III. Riwayat Kepangakatan Dan Golongan';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR KEPEGAWAIAN';
+
     protected static ?string $model = RiwayatKepangkatanDanGolongan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -23,9 +29,7 @@ class RiwayatKepangkatanDanGolonganResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('sumber_daya_manusia_id')
-                    ->required()
-                    ->numeric(),
+                Select::make('sumber_daya_manusia_id')->relationship(name: 'sumberDayaManusia', titleAttribute: 'nama_lengkap'),
                 Forms\Components\TextInput::make('pangkat')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('golongan')
@@ -41,7 +45,7 @@ class RiwayatKepangkatanDanGolonganResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('sumberDayaManusia.nama_lengkap')
+                Tables\Columns\TextColumn::make('sumberDayaManusia.nama_lengkap')->label("Nama Pegawai")
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('pangkat')
