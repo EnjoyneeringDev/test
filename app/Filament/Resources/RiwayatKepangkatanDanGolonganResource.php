@@ -6,6 +6,7 @@ use App\Filament\Resources\RiwayatKepangkatanDanGolonganResource\Pages;
 use App\Filament\Resources\RiwayatKepangkatanDanGolonganResource\RelationManagers;
 use App\Models\RiwayatKepangkatanDanGolongan;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -29,15 +30,17 @@ class RiwayatKepangkatanDanGolonganResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('sumber_daya_manusia_id')->relationship(name: 'sumberDayaManusia', titleAttribute: 'nama_lengkap'),
-                Forms\Components\TextInput::make('pangkat')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('golongan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('ruang')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('tmt')
-                    ->maxLength(255),
+                Fieldset::make('3. Riwayat Kepangakatan Dan Golongan')->schema([
+                    Select::make('sumber_daya_manusia_id')->relationship(name: 'sumberDayaManusia', titleAttribute: 'nama_lengkap'),
+                    Forms\Components\TextInput::make('pangkat')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('golongan')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('ruang')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('tmt')
+                        ->maxLength(255),
+                ])
             ]);
     }
 
