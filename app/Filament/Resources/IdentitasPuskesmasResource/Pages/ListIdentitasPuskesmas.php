@@ -13,7 +13,20 @@ class ListIdentitasPuskesmas extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Identitas Puskesmas')
+                ->color('primary')
+                ->action(function () {
+                    $this->redirect(IdentitasPuskesmasResource::getUrl('create'));
+                }),
+
+            // Custom PDF Generation Action
+            Actions\Action::make('downloadPdf')
+                ->label('Download PDF')
+                ->color('primary')
+                ->action(function () {
+                    return redirect()->route('download.identitas.puskesmas.pdf', ['id' => 1]);
+                }),
         ];
     }
 }
