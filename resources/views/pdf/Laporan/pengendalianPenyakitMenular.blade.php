@@ -125,92 +125,120 @@
       margin: 30px 0;
     }
 
-    .headerForm .left,
-    .headerForm .right,
+    .headerFormLeft,
+    .headerFormRight,
     .headerForm .dataLeft,
     .headerForm .dataRight {
       border: none !important;
     }
 
-    .headerForm .left {
+    .headerFormLeft {
       width: 50vw;
     }
 
-    .headerForm .right {
+    .headerFormRight {
       width: 30vw;
       padding-left: 20vw;
     }
 
     .headerForm .dataLeft {
       /* background: blue; */
-      width: 30%;
-      min-width: 115px;
+      width: 70px;
+      /* background: red; */
     }
 
     .headerForm .dataRight {
       /* background: red; */
       border: 1px solid black !important;
+      /* background: blue; */
     }
   </style>
 </head>
 
 <body>
   <div class="head">
-    <p>Formulir 6</p>
-    <p>LAPORAN BULANAN PENGENDALIAN PENYAKIT MENULAR </p>
+    <p style="text-align: center;">Formulir 6</p>
+    <p style="text-align: center;">LAPORAN BULANAN PENGENDALIAN PENYAKIT MENULAR </p>
   </div>
 
-  <table class="headerForm">
+  <!-- <table class="headerForm">
     <tr>
-      <td class="left">
+      <td class="headerFormLeft" style="width: 150px;">
         <table class="itemHeader">
           <tr>
             <td class="dataLeft">Kode</td>
-            <td class="dataRight">1</td>
-            <td class="dataRight">2</td>
-            <td class="dataRight">3</td>
-            <td class="dataRight">4</td>
-            <td class="dataRight">5</td>
-            <td class="dataRight">6</td>
-            <td class="dataRight">7</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-          </tr>
+            <td class="dataRight" style="width: 10px;">1</td>
+            <td class="dataRight" style="width: 10px;">2</td>
+            <td class="dataRight" style="width: 10px;">3</td>
+            <td class="dataRight" style="width: 10px;">4</td>
+            <td class="dataRight" style="width: 10px;">5</td>
+            <td class="dataRight" style="width: 10px;">6</td>
+            <td class="dataRight" style="width: 10px;">7</td>
+          </tr> 
         </table>
       </td>
-      <td class="right">
+      <td class="headerFormRight" styles="width: 400px;">
         <table class="itemHeader">
           <tr>
-            <td class="dataLeft" style="min-width: 50px;">Bulan</td>
-            <td class="dataRight">1</td>
+            <td class="dataLeft" style="padding-left: 100px; padding-right: -300px; margin-right: -300px; width: 10px;">Bulan</td>
+            <td class="dataRight" style="width: 100px; margin-left: -300px;">1</td>
           </tr>
         </table>
       </td>
     </tr>
     <tr>
-      <td class="left">
+      <td class="headerFormLeft" styles="width: 300px;">
         <table class="itemHeader">
           <tr>
             <td class="dataLeft">Puskesmas</td>
-            <td class="dataRight">1</td>
+            <td class="dataRight" style="width: 200px;">1</td>
           </tr>
         </table>
       </td>
-      <td class="right">
+      <td class="headerFormRight" styles="width: 200px;">
         <table class="itemHeader">
           <tr>
-            <td class="dataLeft" style="min-width: 50px;">Tahun</td>
-            <td class="dataRight">1</td>
+            <td class="dataLeft" style="padding-left: 100px; padding-right: -300px; margin-right: -300px; width: 10px;">Tahun</td>
+            <td class="dataRight" style="width: 100px; margin-left: -300px;">1</td>
           </tr>
         </table>
       </td>
     </tr>
-  </table>
+  </table> -->
 
-  <table>
+  <div style="margin-top: 50px; ">
+    <div style="width: 400px; display: inline-block; vertical-align: middle; ">
+      <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+    </div>
+    <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
+        <div>
+            <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Bulan</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">November</span>
+        </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; " >
+    <div style="width: 400px; display: inline-block; vertical-align: middle; ">
+      <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+    </div>
+    <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
+        <div>
+            <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Tahun</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
+        </div>
+    </div>
+  </div>
+
+  <table style="margin-top: 20px; ">
     <thead>
       <tr>
         <td class="column5">No</td>
