@@ -438,14 +438,355 @@ class PdfController extends Controller
 
         \Log::info("data tes -> ");
 
-        $identitasPuskesmas = (object) [
-            'dataDasar' => $dataDasarPuskesmas,
+        $dataPuskesmas = (object) [
+            'data' => [
+                [
+                    'suspek_malaria' => 1,
+                    'suspek_malaria_rdt' => 1,
+                    'malaria_positif' => 1,
+                    'malaria_positif_plasmodium' => 1,
+                    'malaria_positif_indigenous' => 1,
+                    'malaria_positif_import' => 1,
+                    'malaria_positif_diobati_standar' => 1,
+                    'kelambu_berinsektisida_dibagikan' => 1,
+                    'kelurahan_berisiko_dbd' => 1,
+                    'kelurahan_berisiko_dbd_diperiksa_jentik' => 1,
+                    'kelurahan_berisiko_dbd_tidak_diperiksa_jentik' => 1,
+                    'fogging_focus' => 1,
+                    'kelurahan_dilakukan_larvadisasi' => 1,
+                    'kelurahan_dilakukan_psn_3m_plus' => 1,
+                    'sekolah_diperiksa_jentik' => 1,
+                    'sekolah_diperiksa_bebas_jentik' => 1,
+                    'puskesmas_diperiksa_jetik' => 1,
+                    'puskesmas_diperiksa_bebas_jentik' => 1,
+                    'tempat_umum_diperiksa_jetik' => 1,
+                    'tempat_umum_diperiksa_bebas_jentik' => 1,
+                    'anak_balita_diperiksa_cacing' => 1,
+                    'anak_prasekolah_diperiksa_cacing' => 1,
+                    'anak_sekolah_diperiksa_cacing' => 1,
+                    'anak_balita_positif_telur_cacing' => 1,
+                    'anak_prasekolah_positif_telur_cacing' => 1,
+                    'anak_sekolah_positif_telur_cacing' => 1,
+                    'anak_balita_minum_obat_cacing' => 1,
+                    'anak_prasekolah_minum_obat_cacing' => 1,
+                    'anak_sekolah_minum_obat_cacing' => 1,
+                    'anak_sd_dapat_obat_cacing1' => 1,
+                    'anak_sd_dapat_obat_cacing2' => 1,
+                    'ibu_hamil_tes_cacing' => 1,
+                    'ibu_hamil_cacingan' => 1,
+                    'rabies_pada_anak_laki' => 1,
+                    'rabies_pada_dewasa_laki' => 1,
+                    'rabies_pada_anak_perempuan' => 1,
+                    'rabies_pada_dewasa_perempuan' => 1,
+                    'dapat_vaksin_anti_rabies' => 1,
+                    'kasus_rabies_dapat_var_lengkap' => 1,
+                    'kasus_rabies_tidak_dapat_var_lengkap' => 1,
+                    'bayi_diare_oralit' => 1,
+                    'bayi_diare_zink' => 1,
+                    'bayi_diare_oralit_zink' => 1,
+                    'bayi_diare_infus' => 1,
+                    'balita_diare_oralit' => 1,
+                    'balita_diare_zink' => 1,
+                    'balita_diare_oralit_zink' => 1,
+                    'balita_diare_infus' => 1,
+                    'anak_dewasa_diare_oralit' => 1,
+                    'anak_dewasa_diare_zink' => 1,
+                    'suspek_hepatitis_dirujuk' => 1,
+                    'pasien_tb_paru_diobati' => 1,
+                    'pasien_tb_non_paru_diobati' => 1,
+                    'tb_anak_diobati' => 1,
+                    'pasien_tb_diobati' => 1,
+                    'pasien_tb_sembuh' => 1,
+                    'pasien_tb_pengobatan_lengkap' => 1,
+                    'pasien_tb_baru_pengobatan_lengkap' => 1,
+                    'pasien_tb_kambuh' => 1,
+                    'kusta_baru' => 1,
+                    'kusta_tingkat_0' => 1,
+                    'kusta_tingkat_2' => 1,
+                    'kusta_baru_anak' => 1,
+                    'kasus_indeks_yang_kontaknya_diperiksa_kusta' => 1,
+                    'pasien_kusta_dalam_perawatan' => 1,
+                    'pasien_kusta_default' => 1,
+                    'frambusia_suspek' => 1,
+                    'frambusia_diperiksa_serologi' => 1,
+                    'frambusia_konfirmasi' => 1,
+                    'sd_diperiksa_frambusia' => 1,
+                    'orang_tes_hiv' => 1,
+                    'orang_positif_hiv' => 1,
+                    'ibu_hamil_tes_hiv' => 1,
+                    'ibu_hamil_positif_hiv' => 1,
+                    'pasien_tes_sifilis' => 1,
+                    'pasien_positif_sifilis' => 1,
+                    'pasien_sifilis_diobati' => 1,
+                    'ibu_hamil_tes_sifilis' => 1,
+                    'ibu_hamil_positif_sifilis' => 1,
+                    'ibu_hamil_sifilis_diobati' => 1,
+                    'kunjungan_balita_batuk' => 1,
+                    'kunjungan_balita_batuk_2' => 1,
+                ]
+            ],
         ];
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
         Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
-            'identitasPuskesmas' => $identitasPuskesmas,
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+    }
+
+    public function downloadLaporanPenyakitTidakMenular($id)
+    {
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'data' => [
+                [
+                    'perempuan_diperiksa_iva_sadanis' => 1,
+                    'cakupan_perempuan_diperiksa_iva_sadanis' => 1,
+                    'iva_positif' => 1,
+                    'dirugai_kanker_serviks' => 1,
+                    'kalainan_ginekologi_lain' => 1,
+                    'pap_smear_positif' => 1,
+                    'iva_positif_dikrioterapi' => 1,
+                    'benjolan_payudara' => 1,
+                    'dicurigai_kanker_payudara' => 1,
+                    'kelainan_payudara_lainnya' => 1,
+                    'penduduk_melakukan_posbindu_ptm' => 1,
+                    'posbindu_ptm_merokok' => 1,
+                    'posbindu_ptm_kurang_buah_sayur' => 1,
+                    'posbindu_ptm_kurang_aktivitas_fisik' => 1,
+                    'posbindu_ptm_alkohol' => 1,
+                    'posbindu_ptm_obesitas' => 1,
+                    'posbindu_ptm_obesitas_sentral' => 1,
+                    'posbindu_ptm_hipertensi' => 1,
+                    'posbindu_ptm_hiperglikemia' => 1,
+                    'posbindu_ptm_hiperkolesterolemia' => 1,
+                    'posbindu_ptm_gangguan_penglihatan' => 1,
+                    'posbindu_ptm_gangguan_pendengaran' => 1,
+                    'posbindu_ptm_gangguan_emosi_mental' => 1,
+                    'diabates_tb' => 1,
+                    'diabetes_gestasional' => 1,
+                    'konseling_diet' => 1,
+                    'konseling_berhenti_merokok' => 1,
+                    'konseling_iva_sadanis' => 1,
+                ]
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+    }
+
+    public function downloadLaporanKeperawatanKesehatanMasyarakat($id)
+    {
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'data' => [
+                [
+                    'individu_dapat_asuhan_keperawatan' => 1,
+                    'individu_dengan_asuhan_keperawatan_lebih_lanjut' => 1,
+                    'keluarga_dapat_asuhan_keperawatan' => 1,
+                    'keluarga_binaan_asuhan_1' => 1,
+                    'keluarga_binaan_asuhan_2' => 1,
+                    'keluarga_binaan_asuhan_3' => 1,
+                    'keluarga_binaan_asuhan_4' => 1,
+                    'keluarga_binaan_asuhan_lepas_bina' => 1,
+                    'kelompok_dapat_asuhan_keperawatan' => 1,
+                    'kelompok_binaan_asuhan_1' => 1,
+                    'kelompok_binaan_asuhan_2' => 1,
+                    'kelompok_binaan_asuhan_3' => 1,
+                    'kelompok_binaan_asuhan_4' => 1,
+                    'desa_dapat_asuhan_keperawatan' => 1,
+                    'desa_sudah_total_coverage' => 1,
+                ]
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+    }
+
+    public function downloadLaporanPelayananPuskesmas($id)
+    {
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'data' => [
+                [
+                    'kunjungan_puskesmas_lama' => 1,
+                    'kunjungan_puskesmas_baru' => 1,
+                    'kunjungan_peserta_jkn_lama' => 1,
+                    'kunjungan_peserta_jkn_baru' => 1,
+                    'kunjungan_peserta_asuransi_lama' => 1,
+                    'kunjungan_peserta_asuransi_baru' => 1,
+                    'puskesmas_rawat_inat_lama' => 1,
+                    'puskesmas_rawat_inat_baru' => 1,
+                    'fkrtl_lama' => 1,
+                    'fkrtl_baru' => 1,
+                    'pasien_tidak_menular_dirujuk_lama' => 1,
+                    'pasien_tidak_menular_dirujuk_baru' => 1,
+                    'dirujuk_dari_puskesmas_rawat_inap_lama' => 1,
+                    'dirujuk_dari_puskesmas_rawat_inap_baru' => 1,
+                    'pelayanan_kesehatan_rujukan_tingkat_lanjut_lama' => 1,
+                    'pelayanan_kesehatan_rujukan_tingkat_lanjut_baru' => 1,
+                    'rujukan_posbindu_ptm_lama' => 1,
+                    'rujukan_posbindu_ptm_baru' => 1,
+                    'penderita_rawat_inap_lama' => 1,
+                    'penderita_rawat_inap_baru' => 1,
+                    'ibu_hamil_dengan_gangguan_kesehatan_lama' => 1,
+                    'ibu_hamil_dengan_gangguan_kesehatan_baru' => 1,
+                    'anak_dirawat_inap_lama' => 1,
+                    'anak_dirawat_inap_baru' => 1,
+                    'penderita_kecelakaan_dirawat_inap_lama' => 1,
+                    'penderita_kecelakaan_dirawat_inap_baru' => 1,
+                    'penderita_penyakit_tidak_menular_dirawat_inap_lama' => 1,
+                    'penderita_penyakit_tidak_menular_dirawat_inap_baru' => 1,
+                    'pasien_sembuh_rawat_inap_lama' => 1,
+                    'pasien_sembuh_rawat_inap_baru' => 1,
+                    'hari_rawat_inap_lama' => 1,
+                    'hari_rawat_inap_baru' => 1,
+                    'penambalan_gigi_tetap_lama' => 1,
+                    'penambalan_gigi_tetap_baru' => 1,
+                    'penambalan_gigi_sulung_lama' => 1,
+                    'penambalan_gigi_sulung_baru' => 1,
+                    'pencabutan_gigi_tetap_lama' => 1,
+                    'pencabutan_gigi_tetap_baru' => 1,
+                    'pencabutan_gigi_sulung_lama' => 1,
+                    'pencabutan_gigi_sulung_baru' => 1,
+                    'pembersihan_karang_gigi_lama' => 1,
+                    'pembersihan_karang_gigi_baru' => 1,
+                    'premedikasi_lama' => 1,
+                    'premedikasi_baru' => 1,
+                    'pelayanan_rujukan_gigi_lama' => 1,
+                    'pelayanan_rujukan_gigi_baru' => 1,
+                    'sd_pemeriksaan_gigi_lama' => 1,
+                    'sd_pemeriksaan_gigi_baru' => 1,
+                    'sd_perawatan_kesehatan_gigi_lama' => 1,
+                    'sd_perawatan_kesehatan_gigi_baru' => 1,
+                    'pemasangan_gigi_tiruan_lama' => 1,
+                    'pemasangan_gigi_tiruan_baru' => 1,
+                    'ibu_hamil_perawatan_gigi_lama' => 1,
+                    'ibu_hamil_perawatan_gigi_baru' => 1,
+                    'tk_pemeriksaan_gigi_lama' => 1,
+                    'tk_pemeriksaan_gigi_baru' => 1,
+                    'pemeriksaan_hematologi_lama' => 1,
+                    'pemeriksaan_hematologi_baru' => 1,
+                    'pemeriksaan_kimia_klinik_lama' => 1,
+                    'pemeriksaan_kimia_klinik_baru' => 1,
+                    'pemeriksaan_urinalisa_lama' => 1,
+                    'pemeriksaan_urinalisa_baru' => 1,
+                    'pemeriksaan_mikrobiologi_lama' => 1,
+                    'pemeriksaan_mikrobiologi_baru' => 1,
+                    'pemeriksaan_imunologi_lama' => 1,
+                    'pemeriksaan_imunologi_baru' => 1,
+                    'pemeriksaan_tinja_lama' => 1,
+                    'pemeriksaan_tinja_baru' => 1,
+                    'resep_rawat_jalan_lama' => 1,
+                    'resep_rawat_jalan_baru' => 1,
+                    'resep_rawat_inap_lama' => 1,
+                    'resep_rawat_inap_baru' => 1,
+                    'konseling_obat_lama' => 1,
+                    'konseling_obat_baru' => 1,
+                    'pemberian_informasi_obat_lama' => 1,
+                    'pemberian_informasi_obat_baru' => 1,
+                    'antibiotik_ispa_non_pneumonia_lama' => 1,
+                    'antibiotik_ispa_non_pneumonia_baru' => 1,
+                    'ispa_non_pneumonia_lama' => 1,
+                    'ispa_non_pneumonia_baru' => 1,
+                    'antibiotik_diare_non_spesifik_lama' => 1,
+                    'antibiotik_diare_non_spesifik_baru' => 1,
+                    'diare_non_spesifik_lama' => 1,
+                    'diare_non_spesifik_baru' => 1,
+                    'injeksi_pada_myalgia_lama' => 1,
+                    'injeksi_pada_myalgia_baru' => 1,
+                    'kasus_myalgia_lama' => 1,
+                    'kasus_myalgia_baru' => 1,
+                    'obat_semua_resep_lama' => 1,
+                    'obat_semua_resep_baru' => 1,
+                ]
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+            'dataPuskesmas' => $dataPuskesmas,
         ])->save($pdf1Path);
 
         // Get total page count across all PDFs
