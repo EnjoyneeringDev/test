@@ -15,6 +15,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RiwayatJabatanKedudukanResource extends Resource
 {
+    protected static ?string $navigationLabel = 'III. Riwayat Jabatan Kedudukan';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR KEPEGAWAIAN';
+
     protected static ?string $model = RiwayatJabatanKedudukan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -24,16 +28,16 @@ class RiwayatJabatanKedudukanResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('sumber_daya_manusia_id')
-                    ->relationship('sumberDayaManusia', 'id')
-                    ->required(),
+                    ->relationship(name: 'sumberDayaManusia', titleAttribute: 'nama_lengkap')
+                    ->required()->label('Nama Pegawai'),
                 Forms\Components\TextInput::make('nama_jabatan')
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Nama Jabatan'),
                 Forms\Components\TextInput::make('unit_kerja')
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Unit Kerja'),
                 Forms\Components\TextInput::make('struktural_fungsional')
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Struktural Fungsional'),
                 Forms\Components\TextInput::make('eselon')
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Eselon'),
             ]);
     }
 
@@ -43,15 +47,15 @@ class RiwayatJabatanKedudukanResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('sumberDayaManusia.nama_lengkap')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Pegawai'),
                 Tables\Columns\TextColumn::make('nama_jabatan')
-                    ->searchable(),
+                    ->searchable()->label('Nama Jabatan'),
                 Tables\Columns\TextColumn::make('unit_kerja')
-                    ->searchable(),
+                    ->searchable()->label('Unit Kerja'),
                 Tables\Columns\TextColumn::make('struktural_fungsional')
-                    ->searchable(),
+                    ->searchable()->label('Struktural Fungsional'),
                 Tables\Columns\TextColumn::make('eselon')
-                    ->searchable(),
+                    ->searchable()->label('Eselon'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

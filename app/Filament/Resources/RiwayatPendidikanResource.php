@@ -6,6 +6,7 @@ use App\Filament\Resources\RiwayatPendidikanResource\Pages;
 use App\Filament\Resources\RiwayatPendidikanResource\RelationManagers;
 use App\Models\RiwayatPendidikan;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -15,6 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RiwayatPendidikanResource extends Resource
 {
+    protected static ?string $navigationLabel = 'III. Riwayat Pendidikan';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR KEPEGAWAIAN';
+
     protected static ?string $model = RiwayatPendidikan::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -23,19 +28,21 @@ class RiwayatPendidikanResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('sumber_daya_manusia_id')
-                    ->relationship('sumberDayaManusia', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('jenjang_pendidikan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jurusan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kode_program_studio')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kode_sekolah_perguruan_tinggi')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('tahun_lulus')
-                    ->numeric(),
+                Fieldset::make('4. Riwayat Pendidikan')->schema([
+                    Forms\Components\Select::make('sumber_daya_manusia_id')
+                        ->relationship(name: 'sumberDayaManusia', titleAttribute: 'nama_lengkap')
+                        ->required()->label('Nama Pegawai'),
+                    Forms\Components\TextInput::make('jenjang_pendidikan')
+                        ->maxLength(255)->label('Jenjang Pendidikan'),
+                    Forms\Components\TextInput::make('jurusan')
+                        ->maxLength(255)->label('Jurusan'),
+                    Forms\Components\TextInput::make('kode_program_studi')
+                        ->maxLength(255)->label('Kode Program Studi'),
+                    Forms\Components\TextInput::make('kode_sekolah_perguruan_tinggi')
+                        ->maxLength(255)->label('Kode Sekolah Perguruan Tinggi'),
+                    Forms\Components\TextInput::make('tahun_lulus')
+                        ->numeric()->label('Tahun Lulus'),
+                ]),
             ]);
     }
 
@@ -45,18 +52,18 @@ class RiwayatPendidikanResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('sumberDayaManusia.nama_lengkap')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Pegawai'),
                 Tables\Columns\TextColumn::make('jenjang_pendidikan')
-                    ->searchable(),
+                    ->searchable()->label('Jenjang Pendidikan'),
                 Tables\Columns\TextColumn::make('jurusan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('kode_program_studio')
-                    ->searchable(),
+                    ->searchable()->label('Kode Program Studi'),
                 Tables\Columns\TextColumn::make('kode_sekolah_perguruan_tinggi')
-                    ->searchable(),
+                    ->searchable()->label('Kode Sekolah Perguruan Tinggi'),
                 Tables\Columns\TextColumn::make('tahun_lulus')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Tahun Lulus'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

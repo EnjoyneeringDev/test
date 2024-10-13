@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('sumber_daya_manusia_id');
             $table->string('jenjang_pendidikan')->nullable();
             $table->string('jurusan')->nullable();
-            $table->string('kode_program_studio')->nullable();
+            $table->string('kode_program_studi')->nullable();
             $table->string('kode_sekolah_perguruan_tinggi')->nullable();
             $table->integer('tahun_lulus')->nullable();
             $table->timestamps();
