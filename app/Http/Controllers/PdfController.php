@@ -898,6 +898,182 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'kesakitanBerdasarkanGejala.pdf')->deleteFileAfterSend(true);
     }
 
+    public function downloadLaporanImunisasi($id)
+    {
+        // $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'imunisasi' => [
+                [
+                    'nama_desa' => 'desa 1',
+                    'sasaran_bayi_laki' => 1,
+                    'sasaran_bayi_perempuan' => 1,
+                    'sasaran_infant_laki' => 1,
+                    'sasaran_infant_perempuan' => 1,
+                    'sasaran_hbo_24jam_laki' => 1,
+                    'sasaran_hbo_24jam_perempuan' => 1,
+                    'sasaran_hbo_7hari_laki' => 1,
+                    'sasaran_hbo_7hari_perempuan' => 1,
+                    'sasaran_bcg_laki' => 1,
+                    'sasaran_bcg_perempuan' => 1,
+                    'sasaran_polio1_laki' => 1,
+                    'sasaran_polio1_perempuan' => 1,
+                    'sasaran_dpt1_laki' => 1,
+                    'sasaran_dpt1_perempuan' => 1,
+                    'sasaran_polio2_laki' => 1,
+                    'sasaran_polio2_perempuan' => 1,
+                    'sasaran_dpt2_laki' => 1,
+                    'sasaran_dpt2_perempuan' => 1,
+                    'sasaran_polio3_laki' => 1,
+                    'sasaran_polio3_perempuan' => 1,
+                    'sasaran_dpt3_laki' => 1,
+                    'sasaran_dpt3_perempuan' => 1,
+                    'sasaran_polio4_laki' => 1,
+                    'sasaran_polio4_perempuan' => 1,
+                    'sasaran_imunisasi_dasar_laki' => 1,
+                    'sasaran_imunisasi_dasar_perempuan' => 1,
+                    'sasaran_baduta_laki' => 1,
+                    'sasaran_baduta_perempuan' => 1,
+                    'sasaran_ipv_laki' => 1,
+                    'sasaran_ipv_perempuan' => 1,
+                    'sasaran_campak_laki' => 1,
+                    'sasaran_campak_perempuan' => 1,
+                    'sasaran_campak2_laki' => 1,
+                    'sasaran_campak2_perempuan' => 1,
+                    'sasaran_dpt4_laki' => 1,
+                    'sasaran_dpt4_perempuan' => 1,
+                    'sasaran_wus' => 1,
+                    'sasaran_td1' => 1,
+                    'sasaran_td2' => 1,
+                    'sasaran_td3' => 1,
+                    'sasaran_td4' => 1,
+                    'sasaran_td5' => 1,
+                ],
+                [
+                    'nama_desa' => 'desa 2',
+                    'sasaran_bayi_laki' => 1,
+                    'sasaran_bayi_perempuan' => 1,
+                    'sasaran_infant_laki' => 1,
+                    'sasaran_infant_perempuan' => 1,
+                    'sasaran_hbo_24jam_laki' => 1,
+                    'sasaran_hbo_24jam_perempuan' => 1,
+                    'sasaran_hbo_7hari_laki' => 1,
+                    'sasaran_hbo_7hari_perempuan' => 1,
+                    'sasaran_bcg_laki' => 1,
+                    'sasaran_bcg_perempuan' => 1,
+                    'sasaran_polio1_laki' => 1,
+                    'sasaran_polio1_perempuan' => 1,
+                    'sasaran_dpt1_laki' => 1,
+                    'sasaran_dpt1_perempuan' => 1,
+                    'sasaran_polio2_laki' => 1,
+                    'sasaran_polio2_perempuan' => 1,
+                    'sasaran_dpt2_laki' => 1,
+                    'sasaran_dpt2_perempuan' => 1,
+                    'sasaran_polio3_laki' => 1,
+                    'sasaran_polio3_perempuan' => 1,
+                    'sasaran_dpt3_laki' => 1,
+                    'sasaran_dpt3_perempuan' => 1,
+                    'sasaran_polio4_laki' => 1,
+                    'sasaran_polio4_perempuan' => 1,
+                    'sasaran_imunisasi_dasar_laki' => 1,
+                    'sasaran_imunisasi_dasar_perempuan' => 1,
+                    'sasaran_baduta_laki' => 1,
+                    'sasaran_baduta_perempuan' => 1,
+                    'sasaran_ipv_laki' => 1,
+                    'sasaran_ipv_perempuan' => 1,
+                    'sasaran_campak_laki' => 1,
+                    'sasaran_campak_perempuan' => 1,
+                    'sasaran_campak2_laki' => 1,
+                    'sasaran_campak2_perempuan' => 1,
+                    'sasaran_dpt4_laki' => 1,
+                    'sasaran_dpt4_perempuan' => 1,
+                    'sasaran_wus' => 1,
+                    'sasaran_td1' => 1,
+                    'sasaran_td2' => 1,
+                    'sasaran_td3' => 1,
+                    'sasaran_td4' => 1,
+                    'sasaran_td5' => 1,
+                ],
+                [
+                    'nama_desa' => 'desa 3',
+                    'sasaran_bayi_laki' => 1,
+                    'sasaran_bayi_perempuan' => 1,
+                    'sasaran_infant_laki' => 1,
+                    'sasaran_infant_perempuan' => 1,
+                    'sasaran_hbo_24jam_laki' => 1,
+                    'sasaran_hbo_24jam_perempuan' => 1,
+                    'sasaran_hbo_7hari_laki' => 1,
+                    'sasaran_hbo_7hari_perempuan' => 1,
+                    'sasaran_bcg_laki' => 1,
+                    'sasaran_bcg_perempuan' => 1,
+                    'sasaran_polio1_laki' => 1,
+                    'sasaran_polio1_perempuan' => 1,
+                    'sasaran_dpt1_laki' => 1,
+                    'sasaran_dpt1_perempuan' => 1,
+                    'sasaran_polio2_laki' => 1,
+                    'sasaran_polio2_perempuan' => 1,
+                    'sasaran_dpt2_laki' => 1,
+                    'sasaran_dpt2_perempuan' => 1,
+                    'sasaran_polio3_laki' => 1,
+                    'sasaran_polio3_perempuan' => 1,
+                    'sasaran_dpt3_laki' => 1,
+                    'sasaran_dpt3_perempuan' => 1,
+                    'sasaran_polio4_laki' => 1,
+                    'sasaran_polio4_perempuan' => 1,
+                    'sasaran_imunisasi_dasar_laki' => 1,
+                    'sasaran_imunisasi_dasar_perempuan' => 1,
+                    'sasaran_baduta_laki' => 1,
+                    'sasaran_baduta_perempuan' => 1,
+                    'sasaran_ipv_laki' => 1,
+                    'sasaran_ipv_perempuan' => 1,
+                    'sasaran_campak_laki' => 1,
+                    'sasaran_campak_perempuan' => 1,
+                    'sasaran_campak2_laki' => 1,
+                    'sasaran_campak2_perempuan' => 1,
+                    'sasaran_dpt4_laki' => 1,
+                    'sasaran_dpt4_perempuan' => 1,
+                    'sasaran_wus' => 1,
+                    'sasaran_td1' => 1,
+                    'sasaran_td2' => 1,
+                    'sasaran_td3' => 1,
+                    'sasaran_td4' => 1,
+                    'sasaran_td5' => 1,
+                ]
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.imunisasi', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])
+        ->setPaper('A4', 'landscape')
+        ->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'imunisasi.pdf')->deleteFileAfterSend(true);
+    }
+
     public function downloadLaporanKesakitanGigiMulut($id)
     {
         // $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
