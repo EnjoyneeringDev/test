@@ -145,7 +145,7 @@
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
-            <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Bulan</span>
+            <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Bulan</span>
             <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">November</span>
         </div>
     </div>
@@ -158,9 +158,31 @@
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
-            <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Tahun</span>
+            <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Tahun</span>
             <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
         </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; " >
+    <div style="width: 400px; display: inline-block; vertical-align: middle; ">
+      <span style="display: inline-block; vertical-align: middle; width: 265px; text-align: right; ">Jumlah Puskesmas Pembantu</span>
+      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">3</span>
+    </div>
+    <div style="width: 240px; margin-left: 40px; display: inline-block; vertical-align: middle; ">
+      <span  style="display: inline-block; vertical-align: middle; width: 100px; text-align: right; ">Jml Lapor</span>
+      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">2024</span>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; " >
+    <div style="width: 400px; display: inline-block; vertical-align: middle; ">
+      <span style="display: inline-block; vertical-align: middle; width: 265px; text-align: right; ">Jml Poskesdes/bidan desa</span>
+      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">3</span>
+    </div>
+    <div style="width: 240px; margin-left: 40px; display: inline-block; vertical-align: middle; ">
+      <span  style="display: inline-block; vertical-align: middle; width: 100px; text-align: right; ">Jml Lapor</span>
+      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">2024</span>
     </div>
   </div>
 
@@ -186,20 +208,20 @@
       <tr>
         <td class="column5 textCenter">1.</td>
         <td class="column75">Jumlah kunjungan puskesmas (baru dan lama)</td>
-        <td class="column10">{{ $dataPuskesmas->data->kunjungan_puskesmas_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->kunjungan_puskesmas_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['kunjungan_puskesmas_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['kunjungan_puskesmas_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">2.</td>
         <td class="column75">Jumlah kunjungan peserta JKN</td>
-        <td class="column10">{{ $dataPuskesmas->data->kunjungan_peserta_jkn_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->kunjungan_peserta_jkn_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['kunjungan_peserta_jkn_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['kunjungan_peserta_jkn_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">3.</td>
         <td class="column75">Jumlah kunjungan peserta asuransi kesehatan lainnya</td>
-        <td class="column10">{{ $dataPuskesmas->data->kunjungan_peserta_asuransi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->kunjungan_peserta_asuransi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['kunjungan_peserta_asuransi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['kunjungan_peserta_asuransi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="3" style="vertical-align: top;">4.</td>
@@ -209,19 +231,19 @@
       </tr>
       <tr>
         <td class="column75">a. Puskesmas rawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->puskesmas_rawat_inat_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->puskesmas_rawat_inat_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['puskesmas_rawat_inat_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['puskesmas_rawat_inat_baru'] }}</td>
       </tr>
       <tr>
         <td class="column75">b. Fasilitas kesehatan rujukan tingkat lanjut (FKRTL)</td>
-        <td class="column10">{{ $dataPuskesmas->data->fkrtl_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->fkrtl_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['fkrtl_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['fkrtl_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">5.</td>
         <td class="column75">Jumlah penderita penyakit tidak menular dirujuk ke fasilitas pelayanan kesehatan rujukan tingkat lanjut</td>
-        <td class="column10">{{ $dataPuskesmas->data->pasien_tidak_menular_dirujuk_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pasien_tidak_menular_dirujuk_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pasien_tidak_menular_dirujuk_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pasien_tidak_menular_dirujuk_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="3" style="vertical-align: top;">6.</td>
@@ -231,19 +253,19 @@
       </tr>
       <tr>
         <td class="column75">a. Puskesmas rawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->dirujuk_dari_puskesmas_rawat_inap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->dirujuk_dari_puskesmas_rawat_inap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['dirujuk_dari_puskesmas_rawat_inap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['dirujuk_dari_puskesmas_rawat_inap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column75">b. Fasilitas pelayanan kesehatan rujukan tingkat lanjut</td>
-        <td class="column10">{{ $dataPuskesmas->data->pelayanan_kesehatan_rujukan_tingkat_lanjut_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pelayanan_kesehatan_rujukan_tingkat_lanjut_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pelayanan_kesehatan_rujukan_tingkat_lanjut_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pelayanan_kesehatan_rujukan_tingkat_lanjut_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">7.</td>
         <td class="column75">Jumlah rujukan dari Posbindu PTM ke puskesmas</td>
-        <td class="column10">{{ $dataPuskesmas->data->rujukan_posbindu_ptm_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->rujukan_posbindu_ptm_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['rujukan_posbindu_ptm_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['rujukan_posbindu_ptm_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">II</td>
@@ -254,44 +276,44 @@
       <tr>
         <td class="column5 textCenter">1.</td>
         <td class="column75">Jumlah penderita rawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->penderita_rawat_inap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->penderita_rawat_inap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penderita_rawat_inap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penderita_rawat_inap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">2.</td>
         <td class="column75">Jumlah ibu hamil, melahirkan, nifas dengan gangguan kesehatan dirawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->ibu_hamil_dengan_gangguan_kesehatan_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->ibu_hamil_dengan_gangguan_kesehatan_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['ibu_hamil_dengan_gangguan_kesehatan_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['ibu_hamil_dengan_gangguan_kesehatan_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">3.</td>
         <td class="column75">Jumlah anak berumur <5 tahun sakit dirawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->anak_dirawat_inap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->anak_dirawat_inap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['anak_dirawat_inap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['anak_dirawat_inap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">4.</td>
         <td class="column75">Jumlah penderita cedera/kecelakaan dirawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->penderita_kecelakaan_dirawat_inap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->penderita_kecelakaan_dirawat_inap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penderita_kecelakaan_dirawat_inap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penderita_kecelakaan_dirawat_inap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">5.</td>
         <td class="column75">Jumlah penderita penyakit tidak menular dirawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->penderita_penyakit_tidak_menular_dirawat_inap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->penderita_penyakit_tidak_menular_dirawat_inap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penderita_penyakit_tidak_menular_dirawat_inap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penderita_penyakit_tidak_menular_dirawat_inap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">6.</td>
         <td class="column75">Jumlah penderita yang keluar sembuh dari rawat inap puskesmas</td>
-        <td class="column10">{{ $dataPuskesmas->data->pasien_sembuh_rawat_inap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pasien_sembuh_rawat_inap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pasien_sembuh_rawat_inap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pasien_sembuh_rawat_inap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">7.</td>
         <td class="column75">Jumlah hari rawat semua penderita rawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->hari_rawat_inap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->hari_rawat_inap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['hari_rawat_inap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['hari_rawat_inap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">III</td>
@@ -302,80 +324,80 @@
       <tr>
         <td class="column5 textCenter">1.</td>
         <td class="column75">Jumlah penambalan gigi tetap </td>
-        <td class="column10">{{ $dataPuskesmas->data->penambalan_gigi_tetap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->penambalan_gigi_tetap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penambalan_gigi_tetap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penambalan_gigi_tetap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">2.</td>
         <td class="column75">Jumlah penambalan gigi sulung</td>
-        <td class="column10">{{ $dataPuskesmas->data->penambalan_gigi_sulung_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->penambalan_gigi_sulung_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penambalan_gigi_sulung_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['penambalan_gigi_sulung_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">3.</td>
         <td class="column75">Jumlah pencabutan gigi tetap</td>
-        <td class="column10">{{ $dataPuskesmas->data->pencabutan_gigi_tetap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pencabutan_gigi_tetap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pencabutan_gigi_tetap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pencabutan_gigi_tetap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">4.</td>
         <td class="column75">Jumlah pencabutan gigi sulung</td>
-        <td class="column10">{{ $dataPuskesmas->data->pencabutan_gigi_sulung_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pencabutan_gigi_sulung_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pencabutan_gigi_sulung_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pencabutan_gigi_sulung_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">5.</td>
         <td class="column75">Jumlah pembersihan karang gigi</td>
-        <td class="column10">{{ $dataPuskesmas->data->pembersihan_karang_gigi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pembersihan_karang_gigi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pembersihan_karang_gigi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pembersihan_karang_gigi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">6.</td>
         <td class="column75">Jumlah premedikasi/pengobatan</td>
-        <td class="column10">{{ $dataPuskesmas->data->premedikasi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->premedikasi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['premedikasi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['premedikasi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">7.</td>
         <td class="column75">Jumlah pelayanan rujukan gigi</td>
-        <td class="column10">{{ $dataPuskesmas->data->pelayanan_rujukan_gigi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pelayanan_rujukan_gigi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pelayanan_rujukan_gigi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pelayanan_rujukan_gigi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">8.</td>
         <td class="column75">Jumlah SD/MI dilaksanakan pemeriksaan kesehatan gigi dan mulut</td>
-        <td class="column10">{{ $dataPuskesmas->data->sd_pemeriksaan_gigi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->sd_pemeriksaan_gigi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['sd_pemeriksaan_gigi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['sd_pemeriksaan_gigi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">9.</td>
         <td class="column75">Jumlah murid SD/MI perlu perawatan kesehatan gigi</td>
-        <td class="column10">{{ $dataPuskesmas->data->sd_perlu_perawatan_kesehatan_gigi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->sd_perlu_perawatan_kesehatan_gigi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['sd_perlu_perawatan_kesehatan_gigi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['sd_perlu_perawatan_kesehatan_gigi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">10.</td>
         <td class="column75">Jumlah murid SD/MI yang mendapat perawatan kesehatan gigi</td>
-        <td class="column10">{{ $dataPuskesmas->data->sd_perawatan_kesehatan_gigi_lama }}</td>
-        <td class="column10"{{ $dataPuskesmas->data->sd_perawatan_kesehatan_gigi_baru }}></td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['sd_perawatan_kesehatan_gigi_lama'] }}</td>
+        <td class="column10"{{ $dataPuskesmas->data[0]['sd_perawatan_kesehatan_gigi_baru'] }}></td>
       </tr>
       <tr>
         <td class="column5 textCenter">11.</td>
         <td class="column75">Jumlah pemasangan gigi tiruan</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemasangan_gigi_tiruan_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemasangan_gigi_tiruan_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemasangan_gigi_tiruan_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemasangan_gigi_tiruan_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">12.</td>
         <td class="column75">Jumlah ibu hamil yang mendapatkan perawatan gigi</td>
-        <td class="column10">{{ $dataPuskesmas->data->ibu_hamil_perawatan_gigi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->ibu_hamil_perawatan_gigi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['ibu_hamil_perawatan_gigi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['ibu_hamil_perawatan_gigi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">13.</td>
         <td class="column75">Jumlah TK/PAUD yang dilakukan pemeriksaan kesehatan gigi dan mulut</td>
-        <td class="column10">{{ $dataPuskesmas->data->tk_pemeriksaan_gigi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->tk_pemeriksaan_gigi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['tk_pemeriksaan_gigi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['tk_pemeriksaan_gigi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">IV</td>
@@ -386,38 +408,38 @@
       <tr>
         <td class="column5 textCenter">1.</td>
         <td class="column75">Jumlah pemeriksaan hematologi</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_hematologi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_hematologi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_hematologi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_hematologi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">2.</td>
         <td class="column75">Jumlah pemeriksaan kimia klinik</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_kimia_klinik_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_kimia_klinik_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_kimia_klinik_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_kimia_klinik_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">3.</td>
         <td class="column75">Jumlah pemeriksaan urinalisa</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_urinalisa_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_urinalisa_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_urinalisa_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_urinalisa_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">4.</td>
         <td class="column75">Jumlah pemeriksaan mikrobiologi dan parasitologi</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_mikrobiologi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_mikrobiologi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_mikrobiologi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_mikrobiologi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">5.</td>
         <td class="column75">Jumlah pemeriksaan imunologi</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_imunologi_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_imunologi_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_imunologi_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_imunologi_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">6.</td>
         <td class="column75">Jumlah pemeriksaan tinja</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_tinja_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemeriksaan_tinja_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_tinja_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemeriksaan_tinja_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">V</td>
@@ -428,65 +450,65 @@
       <tr>
         <td class="column5 textCenter">1.</td>
         <td class="column75">Jumlah resep dari rawat jalan</td>
-        <td class="column10">{{ $dataPuskesmas->data->resep_rawat_jalan_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->resep_rawat_jalan_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['resep_rawat_jalan_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['resep_rawat_jalan_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">2.</td>
         <td class="column75">Jumlah resep dari rawat inap</td>
-        <td class="column10">{{ $dataPuskesmas->data->resep_rawat_inap_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->resep_rawat_inap_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['resep_rawat_inap_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['resep_rawat_inap_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">3.</td>
         <td class="column75">Jumlah konseling obat</td>
-        <td class="column10">{{ $dataPuskesmas->data->konseling_obat_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->konseling_obat_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['konseling_obat_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['konseling_obat_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">4.</td>
         <td class="column75">Jumlah pemberian informasi obat</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemberian_informasi_obat_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->pemberian_informasi_obat_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemberian_informasi_obat_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['pemberian_informasi_obat_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="2" style="vertical-align: top;">5.</td>
         <td class="column75">Jumlah penggunaan antibiotik pada ISPA NonPneumonia</td>
-        <td class="column10">{{ $dataPuskesmas->data->antibiotik_ispa_non_pneumonia_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->antibiotik_ispa_non_pneumonia_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['antibiotik_ispa_non_pneumonia_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['antibiotik_ispa_non_pneumonia_baru'] }}</td>
       </tr>
       <tr>
         <td class="column75">Jumlah kasus ISPA Non-Pneumonia</td>
-        <td class="column10">{{ $dataPuskesmas->data->ispa_non_pneumonia_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->ispa_non_pneumonia_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['ispa_non_pneumonia_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['ispa_non_pneumonia_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="2" style="vertical-align: top;">6.</td>
         <td class="column75">Jumlah penggunaan antibiotik pada Diare NonSpesifik</td>
-        <td class="column10">{{ $dataPuskesmas->data->antibiotik_diare_non_spesifik_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->antibiotik_diare_non_spesifik_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['antibiotik_diare_non_spesifik_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['antibiotik_diare_non_spesifik_baru'] }}</td>
       </tr>
       <tr>
         <td class="column75">Jumlah kasus Diare Non-Spesifik</td>
-        <td class="column10">{{ $dataPuskesmas->data->diare_non_spesifik_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->diare_non_spesifik_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['diare_non_spesifik_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['diare_non_spesifik_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="2" style="vertical-align: top;">7.</td>
         <td class="column75">Jumlah penggunaan injeksi pada Myalgia</td>
-        <td class="column10">{{ $dataPuskesmas->data->injeksi_pada_myalgia_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->injeksi_pada_myalgia_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['injeksi_pada_myalgia_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['injeksi_pada_myalgia_baru'] }}</td>
       </tr>
       <tr>
         <td class="column75">Jumlah kasus Myalgia</td>
-        <td class="column10">{{ $dataPuskesmas->data->kasus_myalgia_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->kasus_myalgia_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['kasus_myalgia_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['kasus_myalgia_baru'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">8.</td>
         <td class="column75">Jumlah item obat semua resep</td>
-        <td class="column10">{{ $dataPuskesmas->data->obat_semua_resep_lama }}</td>
-        <td class="column10">{{ $dataPuskesmas->data->obat_semua_resep_baru }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['obat_semua_resep_lama'] }}</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['obat_semua_resep_baru'] }}</td>
       </tr>
     </tbody>
   </table>

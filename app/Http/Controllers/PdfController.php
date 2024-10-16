@@ -737,6 +737,8 @@ class PdfController extends Controller
                     'pelayanan_rujukan_gigi_baru' => 1,
                     'sd_pemeriksaan_gigi_lama' => 1,
                     'sd_pemeriksaan_gigi_baru' => 1,
+                    'sd_perlu_perawatan_kesehatan_gigi_lama' => 1,
+                    'sd_perlu_perawatan_kesehatan_gigi_baru' => 1,
                     'sd_perawatan_kesehatan_gigi_lama' => 1,
                     'sd_perawatan_kesehatan_gigi_baru' => 1,
                     'pemasangan_gigi_tiruan_lama' => 1,
@@ -785,7 +787,7 @@ class PdfController extends Controller
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
-        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+        Pdf::loadView('pdf.Laporan.pelayananPuskesmas', [
             'dataPuskesmas' => $dataPuskesmas,
         ])->save($pdf1Path);
 
@@ -808,7 +810,7 @@ class PdfController extends Controller
         $pdfMerger->merge('file', $mergedPdfPath);
 
         // Return the merged PDF as a response for download
-        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+        return response()->download($mergedPdfPath, 'pelayananPuskesmas.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanKesakitanBerdasarkanGejala($id)
@@ -1186,7 +1188,7 @@ class PdfController extends Controller
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
-        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+        Pdf::loadView('pdf.Laporan.kesakitanBerdasarkanGejala', [
             'dataPuskesmas' => $dataPuskesmas,
         ])->save($pdf1Path);
 
@@ -1196,7 +1198,7 @@ class PdfController extends Controller
 
         // Add page numbers to each PDF with continuous numbering
         $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
-        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
 
         // Create a new PDF merger instance
         $pdfMerger = new PDFMerger;
@@ -1209,7 +1211,7 @@ class PdfController extends Controller
         $pdfMerger->merge('file', $mergedPdfPath);
 
         // Return the merged PDF as a response for download
-        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+        return response()->download($mergedPdfPath, 'kesakitanBerdasarkanGejala.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanKesakitanGigiMulut($id)
@@ -4854,7 +4856,7 @@ class PdfController extends Controller
 
         // Add page numbers to each PDF with continuous numbering
         $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
-        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
 
         // Create a new PDF merger instance
         $pdfMerger = new PDFMerger;
@@ -4867,7 +4869,7 @@ class PdfController extends Controller
         $pdfMerger->merge('file', $mergedPdfPath);
 
         // Return the merged PDF as a response for download
-        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+        return response()->download($mergedPdfPath, 'kesakitanUmum.pdf')->deleteFileAfterSend(true);
     }
 
     // Function to count total pages in multiple PDFs
