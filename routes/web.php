@@ -21,5 +21,5 @@ Route::get('/', function () {
 Route::get('/admin/identitas-puskesmas/download-pdf/{id}', [PdfController::class, 'downloadIdentitasPuskesmasPdf'])
     ->name('download.identitas.puskesmas.pdf');
 
-Route::get('/admin/laporan/penyakit-menular/download-pdf/{id}', [PdfController::class, 'downloadLaporanPelayananPuskesmas'])
+Route::get('/admin/laporan/penyakit-menular/download-pdf/{id}', [PdfController::class, 'downloadLaporanKesakitanTerbanyak'])
     ->name('download.laporan.penyakit-menular.pdf');

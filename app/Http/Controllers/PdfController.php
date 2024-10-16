@@ -4872,6 +4872,63 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'kesakitanUmum.pdf')->deleteFileAfterSend(true);
     }
 
+    public function downloadLaporanKesakitanTerbanyak($id)
+    {
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'kesakitanTerbanyak' => [
+                [
+                    'penyakit' => "penyakit 1",
+                    'icd10' => 'j10.0',
+                    'kasusLama' => 1,
+                    'kasusBaru' => 2,
+                ],
+                [
+                    'penyakit' => "penyakit 2",
+                    'icd10' => 'j10.0',
+                    'kasusLama' => 1,
+                    'kasusBaru' => 2,
+                ],
+                [
+                    'penyakit' => "penyakit 3",
+                    'icd10' => 'j10.0',
+                    'kasusLama' => 1,
+                    'kasusBaru' => 2,
+                ]
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.kesakitanTerbanyak', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'kesakitanTerbanyak.pdf')->deleteFileAfterSend(true);
+    }
+
     // Function to count total pages in multiple PDFs
     private function getTotalPageCount($pdfPaths) {
         $totalPages = 0;
