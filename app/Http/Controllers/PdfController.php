@@ -67,6 +67,55 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'identitas-puskesmas-report.pdf')->deleteFileAfterSend(true);
     }
 
+    public function downloadLaporanKesehatanLingkungan($id)
+    {
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'data' => [
+                [
+                    'jumlah_sarana_air_minum_resiko_rendah' => 1,
+                    'jumlah_sarana_air_minum_resiko_tinggi' => 1,
+                    'jumlah_tpm_yang_memenuhi_syarat' => 1,
+                    'jumlah_tpm_yang_tidak_memenuhi_syarat' => 1,
+                    'jumlah_ttu_yang_memenuhi_syarat' => 1,
+                    'jumlah_ttu_yang_tidak_memenuhi_syarat' => 1,
+                    'jumlah_rumah_yang_memenuhi_syarat' => 1,
+                    'jumlah_rumah_yang_tidak_memenuhi_syarat' => 1,
+                ]
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.kesehatanLingkungan', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'kesehatan-lingkungan.pdf')->deleteFileAfterSend(true);
+    }
+
     public function downloadLaporanPenyakitMenular($id)
     {
         $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
