@@ -1409,9 +1409,11 @@ class PdfController extends Controller
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
-        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+        Pdf::loadView('pdf.Laporan.kesakitanGigiMulut', [
             'dataPuskesmas' => $dataPuskesmas,
-        ])->save($pdf1Path);
+        ])
+        ->setPaper('A4', 'landscape')
+        ->save($pdf1Path);
 
         // Get total page count across all PDFs
         $pdfPaths = [$pdf1Path];
@@ -1419,7 +1421,7 @@ class PdfController extends Controller
 
         // Add page numbers to each PDF with continuous numbering
         $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
-        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
 
         // Create a new PDF merger instance
         $pdfMerger = new PDFMerger;
@@ -1432,12 +1434,13 @@ class PdfController extends Controller
         $pdfMerger->merge('file', $mergedPdfPath);
 
         // Return the merged PDF as a response for download
-        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+        return response()->download($mergedPdfPath, 'laporanBulananKesakitanGigiDanMulut.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanKesakitanUmum($id)
     {
         // $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+        ini_set('memory_limit', '512M');
 
         \Log::info("data tes -> ");
 
@@ -4839,9 +4842,11 @@ class PdfController extends Controller
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
-        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+        Pdf::loadView('pdf.Laporan.kesakitanUmum', [
             'dataPuskesmas' => $dataPuskesmas,
-        ])->save($pdf1Path);
+        ])
+        ->setPaper('A4', 'landscape')
+        ->save($pdf1Path);
 
         // Get total page count across all PDFs
         $pdfPaths = [$pdf1Path];
@@ -4898,6 +4903,26 @@ class PdfController extends Controller
             $pdf->Cell(0, 0, 'Page ' . $currentPage . ' of ' . $totalPages, 0, 0, 'C');
         }
 
+        $pdf->Output('F', $outputPath);
+    }
+
+    private function addContinuousPageNumbersToPdfLandscape($sourcePath, $outputPath, $startPage, $totalPages) {
+        $pdf = new Fpdi();
+        
+        // Set the orientation to landscape for adding pages
+        $pageCount = $pdf->setSourceFile($sourcePath); // Initialize and count pages
+    
+        for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+            $pdf->AddPage('L'); // 'L' for landscape orientation
+            $pdf->useTemplate($pdf->importPage($pageNo));
+    
+            // Add page number
+            // $currentPage = $startPage + $pageNo - 1;
+            // $pdf->SetFont('Arial', '', 12);
+            // $pdf->SetY(-25); // Position at the bottom for landscape
+            // $pdf->Cell(0, 0, 'Page ' . $currentPage . ' of ' . $totalPages, 0, 0, 'C');
+        }
+    
         $pdf->Output('F', $outputPath);
     }
 
