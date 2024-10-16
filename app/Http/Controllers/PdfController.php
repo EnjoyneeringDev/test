@@ -4929,6 +4929,107 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'kesakitanTerbanyak.pdf')->deleteFileAfterSend(true);
     }
 
+    public function downloadLaporanKematian($id)
+    {
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'kematian' => [
+                [
+                    'nik' => '12412412412',
+                    'nama' => 'nama 1',
+                    'alamat' => 'alamat',
+                    'umur' => 65,
+                    'kelamin' => 'L',
+                    'tanggalMeninggal' => '23 Juni 2024',
+                    'tempatMeninggal' => 'Rumah Sakit',
+                    'diagnosa' => 'umur',
+                    'icd10' => 'j10.0'
+                ],
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.kematian', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'laporanKematian.pdf')->deleteFileAfterSend(true);
+    }
+
+    public function downloadLaporanKelahiran($id)
+    {
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'kematian' => [
+                [
+                    'nama' => 'nama 1',
+                    'kelamin' => 'L',
+                    'namaOrtu' => 'nama ortu',
+                    'nkk' => '1241414',
+                    'alamat' => 'alamat',
+                    'tanggalLahir' => '2 Maret 2024',
+                    'umurLahir' => 9,
+                    'bb' => 3,
+                    'tb' => 35,
+                    'normal' => "Normal"
+                ],
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.kematian', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'laporanKematian.pdf')->deleteFileAfterSend(true);
+    }
+
     // Function to count total pages in multiple PDFs
     private function getTotalPageCount($pdfPaths) {
         $totalPages = 0;
@@ -4946,6 +5047,8 @@ class PdfController extends Controller
     }
 
     // Function to add continuous page numbers to PDF
+
+    // ini buat atur kalau filenya akan dirender portrait
     private function addContinuousPageNumbersToPdf($sourcePath, $outputPath, $startPage, $totalPages) {
         $pdf = new Fpdi();
         // $pdf->setMargins(25.4, 25.4, 25.4);
@@ -4965,6 +5068,7 @@ class PdfController extends Controller
         $pdf->Output('F', $outputPath);
     }
 
+    // ini buat atur kalau filenya akan dirender landscape
     private function addContinuousPageNumbersToPdfLandscape($sourcePath, $outputPath, $startPage, $totalPages) {
         $pdf = new Fpdi();
         

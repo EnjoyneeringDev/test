@@ -131,8 +131,8 @@
 
 <body>
   <div class="head">
-    <p>Formulir 8</p>
-    <p>LAPORAN BULANAN KEPERAWATAN KESEHATAN MASYARAKAT</p>
+    <p style="text-align: center;">Formulir 8</p>
+    <p style="text-align: center;">LAPORAN BULANAN KEPERAWATAN KESEHATAN MASYARAKAT</p>
   </div>
 
   <div style="margin-top: 50px; ">

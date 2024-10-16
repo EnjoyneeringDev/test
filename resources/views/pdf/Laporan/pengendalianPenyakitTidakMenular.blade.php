@@ -128,8 +128,8 @@
 
 <body>
   <div class="head">
-    <p>Formulir 7</p>
-    <p>LAPORAN BULANAN PENGENDALIAN PENYAKIT TIDAK MENULAR </p>
+    <p style="text-align: center;">Formulir 7</p>
+    <p style="text-align: center;">LAPORAN BULANAN PENGENDALIAN PENYAKIT TIDAK MENULAR </p>
   </div>
 
   <div style="margin-top: 50px; ">
