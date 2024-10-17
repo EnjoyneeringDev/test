@@ -4890,6 +4890,48 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'laporanKematian.pdf')->deleteFileAfterSend(true);
     }
 
+    public function downloadLaporanKlb24Jam($id)
+    {
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+
+        \Log::info("data tes -> ");
+
+        $dataPuskesmas = (object) [
+            'kematian' => [
+                [
+                    
+                ],
+            ],
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.klb24Jam', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdfNotWithNumber($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'klb-24-jam.pdf')->deleteFileAfterSend(true);
+    }
+
     // Function to count total pages in multiple PDFs
     private function getTotalPageCount($pdfPaths) {
         $totalPages = 0;
@@ -4923,6 +4965,20 @@ class PdfController extends Controller
             $pdf->SetFont('Arial', '', 12);
             $pdf->SetY(-25); // Position at the bottom
             $pdf->Cell(0, 0, 'Page ' . $currentPage . ' of ' . $totalPages, 0, 0, 'C');
+        }
+
+        $pdf->Output('F', $outputPath);
+    }
+
+    // ini buat atur kalau filenya akan dirender portrait tanpa nomor halaman
+    private function addContinuousPageNumbersToPdfNotWithNumber($sourcePath, $outputPath, $startPage, $totalPages) {
+        $pdf = new Fpdi();
+        // $pdf->setMargins(25.4, 25.4, 25.4);
+        $pageCount = $pdf->setSourceFile($sourcePath); // Initialize and count pages
+
+        for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+            $pdf->AddPage();
+            $pdf->useTemplate($pdf->importPage($pageNo));
         }
 
         $pdf->Output('F', $outputPath);
