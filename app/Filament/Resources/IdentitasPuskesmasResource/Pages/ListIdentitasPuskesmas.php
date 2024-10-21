@@ -27,6 +27,13 @@ class ListIdentitasPuskesmas extends ListRecords
                 ->action(function () {
                     return redirect()->route('download.identitas.puskesmas.pdf', ['id' => 1]);
                 }),
+
+            Actions\Action::make('downloadPdf 2')
+                ->label('Download PDF 2')
+                ->color('primary')
+                ->action(function () {
+                    return redirect()->route('download.laporan.penyakit-menular.pdf', ['id' => 1]);
+                }),
         ];
     }
 }

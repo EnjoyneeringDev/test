@@ -125,92 +125,120 @@
       margin: 30px 0;
     }
 
-    .headerForm .left,
-    .headerForm .right,
+    .headerFormLeft,
+    .headerFormRight,
     .headerForm .dataLeft,
     .headerForm .dataRight {
       border: none !important;
     }
 
-    .headerForm .left {
+    .headerFormLeft {
       width: 50vw;
     }
 
-    .headerForm .right {
+    .headerFormRight {
       width: 30vw;
       padding-left: 20vw;
     }
 
     .headerForm .dataLeft {
       /* background: blue; */
-      width: 30%;
-      min-width: 115px;
+      width: 70px;
+      /* background: red; */
     }
 
     .headerForm .dataRight {
       /* background: red; */
       border: 1px solid black !important;
+      /* background: blue; */
     }
   </style>
 </head>
 
 <body>
   <div class="head">
-    <p>Formulir 6</p>
-    <p>LAPORAN BULANAN PENGENDALIAN PENYAKIT MENULAR </p>
+    <p style="text-align: center;">Formulir 6</p>
+    <p style="text-align: center;">LAPORAN BULANAN PENGENDALIAN PENYAKIT MENULAR </p>
   </div>
 
-  <table class="headerForm">
+  <!-- <table class="headerForm">
     <tr>
-      <td class="left">
+      <td class="headerFormLeft" style="width: 150px;">
         <table class="itemHeader">
           <tr>
             <td class="dataLeft">Kode</td>
-            <td class="dataRight">1</td>
-            <td class="dataRight">2</td>
-            <td class="dataRight">3</td>
-            <td class="dataRight">4</td>
-            <td class="dataRight">5</td>
-            <td class="dataRight">6</td>
-            <td class="dataRight">7</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-            <td class="dataRight" style="opacity: 0; border: none !important;">1</td>
-          </tr>
+            <td class="dataRight" style="width: 10px;">1</td>
+            <td class="dataRight" style="width: 10px;">2</td>
+            <td class="dataRight" style="width: 10px;">3</td>
+            <td class="dataRight" style="width: 10px;">4</td>
+            <td class="dataRight" style="width: 10px;">5</td>
+            <td class="dataRight" style="width: 10px;">6</td>
+            <td class="dataRight" style="width: 10px;">7</td>
+          </tr> 
         </table>
       </td>
-      <td class="right">
+      <td class="headerFormRight" styles="width: 400px;">
         <table class="itemHeader">
           <tr>
-            <td class="dataLeft" style="min-width: 50px;">Bulan</td>
-            <td class="dataRight">1</td>
+            <td class="dataLeft" style="padding-left: 100px; padding-right: -300px; margin-right: -300px; width: 10px;">Bulan</td>
+            <td class="dataRight" style="width: 100px; margin-left: -300px;">1</td>
           </tr>
         </table>
       </td>
     </tr>
     <tr>
-      <td class="left">
+      <td class="headerFormLeft" styles="width: 300px;">
         <table class="itemHeader">
           <tr>
             <td class="dataLeft">Puskesmas</td>
-            <td class="dataRight">1</td>
+            <td class="dataRight" style="width: 200px;">1</td>
           </tr>
         </table>
       </td>
-      <td class="right">
+      <td class="headerFormRight" styles="width: 200px;">
         <table class="itemHeader">
           <tr>
-            <td class="dataLeft" style="min-width: 50px;">Tahun</td>
-            <td class="dataRight">1</td>
+            <td class="dataLeft" style="padding-left: 100px; padding-right: -300px; margin-right: -300px; width: 10px;">Tahun</td>
+            <td class="dataRight" style="width: 100px; margin-left: -300px;">1</td>
           </tr>
         </table>
       </td>
     </tr>
-  </table>
+  </table> -->
 
-  <table>
+  <div style="margin-top: 50px; ">
+    <div style="width: 400px; display: inline-block; vertical-align: middle; ">
+      <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
+      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+    </div>
+    <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
+        <div>
+            <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Bulan</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">November</span>
+        </div>
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; " >
+    <div style="width: 400px; display: inline-block; vertical-align: middle; ">
+      <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+    </div>
+    <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
+        <div>
+            <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Tahun</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
+        </div>
+    </div>
+  </div>
+
+  <table style="margin-top: 20px; ">
     <thead>
       <tr>
         <td class="column5">No</td>
@@ -227,42 +255,42 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah suspek malaria ditemukan</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->suspek_malaria }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah suspek malaria diperiksa mikroskopis/RDT </td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->suspek_malaria_rdt }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah malaria positif (sama dengan jumlah malaria positif pada Laporan Bulanan Data Kesakitan) </td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->malaria_positif }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah malaria positif Plasmodium falsiparum</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->malaria_positif_plasmodium }}</td>
       </tr>
       <tr>
         <td class="column5">5.</td>
         <td class="column80">Jumlah malaria positif indigenous</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->malaria_positif_indigenous }}</td>
       </tr>
       <tr>
         <td class="column5">6.</td>
         <td class="column80">Jumlah malaria positif import</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->malaria_positif_import }}</td>
       </tr>
       <tr>
         <td class="column5">7.</td>
         <td class="column80">Jumlah malaria positif diobati standar</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->malaria_positif_diobati_standar }}</td>
       </tr>
       <tr>
         <td class="column5">8.</td>
         <td class="column80">Jumlah kelambu berinsektisida yang dibagikan</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kelambu_berinsektisida_dibagikan }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">B</td>
@@ -272,62 +300,62 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah kelurahan/desa berisiko penularan DBD (ada kelompok/cluster dalam 3 tahun terakhir)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kelurahan_berisiko_dbd }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah kelurahan/desa berisiko penularan DBD diperiksa jentik</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kelurahan_berisiko_dbd_diperiksa_jentik }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah kelurahan/desa berisiko penularan DBD bebas jentik (ada jentik <5 rmh/bangunan) </td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kelurahan_berisiko_dbd_tidak_diperiksa_jentik }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah fogging focus</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->fogging_focus }}</td>
       </tr>
       <tr>
         <td class="column5">5.</td>
         <td class="column80">Jumlah kelurahan/desa yang dilakukan larvasidasi</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kelurahan_dilakukan_larvadisasi }}</td>
       </tr>
       <tr>
         <td class="column5">6.</td>
         <td class="column80">Jumlah kelurahan/desa yang dilakukan PSN 3M Plus</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kelurahan_dilakukan_psn_3m_plus }}</td>
       </tr>
       <tr>
         <td class="column5">7.</td>
         <td class="column80">Jumlah sekolah diperiksa jentik</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->sekolah_diperiksa_jentik }}</td>
       </tr>
       <tr>
         <td class="column5">8.</td>
         <td class="column80">Jumlah sekolah diperiksa dan bebas dari jentik</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->sekolah_diperiksa_bebas_jentik }}</td>
       </tr>
       <tr>
         <td class="column5">9.</td>
         <td class="column80">Jumlah RS/puskesmas/klinik diperiksa jentik</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->puskesmas_diperiksa_jetik }}</td>
       </tr>
       <tr>
         <td class="column5">10.</td>
         <td class="column80">Jumlah RS/puskesmas/klinik diperiksa dan bebas dari jentik</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->puskesmas_diperiksa_bebas_jentik }}</td>
       </tr>
       <tr>
         <td class="column5">11.</td>
         <td class="column80">Jumlah tempat-tempat umum lainnya diperiksa jentik</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->tempat_umum_diperiksa_jetik }}</td>
       </tr>
       <tr>
         <td class="column5">12.</td>
         <td class="column80">Jumlah tempat - tempat umum lainnya diperiksa dan bebas jentik</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->tempat_umum_diperiksa_bebas_jentik }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">C</td>
@@ -337,67 +365,67 @@
       <tr>
         <td class="column5">1</td>
         <td class="column80">Jumlah anak balita (1-4 tahun) yang diperiksa cacing pada tinjanya</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_balita_diperiksa_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah anak prasekolah (5-6 tahun) yang diperiksa cacing pada tinjanya</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_prasekolah_diperiksa_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah anak sekolah (7-12 tahun) yang diperiksa cacing pada tinjanya</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_sekolah_diperiksa_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah anak balita (1-4 tahun) yang ditemukan positif telur cacing pada pemeriksaan tinjanya</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_balita_positif_telur_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">5.</td>
         <td class="column80">Jumlah anak prasekolah (5-6 tahun) yang ditemukan positif telur cacing pada pemeriksaan tinjanya</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_prasekolah_positif_telur_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">6.</td>
         <td class="column80">Jumlah anak sekolah (7-12 tahun) yang ditemukan positif telur cacing pada pemeriksaan tinjanya</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_sekolah_positif_telur_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">7.</td>
         <td class="column80">Jumlah anak balita (1-4 tahun) yang minum obat cacing (Albendazole)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_balita_minum_obat_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">8.</td>
         <td class="column80">Jumlah anak prasekolah (5-6 tahun) yang minum obat cacing (Albendazole)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_prasekolah_minum_obat_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">9.</td>
         <td class="column80">Jumlah anak sekolah (7-12 tahun) yang minum obat cacing (Albendazole)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_sekolah_minum_obat_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">10.</td>
         <td class="column80">Jumlah SD/MI yang anak didiknya mendapat obat cacing (Albendazole) I</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_sd_dapat_obat_cacing1 }}</td>
       </tr>
       <tr>
         <td class="column5">11.</td>
         <td class="column80">Jumlah SD/MI yang anak didiknya mendapat obat cacing (Albendazole) II tahun ini</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_sd_dapat_obat_cacing2 }}</td>
       </tr>
       <tr>
         <td class="column5">12.</td>
         <td class="column80">Jumlah ibu hamil dites cacing tinjanya</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->ibu_hamil_tes_cacing }}</td>
       </tr>
       <tr>
         <td class="column5">13.</td>
         <td class="column80">Jumlah ibu hamil cacingan ditangani (mendapat albendazole) (baru/ulang)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->ibu_hamil_cacingan }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">D</td>
@@ -407,37 +435,37 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah kasus Gigitan Hewan Penular Rabies (GHPR) pada anak laki-laki (umur  <15 tahun)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->rabies_pada_anak_laki }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah kasus GHPR pada laki-laki dewasa (umur > 15 tahun)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->rabies_pada_dewasa_laki }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah kasus GHPR pada anak perempuan (umur  <15 tahun)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->rabies_pada_anak_perempuan }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah kasus GHPR pada perempuan dewasa (umur > 15 tahun)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->rabies_pada_dewasa_perempuan }}</td>
       </tr>
       <tr>
         <td class="column5">5.</td>
         <td class="column80">Jumlah kasus GHPR yang mendapatkan Vaksin Anti Rabies (VAR)/SAR</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->dapat_vaksin_anti_rabies }}</td>
       </tr>
       <tr>
         <td class="column5">6.</td>
         <td class="column80">Jumlah kasus Rabies (Kasus Lyssa) yang mendapatkan VAR/SAR  secara lengkap</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kasus_rabies_dapat_var_lengkap }}</td>
       </tr>
       <tr>
         <td class="column5">7.</td>
         <td class="column80">Jumlah kasus Rabies (Kasus Lyssa) yang tidak mendapatkan VAR/SAR secara lengkap</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kasus_rabies_tidak_dapat_var_lengkap }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">E</td>
@@ -447,52 +475,52 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah penderita diare pada bayi dapat oralit</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->bayi_diare_oralit }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah penderita diare pada bayi dapat Zink</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->bayi_diare_zink }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah penderita diare pada bayi dapat oralit dan Zink</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->bayi_diare_oralit_zink }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah penderita diare pada bayi dapat Infus</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->bayi_diare_infus }}</td>
       </tr>
       <tr>
         <td class="column5">5.</td>
         <td class="column80">Jumlah penderita diare pada anak balita dapat oralit</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->balita_diare_oralit }}</td>
       </tr>
       <tr>
         <td class="column5">6.</td>
         <td class="column80">Jumlah penderita diare pada anak balita Zink</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->balita_diare_zink }}</td>
       </tr>
       <tr>
         <td class="column5">7.</td>
         <td class="column80">Jumlah penderita diare pada anak balita dapat oralit dan Zink</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->balita_diare_oralit_zink }}</td>
       </tr>
       <tr>
         <td class="column5">8.</td>
         <td class="column80">Jumlah penderita diare pada anak balita dapat Infus</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->balita_diare_infus }}</td>
       </tr>
       <tr>
         <td class="column5">9.</td>
         <td class="column80">Jumlah penderita diare umur ≥ 5 tahun dapat oralit</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_dewasa_diare_oralit }}</td>
       </tr>
       <tr>
         <td class="column5">10.</td>
         <td class="column80">Jumlah penderita diare umur ≥ 5 tahun dapat infus</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->anak_dewasa_diare_zink }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">F</td>
@@ -502,7 +530,7 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah kasus suspek hepatitis yang dirujuk</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->suspek_hepatitis_dirujuk }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">G</td>
@@ -512,42 +540,42 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah pasien tuberculosis paru terkonfirmasi bakteriologis (BTA/biakan/tes cepat) baru diobati</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_tb_paru_diobati }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah pasien tuberculosis selain paru (klinis paru, BTA negatif, rontgen positif)  yang diobati</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_tb_non_paru_diobati }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah pasien tuberculosis anak (0-14 tahun) yang diobati</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->tb_anak_diobati }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah pasien tuberculosis yang diobati bulan ini</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_tb_diobati }}</td>
       </tr>
       <tr>
         <td class="column5">5.</td>
         <td class="column80">Jumlah pasien tuberculosis paru terkonfirmasi bakteriologis yang sembuh</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_tb_sembuh }}</td>
       </tr>
       <tr>
         <td class="column5">6.</td>
         <td class="column80">Jumlah pasien tuberculosis paru terkonfirmasi bakteriologis yang mendapat pengobatan lengkap</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_tb_pengobatan_lengkap }}</td>
       </tr>
       <tr>
         <td class="column5">7.</td>
         <td class="column80">Jumlah pasien tuberculosis (paru BTA negatif, rontgen positif) baru yang mendapat pengobatan lengkap)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_tb_baru_pengobatan_lengkap }}</td>
       </tr>
       <tr>
         <td class="column5">8.</td>
         <td class="column80">Jumlah pasien tuberculosis kambuh</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_tb_kambuh }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">H</td>
@@ -557,37 +585,37 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah penderita kusta baru tipe PB dan MB</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kusta_baru }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah penderita kusta (MB dan PB) baru dengan cacat tingkat 0</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kusta_tingkat_0 }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah penderita kusta (MB dan PB) baru dengan cacat tingkat 2 </td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kusta_tingkat_2 }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah penderita kusta baru anak</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kusta_baru_anak }}</td>
       </tr>
       <tr>
         <td class="column5">5.</td>
         <td class="column80">Jumlah kasus indeks (MB dan PB) yang kontaknya dilakukan pemeriksaan kusta</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kasus_indeks_yang_kontaknya_diperiksa_kusta }}</td>
       </tr>
       <tr>
         <td class="column5">6.</td>
         <td class="column80">Jumlah penderita kusta (PB dan MB) masih dalam pengobatan MDT</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_kusta_dalam_perawatan }}</td>
       </tr>
       <tr>
         <td class="column5">7.</td>
         <td class="column80">Jumlah penderita kusta (PB) dinyatakan default</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_kusta_default }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">I</td>
@@ -597,22 +625,22 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah penderita frambusia suspek</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->frambusia_suspek }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah penderita frambusia suspek diperiksa serologi (pemeriksaan cepat/RDT)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->frambusia_diperiksa_serologi }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah penderita frambusia konfirmasi (RDT +)</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->frambusia_konfirmasi }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah SD/MI dilakukan pemeriksaan frambusia </td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->sd_diperiksa_frambusia }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">J</td>
@@ -622,22 +650,22 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah orang dites HIV</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->orang_tes_hiv }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah orang dengan HIV positif </td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->orang_positif_hiv }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah ibu hamil dites HIV</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->ibu_hamil_tes_hiv }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah ibu hamil dengan HIV positif </td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->ibu_hamil_positif_hiv }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">K</td>
@@ -647,32 +675,32 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah pasien yang dites sifilis</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_tes_sifilis }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah pasien positif sifilis </td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_positif_sifilis }}</td>
       </tr>
       <tr>
         <td class="column5">3.</td>
         <td class="column80">Jumlah pasien sifilis yang diobati</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->pasien_sifilis_diobati }}</td>
       </tr>
       <tr>
         <td class="column5">4.</td>
         <td class="column80">Jumlah ibu hamil yang dites sifilis</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->ibu_hamil_tes_sifilis }}</td>
       </tr>
       <tr>
         <td class="column5">5.</td>
         <td class="column80">Jumlah ibu hamil positif  sifilis</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->ibu_hamil_positif_sifilis }}</td>
       </tr>
       <tr>
         <td class="column5">6.</td>
         <td class="column80">Jumlah ibu hamil sifilis yang diobati</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->ibu_hamil_sifilis_diobati }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey">L</td>
@@ -682,12 +710,12 @@
       <tr>
         <td class="column5">1.</td>
         <td class="column80">Jumlah kunjungan Balita batuk atau kesukaran bernapas</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kunjungan_balita_batuk }}</td>
       </tr>
       <tr>
         <td class="column5">2.</td>
         <td class="column80">Jumlah Balita batuk atau kesukaran bernafas yang dihitung napas atau dilihat ada tidaknya tarikan dinding dada kedalam</td>
-        <td class="column15"></td>
+        <td class="column15">{{ $dataPuskesmas->data->kunjungan_balita_batuk_2 }}</td>
       </tr>
     </tbody>
   </table>
