@@ -37,4 +37,24 @@ class SumberDayaManusia extends Model
     {
         return $this->hasMany(PelatihanJabatanPenjenjangan::class);
     }
+
+    public function pelatihanTeknis(): HasMany
+    {
+        return $this->hasMany(PelatihanTeknis::class);
+    }
+
+    public function registrasi(): HasMany
+    {
+        return $this->hasMany(Registrasi::class);
+    }
+
+    public function perizinan(): HasMany
+    {
+        return $this->hasMany(Perizinan::class);
+    }
+
+    public function penghargaan(): HasMany
+    {
+        return $this->hasMany(Penghargaan::class);
+    }
 }

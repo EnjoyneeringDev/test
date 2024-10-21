@@ -36,4 +36,60 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(SumberDayaManusia::class);
     }
+
+    public function ketersediaanKondisiPeralatanPuskesmas(): HasMany
+    {
+        return $this->hasMany(ketersediaanKondisiPeralatanPuskesmas::class);
+    }
+
+    public function desaKelurahanPuskesmas(): HasMany
+    {
+        return $this->hasMany(DesaKelurahanPuskesmas::class);
+    }
+
+    public function TopikPromosiKesehatan(): HasMany
+    {
+        return $this->hasMany(TopikPromosiKesehatan::class);
+    }
+
+    public function promosiKesehatanPenyakitMenular(): HasMany
+    {
+        return $this->hasMany(PromosiKesehatanPenyakitMenular::class);
+    }
+
+    public function promosiKesehatanLingkungan(): HasMany
+    {
+        return $this->hasMany(PromosiKesehatanLingkungan::class);
+    }
+
+    public function promosiKesehatanKIA(): HasMany
+    {
+        return $this->hasMany(PromosiKesehatanKIA::class);
+    }
+
+    public function promosiKesehatanSekolahDasar(): HasMany
+    {
+        return $this->hasMany(PromosiKesehatanSekolahDasar::class);
+    }
+
+    public function promosiKesehatanPengendalianPenyakitTidakMenular(): HasMany
+    {
+        return $this->hasMany(PromosiKesehatanPengendalianPenyakitTidakMenular::class);
+    }
+
+
+    public function promosiKesehatanJiwaNapza(): HasMany
+    {
+        return $this->hasMany(PromosiKesehatanJiwaNapza::class);
+    }
+
+    public function KesehatanLingkungan(): HasMany
+    {
+        return $this->hasMany(KesehatanLingkungan::class);
+    }
+
+    public function PengendalianPenyakitTidakMenular(): HasMany
+    {
+        return $this->hasMany(PengendalianPenyakitTidakMenular::class);
+    }
 }
