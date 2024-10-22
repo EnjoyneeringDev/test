@@ -17,6 +17,12 @@ class LaporanKlbResource extends Resource
 {
     protected static ?string $model = LaporanKlb::class;
 
+
+
+    protected static ?string $navigationLabel = 'KLB 24 Jam';
+
+    protected static ?string $navigationGroup = 'Form 18. KLB 24 Jam';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

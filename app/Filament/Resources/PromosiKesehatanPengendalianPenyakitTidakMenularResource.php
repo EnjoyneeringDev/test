@@ -17,6 +17,11 @@ class PromosiKesehatanPengendalianPenyakitTidakMenularResource extends Resource
 {
     protected static ?string $model = PromosiKesehatanPengendalianPenyakitTidakMenular::class;
 
+    protected static ?string $navigationLabel = 'F. Pengendalian Penyakit Tidak
+ Menular';
+
+    protected static ?string $navigationGroup = 'Form 2. PROMOSI KESEHATAN';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -17,6 +17,10 @@ class PromosiKesehatanLingkunganResource extends Resource
 {
     protected static ?string $model = PromosiKesehatanLingkungan::class;
 
+    protected static ?string $navigationLabel = 'C. Promkes Lingkungan';
+
+    protected static ?string $navigationGroup = 'Form 2. PROMOSI KESEHATAN';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

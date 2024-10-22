@@ -17,6 +17,10 @@ class KelahiranDiPuskesmasResource extends Resource
 {
     protected static ?string $model = KelahiranDiPuskesmas::class;
 
+    protected static ?string $navigationLabel = 'Data Kelahiran Di Puskesmas';
+
+    protected static ?string $navigationGroup = 'Form 19. DATA KELAHIRAN DI PUSKESMAS';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

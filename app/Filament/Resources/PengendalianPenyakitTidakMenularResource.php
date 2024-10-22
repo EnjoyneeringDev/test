@@ -17,6 +17,10 @@ class PengendalianPenyakitTidakMenularResource extends Resource
 {
     protected static ?string $model = PengendalianPenyakitTidakMenular::class;
 
+    protected static ?string $navigationLabel = 'Laporan Keperawatan Kesehatan Masyarakat';
+
+    protected static ?string $navigationGroup = 'Form 7. KEPERAWATAN KESEHATAN MASYARAKAT';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -17,6 +17,10 @@ class RegistrasiResource extends Resource
 {
     protected static ?string $model = Registrasi::class;
 
+    protected static ?string $navigationLabel = 'III. Registrasi';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR KEPEGAWAIAN';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

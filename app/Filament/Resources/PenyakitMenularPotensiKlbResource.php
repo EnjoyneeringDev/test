@@ -19,6 +19,10 @@ class PenyakitMenularPotensiKlbResource extends Resource
 {
     protected static ?string $model = PenyakitMenularPotensiKlb::class;
 
+    protected static ?string $navigationLabel = 'Panyakit Menular Potensi KLB';
+
+    protected static ?string $navigationGroup = 'Form 17. PENYAKIT MENULAR POTENSI KLB';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -17,6 +17,10 @@ class KesehatanLingkunganResource extends Resource
 {
     protected static ?string $model = KesehatanLingkungan::class;
 
+    protected static ?string $navigationLabel = 'Laporan Kesehatan Lingkungan';
+
+    protected static ?string $navigationGroup = 'Form 3. KESEHATAN LINGKUNGAN';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

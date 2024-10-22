@@ -17,6 +17,10 @@ class PromosiKesehatanJiwaNapzaResource extends Resource
 {
     protected static ?string $model = PromosiKesehatanJiwaNapza::class;
 
+    protected static ?string $navigationLabel = 'G. Promkes Jiwa dan NAPZA';
+
+    protected static ?string $navigationGroup = 'Form 2. PROMOSI KESEHATAN';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

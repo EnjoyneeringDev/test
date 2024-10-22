@@ -17,7 +17,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PemakaianPermintaanObatResource extends Resource
 {
+
     protected static ?string $model = PemakaianPermintaanObat::class;
+
+    protected static ?string $navigationLabel = 'Pemakaian Dan Lembar Permintaan Obat';
+
+    protected static ?string $navigationGroup = 'Form 16. PEMAKAIAN DAN LEMBAR PERMINTAAN OBAT';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

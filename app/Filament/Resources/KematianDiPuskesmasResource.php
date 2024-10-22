@@ -17,6 +17,10 @@ class KematianDiPuskesmasResource extends Resource
 {
     protected static ?string $model = KematianDiPuskesmas::class;
 
+    protected static ?string $navigationLabel = 'Data Kematian Di Puskesmas';
+
+    protected static ?string $navigationGroup = 'Form 15. DATA KEMATIAN DI PUSKESMAS';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

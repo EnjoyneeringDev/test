@@ -19,6 +19,10 @@ class KesakitanTerbanyakResource extends Resource
 {
     protected static ?string $model = KesakitanTerbanyak::class;
 
+    protected static ?string $navigationLabel = 'Kesakitan Terbanyak';
+
+    protected static ?string $navigationGroup = 'Form 14. KESAKITAN TERBANYAK';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

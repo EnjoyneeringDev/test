@@ -17,6 +17,10 @@ class PelatihanJabatanPenjenjanganResource extends Resource
 {
     protected static ?string $model = PelatihanJabatanPenjenjangan::class;
 
+    protected static ?string $navigationLabel = 'III. Pelatihan Jabatan/Penjenjangan';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR KEPEGAWAIAN';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
