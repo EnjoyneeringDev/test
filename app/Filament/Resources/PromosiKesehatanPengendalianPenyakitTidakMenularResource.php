@@ -31,7 +31,7 @@ class PromosiKesehatanPengendalianPenyakitTidakMenularResource extends Resource
                 Forms\Components\DatePicker::make('bulan_tahun')
                     ->required(),
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
                     ->required(),
                 Forms\Components\Select::make('topik_promosi_kesehatan_id')
                     ->relationship('topikPromosiKesehatan', 'id')
@@ -49,10 +49,10 @@ class PromosiKesehatanPengendalianPenyakitTidakMenularResource extends Resource
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('topikPromosiKesehatan.id')
+                Tables\Columns\TextColumn::make('topikPromosiKesehatan.nama_topik')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah_mengikuti_penyuluhan_kesehatan')

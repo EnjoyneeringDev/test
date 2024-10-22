@@ -30,7 +30,7 @@ class PromosiKesehatanJiwaNapzaResource extends Resource
                 Forms\Components\DatePicker::make('bulan_tahun')
                     ->required(),
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
                     ->required(),
                 Forms\Components\TextInput::make('jumlah_kegiatan_penyuluhan')
                     ->numeric(),
@@ -44,7 +44,7 @@ class PromosiKesehatanJiwaNapzaResource extends Resource
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah_kegiatan_penyuluhan')
