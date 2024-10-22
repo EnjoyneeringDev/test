@@ -83,13 +83,18 @@ class IdentitasPuskesmas extends Model
         return $this->hasMany(PromosiKesehatanJiwaNapza::class);
     }
 
-    public function KesehatanLingkungan(): HasMany
+    public function kesehatanLingkungan(): HasMany
     {
         return $this->hasMany(KesehatanLingkungan::class);
     }
 
-    public function PengendalianPenyakitTidakMenular(): HasMany
+    public function pengendalianPenyakitTidakMenular(): HasMany
     {
         return $this->hasMany(PengendalianPenyakitTidakMenular::class);
+    }
+
+    public function laporanKlb(): HasMany
+    {
+        return $this->hasMany(LaporanKlb::class);
     }
 }

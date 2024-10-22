@@ -59,7 +59,8 @@ class DatabaseSeeder extends Seeder
             PengendalianPenyakitTidakMenularSeeder::class,
             KeperawatanKesehatanMasyarakatSeeder::class,
             KematianDiPuskesmasSeeder::class,
-            KelahiranDiPuskesmasSeeder::class
+            KelahiranDiPuskesmasSeeder::class,
+            LaporanKlbSeeder::class,
         ]);
     }
 }
