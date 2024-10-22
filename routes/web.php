@@ -23,3 +23,6 @@ Route::get('/admin/identitas-puskesmas/download-pdf/{id}', [PdfController::class
 
 Route::get('/admin/laporan/penyakit-menular/download-pdf/{id}', [PdfController::class, 'downloadLaporanKlb24Jam'])
     ->name('download.laporan.penyakit-menular.pdf');
+
+Route::get('/admin/laporan/kematian/download-pdf/{id}', [PdfController::class, 'downloadLaporanKematian'])
+    ->name('download.laporan.kematian.pdf');
