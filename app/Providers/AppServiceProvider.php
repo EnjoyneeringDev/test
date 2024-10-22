@@ -38,5 +38,7 @@ class AppServiceProvider extends ServiceProvider
                 'Form 19. DATA KELAHIRAN DI PUSKESMAS'
             ]);
         });
+
+        \Illuminate\Support\Facades\URL::forceScheme('https');
     }
 }
