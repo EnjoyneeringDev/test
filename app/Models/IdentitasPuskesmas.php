@@ -97,4 +97,9 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(LaporanKlb::class);
     }
+
+    public function pemakaianPermintaanObat(): HasMany
+    {
+        return $this->hasMany(PemakaianPermintaanObat::class);
+    }
 }

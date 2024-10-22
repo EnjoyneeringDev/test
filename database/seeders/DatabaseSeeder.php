@@ -61,6 +61,7 @@ class DatabaseSeeder extends Seeder
             KematianDiPuskesmasSeeder::class,
             KelahiranDiPuskesmasSeeder::class,
             LaporanKlbSeeder::class,
+            PemakaianPermintaanObatSeeder::class
         ]);
     }
 }
