@@ -63,6 +63,7 @@ class DatabaseSeeder extends Seeder
             LaporanKlbSeeder::class,
             PemakaianPermintaanObatSeeder::class,
             PenyakitMenularPotensiKlbSeeder::class,
+            KesakitanTerbanyakSeeder::class
         ]);
     }
 }
