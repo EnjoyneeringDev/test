@@ -32,3 +32,6 @@ Route::get('/admin/laporan/pengendalian-penyakit-menular/download-pdf/{record_id
 
 Route::get('/admin/laporan/pelayanan-puskesmas/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanPelayananPuskesmas'])
     ->name('download.laporan.pelayananPuskesmas.pdf');
+
+Route::get('/admin/laporan/kesakitan-berdasarkan-gejala/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKesakitanBerdasarkanGejala'])
+    ->name('download.laporan.kesakitanBerdasarkanGejala.pdf');
