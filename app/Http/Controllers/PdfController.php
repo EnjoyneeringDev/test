@@ -119,14 +119,17 @@ class PdfController extends Controller
 
     public function downloadLaporanPenyakitMenular($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = PengendalianPenyakitMenular::where('identitas_puskesmas_id', $puskesmas_id)
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+        $dataLaporan = PengendalianPenyakitMenular::where('identitas_puskesmas_id', $puskesmas_id)
             ->where('id', $record_id)
             ->first();
-
+        $idLaporan = sprintf('%07d', $record_id);
 
         $dataPuskesmas = (object) [
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
             'data' => [
-                $dataDasarPuskesmas
+                $dataLaporan
             ],
         ];
 
