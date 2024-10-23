@@ -13,6 +13,7 @@ use App\Models\IdentitasPuskesmas;
 use App\Models\WilayahKerjaPuskesmas;
 use App\Models\SumberDayaPuskesmas;
 use App\Models\PengendalianPenyakitMenular;
+use App\Models\PelayananPuskesmas;
 
 class PdfController extends Controller
 {
@@ -286,110 +287,35 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanPelayananPuskesmas($id)
+    public function downloadLaporanPelayananPuskesmas($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+        $currentRecord = PelayananPuskesmas::where('id', $record_id)
+        ->where('identitas_puskesmas_id', $puskesmas_id)
+        ->first();
 
-        \Log::info("data tes -> ");
+        if (!$currentRecord) {
+            // Handle case where the current record does not exist
+            \Log::info("Record with ID {$record_id} not found for puskesmas ID {$puskesmas_id}.");
+            return response()->json(['message' => 'Record not found.'], 404);
+        }
+
+        // Fetch the previous record with the same puskesmas_id, created before the current record
+        $previousRecord = PelayananPuskesmas::where('identitas_puskesmas_id', $puskesmas_id)
+            ->where('created_at', '<', $currentRecord->created_at) // Ensure we get the record before the current one
+            ->orderBy('created_at', 'desc') // Order by created_at descending to get the latest before the current
+            ->first(); // Get the first matching previous record
+
+        $idLaporan = sprintf('%07d', $record_id);
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
 
         $dataPuskesmas = (object) [
-            'data' => [
-                [
-                    'kunjungan_puskesmas_lama' => 1,
-                    'kunjungan_puskesmas_baru' => 1,
-                    'kunjungan_peserta_jkn_lama' => 1,
-                    'kunjungan_peserta_jkn_baru' => 1,
-                    'kunjungan_peserta_asuransi_lama' => 1,
-                    'kunjungan_peserta_asuransi_baru' => 1,
-                    'puskesmas_rawat_inat_lama' => 1,
-                    'puskesmas_rawat_inat_baru' => 1,
-                    'fkrtl_lama' => 1,
-                    'fkrtl_baru' => 1,
-                    'pasien_tidak_menular_dirujuk_lama' => 1,
-                    'pasien_tidak_menular_dirujuk_baru' => 1,
-                    'dirujuk_dari_puskesmas_rawat_inap_lama' => 1,
-                    'dirujuk_dari_puskesmas_rawat_inap_baru' => 1,
-                    'pelayanan_kesehatan_rujukan_tingkat_lanjut_lama' => 1,
-                    'pelayanan_kesehatan_rujukan_tingkat_lanjut_baru' => 1,
-                    'rujukan_posbindu_ptm_lama' => 1,
-                    'rujukan_posbindu_ptm_baru' => 1,
-                    'penderita_rawat_inap_lama' => 1,
-                    'penderita_rawat_inap_baru' => 1,
-                    'ibu_hamil_dengan_gangguan_kesehatan_lama' => 1,
-                    'ibu_hamil_dengan_gangguan_kesehatan_baru' => 1,
-                    'anak_dirawat_inap_lama' => 1,
-                    'anak_dirawat_inap_baru' => 1,
-                    'penderita_kecelakaan_dirawat_inap_lama' => 1,
-                    'penderita_kecelakaan_dirawat_inap_baru' => 1,
-                    'penderita_penyakit_tidak_menular_dirawat_inap_lama' => 1,
-                    'penderita_penyakit_tidak_menular_dirawat_inap_baru' => 1,
-                    'pasien_sembuh_rawat_inap_lama' => 1,
-                    'pasien_sembuh_rawat_inap_baru' => 1,
-                    'hari_rawat_inap_lama' => 1,
-                    'hari_rawat_inap_baru' => 1,
-                    'penambalan_gigi_tetap_lama' => 1,
-                    'penambalan_gigi_tetap_baru' => 1,
-                    'penambalan_gigi_sulung_lama' => 1,
-                    'penambalan_gigi_sulung_baru' => 1,
-                    'pencabutan_gigi_tetap_lama' => 1,
-                    'pencabutan_gigi_tetap_baru' => 1,
-                    'pencabutan_gigi_sulung_lama' => 1,
-                    'pencabutan_gigi_sulung_baru' => 1,
-                    'pembersihan_karang_gigi_lama' => 1,
-                    'pembersihan_karang_gigi_baru' => 1,
-                    'premedikasi_lama' => 1,
-                    'premedikasi_baru' => 1,
-                    'pelayanan_rujukan_gigi_lama' => 1,
-                    'pelayanan_rujukan_gigi_baru' => 1,
-                    'sd_pemeriksaan_gigi_lama' => 1,
-                    'sd_pemeriksaan_gigi_baru' => 1,
-                    'sd_perlu_perawatan_kesehatan_gigi_lama' => 1,
-                    'sd_perlu_perawatan_kesehatan_gigi_baru' => 1,
-                    'sd_perawatan_kesehatan_gigi_lama' => 1,
-                    'sd_perawatan_kesehatan_gigi_baru' => 1,
-                    'pemasangan_gigi_tiruan_lama' => 1,
-                    'pemasangan_gigi_tiruan_baru' => 1,
-                    'ibu_hamil_perawatan_gigi_lama' => 1,
-                    'ibu_hamil_perawatan_gigi_baru' => 1,
-                    'tk_pemeriksaan_gigi_lama' => 1,
-                    'tk_pemeriksaan_gigi_baru' => 1,
-                    'pemeriksaan_hematologi_lama' => 1,
-                    'pemeriksaan_hematologi_baru' => 1,
-                    'pemeriksaan_kimia_klinik_lama' => 1,
-                    'pemeriksaan_kimia_klinik_baru' => 1,
-                    'pemeriksaan_urinalisa_lama' => 1,
-                    'pemeriksaan_urinalisa_baru' => 1,
-                    'pemeriksaan_mikrobiologi_lama' => 1,
-                    'pemeriksaan_mikrobiologi_baru' => 1,
-                    'pemeriksaan_imunologi_lama' => 1,
-                    'pemeriksaan_imunologi_baru' => 1,
-                    'pemeriksaan_tinja_lama' => 1,
-                    'pemeriksaan_tinja_baru' => 1,
-                    'resep_rawat_jalan_lama' => 1,
-                    'resep_rawat_jalan_baru' => 1,
-                    'resep_rawat_inap_lama' => 1,
-                    'resep_rawat_inap_baru' => 1,
-                    'konseling_obat_lama' => 1,
-                    'konseling_obat_baru' => 1,
-                    'pemberian_informasi_obat_lama' => 1,
-                    'pemberian_informasi_obat_baru' => 1,
-                    'antibiotik_ispa_non_pneumonia_lama' => 1,
-                    'antibiotik_ispa_non_pneumonia_baru' => 1,
-                    'ispa_non_pneumonia_lama' => 1,
-                    'ispa_non_pneumonia_baru' => 1,
-                    'antibiotik_diare_non_spesifik_lama' => 1,
-                    'antibiotik_diare_non_spesifik_baru' => 1,
-                    'diare_non_spesifik_lama' => 1,
-                    'diare_non_spesifik_baru' => 1,
-                    'injeksi_pada_myalgia_lama' => 1,
-                    'injeksi_pada_myalgia_baru' => 1,
-                    'kasus_myalgia_lama' => 1,
-                    'kasus_myalgia_baru' => 1,
-                    'obat_semua_resep_lama' => 1,
-                    'obat_semua_resep_baru' => 1,
-                ]
-            ],
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'current' => $currentRecord,
+            'previous' => $previousRecord,
         ];
+
+        \Log::info("Data Puskesmas: ", (array) $dataPuskesmas);
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');

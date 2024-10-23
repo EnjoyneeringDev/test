@@ -29,3 +29,6 @@ Route::get('/admin/laporan/kematian/download-pdf/{id}', [PdfController::class, '
 
 Route::get('/admin/laporan/pengendalian-penyakit-menular/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanPenyakitMenular'])
     ->name('download.laporan.pengendalianPenyakitMenular.pdf');
+
+Route::get('/admin/laporan/pelayanan-puskesmas/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanPelayananPuskesmas'])
+    ->name('download.laporan.pelayananPuskesmas.pdf');
