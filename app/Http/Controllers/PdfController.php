@@ -12,6 +12,7 @@ use setasign\Fpdi\PdfReader;
 use App\Models\IdentitasPuskesmas;
 use App\Models\WilayahKerjaPuskesmas;
 use App\Models\SumberDayaPuskesmas;
+use App\Models\PengendalianPenyakitMenular;
 
 class PdfController extends Controller
 {
@@ -116,98 +117,16 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'kesehatan-lingkungan.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanPenyakitMenular($id)
+    public function downloadLaporanPenyakitMenular($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+        $dataDasarPuskesmas = PengendalianPenyakitMenular::where('identitas_puskesmas_id', $puskesmas_id)
+            ->where('id', $record_id)
+            ->first();
 
-        \Log::info("data tes -> ");
 
         $dataPuskesmas = (object) [
             'data' => [
-                [
-                    'suspek_malaria' => 1,
-                    'suspek_malaria_rdt' => 1,
-                    'malaria_positif' => 1,
-                    'malaria_positif_plasmodium' => 1,
-                    'malaria_positif_indigenous' => 1,
-                    'malaria_positif_import' => 1,
-                    'malaria_positif_diobati_standar' => 1,
-                    'kelambu_berinsektisida_dibagikan' => 1,
-                    'kelurahan_berisiko_dbd' => 1,
-                    'kelurahan_berisiko_dbd_diperiksa_jentik' => 1,
-                    'kelurahan_berisiko_dbd_tidak_diperiksa_jentik' => 1,
-                    'fogging_focus' => 1,
-                    'kelurahan_dilakukan_larvadisasi' => 1,
-                    'kelurahan_dilakukan_psn_3m_plus' => 1,
-                    'sekolah_diperiksa_jentik' => 1,
-                    'sekolah_diperiksa_bebas_jentik' => 1,
-                    'puskesmas_diperiksa_jetik' => 1,
-                    'puskesmas_diperiksa_bebas_jentik' => 1,
-                    'tempat_umum_diperiksa_jetik' => 1,
-                    'tempat_umum_diperiksa_bebas_jentik' => 1,
-                    'anak_balita_diperiksa_cacing' => 1,
-                    'anak_prasekolah_diperiksa_cacing' => 1,
-                    'anak_sekolah_diperiksa_cacing' => 1,
-                    'anak_balita_positif_telur_cacing' => 1,
-                    'anak_prasekolah_positif_telur_cacing' => 1,
-                    'anak_sekolah_positif_telur_cacing' => 1,
-                    'anak_balita_minum_obat_cacing' => 1,
-                    'anak_prasekolah_minum_obat_cacing' => 1,
-                    'anak_sekolah_minum_obat_cacing' => 1,
-                    'anak_sd_dapat_obat_cacing1' => 1,
-                    'anak_sd_dapat_obat_cacing2' => 1,
-                    'ibu_hamil_tes_cacing' => 1,
-                    'ibu_hamil_cacingan' => 1,
-                    'rabies_pada_anak_laki' => 1,
-                    'rabies_pada_dewasa_laki' => 1,
-                    'rabies_pada_anak_perempuan' => 1,
-                    'rabies_pada_dewasa_perempuan' => 1,
-                    'dapat_vaksin_anti_rabies' => 1,
-                    'kasus_rabies_dapat_var_lengkap' => 1,
-                    'kasus_rabies_tidak_dapat_var_lengkap' => 1,
-                    'bayi_diare_oralit' => 1,
-                    'bayi_diare_zink' => 1,
-                    'bayi_diare_oralit_zink' => 1,
-                    'bayi_diare_infus' => 1,
-                    'balita_diare_oralit' => 1,
-                    'balita_diare_zink' => 1,
-                    'balita_diare_oralit_zink' => 1,
-                    'balita_diare_infus' => 1,
-                    'anak_dewasa_diare_oralit' => 1,
-                    'anak_dewasa_diare_zink' => 1,
-                    'suspek_hepatitis_dirujuk' => 1,
-                    'pasien_tb_paru_diobati' => 1,
-                    'pasien_tb_non_paru_diobati' => 1,
-                    'tb_anak_diobati' => 1,
-                    'pasien_tb_diobati' => 1,
-                    'pasien_tb_sembuh' => 1,
-                    'pasien_tb_pengobatan_lengkap' => 1,
-                    'pasien_tb_baru_pengobatan_lengkap' => 1,
-                    'pasien_tb_kambuh' => 1,
-                    'kusta_baru' => 1,
-                    'kusta_tingkat_0' => 1,
-                    'kusta_tingkat_2' => 1,
-                    'kusta_baru_anak' => 1,
-                    'kasus_indeks_yang_kontaknya_diperiksa_kusta' => 1,
-                    'pasien_kusta_dalam_perawatan' => 1,
-                    'pasien_kusta_default' => 1,
-                    'frambusia_suspek' => 1,
-                    'frambusia_diperiksa_serologi' => 1,
-                    'frambusia_konfirmasi' => 1,
-                    'sd_diperiksa_frambusia' => 1,
-                    'orang_tes_hiv' => 1,
-                    'orang_positif_hiv' => 1,
-                    'ibu_hamil_tes_hiv' => 1,
-                    'ibu_hamil_positif_hiv' => 1,
-                    'pasien_tes_sifilis' => 1,
-                    'pasien_positif_sifilis' => 1,
-                    'pasien_sifilis_diobati' => 1,
-                    'ibu_hamil_tes_sifilis' => 1,
-                    'ibu_hamil_positif_sifilis' => 1,
-                    'ibu_hamil_sifilis_diobati' => 1,
-                    'kunjungan_balita_batuk' => 1,
-                    'kunjungan_balita_batuk_2' => 1,
-                ]
+                $dataDasarPuskesmas
             ],
         ];
 

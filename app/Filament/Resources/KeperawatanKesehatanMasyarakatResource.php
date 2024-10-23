@@ -17,9 +17,9 @@ class KeperawatanKesehatanMasyarakatResource extends Resource
 {
     protected static ?string $model = KeperawatanKesehatanMasyarakat::class;
 
-    protected static ?string $navigationLabel = 'Laporan Pengendalian Penyakit Tidak Menular';
+    protected static ?string $navigationLabel = 'Laporan Keperawatan Kesehatan Masyarakat';
 
-    protected static ?string $navigationGroup = 'Form 8.  PENGENDALIAN PENYAKIT TIDAK MENULAR';
+    protected static ?string $navigationGroup = 'Form 8.  Keperawatan Kesehatan Masyarakat';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
