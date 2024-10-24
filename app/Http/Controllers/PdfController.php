@@ -18,6 +18,7 @@ use App\Models\PelayananPuskesmas;
 use App\Models\KesakitanBerdasarkanGejala;
 use App\Models\KesakitanGigiDanMulut;
 use App\Models\KelahiranDiPuskesmas;
+use App\Models\KesakitanTerbanyak;
 
 class PdfController extends Controller
 {
@@ -4047,34 +4048,29 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'kesakitanUmum.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanKesakitanTerbanyak($id)
+    public function downloadLaporanKesakitanTerbanyak($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+        $dataRecord = KesakitanTerbanyak::where('id', $record_id)
+            ->where('identitas_puskesmas_id', $puskesmas_id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        \Log::info("data tes -> ");
+        if (!$dataRecord) {
+            // Handle case where the current record does not exist
+            \Log::info("Record with ID {$record_id} not found for puskesmas ID {$puskesmas_id}.");
+            return response()->json(['message' => 'Record not found.'], 404);
+        }
+
+        $idLaporan = sprintf('%07d', $record_id);
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
 
         $dataPuskesmas = (object) [
-            'kesakitanTerbanyak' => [
-                [
-                    'penyakit' => "penyakit 1",
-                    'icd10' => 'j10.0',
-                    'kasusLama' => 1,
-                    'kasusBaru' => 2,
-                ],
-                [
-                    'penyakit' => "penyakit 2",
-                    'icd10' => 'j10.0',
-                    'kasusLama' => 1,
-                    'kasusBaru' => 2,
-                ],
-                [
-                    'penyakit' => "penyakit 3",
-                    'icd10' => 'j10.0',
-                    'kasusLama' => 1,
-                    'kasusBaru' => 2,
-                ]
-            ],
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'data' => $dataRecord,
         ];
+
+        \Log::info("Data Kesakitan Terbanyak: ", (array) $dataPuskesmas);
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
@@ -4101,7 +4097,7 @@ class PdfController extends Controller
         $pdfMerger->merge('file', $mergedPdfPath);
 
         // Return the merged PDF as a response for download
-        return response()->download($mergedPdfPath, 'kesakitanTerbanyak.pdf')->deleteFileAfterSend(true);
+        return response()->download($mergedPdfPath, 'kesakitan-terbanyak.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanKematian($record_id, $puskesmas_id)

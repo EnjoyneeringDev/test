@@ -132,21 +132,40 @@
     <p style="text-align: center;">LAPORAN BULANAN KESAKITAN TERBANYAK </p>
   </div>
 
+  @php
+    // Check if the current record exists
+    if (isset($dataPuskesmas->data[0])) {  // Access the first element of the data array
+        // Access the bulan_tahun directly as it's an object
+        $dateString = $dataPuskesmas->data[0]->bulan_tahun; // Use '->' to access object properties
+        
+        // Create a Carbon instance
+        $date = \Carbon\Carbon::parse($dateString);
+        
+        // Get the year and month name
+        $year = $date->format('Y'); // 'Y' gives a 4-digit year
+        $monthName = $date->format('m'); // 'm' gives the numeric representation of the month (e.g., "10" for October)
+    } else {
+        // Handle the case where the record is not set
+        $year = null;
+        $monthName = null;
+        // Log an error or take appropriate action
+        \Log::info("Current record is not available in dataPuskesmas.");
+    }
+  @endphp
+
   <div style="margin-top: 50px; "></div>
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+      @foreach (str_split($dataPuskesmas->idLaporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Bulan</span>
-            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">November</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $monthName }}</span>
         </div>
     </div>
   </div>
@@ -154,12 +173,12 @@
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
-      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->namaPuskesmas ?? "") }}</span>
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Tahun</span>
-            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $year }}</span>
         </div>
     </div>
   </div>
@@ -167,22 +186,22 @@
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; width: 265px; text-align: right; ">Jumlah Puskesmas Pembantu</span>
-      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">3</span>
+      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->data[0]->jumlah_puskesmas_pembantu ?? 0) }}</span>
     </div>
     <div style="width: 240px; margin-left: 40px; display: inline-block; vertical-align: middle; ">
       <span  style="display: inline-block; vertical-align: middle; width: 100px; text-align: right; ">Jml Lapor</span>
-      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">2024</span>
+      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->data[0]->jumlah_lapor_puskesmas_pembantu ?? 0) }}</span>
     </div>
   </div>
 
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; width: 265px; text-align: right; ">Jml Poskesdes/bidan desa</span>
-      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">3</span>
+      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->data[0]->jumlah_poskesdes ?? 0) }}</span>
     </div>
     <div style="width: 240px; margin-left: 40px; display: inline-block; vertical-align: middle; ">
       <span  style="display: inline-block; vertical-align: middle; width: 100px; text-align: right; ">Jml Lapor</span>
-      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">2024</span>
+      <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->data[0]->jumlah_laporan_poskesdes ?? 0) }}</span>
     </div>
   </div>
 
@@ -197,15 +216,17 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->kesakitanTerbanyak as $index => $data)
-        <tr>
+      @foreach ($dataPuskesmas->data as $data)
+        @foreach ($data['penyakit'] as $index => $penyakit)
+          <tr>
             <td class="column5 textCenter">{{ $index + 1 }}</td>
-            <td class="column45">{{ $data['penyakit'] }}</td>
-            <td class="column10">{{ $data['icd10'] }}</td>
-            <td class="column20">{{ $data['kasusBaru'] }}</td>
-            <td class="column20">{{ $data['kasusLama'] }}</td>
-        </tr>
+            <td class="column45">{{ $penyakit['jenis_penyakit_terbanyak'] }}</td>
+            <td class="column10">{{ $penyakit['icd10'] }}</td>
+            <td class="column20">{{ $penyakit['jumlah_kasus_baru'] }}</td>
+            <td class="column20">{{ $penyakit['jumlah_kasus_lama'] }}</td>
+          </tr>
         @endforeach
+      @endforeach
     </tbody>
   </table>
 </body>
