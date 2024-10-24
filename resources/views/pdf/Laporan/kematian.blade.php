@@ -138,21 +138,40 @@
     <p style="text-align: center;">LAPORAN BULANAN DATA KEMATIAN DI PUSKESMAS</p>
   </div>
 
+  @php
+    // Check if the current record exists
+    if (isset($dataPuskesmas->data[0])) {  // Access the first element of the data array
+        // Access the bulan_tahun directly as it's an object
+        $dateString = $dataPuskesmas->data[0]->bulan_tahun; // Use '->' to access object properties
+        
+        // Create a Carbon instance
+        $date = \Carbon\Carbon::parse($dateString);
+        
+        // Get the year and month name
+        $year = $date->format('Y'); // 'Y' gives a 4-digit year
+        $monthName = $date->format('m'); // 'm' gives the numeric representation of the month (e.g., "10" for October)
+    } else {
+        // Handle the case where the record is not set
+        $year = null;
+        $monthName = null;
+        // Log an error or take appropriate action
+        \Log::info("Current record is not available in dataPuskesmas.");
+    }
+  @endphp
+
   <div style="margin-top: 50px; "></div>
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+      @foreach (str_split($dataPuskesmas->idLaporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
     </div>
     <div style="width: 250px; margin-left: 300px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Bulan</span>
-            <span  style="width: 150px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">November</span>
+            <span  style="width: 150px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $monthName }}</span>
         </div>
     </div>
   </div>
@@ -160,12 +179,12 @@
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
-      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->namaPuskesmas ?? "") }}</span>
     </div>
     <div style="width: 250px; margin-left: 300px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Tahun</span>
-            <span  style="width: 150px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
+            <span  style="width: 150px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $year }}</span>
         </div>
     </div>
   </div>
@@ -209,8 +228,8 @@
           <td class="column15">{{ $data['alamat'] }}</td>
           <td class="column5 textCenter">{{ $data['umur'] }}</td>
           <td class="column5 textCenter">{{ $data['kelamin'] }}</td>
-          <td class="column10">{{ $data['tanggalMeninggal'] }}</td>
-          <td class="column15">{{ $data['tempatMeninggal'] }}</td>
+          <td class="column10">{{ $data['tanggal_meninggal'] }}</td>
+          <td class="column15">{{ $data['tempat_meninggal'] }}</td>
           <td class="column10">{{ $data['diagnosa'] }}</td>
           <td class="column10">{{ $data['icd10'] }}</td>
         </tr>

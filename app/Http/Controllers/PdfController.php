@@ -16,6 +16,7 @@ use App\Models\PengendalianPenyakitMenular;
 use App\Models\PelayananPuskesmas;
 use App\Models\KesakitanBerdasarkanGejala;
 use App\Models\KesakitanGigiDanMulut;
+use App\Models\KelahiranDiPuskesmas;
 
 class PdfController extends Controller
 {
@@ -4127,26 +4128,26 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'kesakitanTerbanyak.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanKematian($id)
+    public function downloadLaporanKematian($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+        $dataRecord = KelahiranDiPuskesmas::where('id', $record_id)
+            ->where('identitas_puskesmas_id', $puskesmas_id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        \Log::info("data tes -> ");
+        if (!$dataRecord) {
+            // Handle case where the current record does not exist
+            \Log::info("Record with ID {$record_id} not found for puskesmas ID {$puskesmas_id}.");
+            return response()->json(['message' => 'Record not found.'], 404);
+        }
+
+        $idLaporan = sprintf('%07d', $record_id);
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
 
         $dataPuskesmas = (object) [
-            'kematian' => [
-                [
-                    'nik' => '12412412412',
-                    'nama' => 'nama 1',
-                    'alamat' => 'alamat',
-                    'umur' => 65,
-                    'kelamin' => 'L',
-                    'tanggalMeninggal' => '23 Juni 2024',
-                    'tempatMeninggal' => 'Rumah Sakit',
-                    'diagnosa' => 'umur',
-                    'icd10' => 'j10.0'
-                ],
-            ],
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'data' => $dataRecord,
         ];
 
         // Generate the first PDF and save to a temporary file
@@ -4177,32 +4178,33 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'laporanKematian.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanKelahiran($id)
+    public function downloadLaporanKelahiran($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
+        $dataRecord = KelahiranDiPuskesmas::where('id', $record_id)
+            ->where('identitas_puskesmas_id', $puskesmas_id)
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        \Log::info("data tes -> ");
+        if (!$dataRecord) {
+            // Handle case where the current record does not exist
+            \Log::info("Record with ID {$record_id} not found for puskesmas ID {$puskesmas_id}.");
+            return response()->json(['message' => 'Record not found.'], 404);
+        }
+
+        $idLaporan = sprintf('%07d', $record_id);
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
 
         $dataPuskesmas = (object) [
-            'kematian' => [
-                [
-                    'nama' => 'nama 1',
-                    'kelamin' => 'L',
-                    'namaOrtu' => 'nama ortu',
-                    'nkk' => '1241414',
-                    'alamat' => 'alamat',
-                    'tanggalLahir' => '2 Maret 2024',
-                    'umurLahir' => 9,
-                    'bb' => 3,
-                    'tb' => 35,
-                    'normal' => "Normal"
-                ],
-            ],
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'data' => $dataRecord,
         ];
+
+        \Log::info("Data Kelahiran di Puskesmas: ", (array) $dataPuskesmas);
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
-        Pdf::loadView('pdf.Laporan.kematian', [
+        Pdf::loadView('pdf.Laporan.kelahiran', [
             'dataPuskesmas' => $dataPuskesmas,
         ])->save($pdf1Path);
 

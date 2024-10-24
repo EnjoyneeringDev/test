@@ -100,6 +100,16 @@ class KelahiranDiPuskesmasResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('downloadPdf')
+                    ->label('Download PDF')
+                    ->color('primary')
+                    ->action(function (KelahiranDiPuskesmas $record) {
+                        // Pass both the record's id and identitasPuskesmas.id to the route
+                        return redirect()->route('download.laporan.kelahiran.pdf', [
+                            'record_id' => $record->id, // the record's own id
+                            'puskesmas_id' => $record->identitas_puskesmas_id, // the identitasPuskesmas id
+                        ]);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
