@@ -132,21 +132,29 @@
     <p style="text-align: center;">LAPORAN BULANAN PENGENDALIAN PENYAKIT TIDAK MENULAR </p>
   </div>
 
+  @php
+    // Assuming you have your date string
+    $dateString = $dataPuskesmas->data[0]['bulan_tahun'];
+    // Create a Carbon instance
+    $date = \Carbon\Carbon::parse($dateString);
+    // Get the year
+    $year = $date->format('Y'); // 'Y' gives a 4-digit year
+    $monthName = $date->format('F'); // 'F' gives the full textual representation of the month
+  @endphp
+
   <div style="margin-top: 50px; ">
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+      @foreach (str_split($dataPuskesmas->idLaporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Bulan</span>
-            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">November</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $monthName }}</span>
         </div>
     </div>
   </div>
@@ -154,12 +162,12 @@
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
-      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ $dataPuskesmas->namaPuskesmas ?? "" }}</span>
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Tahun</span>
-            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $year }}</span>
         </div>
     </div>
   </div>
@@ -181,12 +189,12 @@
       <tr>
         <td class="column5 textCenter">1.</td>
         <td class="column80">Jumlah perempuan 30-50 tahun yang diperiksa IVASADANIS (pemeriksaan payudara klinis)</td>
-        <td class="column15">{{ $dataPuskesmas->data->perempuan_diperiksa_iva_sadanis }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_30_50_periksa_payudara_klinis'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter">2.</td>
         <td class="column80">Persentase cakupan perempuan 30-50 tahun yang diperiksa IVA-SADANIS</td>
-        <td class="column15">{{ $dataPuskesmas->data->cakupan_perempuan_diperiksa_iva_sadanis }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_iva_positif'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="9" style="vertical-align: top;">3.</td>
@@ -195,35 +203,35 @@
       </tr>
       <tr>
         <td class="column80">a.  IVA positif </td>
-        <td class="column15">{{ $dataPuskesmas->data->iva_positif }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_iva_positif'] }}</td>
       </tr>
       <tr>
         <td class="column80">b.  dicurigai kanker serviks</td>
-        <td class="column15">{{ $dataPuskesmas->data->dirugai_kanker_serviks }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_dicurigai_kanker_serviks'] }}</td>
       </tr>
       <tr>
         <td class="column80">c. kelainan ginekologi lain</td>
-        <td class="column15">{{ $dataPuskesmas->data->kalainan_ginekologi_lain }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_kelainan_ginekologi_lain'] }}</td>
       </tr>
       <tr>
         <td class="column80">d. pap smear positif</td>
-        <td class="column15">{{ $dataPuskesmas->data->pap_smear_positif }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_pap_smear_positif'] }}</td>
       </tr>
       <tr>
         <td class="column80">e. IVA positif yang sudah dikrioterapi</td>
-        <td class="column15">{{ $dataPuskesmas->data->iva_positif_dikrioterapi }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_iva_positif_sudah_dikiroterapi'] }}</td>
       </tr>
       <tr>
         <td class="column80">f. benjolan payudara</td>
-        <td class="column15">{{ $dataPuskesmas->data->benjolan_payudara }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_dengan_benjolan_payudara'] }}</td>
       </tr>
       <tr>
         <td class="column80">g. dicurigai kanker payudara</td>
-        <td class="column15">{{ $dataPuskesmas->data->dicurigai_kanker_payudara }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_dicurigai_kanker_payudara'] }}</td>
       </tr>
       <tr>
         <td class="column80">h. kelainan payudara lainnya</td>
-        <td class="column15">{{ $dataPuskesmas->data->kelainan_payudara_lainnya }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_perempuan_dengan_kelainan_payudara_lainnya'] }}</td>
       </tr>
       <tr>
         <td class="column5 columGrey textCenter">B</td>
@@ -233,7 +241,7 @@
       <tr>
         <td class="column5 textCenter">1.</td>
         <td class="column80">Jumlah penduduk berusia 15-59 tahun melakukan pemeriksaan di Posbindu PTM</td>
-        <td class="column15">{{ $dataPuskesmas->data->penduduk_melakukan_posbindu_ptm }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_penduduk_15_59_periksa_posbindu'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="13" style="vertical-align: top;">2.</td>
@@ -242,51 +250,51 @@
       </tr>
       <tr>
         <td class="column80">a.  merokok</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_merokok }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_merokok'] }}</td>
       </tr>
       <tr>
         <td class="column80">b.  kurang mengkonsumsi buah dan sayur</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_kurang_buah_sayur }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_kurang_konsumsi_buah_sayur'] }}</td>
       </tr>
       <tr>
         <td class="column80">c. kurang melakukan aktivitas fisik</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_kurang_aktivitas_fisik }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_kurang_aktivitas_fisik'] }}</td>
       </tr>
       <tr>
         <td class="column80">d.   mengkonsumi alcohol</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_alkohol }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_konsumsi_alcohol'] }}</td>
       </tr>
       <tr>
         <td class="column80">e.  obesitas</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_obesitas }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_obesitas'] }}</td>
       </tr>
       <tr>
         <td class="column80">f. obesitas sentral</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_obesitas_sentral }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_obesitas_sentral'] }}</td>
       </tr>
       <tr>
         <td class="column80">g.  menderita tekanan darah tinggi</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_hipertensi }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_tekanan_darah_tinggi'] }}</td>
       </tr>
       <tr>
         <td class="column80">h. Hiperglikemia</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_hiperglikemia }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_hiperglikemia'] }}</td>
       </tr>
       <tr>
         <td class="column80">i.  Hiperkolesterolemia</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_hiperkolesterolemia }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_hiperkolesterolemia'] }}</td>
       </tr>
       <tr>
         <td class="column80">j. gangguan penglihatan</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_gangguan_penglihatan }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_penglihatan'] }}</td>
       </tr>
       <tr>
         <td class="column80">k. gangguan pendengaran</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_gangguan_pendengaran }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_pendengaran'] }}</td>
       </tr>
       <tr>
         <td class="column80">l.  gangguan emosi mental</td>
-        <td class="column15">{{ $dataPuskesmas->data->posbindu_ptm_gangguan_emosi_mental }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_periksa_posbindu_masalah_emosi_mental'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="3" style="vertical-align: top;">3.</td>
@@ -295,11 +303,11 @@
       </tr>
       <tr>
         <td class="column80">a.    diabetes melitus dengan TB</td>
-        <td class="column15">{{ $dataPuskesmas->data->diabates_tb }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['gangguan_ptm_diabetes_melitus_tb'] }}</td>
       </tr>
       <tr>
         <td class="column80">b.    diabetes melitus gestasional</td>
-        <td class="column15">{{ $dataPuskesmas->data->diabetes_gestasional }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['gangguan_ptm_diabetes_melitus_gestasional'] }}</td>
       </tr>
       <tr>
         <td class="column5 textCenter" rowspan="4" style="vertical-align: top;">4.</td>
@@ -308,15 +316,15 @@
       </tr>
       <tr>
         <td class="column80">a. mengikuti konseling diet</td>
-        <td class="column15">{{ $dataPuskesmas->data->konseling_diet }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_penduduk_mengikuti_konseling_diet'] }}</td>
       </tr>
       <tr>
         <td class="column80">b.  mengikuti konseling berhenti merokok</td>
-        <td class="column15">{{ $dataPuskesmas->data->konseling_berhenti_merokok }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_penduduk_mengikuti_konseling_berhenti_merokok'] }}</td>
       </tr>
       <tr>
         <td class="column80">c. mengikuti konseling IVA-SADANIS</td>
-        <td class="column15">{{ $dataPuskesmas->data->konseling_iva_sadanis }}</td>
+        <td class="column15">{{ $dataPuskesmas->data[0]['jumlah_penduduk_mengikuti_konseling_iva_sadanis'] }}</td>
       </tr>
     </tbody>
   </table>

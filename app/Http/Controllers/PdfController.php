@@ -13,6 +13,7 @@ use App\Models\IdentitasPuskesmas;
 use App\Models\WilayahKerjaPuskesmas;
 use App\Models\SumberDayaPuskesmas;
 use App\Models\PengendalianPenyakitMenular;
+use App\Models\PengendalianPenyakitTidakMenular;
 use App\Models\PelayananPuskesmas;
 use App\Models\KesakitanBerdasarkanGejala;
 use App\Models\KesakitanGigiDanMulut;
@@ -165,50 +166,25 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanPenyakitTidakMenular($id)
+    public function downloadLaporanPenyakitTidakMenular($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
-
-        \Log::info("data tes -> ");
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+        $dataLaporan = PengendalianPenyakitTidakMenular::where('identitas_puskesmas_id', $puskesmas_id)
+            ->where('id', $record_id)
+            ->first();
+        $idLaporan = sprintf('%07d', $record_id);
 
         $dataPuskesmas = (object) [
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
             'data' => [
-                [
-                    'perempuan_diperiksa_iva_sadanis' => 1,
-                    'cakupan_perempuan_diperiksa_iva_sadanis' => 1,
-                    'iva_positif' => 1,
-                    'dirugai_kanker_serviks' => 1,
-                    'kalainan_ginekologi_lain' => 1,
-                    'pap_smear_positif' => 1,
-                    'iva_positif_dikrioterapi' => 1,
-                    'benjolan_payudara' => 1,
-                    'dicurigai_kanker_payudara' => 1,
-                    'kelainan_payudara_lainnya' => 1,
-                    'penduduk_melakukan_posbindu_ptm' => 1,
-                    'posbindu_ptm_merokok' => 1,
-                    'posbindu_ptm_kurang_buah_sayur' => 1,
-                    'posbindu_ptm_kurang_aktivitas_fisik' => 1,
-                    'posbindu_ptm_alkohol' => 1,
-                    'posbindu_ptm_obesitas' => 1,
-                    'posbindu_ptm_obesitas_sentral' => 1,
-                    'posbindu_ptm_hipertensi' => 1,
-                    'posbindu_ptm_hiperglikemia' => 1,
-                    'posbindu_ptm_hiperkolesterolemia' => 1,
-                    'posbindu_ptm_gangguan_penglihatan' => 1,
-                    'posbindu_ptm_gangguan_pendengaran' => 1,
-                    'posbindu_ptm_gangguan_emosi_mental' => 1,
-                    'diabates_tb' => 1,
-                    'diabetes_gestasional' => 1,
-                    'konseling_diet' => 1,
-                    'konseling_berhenti_merokok' => 1,
-                    'konseling_iva_sadanis' => 1,
-                ]
+                $dataLaporan
             ],
         ];
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
-        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+        Pdf::loadView('pdf.Laporan.pengendalianPenyakitTidakMenular', [
             'dataPuskesmas' => $dataPuskesmas,
         ])->save($pdf1Path);
 
@@ -231,7 +207,7 @@ class PdfController extends Controller
         $pdfMerger->merge('file', $mergedPdfPath);
 
         // Return the merged PDF as a response for download
-        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+        return response()->download($mergedPdfPath, 'pengendalian-penyakit-tidak-menular.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanKeperawatanKesehatanMasyarakat($id)

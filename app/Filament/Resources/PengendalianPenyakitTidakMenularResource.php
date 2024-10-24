@@ -34,6 +34,8 @@ class PengendalianPenyakitTidakMenularResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('jumlah_perempuan_30_50_periksa_payudara_klinis')
                     ->numeric(),
+                Forms\Components\TextInput::make('persentase_perempuan_30_50_periksa_payudara_klinis')
+                    ->numeric(),
                 Forms\Components\TextInput::make('jumlah_perempuan_iva_positif')
                     ->numeric(),
                 Forms\Components\TextInput::make('jumlah_perempuan_dicurigai_kanker_serviks')
@@ -100,6 +102,9 @@ class PengendalianPenyakitTidakMenularResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah_perempuan_30_50_periksa_payudara_klinis')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('persentase_perempuan_30_50_periksa_payudara_klinis')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah_perempuan_iva_positif')
@@ -194,6 +199,16 @@ class PengendalianPenyakitTidakMenularResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('downloadPdf')
+                    ->label('Download PDF')
+                    ->color('primary')
+                    ->action(function (PengendalianPenyakitTidakMenular $record) {
+                        // Pass both the record's id and identitasPuskesmas.id to the route
+                        return redirect()->route('download.laporan.pengendalianPenyakitTidakMenular.pdf', [
+                            'record_id' => $record->id, // the record's own id
+                            'puskesmas_id' => $record->identitas_puskesmas_id, // the identitasPuskesmas id
+                        ]);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

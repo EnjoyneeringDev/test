@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
             $table->integer('jumlah_perempuan_30_50_periksa_payudara_klinis')->nullable();
+            $table->integer('persentase_perempuan_30_50_periksa_payudara_klinis')->nullable();
             $table->integer('jumlah_perempuan_iva_positif')->nullable();
             $table->integer('jumlah_perempuan_dicurigai_kanker_serviks')->nullable();
             $table->integer('jumlah_perempuan_kelainan_ginekologi_lain')->nullable();
