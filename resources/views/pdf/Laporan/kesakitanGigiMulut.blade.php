@@ -144,33 +144,53 @@
     <p style="text-align: center; ">LAPORAN BULANAN KESAKITAN GIGI DAN MULUT</p>
   </div>
 
+  @php
+    // Check if the current record exists
+    if (isset($dataPuskesmas->current) && !is_null($dataPuskesmas->current)) {
+        // Access the bulan_tahun directly as it's an object
+        $dateString = $dataPuskesmas->current->bulan_tahun; 
+        
+        // Create a Carbon instance
+        $date = \Carbon\Carbon::parse($dateString);
+        
+        // Get the year and month name
+        $year = $date->format('Y'); // 'Y' gives a 4-digit year
+        // $monthName = $date->format('F'); // 'F' gives the full textual representation of the month -> hasilnya ini seperti "Oktober"
+        $monthName = $date->format('m'); // 'F' gives the full textual representation of the month -> hasilnya ini seperti "10"
+    } else {
+        // Handle the case where current record is not set
+        $year = null;
+        $monthName = null;
+        // Log an error or take appropriate action
+        \Log::info("Current record is not available in dataPuskesmas.");
+    }
+  @endphp
+
   <div style="margin-top: 50px; ">
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+      @foreach (str_split($dataPuskesmas->idLaporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
     </div>
     <div style="width: 150px; margin-left: 50px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Bulan</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ $monthName }}</span>
         </div>
     </div>
     <div style="width: 150px; margin-left: 20px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Jml. PP</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->current->jumlah_puskesmas_pembantu ?? 0) }}</span>
         </div>
     </div>
     <div style="width: 200px; margin-left: 20px; display: inline-block; vertical-align: middle;  ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 120px; text-wrap: wrap; text-align: right; ">Jml Poskesdes/ bidan desa</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->current->jumlah_poskesdes ?? 0) }}</span>
         </div>
     </div>
   </div>
@@ -178,24 +198,24 @@
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
-      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->namaPuskesmas ?? "") }}</span>
     </div>
     <div style="width: 150px; margin-left: 50px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Tahun</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">2024</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ $year }}</span>
         </div>
     </div>
     <div style="width: 150px; margin-left: 20px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Jml melapor</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->current->jumlah_laporan_puskesma_pembantu ?? 0) }}</span>
         </div>
     </div>
     <div style="width: 200px; margin-left: 20px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 120px; text-align: right; ">Jml melapor</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->current->jumlah_laporan_poskesdes ?? 0) }}</span>
         </div>
     </div>
   </div>
@@ -254,274 +274,274 @@
         <td class="column3 textCenter">1</td>
         <td class="column15">Persistensi gigi sulung</td>
         <td class="column3">K00.6</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_4_tahun'] + $dataPuskesmas->data[0]['k0_6_tahun'] + $dataPuskesmas->data[0]['k0_11_tahun'] + $dataPuskesmas->data[0]['k0_12_tahun'] + $dataPuskesmas->data[0]['k0_14_tahun'] + $dataPuskesmas->data[0]['k0_18_tahun'] + $dataPuskesmas->data[0]['k0_34_tahun'] + $dataPuskesmas->data[0]['k0_44_tahun'] + $dataPuskesmas->data[0]['k0_64_tahun'] + $dataPuskesmas->data[0]['k0_lebih_64_tahun'] + $dataPuskesmas->data[0]['k0_l'] + $dataPuskesmas->data[0]['k0_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k0_l_lama'] + $dataPuskesmas->data[0]['k0_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k0_4_tahun ?? 0) + ($dataPuskesmas->current->k0_6_tahun ?? 0) + ($dataPuskesmas->current->k0_11_tahun ?? 0) + ($dataPuskesmas->current->k0_12_tahun ?? 0) + ($dataPuskesmas->current->k0_14_tahun ?? 0) + ($dataPuskesmas->current->k0_18_tahun ?? 0) + ($dataPuskesmas->current->k0_34_tahun ?? 0) + ($dataPuskesmas->current->k0_44_tahun ?? 0) + ($dataPuskesmas->current->k0_64_tahun ?? 0) + ($dataPuskesmas->current->k0_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k0_l ?? 0) + ($dataPuskesmas->current->k0_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k0_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k0_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k0_l_lama ?? 0) + ($dataPuskesmas->previous->k0_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">2</td>
         <td class="column15">Impaksi M3 klasifikasi IA</td>
         <td class="column3">K01.1</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_4_tahun'] + $dataPuskesmas->data[0]['k1_6_tahun'] + $dataPuskesmas->data[0]['k1_11_tahun'] + $dataPuskesmas->data[0]['k1_12_tahun'] + $dataPuskesmas->data[0]['k1_14_tahun'] + $dataPuskesmas->data[0]['k1_18_tahun'] + $dataPuskesmas->data[0]['k1_34_tahun'] + $dataPuskesmas->data[0]['k1_44_tahun'] + $dataPuskesmas->data[0]['k1_64_tahun'] + $dataPuskesmas->data[0]['k1_lebih_64_tahun'] + $dataPuskesmas->data[0]['k1_l'] + $dataPuskesmas->data[0]['k1_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k1_l_lama'] + $dataPuskesmas->data[0]['k1_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k1_4_tahun ?? 0) + ($dataPuskesmas->current->k1_6_tahun ?? 0) + ($dataPuskesmas->current->k1_11_tahun ?? 0) + ($dataPuskesmas->current->k1_12_tahun ?? 0) + ($dataPuskesmas->current->k1_14_tahun ?? 0) + ($dataPuskesmas->current->k1_18_tahun ?? 0) + ($dataPuskesmas->current->k1_34_tahun ?? 0) + ($dataPuskesmas->current->k1_44_tahun ?? 0) + ($dataPuskesmas->current->k1_64_tahun ?? 0) + ($dataPuskesmas->current->k1_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k1_l ?? 0) + ($dataPuskesmas->current->k1_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k1_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k1_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k1_l_lama ?? 0) + ($dataPuskesmas->previous->k1_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">3</td>
         <td class="column15">Karies gigi</td>
         <td class="column3">K02</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_4_tahun'] + $dataPuskesmas->data[0]['k2_6_tahun'] + $dataPuskesmas->data[0]['k2_11_tahun'] + $dataPuskesmas->data[0]['k2_12_tahun'] + $dataPuskesmas->data[0]['k2_14_tahun'] + $dataPuskesmas->data[0]['k2_18_tahun'] + $dataPuskesmas->data[0]['k2_34_tahun'] + $dataPuskesmas->data[0]['k2_44_tahun'] + $dataPuskesmas->data[0]['k2_64_tahun'] + $dataPuskesmas->data[0]['k2_lebih_64_tahun'] + $dataPuskesmas->data[0]['k2_l'] + $dataPuskesmas->data[0]['k2_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k2_l_lama'] + $dataPuskesmas->data[0]['k2_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k2_4_tahun ?? 0) + ($dataPuskesmas->current->k2_6_tahun ?? 0) + ($dataPuskesmas->current->k2_11_tahun ?? 0) + ($dataPuskesmas->current->k2_12_tahun ?? 0) + ($dataPuskesmas->current->k2_14_tahun ?? 0) + ($dataPuskesmas->current->k2_18_tahun ?? 0) + ($dataPuskesmas->current->k2_34_tahun ?? 0) + ($dataPuskesmas->current->k2_44_tahun ?? 0) + ($dataPuskesmas->current->k2_64_tahun ?? 0) + ($dataPuskesmas->current->k2_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k2_l ?? 0) + ($dataPuskesmas->current->k2_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k2_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k2_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k2_l_lama ?? 0) + ($dataPuskesmas->previous->k2_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">4</td>
         <td class="column15">Penyakit jaringan keras gigi lainnya</td>
         <td class="column3">K03</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_4_tahun'] + $dataPuskesmas->data[0]['k3_6_tahun'] + $dataPuskesmas->data[0]['k3_11_tahun'] + $dataPuskesmas->data[0]['k3_12_tahun'] + $dataPuskesmas->data[0]['k3_14_tahun'] + $dataPuskesmas->data[0]['k3_18_tahun'] + $dataPuskesmas->data[0]['k3_34_tahun'] + $dataPuskesmas->data[0]['k3_44_tahun'] + $dataPuskesmas->data[0]['k3_64_tahun'] + $dataPuskesmas->data[0]['k3_lebih_64_tahun'] + $dataPuskesmas->data[0]['k3_l'] + $dataPuskesmas->data[0]['k3_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k3_l_lama'] + $dataPuskesmas->data[0]['k3_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k3_4_tahun ?? 0) + ($dataPuskesmas->current->k3_6_tahun ?? 0) + ($dataPuskesmas->current->k3_11_tahun ?? 0) + ($dataPuskesmas->current->k3_12_tahun ?? 0) + ($dataPuskesmas->current->k3_14_tahun ?? 0) + ($dataPuskesmas->current->k3_18_tahun ?? 0) + ($dataPuskesmas->current->k3_34_tahun ?? 0) + ($dataPuskesmas->current->k3_44_tahun ?? 0) + ($dataPuskesmas->current->k3_64_tahun ?? 0) + ($dataPuskesmas->current->k3_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k3_l ?? 0) + ($dataPuskesmas->current->k3_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k3_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k3_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k3_l_lama ?? 0) + ($dataPuskesmas->previous->k3_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">5</td>
         <td class="column15">Penyakit pulpa dan jaringan periapikal</td>
         <td class="column3">K04</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_4_tahun'] + $dataPuskesmas->data[0]['k4_6_tahun'] + $dataPuskesmas->data[0]['k4_11_tahun'] + $dataPuskesmas->data[0]['k4_12_tahun'] + $dataPuskesmas->data[0]['k4_14_tahun'] + $dataPuskesmas->data[0]['k4_18_tahun'] + $dataPuskesmas->data[0]['k4_34_tahun'] + $dataPuskesmas->data[0]['k4_44_tahun'] + $dataPuskesmas->data[0]['k4_64_tahun'] + $dataPuskesmas->data[0]['k4_lebih_64_tahun'] + $dataPuskesmas->data[0]['k4_l'] + $dataPuskesmas->data[0]['k4_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k4_l_lama'] + $dataPuskesmas->data[0]['k4_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k4_4_tahun ?? 0) + ($dataPuskesmas->current->k4_6_tahun ?? 0) + ($dataPuskesmas->current->k4_11_tahun ?? 0) + ($dataPuskesmas->current->k4_12_tahun ?? 0) + ($dataPuskesmas->current->k4_14_tahun ?? 0) + ($dataPuskesmas->current->k4_18_tahun ?? 0) + ($dataPuskesmas->current->k4_34_tahun ?? 0) + ($dataPuskesmas->current->k4_44_tahun ?? 0) + ($dataPuskesmas->current->k4_64_tahun ?? 0) + ($dataPuskesmas->current->k4_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k4_l ?? 0) + ($dataPuskesmas->current->k4_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k4_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k4_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k4_l_lama ?? 0) + ($dataPuskesmas->previous->k4_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">6</td>
         <td class="column15">Gingivitis dan penyakit periodental</td>
         <td class="column3">K05</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_4_tahun'] + $dataPuskesmas->data[0]['k5_6_tahun'] + $dataPuskesmas->data[0]['k5_11_tahun'] + $dataPuskesmas->data[0]['k5_12_tahun'] + $dataPuskesmas->data[0]['k5_14_tahun'] + $dataPuskesmas->data[0]['k5_18_tahun'] + $dataPuskesmas->data[0]['k5_34_tahun'] + $dataPuskesmas->data[0]['k5_44_tahun'] + $dataPuskesmas->data[0]['k5_64_tahun'] + $dataPuskesmas->data[0]['k5_lebih_64_tahun'] + $dataPuskesmas->data[0]['k5_l'] + $dataPuskesmas->data[0]['k5_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k5_l_lama'] + $dataPuskesmas->data[0]['k5_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k5_4_tahun ?? 0) + ($dataPuskesmas->current->k5_6_tahun ?? 0) + ($dataPuskesmas->current->k5_11_tahun ?? 0) + ($dataPuskesmas->current->k5_12_tahun ?? 0) + ($dataPuskesmas->current->k5_14_tahun ?? 0) + ($dataPuskesmas->current->k5_18_tahun ?? 0) + ($dataPuskesmas->current->k5_34_tahun ?? 0) + ($dataPuskesmas->current->k5_44_tahun ?? 0) + ($dataPuskesmas->current->k5_64_tahun ?? 0) + ($dataPuskesmas->current->k5_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k5_l ?? 0) + ($dataPuskesmas->current->k5_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k5_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k5_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k5_l_lama ?? 0) + ($dataPuskesmas->previous->k5_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">7</td>
         <td class="column15">Anomali dentofasial</td>
         <td class="column3">K07</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_4_tahun'] + $dataPuskesmas->data[0]['k7_6_tahun'] + $dataPuskesmas->data[0]['k7_11_tahun'] + $dataPuskesmas->data[0]['k7_12_tahun'] + $dataPuskesmas->data[0]['k7_14_tahun'] + $dataPuskesmas->data[0]['k7_18_tahun'] + $dataPuskesmas->data[0]['k7_34_tahun'] + $dataPuskesmas->data[0]['k7_44_tahun'] + $dataPuskesmas->data[0]['k7_64_tahun'] + $dataPuskesmas->data[0]['k7_lebih_64_tahun'] + $dataPuskesmas->data[0]['k7_l'] + $dataPuskesmas->data[0]['k7_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k7_l_lama'] + $dataPuskesmas->data[0]['k7_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k7_4_tahun ?? 0) + ($dataPuskesmas->current->k7_6_tahun ?? 0) + ($dataPuskesmas->current->k7_11_tahun ?? 0) + ($dataPuskesmas->current->k7_12_tahun ?? 0) + ($dataPuskesmas->current->k7_14_tahun ?? 0) + ($dataPuskesmas->current->k7_18_tahun ?? 0) + ($dataPuskesmas->current->k7_34_tahun ?? 0) + ($dataPuskesmas->current->k7_44_tahun ?? 0) + ($dataPuskesmas->current->k7_64_tahun ?? 0) + ($dataPuskesmas->current->k7_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k7_l ?? 0) + ($dataPuskesmas->current->k7_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k7_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k7_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k7_l_lama ?? 0) + ($dataPuskesmas->previous->k7_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">8</td>
         <td class="column15">Gangguan gigi dan jaringan penyangga lainnya</td>
         <td class="column3">K08</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_4_tahun'] + $dataPuskesmas->data[0]['k8_6_tahun'] + $dataPuskesmas->data[0]['k8_11_tahun'] + $dataPuskesmas->data[0]['k8_12_tahun'] + $dataPuskesmas->data[0]['k8_14_tahun'] + $dataPuskesmas->data[0]['k8_18_tahun'] + $dataPuskesmas->data[0]['k8_34_tahun'] + $dataPuskesmas->data[0]['k8_44_tahun'] + $dataPuskesmas->data[0]['k8_64_tahun'] + $dataPuskesmas->data[0]['k8_lebih_64_tahun'] + $dataPuskesmas->data[0]['k8_l'] + $dataPuskesmas->data[0]['k8_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k8_l_lama'] + $dataPuskesmas->data[0]['k8_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k8_4_tahun ?? 0) + ($dataPuskesmas->current->k8_6_tahun ?? 0) + ($dataPuskesmas->current->k8_11_tahun ?? 0) + ($dataPuskesmas->current->k8_12_tahun ?? 0) + ($dataPuskesmas->current->k8_14_tahun ?? 0) + ($dataPuskesmas->current->k8_18_tahun ?? 0) + ($dataPuskesmas->current->k8_34_tahun ?? 0) + ($dataPuskesmas->current->k8_44_tahun ?? 0) + ($dataPuskesmas->current->k8_64_tahun ?? 0) + ($dataPuskesmas->current->k8_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k8_l ?? 0) + ($dataPuskesmas->current->k8_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k8_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k8_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k8_l_lama ?? 0) + ($dataPuskesmas->previous->k8_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">9</td>
         <td class="column15">Stomatitis dan lesi-lesi berhubungan</td>
         <td class="column3">K12</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_4_tahun'] + $dataPuskesmas->data[0]['k12_6_tahun'] + $dataPuskesmas->data[0]['k12_11_tahun'] + $dataPuskesmas->data[0]['k12_12_tahun'] + $dataPuskesmas->data[0]['k12_14_tahun'] + $dataPuskesmas->data[0]['k12_18_tahun'] + $dataPuskesmas->data[0]['k12_34_tahun'] + $dataPuskesmas->data[0]['k12_44_tahun'] + $dataPuskesmas->data[0]['k12_64_tahun'] + $dataPuskesmas->data[0]['k12_lebih_64_tahun'] + $dataPuskesmas->data[0]['k12_l'] + $dataPuskesmas->data[0]['k12_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k12_l_lama'] + $dataPuskesmas->data[0]['k12_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k12_4_tahun ?? 0) + ($dataPuskesmas->current->k12_6_tahun ?? 0) + ($dataPuskesmas->current->k12_11_tahun ?? 0) + ($dataPuskesmas->current->k12_12_tahun ?? 0) + ($dataPuskesmas->current->k12_14_tahun ?? 0) + ($dataPuskesmas->current->k12_18_tahun ?? 0) + ($dataPuskesmas->current->k12_34_tahun ?? 0) + ($dataPuskesmas->current->k12_44_tahun ?? 0) + ($dataPuskesmas->current->k12_64_tahun ?? 0) + ($dataPuskesmas->current->k12_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k12_l ?? 0) + ($dataPuskesmas->current->k12_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k12_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k12_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k12_l_lama ?? 0) + ($dataPuskesmas->previous->k12_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">10</td>
         <td class="column15">Angular Cheilitis</td>
         <td class="column3">K13.0</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_4_tahun'] + $dataPuskesmas->data[0]['k13_6_tahun'] + $dataPuskesmas->data[0]['k13_11_tahun'] + $dataPuskesmas->data[0]['k13_12_tahun'] + $dataPuskesmas->data[0]['k13_14_tahun'] + $dataPuskesmas->data[0]['k13_18_tahun'] + $dataPuskesmas->data[0]['k13_34_tahun'] + $dataPuskesmas->data[0]['k13_44_tahun'] + $dataPuskesmas->data[0]['k13_64_tahun'] + $dataPuskesmas->data[0]['k13_lebih_64_tahun'] + $dataPuskesmas->data[0]['k13_l'] + $dataPuskesmas->data[0]['k13_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k13_l_lama'] + $dataPuskesmas->data[0]['k13_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k13_4_tahun ?? 0) + ($dataPuskesmas->current->k13_6_tahun ?? 0) + ($dataPuskesmas->current->k13_11_tahun ?? 0) + ($dataPuskesmas->current->k13_12_tahun ?? 0) + ($dataPuskesmas->current->k13_14_tahun ?? 0) + ($dataPuskesmas->current->k13_18_tahun ?? 0) + ($dataPuskesmas->current->k13_34_tahun ?? 0) + ($dataPuskesmas->current->k13_44_tahun ?? 0) + ($dataPuskesmas->current->k13_64_tahun ?? 0) + ($dataPuskesmas->current->k13_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k13_l ?? 0) + ($dataPuskesmas->current->k13_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k13_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k13_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k13_l_lama ?? 0) + ($dataPuskesmas->previous->k13_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">11</td>
         <td class="column15">Eritema Multiformis</td>
         <td class="column3">L51</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_4_tahun'] + $dataPuskesmas->data[0]['k51_6_tahun'] + $dataPuskesmas->data[0]['k51_11_tahun'] + $dataPuskesmas->data[0]['k51_12_tahun'] + $dataPuskesmas->data[0]['k51_14_tahun'] + $dataPuskesmas->data[0]['k51_18_tahun'] + $dataPuskesmas->data[0]['k51_34_tahun'] + $dataPuskesmas->data[0]['k51_44_tahun'] + $dataPuskesmas->data[0]['k51_64_tahun'] + $dataPuskesmas->data[0]['k51_lebih_64_tahun'] + $dataPuskesmas->data[0]['k51_l'] + $dataPuskesmas->data[0]['k51_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['k51_l_lama'] + $dataPuskesmas->data[0]['k51_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->k51_4_tahun ?? 0) + ($dataPuskesmas->current->k51_6_tahun ?? 0) + ($dataPuskesmas->current->k51_11_tahun ?? 0) + ($dataPuskesmas->current->k51_12_tahun ?? 0) + ($dataPuskesmas->current->k51_14_tahun ?? 0) + ($dataPuskesmas->current->k51_18_tahun ?? 0) + ($dataPuskesmas->current->k51_34_tahun ?? 0) + ($dataPuskesmas->current->k51_44_tahun ?? 0) + ($dataPuskesmas->current->k51_64_tahun ?? 0) + ($dataPuskesmas->current->k51_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->k51_l ?? 0) + ($dataPuskesmas->current->k51_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k51_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k51_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->k51_l_lama ?? 0) + ($dataPuskesmas->previous->k51_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">12</td>
         <td class="column15">Nyeri orfasial</td>
         <td class="column3">R.51</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_4_tahun'] + $dataPuskesmas->data[0]['r51_6_tahun'] + $dataPuskesmas->data[0]['r51_11_tahun'] + $dataPuskesmas->data[0]['r51_12_tahun'] + $dataPuskesmas->data[0]['r51_14_tahun'] + $dataPuskesmas->data[0]['r51_18_tahun'] + $dataPuskesmas->data[0]['r51_34_tahun'] + $dataPuskesmas->data[0]['r51_44_tahun'] + $dataPuskesmas->data[0]['r51_64_tahun'] + $dataPuskesmas->data[0]['r51_lebih_64_tahun'] + $dataPuskesmas->data[0]['r51_l'] + $dataPuskesmas->data[0]['r51_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['r51_l_lama'] + $dataPuskesmas->data[0]['r51_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->r51_4_tahun ?? 0) + ($dataPuskesmas->current->r51_6_tahun ?? 0) + ($dataPuskesmas->current->r51_11_tahun ?? 0) + ($dataPuskesmas->current->r51_12_tahun ?? 0) + ($dataPuskesmas->current->r51_14_tahun ?? 0) + ($dataPuskesmas->current->r51_18_tahun ?? 0) + ($dataPuskesmas->current->r51_34_tahun ?? 0) + ($dataPuskesmas->current->r51_44_tahun ?? 0) + ($dataPuskesmas->current->r51_64_tahun ?? 0) + ($dataPuskesmas->current->r51_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->r51_l ?? 0) + ($dataPuskesmas->current->r51_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->r51_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->r51_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->r51_l_lama ?? 0) + ($dataPuskesmas->previous->r51_p_lama ?? 0) }}</td>
       </tr>
       <tr>
         <td class="column3 textCenter">13</td>
         <td class="column15">Fraktur mahkota yang tidak merusak pulpa</td>
         <td class="column3">S02.5</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_4_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_6_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_11_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_12_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_14_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_18_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_34_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_44_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_lebih_64_tahun'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_l'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_4_tahun'] + $dataPuskesmas->data[0]['s2_6_tahun'] + $dataPuskesmas->data[0]['s2_11_tahun'] + $dataPuskesmas->data[0]['s2_12_tahun'] + $dataPuskesmas->data[0]['s2_14_tahun'] + $dataPuskesmas->data[0]['s2_18_tahun'] + $dataPuskesmas->data[0]['s2_34_tahun'] + $dataPuskesmas->data[0]['s2_44_tahun'] + $dataPuskesmas->data[0]['s2_64_tahun'] + $dataPuskesmas->data[0]['s2_lebih_64_tahun'] + $dataPuskesmas->data[0]['s2_l'] + $dataPuskesmas->data[0]['s2_p'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_l_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_p_lama'] }}</td>
-        <td class="column3">{{ $dataPuskesmas->data[0]['s2_l_lama'] + $dataPuskesmas->data[0]['s2_p_lama'] }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_4_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_6_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_11_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_12_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_14_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_18_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_34_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_44_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_lebih_64_tahun ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_l ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->current->s2_4_tahun ?? 0) + ($dataPuskesmas->current->s2_6_tahun ?? 0) + ($dataPuskesmas->current->s2_11_tahun ?? 0) + ($dataPuskesmas->current->s2_12_tahun ?? 0) + ($dataPuskesmas->current->s2_14_tahun ?? 0) + ($dataPuskesmas->current->s2_18_tahun ?? 0) + ($dataPuskesmas->current->s2_34_tahun ?? 0) + ($dataPuskesmas->current->s2_44_tahun ?? 0) + ($dataPuskesmas->current->s2_64_tahun ?? 0) + ($dataPuskesmas->current->s2_lebih_64_tahun ?? 0) + ($dataPuskesmas->current->s2_l ?? 0) + ($dataPuskesmas->current->s2_p ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->s2_l_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->s2_p_lama ?? 0) }}</td>
+        <td class="column3">{{ ($dataPuskesmas->previous->s2_l_lama ?? 0) + ($dataPuskesmas->previous->s2_p_lama ?? 0) }}</td>
       </tr>
     </tbody>
   </table>

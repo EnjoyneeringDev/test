@@ -35,3 +35,6 @@ Route::get('/admin/laporan/pelayanan-puskesmas/download-pdf/{record_id}/{puskesm
 
 Route::get('/admin/laporan/kesakitan-berdasarkan-gejala/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKesakitanBerdasarkanGejala'])
     ->name('download.laporan.kesakitanBerdasarkanGejala.pdf');
+
+Route::get('/admin/laporan/kesakitan-gigi-dan-mulut/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKesakitanGigiMulut'])
+    ->name('download.laporan.kesakitanGigiMulut.pdf');
