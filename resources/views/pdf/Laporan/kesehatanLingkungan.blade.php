@@ -135,21 +135,29 @@
     <p style="text-align: center;">LAPORAN BULANAN KEPERAWATAN KESEHATAN MASYARAKAT</p>
   </div>
 
+  @php
+    // Assuming you have your date string
+    $dateString = $dataPuskesmas->data[0]['bulan_tahun'];
+    // Create a Carbon instance
+    $date = \Carbon\Carbon::parse($dateString);
+    // Get the year
+    $year = $date->format('Y'); // 'Y' gives a 4-digit year
+    $monthName = $date->format('F'); // 'F' gives the full textual representation of the month
+  @endphp
+
   <div style="margin-top: 50px; ">
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+      @foreach (str_split($dataPuskesmas->idLaporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Bulan</span>
-            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">November</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $monthName }}</span>
         </div>
     </div>
   </div>
@@ -157,12 +165,12 @@
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
-      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ $dataPuskesmas->namaPuskesmas ?? "" }}</span>
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Tahun</span>
-            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $year }}</span>
         </div>
     </div>
   </div>
@@ -171,70 +179,70 @@
     <thead>
       <tr>
         <td class="column5 textCenter">No</td>
-        <td class="column75 textCenter" colspan="2">KEGIATAN</td>
+        <td class="column75 textCenter" >KEGIATAN</td>
         <td class="column20 textCenter" colspan="2">JUMLAH</td>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="column5 textCenter" style="vertical-align: top; " rowspan="2" >1.</td>
-        <td class="column75" rowspan="2" >Jumlah sarana air minum yang dilakukan inspeksi kesehatan lingkungan: </td>
+        <td class="column5 textCenter" style="vertical-align: top; " rowspan="3" >1.</td>
+        <td class="column75" >Jumlah sarana air minum yang dilakukan inspeksi kesehatan lingkungan: </td>
         <td class="column20 columGrey" colspan="2"></td>
       </tr>
       <tr>
-        <td class="column75" rowspan="2" >a. Jumlah sarana air minum yang memiliki resiko rendah/sedang</td>
-        <td class="column1">{{ $dataPuskesmas->data[0]['jumlah_sarana_air_minum_resiko_rendah'] }}</td>
-        <td class="column1">buah</td>
+        <td class="column75" >a. Jumlah sarana air minum yang memiliki resiko rendah/sedang</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['jumlah_sarana_air_minum_resiko_rendah_sedang'] }}</td>
+        <td class="column10">buah</td>
       </tr>
       <tr>
-        <td class="column75" rowspan="2" >b. Jumlah sarana air minum yang memiliki resiko tinggi/amat tinggi </td>
-        <td class="column1">{{ $dataPuskesmas->data[0]['jumlah_sarana_air_minum_resiko_tinggi'] }}</td>
-        <td class="column1">buah</td>
+        <td class="column75" >b. Jumlah sarana air minum yang memiliki resiko tinggi/amat tinggi </td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['jumlah_sarana_air_minum_resiko_tinggi_amat_tinggi'] }}</td>
+        <td class="column10">buah</td>
       </tr>
       <tr>
-        <td class="column5 textCenter" style="vertical-align: top; " rowspan="2" >2.</td>
-        <td class="column75" rowspan="2" >Jumlah Tempat Pengelolaan Makanan (TPM) yang  dilakukan inspeksi kesehatan lingkungan:</td>
+        <td class="column5 textCenter" style="vertical-align: top; " rowspan="3" >2.</td>
+        <td class="column75"  >Jumlah Tempat Pengelolaan Makanan (TPM) yang  dilakukan inspeksi kesehatan lingkungan:</td>
         <td class="column20 columGrey" colspan="2"></td>
       </tr>
       <tr>
-        <td class="column75" rowspan="2" >a. Jumlah Tempat Pengelolaan Makanan (TPM) yang memenuhi syarat </td>
-        <td class="column1">{{ $dataPuskesmas->data[0]['jumlah_tpm_yang_memenuhi_syarat'] }}</td>
-        <td class="column1">buah</td>
+        <td class="column75"  >a. Jumlah Tempat Pengelolaan Makanan (TPM) yang memenuhi syarat </td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['jumlah_tpm_memenuhi_syarat'] }}</td>
+        <td class="column10">buah</td>
       </tr>
       <tr>
-        <td class="column75" rowspan="2" >b. Jumlah Tempat Pengelolaan Makanan (TPM) yang tidak memenuhi syarat</td>
-        <td class="column1">{{ $dataPuskesmas->data[0]['jumlah_tpm_yang_tidak_memenuhi_syarat'] }}</td>
-        <td class="column1">buah</td>
+        <td class="column75"  >b. Jumlah Tempat Pengelolaan Makanan (TPM) yang tidak memenuhi syarat</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['jumlah_tpm_tidak_memenuhi_syarat'] }}</td>
+        <td class="column10">buah</td>
       </tr>
       <tr>
-        <td class="column5 textCenter" style="vertical-align: top; " rowspan="2" >3.</td>
-        <td class="column75" rowspan="2" >Jumlah Tempat-Tempat Umum (TTU) yang dilakukan inspeksi kesehatan</td>
+        <td class="column5 textCenter" style="vertical-align: top; " rowspan="3" >3.</td>
+        <td class="column75" >Jumlah Tempat-Tempat Umum (TTU) yang dilakukan inspeksi kesehatan</td>
         <td class="column20 columGrey" colspan="2"></td>
       </tr>
       <tr>
-        <td class="column75" rowspan="2" >a. Jumlah TTU yang memenuhi syarat</td>
-        <td class="column1">{{ $dataPuskesmas->data[0]['jumlah_ttu_yang_memenuhi_syarat'] }}</td>
-        <td class="column1">buah</td>
+        <td class="column75" >a. Jumlah TTU yang memenuhi syarat</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['jumlah_ttu_memenuhi_syarat'] }}</td>
+        <td class="column10">buah</td>
       </tr>
       <tr>
-        <td class="column75" rowspan="2" >b. Jumlah TTU yang tidak memenuhi syarat </td>
-        <td class="column1">{{ $dataPuskesmas->data[0]['jumlah_ttu_yang_tidak_memenuhi_syarat'] }}</td>
-        <td class="column1">buah</td>
+        <td class="column75" >b. Jumlah TTU yang tidak memenuhi syarat </td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['jumlah_ttu_tidak_memenuhi_syarat'] }}</td>
+        <td class="column10">buah</td>
       </tr>
       <tr>
-        <td class="column5 textCenter" style="vertical-align: top; " rowspan="2" >4.</td>
-        <td class="column75" rowspan="2" >Jumlah rumah yang dilakukan Inspeksi Kesehatan Lingkungan</td>
+        <td class="column5 textCenter" style="vertical-align: top; " rowspan="3" >4.</td>
+        <td class="column75" >Jumlah rumah yang dilakukan Inspeksi Kesehatan Lingkungan</td>
         <td class="column20 columGrey" colspan="2"></td>
       </tr>
       <tr>
-        <td class="column75" rowspan="2" >a. Jumlah rumah yang memenuhi syarat kesehatan</td>
-        <td class="column1">{{ $dataPuskesmas->data[0]['jumlah_rumah_yang_memenuhi_syarat'] }}</td>
-        <td class="column1">buah</td>
+        <td class="column75" >a. Jumlah rumah yang memenuhi syarat kesehatan</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['jumlah_rumah_memenuhi_syarat'] }}</td>
+        <td class="column10">buah</td>
       </tr>
       <tr>
-        <td class="column75" rowspan="2" >b. Jumlah rumah yang tidak memenuhi syarat kesehatan</td>
-        <td class="column1">{{ $dataPuskesmas->data[0]['jumlah_rumah_yang_tidak_memenuhi_syarat'] }}</td>
-        <td class="column1">buah</td>
+        <td class="column75" >b. Jumlah rumah yang tidak memenuhi syarat kesehatan</td>
+        <td class="column10">{{ $dataPuskesmas->data[0]['jumlah_rumah_tidak_memenuhi_syarat'] }}</td>
+        <td class="column10">buah</td>
       </tr>
     </tbody>
   </table>

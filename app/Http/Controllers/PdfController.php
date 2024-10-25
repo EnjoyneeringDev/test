@@ -20,6 +20,7 @@ use App\Models\KesakitanGigiDanMulut;
 use App\Models\KelahiranDiPuskesmas;
 use App\Models\KesakitanTerbanyak;
 use App\Models\KeperawatanKesehatanMasyarakat;
+use App\Models\KesehatanLingkungan;
 
 class PdfController extends Controller
 {
@@ -75,24 +76,19 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'identitas-puskesmas-report.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanKesehatanLingkungan($id)
+    public function downloadLaporanKesehatanLingkungan($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
-
-        \Log::info("data tes -> ");
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+        $dataLaporan = KesehatanLingkungan::where('identitas_puskesmas_id', $puskesmas_id)
+            ->where('id', $record_id)
+            ->first();
+        $idLaporan = sprintf('%07d', $record_id);
 
         $dataPuskesmas = (object) [
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
             'data' => [
-                [
-                    'jumlah_sarana_air_minum_resiko_rendah' => 1,
-                    'jumlah_sarana_air_minum_resiko_tinggi' => 1,
-                    'jumlah_tpm_yang_memenuhi_syarat' => 1,
-                    'jumlah_tpm_yang_tidak_memenuhi_syarat' => 1,
-                    'jumlah_ttu_yang_memenuhi_syarat' => 1,
-                    'jumlah_ttu_yang_tidak_memenuhi_syarat' => 1,
-                    'jumlah_rumah_yang_memenuhi_syarat' => 1,
-                    'jumlah_rumah_yang_tidak_memenuhi_syarat' => 1,
-                ]
+                $dataLaporan
             ],
         ];
 
