@@ -47,3 +47,6 @@ Route::get('/admin/laporan/kematian/download-pdf/{record_id}/{puskesmas_id}', [P
 
 Route::get('/admin/laporan/kesakitan-terbanyak/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKesakitanTerbanyak'])
     ->name('download.laporan.kesakitanTerbanyak.pdf');
+
+Route::get('/admin/laporan/keperawatan-kesehatan-masyarakat/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKeperawatanKesehatanMasyarakat'])
+    ->name('download.laporan.keperawatanKesehatanMasyarakat.pdf');

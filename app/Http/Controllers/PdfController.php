@@ -19,6 +19,7 @@ use App\Models\KesakitanBerdasarkanGejala;
 use App\Models\KesakitanGigiDanMulut;
 use App\Models\KelahiranDiPuskesmas;
 use App\Models\KesakitanTerbanyak;
+use App\Models\KeperawatanKesehatanMasyarakat;
 
 class PdfController extends Controller
 {
@@ -211,37 +212,25 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'pengendalian-penyakit-tidak-menular.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanKeperawatanKesehatanMasyarakat($id)
+    public function downloadLaporanKeperawatanKesehatanMasyarakat($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
-
-        \Log::info("data tes -> ");
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+        $dataLaporan = KeperawatanKesehatanMasyarakat::where('identitas_puskesmas_id', $puskesmas_id)
+            ->where('id', $record_id)
+            ->first();
+        $idLaporan = sprintf('%07d', $record_id);
 
         $dataPuskesmas = (object) [
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
             'data' => [
-                [
-                    'individu_dapat_asuhan_keperawatan' => 1,
-                    'individu_dengan_asuhan_keperawatan_lebih_lanjut' => 1,
-                    'keluarga_dapat_asuhan_keperawatan' => 1,
-                    'keluarga_binaan_asuhan_1' => 1,
-                    'keluarga_binaan_asuhan_2' => 1,
-                    'keluarga_binaan_asuhan_3' => 1,
-                    'keluarga_binaan_asuhan_4' => 1,
-                    'keluarga_binaan_asuhan_lepas_bina' => 1,
-                    'kelompok_dapat_asuhan_keperawatan' => 1,
-                    'kelompok_binaan_asuhan_1' => 1,
-                    'kelompok_binaan_asuhan_2' => 1,
-                    'kelompok_binaan_asuhan_3' => 1,
-                    'kelompok_binaan_asuhan_4' => 1,
-                    'desa_dapat_asuhan_keperawatan' => 1,
-                    'desa_sudah_total_coverage' => 1,
-                ]
+                $dataLaporan
             ],
         ];
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
-        Pdf::loadView('pdf.Laporan.pengendalianPenyakitMenular', [
+        Pdf::loadView('pdf.Laporan.keperawatanKesehatanMasyarakat', [
             'dataPuskesmas' => $dataPuskesmas,
         ])->save($pdf1Path);
 
@@ -251,7 +240,7 @@ class PdfController extends Controller
 
         // Add page numbers to each PDF with continuous numbering
         $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
-        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+        $this->addContinuousPageNumbersToPdfNotWithNumber($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
 
         // Create a new PDF merger instance
         $pdfMerger = new PDFMerger;
@@ -264,7 +253,7 @@ class PdfController extends Controller
         $pdfMerger->merge('file', $mergedPdfPath);
 
         // Return the merged PDF as a response for download
-        return response()->download($mergedPdfPath, 'pengendalianPenyakitMenular.pdf')->deleteFileAfterSend(true);
+        return response()->download($mergedPdfPath, 'keperawatan-kesehatan-masyarakat.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanPelayananPuskesmas($record_id, $puskesmas_id)
