@@ -46,42 +46,52 @@ class LaporanKlbResource extends Resource
                     ->numeric(),
                 Forms\Components\TextInput::make('kematian')
                     ->numeric(),
-                Forms\Components\Toggle::make('kolera'),
-                Forms\Components\Toggle::make('Pes'),
-                Forms\Components\Toggle::make('dbd'),
-                Forms\Components\Toggle::make('campak'),
-                Forms\Components\Toggle::make('polio'),
-                Forms\Components\Toggle::make('difteri'),
-                Forms\Components\Toggle::make('pertusis'),
-                Forms\Components\Toggle::make('rabies'),
-                Forms\Components\Toggle::make('malaria'),
-                Forms\Components\Toggle::make('avian'),
-                Forms\Components\Toggle::make('antraks'),
-                Forms\Components\Toggle::make('leptospirosis'),
-                Forms\Components\Toggle::make('chikungunya'),
-                Forms\Components\Toggle::make('keracunan'),
-                Forms\Components\Toggle::make('muntah'),
-                Forms\Components\Toggle::make('berak'),
-                Forms\Components\Toggle::make('menggigil'),
-                Forms\Components\Toggle::make('turgor_jelek'),
-                Forms\Components\Toggle::make('kaku_kuduk'),
-                Forms\Components\Toggle::make('sakit_perut'),
-                Forms\Components\Toggle::make('hidrofobi'),
-                Forms\Components\Toggle::make('kejang_syok'),
-                Forms\Components\Toggle::make('batuk_beruntun'),
-                Forms\Components\Toggle::make('panas_demam'),
-                Forms\Components\Toggle::make('batuk'),
-                Forms\Components\Toggle::make('pilek'),
-                Forms\Components\Toggle::make('pusing'),
-                Forms\Components\Toggle::make('kesadaran_menurun'),
-                Forms\Components\Toggle::make('pingsan'),
-                Forms\Components\Toggle::make('bercak_merah_kulit'),
-                Forms\Components\Toggle::make('ikterus'),
-                Forms\Components\Toggle::make('mulut_suka_dibuka'),
-                Forms\Components\Toggle::make('bercak_putih_faring'),
-                Forms\Components\Toggle::make('meringkil'),
-                Forms\Components\Toggle::make('pendarahan'),
-                Forms\Components\Toggle::make('gatal'),
+                Forms\Components\Fieldset::make('Penyakit')
+                    ->schema([
+                        Forms\Components\Toggle::make('kolera'),
+                        Forms\Components\Toggle::make('Pes'),
+                        Forms\Components\Toggle::make('dbd'),
+                        Forms\Components\Toggle::make('campak'),
+                        Forms\Components\Toggle::make('polio'),
+                        Forms\Components\Toggle::make('difteri'),
+                        Forms\Components\Toggle::make('pertusis'),
+                        Forms\Components\Toggle::make('rabies'),
+                        Forms\Components\Toggle::make('malaria'),
+                        Forms\Components\Toggle::make('avian'),
+                        Forms\Components\Toggle::make('antraks'),
+                        Forms\Components\Toggle::make('leptospirosis'),
+                        Forms\Components\Toggle::make('chikungunya'),
+                        Forms\Components\Toggle::make('keracunan'),
+                    ])
+                    ->columns(3),
+                Forms\Components\Fieldset::make('Gejala')
+                    ->schema([
+                        Forms\Components\Toggle::make('muntah'),
+                        Forms\Components\Toggle::make('berak'),
+                        Forms\Components\Toggle::make('menggigil'),
+                        Forms\Components\Toggle::make('turgor_jelek'),
+                        Forms\Components\Toggle::make('kaku_kuduk'),
+                        Forms\Components\Toggle::make('sakit_perut'),
+                        Forms\Components\Toggle::make('hidrofobi'),
+                        Forms\Components\Toggle::make('kejang'),
+                        Forms\Components\Toggle::make('syok'),
+                        Forms\Components\Toggle::make('batuk_beruntun'),
+                        Forms\Components\Toggle::make('panas_demam'),
+                        Forms\Components\Toggle::make('batuk'),
+                        Forms\Components\Toggle::make('pilek'),
+                        Forms\Components\Toggle::make('pusing'),
+                        Forms\Components\Toggle::make('kesadaran_menurun'),
+                        Forms\Components\Toggle::make('pingsan'),
+                        Forms\Components\Toggle::make('bercak_merah_kulit'),
+                        Forms\Components\Toggle::make('lumpuh'),
+                        Forms\Components\Toggle::make('ikterus'),
+                        Forms\Components\Toggle::make('mulut_suka_dibuka'),
+                        Forms\Components\Toggle::make('bercak_putih_faring'),
+                        Forms\Components\Toggle::make('meringkil'),
+                        Forms\Components\Toggle::make('pendarahan'),
+                        Forms\Components\Toggle::make('gatal'),
+                    ])
+                    ->columns(3),
                 Forms\Components\TextInput::make('tindakan')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('telpon')
@@ -159,7 +169,9 @@ class LaporanKlbResource extends Resource
                     ->boolean(),
                 Tables\Columns\IconColumn::make('hidrofobi')
                     ->boolean(),
-                Tables\Columns\IconColumn::make('kejang_syok')
+                Tables\Columns\IconColumn::make('kejang')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('syok')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('batuk_beruntun')
                     ->boolean(),
@@ -176,6 +188,8 @@ class LaporanKlbResource extends Resource
                 Tables\Columns\IconColumn::make('pingsan')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('bercak_merah_kulit')
+                    ->boolean(),
+                Tables\Columns\IconColumn::make('lumpuh')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('ikterus')
                     ->boolean(),
@@ -209,6 +223,16 @@ class LaporanKlbResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('downloadPdf')
+                    ->label('Download PDF')
+                    ->color('primary')
+                    ->action(function (LaporanKlb $record) {
+                        // Pass both the record's id and identitasPuskesmas.id to the route
+                        return redirect()->route('download.laporan.klb24Jam.pdf', [
+                            'record_id' => $record->id, // the record's own id
+                            'puskesmas_id' => $record->identitas_puskesmas_id, // the identitasPuskesmas id
+                        ]);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

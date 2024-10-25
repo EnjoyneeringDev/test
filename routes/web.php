@@ -21,9 +21,6 @@ Route::get('/', function () {
 Route::get('/admin/identitas-puskesmas/download-pdf/{id}', [PdfController::class, 'downloadIdentitasPuskesmasPdf'])
     ->name('download.identitas.puskesmas.pdf');
 
-Route::get('/admin/laporan/penyakit-menular/download-pdf/{id}', [PdfController::class, 'downloadLaporanKlb24Jam'])
-    ->name('download.laporan.penyakit-menular.pdf');
-
 Route::get('/admin/laporan/pengendalian-penyakit-menular/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanPenyakitMenular'])
     ->name('download.laporan.pengendalianPenyakitMenular.pdf');
 
@@ -53,3 +50,6 @@ Route::get('/admin/laporan/keperawatan-kesehatan-masyarakat/download-pdf/{record
 
 Route::get('/admin/laporan/kesehatan-lingkungan/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKesehatanLingkungan'])
     ->name('download.laporan.kesehatanLingkungan.pdf');
+
+Route::get('/admin/laporan/klb-24-jam/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKlb24Jam'])
+    ->name('download.laporan.klb24Jam.pdf');

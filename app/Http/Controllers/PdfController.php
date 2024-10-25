@@ -21,6 +21,7 @@ use App\Models\KelahiranDiPuskesmas;
 use App\Models\KesakitanTerbanyak;
 use App\Models\KeperawatanKesehatanMasyarakat;
 use App\Models\KesehatanLingkungan;
+use App\Models\LaporanKlb;
 
 class PdfController extends Controller
 {
@@ -4187,19 +4188,23 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'laporanKematian.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanKlb24Jam($id)
+    public function downloadLaporanKlb24Jam($record_id, $puskesmas_id)
     {
-        $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
-
-        \Log::info("data tes -> ");
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+        $dataLaporan = LaporanKlb::where('identitas_puskesmas_id', $puskesmas_id)
+            ->where('id', $record_id)
+            ->first();
+        $idLaporan = sprintf('%07d', $record_id);
 
         $dataPuskesmas = (object) [
-            'kematian' => [
-                [
-                    
-                ],
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'data' => [
+                $dataLaporan
             ],
         ];
+
+        \Log::info("Data Klb 24 Jam : ", (array) $dataPuskesmas);
 
         // Generate the first PDF and save to a temporary file
         $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');

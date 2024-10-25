@@ -42,7 +42,9 @@ return new class extends Migration
             $table->boolean('kaku_kuduk')->nullable();
             $table->boolean('sakit_perut')->nullable();
             $table->boolean('hidrofobi')->nullable();
-            $table->boolean('kejang_syok')->nullable();
+            $table->boolean('kejang')->nullable();
+            $table->boolean('syok')->nullable();
+            $table->boolean('lumpuh')->nullable();
             $table->boolean('batuk_beruntun')->nullable();
             $table->boolean('panas_demam')->nullable();
             $table->boolean('batuk')->nullable();

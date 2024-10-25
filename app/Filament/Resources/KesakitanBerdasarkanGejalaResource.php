@@ -44,7 +44,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                 Forms\Components\TextInput::make('jumlah_laporan_poskesdes')
                     ->label('Jumlah Laporan Poskesdes')
                     ->numeric(),
-                    Forms\Components\Fieldset::make('INFEKSI PADA USUS')
+                Forms\Components\Fieldset::make('INFEKSI PADA USUS')
                     ->schema([
                         Forms\Components\Fieldset::make('Diare tanpa dehidrasi')
                             ->schema([
