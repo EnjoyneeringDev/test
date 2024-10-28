@@ -56,7 +56,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                                 Forms\Components\TextInput::make('diare_tanpa_dehidrasi_28hari')
                                     ->label('8-28 Hari')
                                     ->numeric(),
-                                    Forms\Components\TextInput::make('diare_tanpa_dehidrasi_11bulan')
+                                Forms\Components\TextInput::make('diare_tanpa_dehidrasi_11bulan')
                                     ->label('1-11 Bulan')
                                     ->numeric(),
                                 Forms\Components\TextInput::make('diare_tanpa_dehidrasi_4tahun')
@@ -98,7 +98,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                                 Forms\Components\TextInput::make('diare_dehidrasi_sedang_28hari')
                                     ->label('8-28 Hari')
                                     ->numeric(),
-                                    Forms\Components\TextInput::make('diare_dehidrasi_sedang_11bulan')
+                                Forms\Components\TextInput::make('diare_dehidrasi_sedang_11bulan')
                                     ->label('1-11 Bulan')
                                     ->numeric(),
                                 Forms\Components\TextInput::make('diare_dehidrasi_sedang_4tahun')
@@ -140,7 +140,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                                 Forms\Components\TextInput::make('diare_dehidrasi_berat_28hari')
                                     ->label('8-28 Hari')
                                     ->numeric(),
-                                    Forms\Components\TextInput::make('diare_dehidrasi_berat_11bulan')
+                                Forms\Components\TextInput::make('diare_dehidrasi_berat_11bulan')
                                     ->label('1-11 Bulan')
                                     ->numeric(),
                                 Forms\Components\TextInput::make('diare_dehidrasi_berat_4tahun')
@@ -1125,7 +1125,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Jumlah Poskesdes')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('diare_tanpa_dehidrasi_kode')
+                Tables\Columns\TextColumn::make('diare_tanpa_dehidrasi_kode')
                     ->label('Kode Unik Diare Tanpa Dehidarasi'),
                 Tables\Columns\TextColumn::make('diare_tanpa_dehidrasi_7hari')
                     ->label('Diare Tanpa Dehidarasi 0-7 Hari')
@@ -1175,7 +1175,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Diare Tanpa Dehidarasi Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('diare_dehidrasi_sedang_kode')
+                Tables\Columns\TextColumn::make('diare_dehidrasi_sedang_kode')
                     ->label('Kode Unik Dehidrasi Sedang'),
                 Tables\Columns\TextColumn::make('diare_dehidrasi_sedang_7hari')
                     ->label('Dehidrasi Sedang 0-7 Hari')
@@ -1185,7 +1185,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Dehidrasi Sedang 8-28 Hari')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('diare_dehidrasi_sedang_11bulan')
+                Tables\Columns\TextColumn::make('diare_dehidrasi_sedang_11bulan')
                     ->label('Dehidrasi Sedang 1-11 Bulan')
                     ->numeric()
                     ->sortable(),
@@ -1225,7 +1225,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Dehidrasi Sedang Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('diare_dehidrasi_berat_kode')
+                Tables\Columns\TextColumn::make('diare_dehidrasi_berat_kode')
                     ->label('Kode Unik Dehidarasi Berat'),
                 Tables\Columns\TextColumn::make('diare_dehidrasi_berat_7hari')
                     ->label('Dehidarasi Berat 0-7 Hari')
@@ -1235,7 +1235,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Dehidarasi Berat 8-28 Hari')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('diare_dehidrasi_berat_11bulan')
+                Tables\Columns\TextColumn::make('diare_dehidrasi_berat_11bulan')
                     ->label('Dehidarasi Berat 1-11 Bulan')
                     ->numeric()
                     ->sortable(),
@@ -1275,7 +1275,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Dehidarasi Berat Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('pneumonia_kode')
+                Tables\Columns\TextColumn::make('pneumonia_kode')
                     ->label('Kode Unik Pneumonia'),
                 Tables\Columns\TextColumn::make('pneumonia_7hari')
                     ->label('Pneumonia 0-7 Hari')
@@ -1325,7 +1325,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Pneumonia Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('demam_probable_kode')
+                Tables\Columns\TextColumn::make('demam_probable_kode')
                     ->label('Kode Unik Demam Probable'),
                 Tables\Columns\TextColumn::make('demam_probable_7hari')
                     ->label('Demam Probable 0-7 Hari')
@@ -1375,7 +1375,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Demam Probable Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('demam_konfirmasi_kode')
+                Tables\Columns\TextColumn::make('demam_konfirmasi_kode')
                     ->label('Kode Unik Demam Konfirmasi'),
                 Tables\Columns\TextColumn::make('demam_konfirmasi_7hari')
                     ->label('Demam Konfirmasi 0-7 Hari')
@@ -1425,7 +1425,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Demam Konfirmasi Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('afp_kode')
+                Tables\Columns\TextColumn::make('afp_kode')
                     ->label('Kode Unik AFP'),
                 Tables\Columns\TextColumn::make('afp_7hari')
                     ->label('AFP 0-7 Hari')
@@ -1475,7 +1475,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('AFP Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('hepatitis_klinis_kode')
+                Tables\Columns\TextColumn::make('hepatitis_klinis_kode')
                     ->label('Kode Unik Hepatitis Klinis'),
                 Tables\Columns\TextColumn::make('hepatitis_klinis_7hari')
                     ->label('Hepatitis Klinis 0-7 Hari')
@@ -1525,7 +1525,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Hepatitis Klinis Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('buta_kode')
+                Tables\Columns\TextColumn::make('buta_kode')
                     ->label('Kode Unik Buta'),
                 Tables\Columns\TextColumn::make('buta_7hari')
                     ->label('Buta 0-7 Hari')
@@ -1575,7 +1575,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Buta Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('cedera_transport_kode')
+                Tables\Columns\TextColumn::make('cedera_transport_kode')
                     ->label('Kode Unik Cederea Tansport'),
                 Tables\Columns\TextColumn::make('cedera_transport_7hari')
                     ->label('Cederea Tansport 0-7 Hari')
@@ -1625,7 +1625,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Cederea Tansport Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('cedera_tenggelam_kode')
+                Tables\Columns\TextColumn::make('cedera_tenggelam_kode')
                     ->label('Kode Unik Cedere Tenggelam'),
                 Tables\Columns\TextColumn::make('cedera_tenggelam_7hari')
                     ->label('Cedere Tenggelam 0-7 Hari')
@@ -1675,7 +1675,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Cedere Tenggelam Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('cedera_jatuh_kode')
+                Tables\Columns\TextColumn::make('cedera_jatuh_kode')
                     ->label('Kode Unik Cederea Jatuh'),
                 Tables\Columns\TextColumn::make('cedera_jatuh_7hari')
                     ->label('Cederea Jatuh 0-7 Hari')
@@ -1725,7 +1725,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Cederea Jatuh Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('cedera_terbakar_kode')
+                Tables\Columns\TextColumn::make('cedera_terbakar_kode')
                     ->label('Kode Unik Cedera Terbakar'),
                 Tables\Columns\TextColumn::make('cedera_terbakar_7hari')
                     ->label('Cedera Terbakar 0-7 Hari')
@@ -1775,7 +1775,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Cedera Terbakar Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('cedera_ular_kode')
+                Tables\Columns\TextColumn::make('cedera_ular_kode')
                     ->label('Kode Unik Cedera Ular'),
                 Tables\Columns\TextColumn::make('cedera_ular_7hari')
                     ->label('Cedera Ular 0-7 Hari')
@@ -1825,7 +1825,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Cedera Ular Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('cedera_fisik_kode')
+                Tables\Columns\TextColumn::make('cedera_fisik_kode')
                     ->label('Kode Unik Cedera Fisik'),
                 Tables\Columns\TextColumn::make('cedera_fisik_7hari')
                     ->label('Cedera Fisik 0-7 Hari')
@@ -1875,7 +1875,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Cedera Fisik Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('cedera_mental_kode')
+                Tables\Columns\TextColumn::make('cedera_mental_kode')
                     ->label('Kode Unik Cedera Mental'),
                 Tables\Columns\TextColumn::make('cedera_mental_7hari')
                     ->label('Cedera Mental 0-7 Hari')
@@ -1925,7 +1925,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Cedera Mental Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('kekerasan_seksual_kode')
+                Tables\Columns\TextColumn::make('kekerasan_seksual_kode')
                     ->label('Kode Unik Seksual'),
                 Tables\Columns\TextColumn::make('kekerasan_seksual_7hari')
                     ->label('Seksual 0-7 Hari')
@@ -1975,7 +1975,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Seksual Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('keracunan_kimia_kode')
+                Tables\Columns\TextColumn::make('keracunan_kimia_kode')
                     ->label('Kode Unik Keracunan Kimia'),
                 Tables\Columns\TextColumn::make('keracunan_kimia_7hari')
                     ->label('Keracunan Kimia 0-7 Hari')
@@ -2025,7 +2025,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Keracunan Kimia Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('keracunan_makanan_kode')
+                Tables\Columns\TextColumn::make('keracunan_makanan_kode')
                     ->label('Kode Unik Keracunan Makanan'),
                 Tables\Columns\TextColumn::make('keracunan_makanan_7hari')
                     ->label('Keracunan Makanan 0-7 Hari')
@@ -2075,7 +2075,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Keracunan Makanan Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('sakit_kerja_kode')
+                Tables\Columns\TextColumn::make('sakit_kerja_kode')
                     ->label('Kode Unik Sakit Kerja'),
                 Tables\Columns\TextColumn::make('sakit_kerja_7hari')
                     ->label('Sakit Kerja 0-7 Hari')
@@ -2125,7 +2125,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Sakit Kerja Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('cedera_kerja_kode')
+                Tables\Columns\TextColumn::make('cedera_kerja_kode')
                     ->label('Kode Unik Cedera Kerja'),
                 Tables\Columns\TextColumn::make('cedera_kerja_7hari')
                     ->label('Cedera Kerja 0-7 Hari')
@@ -2175,7 +2175,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Cedera Kerja Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('bunuh_diri_kode')
+                Tables\Columns\TextColumn::make('bunuh_diri_kode')
                     ->label('Kode Unik Bunuh Diri'),
                 Tables\Columns\TextColumn::make('bunuh_diri_7hari')
                     ->label('Bunuh Diri 0-7 Hari')
@@ -2225,7 +2225,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Bunuh Diri Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('trauma_lahir_kode')
+                Tables\Columns\TextColumn::make('trauma_lahir_kode')
                     ->label('Kode Unik Trauma Lahir'),
                 Tables\Columns\TextColumn::make('trauma_lahir_7hari')
                     ->label('Trauma Lahir 0-7 Hari')
@@ -2275,7 +2275,7 @@ class KesakitanBerdasarkanGejalaResource extends Resource
                     ->label('Trauma Lahir Perempuan')
                     ->numeric()
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('kembar_siam_kode')
+                Tables\Columns\TextColumn::make('kembar_siam_kode')
                     ->label('Kode Unik Kembar Siam'),
                 Tables\Columns\TextColumn::make('kembar_siam_7hari')
                     ->label('Kembar Siam 0-7 Hari')

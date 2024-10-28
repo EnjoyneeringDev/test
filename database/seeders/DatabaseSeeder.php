@@ -65,7 +65,9 @@ class DatabaseSeeder extends Seeder
             PemakaianPermintaanObatSeeder::class,
             PenyakitMenularPotensiKlbSeeder::class,
             KesakitanTerbanyakSeeder::class,
-            KesehatanKerjaDanOlahragaSeeder::class
+            KesehatanKerjaDanOlahragaSeeder::class,
+            ImunisasiSeeder::class,
+            GiziIbuAnakSeeder::class
         ]);
     }
 }

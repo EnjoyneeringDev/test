@@ -19,7 +19,7 @@ class KeperawatanKesehatanMasyarakatResource extends Resource
 
     protected static ?string $navigationLabel = 'Laporan Keperawatan Kesehatan Masyarakat';
 
-    protected static ?string $navigationGroup = 'Form 8.  Keperawatan Kesehatan Masyarakat';
+    protected static ?string $navigationGroup = 'Form 8. KEPERAWATAN KESEHATAN MASYARAKAT';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

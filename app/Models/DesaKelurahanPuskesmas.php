@@ -27,4 +27,14 @@ class DesaKelurahanPuskesmas extends Model
     {
         return $this->hasMany(PenyakitMenularPotensiKlb::class);
     }
+
+    public function imunisasi(): HasMany
+    {
+        return $this->hasMany(Imunisasi::class);
+    }
+
+    public function giziIbuAnak(): HasMany
+    {
+        return $this->hasMany(GiziIbuAnak::class);
+    }
 }
