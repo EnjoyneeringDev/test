@@ -34,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
                 'Form 8. KEPERAWATAN KESEHATAN MASYARAKAT',
                 'Form 9. KESEHATAN KERJA DAN OLAH RAGA',
                 'Form 10. PELAYANAN PUSKESMAS',
+                'Form 11. LAPORAN BULANAN KESAKITAN UMUM',
                 'Form 12. KESAKITAN BERDASARKAN GEJALA, PENYEBAB PENYAKIT ATAU KONDISI PASIEN',
                 'Form 13. KESAKITAN GIGI DAN MULUT',
                 'Form 14. KESAKITAN TERBANYAK',

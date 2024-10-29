@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\DesaKelurahanPuskesmas;
 use App\Models\KelahiranDiPuskesmas;
+use App\Models\KelompokPenyakit;
 use App\Models\KeperawatanKesehatanMasyarakat;
 use App\Models\KesehatanKerjaDanOlahRaga;
 use App\Models\KetersediaanRuanganPuskesmas;
@@ -67,7 +68,11 @@ class DatabaseSeeder extends Seeder
             KesakitanTerbanyakSeeder::class,
             KesehatanKerjaDanOlahragaSeeder::class,
             ImunisasiSeeder::class,
-            GiziIbuAnakSeeder::class
+            GiziIbuAnakSeeder::class,
+            KelompokPenyakitSeeder::class,
+            KelompokPenyakitSeeder::class,
+            JenisPenyakitSeeder::class,
+            JumlahKasusBaruSeeder::class
         ]);
     }
 }

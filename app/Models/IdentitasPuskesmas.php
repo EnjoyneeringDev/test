@@ -122,4 +122,9 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(GiziIbuAnak::class);
     }
+
+    public function jumlahKasusbaru(): HasMany
+    {
+        return $this->hasMany(JumlahKasusBaru::class);
+    }
 }
