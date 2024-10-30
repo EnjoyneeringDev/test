@@ -120,21 +120,13 @@ class SumberDayaPuskesmasResource extends Resource
                                 Forms\Components\TextInput::make('jumlah_keluarga_iks_kategori_tidaksehat')
                                     ->numeric()->label('4) Jumlah keluarga dengan IKS keluarga kategori keluarga tidak sehat'),
                                 Forms\Components\TextInput::make('jumlah_desa_yang_dilakukan_pis_pk')
-                                    ->numeric()->label('5) Jumlah kelurahan yang telah dilakukan PIS-PK'),
-                                Forms\Components\TextInput::make('jumlah_kelurahan_yang_dilakukan_pis_pk')
-                                    ->numeric()->label('5) Jumlah kelurahan yang telah dilakukan PIS-PK'),
+                                    ->numeric()->label('5) Jumlah desa/kelurahan yang telah dilakukan PIS-PK'),
                                 Forms\Components\TextInput::make('jumlah_desa_kategori_sehat')
-                                    ->numeric()->label('Jumlah desa dengan kategori desa/kelurahan sehat'),
-                                Forms\Components\TextInput::make('jumlah_kelurahan_kategori_sehat')
-                                    ->numeric()->label('Jumlah kelurahan dengan kategori desa/kelurahan sehat'),
+                                    ->numeric()->label('(6) Jumlah desa/keluarahan dengan kategori desa/kelurahan sehat'),
                                 Forms\Components\TextInput::make('jumlah_desa_kategori_prasehat')
-                                    ->numeric()->label('7) Jumlah desa dengan kategori desa/kelurahan pra sehat'),
-                                Forms\Components\TextInput::make('jumlah_kelurahan_kategori_prasehat')
-                                    ->numeric()->label('7) Jumlah kelurahan dengan kategori desa/kelurahan pra sehat'),
+                                    ->numeric()->label('7) Jumlah desa/kelurahan dengan kategori desa/kelurahan pra sehat'),
                                 Forms\Components\TextInput::make('jumlah_desa_kategori_tidaksehat')
-                                    ->numeric()->label('8) Jumlah desa dengan kategori desa tidak sehat'),
-                                Forms\Components\TextInput::make('jumlah_kelurahan_kategori_tidaksehat')
-                                    ->numeric()->label('8) Jumlah kelurahan dengan kategori desa/kelurahan tidak sehat'),
+                                    ->numeric()->label('8) Jumlah desa/kelurahan dengan kategori desa tidak sehat'),
                             ])->columns(3),
                         ]),
                     ]),

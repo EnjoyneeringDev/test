@@ -547,10 +547,10 @@
                     <td class="column5"></td>
                     <td class="column55">a. Hasil pelayanan kesehatan</td>
                     <td class="column40" colspan="2">
-                        @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_1']))
-                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_1'] === 1)
+                        @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan']))
+                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan'] === 'baik')
                                 Baik
-                            @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_1'] === 1)
+                            @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan'] === 'cukup')
                                 Cukup
                             @else
                                 Kurang
@@ -564,10 +564,10 @@
                     <td class="column5"></td>
                     <td class="column55">b. Hasil manajemen</td>
                     <td class="column40" colspan="2">
-                        @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_1']))
-                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_1'] === 1)
+                        @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen']))
+                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen'] === 'baik')
                                 Baik
-                            @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_1'] === 1)
+                            @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen'] === 'cukup')
                                 Cukup
                             @else
                                 Kurang
@@ -597,8 +597,8 @@
                 <td class="column5">5</td>
                 <td class="column55">Dokumen Penilaian Kinerja Puskesmas (PKP) yang ditetapkan oleh Dinas Kesehatan kabupaten/kota</td>
                 <td class="column40" colspan="2">
-                    @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_yang_ditetapkan_dinkes']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_yang_ditetapkan_dinkes'] === 1)
+                    @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota']))
+                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -608,15 +608,15 @@
                     @endif
                 </td>
             </tr>
-            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_yang_ditetapkan_dinkes'] === 1)
+            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota'] === 1)
                 <tr>
                     <td class="column5"></td>
                     <td class="column55">a. Hasil pelayanan kesehatan</td>
                     <td class="column40" colspan="2">
-                        @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_2']))
-                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_2'] === 1)
+                        @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_dinkes_kota']))
+                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_dinkes_kota'] === 'baik')
                                 Baik
-                            @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_2'] === 1)
+                            @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_dinkes_kota'] === 'cukup')
                                 Cukup
                             @else
                                 Kurang
@@ -630,10 +630,10 @@
                     <td class="column5"></td>
                     <td class="column55">b. Hasil manajemen</td>
                     <td class="column40" colspan="2">
-                        @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_2']))
-                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_2'] === 1)
+                        @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_dinkes_kota']))
+                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_dinkes_kota'] === 'baik')
                                 Baik
-                            @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_2'] === 1)
+                            @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_dinkes_kota'] === 'cukup')
                                 Cukup
                             @else
                                 Kurang
@@ -828,8 +828,8 @@
                 <td class="column5"></td>
                 <td class="column55">g. ... lainnya</td>
                 <td class="column40" colspan="2">
-                    @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_lainnya']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_lainnya'] === 1)
+                    @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_lainnya']))
+                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_lainnya'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -1031,25 +1031,25 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>5) Jumlah desa/ kelurahan yang telah dilakukan PIS-PK</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kelurahan_yang_dilakukan_pis_pk'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_desa_yang_dilakukan_pis_pk'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">desa/ kelurahan</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>6) Jumlah desa/ kelurahan dengan kategori desa/kelurahan sehat</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kelurahan_kategori_sehat'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_desa_kategori_sehat'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">desa/ kelurahan</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>7) Jumlah desa/ kelurahan dengan kategori desa/kelurahan pra sehat</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kelurahan_kategori_prasehat'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_desa_kategori_prasehat'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">desa/ kelurahan</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>8) Jumlah desa/ kelurahan dengan kategori desa/kelurahan tidak sehat</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kelurahan_kategori_tidaksehat'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_desa_kategori_tidaksehat'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">desa/ kelurahan</td>
             </tr>
             <tr>
@@ -1225,11 +1225,11 @@
                 <td class="column55">c. Sertifikat tanah </td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 1)
+                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 'shm')
                             SHM
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 1)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 'shgu_shgb')
                             SHGU/SHGB 
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 3)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 'girik_dan_petik')
                             Girik dan Petok 
                         @else
                             Acte van Eigendom
@@ -1244,11 +1244,11 @@
                 <td class="column55">d. Kepemilikan tanah</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 1)
+                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 'pemerintah')
                             Pemerintah
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 1)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 'adat')
                             Adat
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 3)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 'warga')
                             Warga 
                         @else
                             Sewa
@@ -1278,7 +1278,7 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>1) Jumlah tempat tidur perawatan umum</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['luas_total_lantai_bangunan'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_tempat_tidur_perawatan_umum'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
@@ -1390,7 +1390,7 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column55">m. Waktu tempuh terlama bagi warga menuju puskesmas (jam)</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['waktu_tempuh_terlama_ke_puskesmas'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['waktu_tempuh_ke_puskesmas'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">jam</td>
             </tr>
             <tr>
@@ -1398,11 +1398,11 @@
                 <td class="column55">n. Akses jalan depan gedung puskesmas</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 1)
+                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 'aspal_beton')
                             Aspal/Beton
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 1)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 'tanah')
                             Tanah
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 3)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 'air')
                             Air 
                         @else
                             lainnya
@@ -1417,11 +1417,11 @@
                 <td class="column55">o. Status jalan raya terdekat menuju ke puskesmas</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 1)
+                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 'jalan_pusat')
                             Jalan pusat
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 1)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 'jalan_provinsi')
                             Jalan provinsi
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 3)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 'jalan_kab_kota')
                             Jalan kab/kota 
                         @else
                             Status lainnya
@@ -1457,20 +1457,20 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column55">q. Jumlah unit bangunan di puskesmas yang direhabilitasi pada tahun terakhir</td>
-                <td class="column40" colspan="2">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_yang_direhabilitasi_terakhir'] ?? "" }} unit, tahun {{ $identitasPuskesmas->sumber_daya_puskesmas[0]['tahun_bangunan_yang_direhabilitasi_terakhir'] ?? "" }}</td>
+                <td class="column40" colspan="2">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_yang_direhabilitasi_terakhir'] ?? "" }} unit, tahun {{ $identitasPuskesmas->sumber_daya_puskesmas[0]['tahun_rehabilitasi_terakhir'] ?? "" }}</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55">r. Sumber dana rehabilitasi puskesmas</td>
                 <td class="column40" colspan="2">
-                    @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sember_dana_rehabilitasi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sember_dana_rehabilitasi'] === 1)
+                    @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi']))
+                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi'] === 'apbn')
                             APBN
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sember_dana_rehabilitasi'] === 1)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi'] === 'apbd_provinsi')
                             APBD propinsi 
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sember_dana_rehabilitasi'] === 3)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi'] === 'apbd_kab_kota')
                             APBD kab/kota 
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sember_dana_rehabilitasi'] === 4)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi'] === 'hibah')
                             Hibah
                         @else
                             Dll 
@@ -1484,12 +1484,12 @@
                 <td class="column5"></td>
                 <td class="column55">s. Keadaan bangunan puskesmas   (Kondisi bangunan sesuai Peraturan Menteri PU No. 45 tahun 2000)</td>
                 <td class="column40" colspan="2">
-                    @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['kedaan_bangunan_puskesmas']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['kedaan_bangunan_puskesmas'] === 1)
+                    @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['keadaan_bangunan_puskesmas']))
+                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['keadaan_bangunan_puskesmas'] === 'baik')
                             Baik
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['kedaan_bangunan_puskesmas'] === 1)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['keadaan_bangunan_puskesmas'] === 'rusak_ringan')
                             Rusak ringan
-                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['kedaan_bangunan_puskesmas'] === 3)
+                        @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['keadaan_bangunan_puskesmas'] === 'rusak_sedang')
                             Rusak sedang
                         @else
                             Rusak berat
@@ -1507,25 +1507,25 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>1) Baik</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['bangunan_pp_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_pp_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>2) Rusak ringan</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['bangunan_pp_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_pp_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>3) Rusak sedang</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['bangunan_pp_kondisi_rusak_sedang'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_pp_kondisi_rusak_sedang'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>4) Rusak berat</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['bangunan_pp_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_pp_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
@@ -1536,25 +1536,25 @@
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>1) Baik</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['bangunan_rumah_dinas_nakes_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_rumah_dinas_nakes_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>2) Rusak ringan</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['bangunan_rumah_dinas_nakes_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_rumah_dinas_nakes_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>3) Rusak sedang</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['bangunan_rumah_dinas_nakes_kondisi_rusak_sedang'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_rumah_dinas_nakes_kondisi_rusak_sedang'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
                 <td class="column5"></td>
                 <td class="column55"><span>&nbsp;&nbsp;</span>4) Rusak berat</td>
-                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['bangunan_rumah_dinas_nakes_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
+                <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_bangunan_rumah_dinas_nakes_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
                 <td class="column25">unit</td>
             </tr>
             <tr>
@@ -1592,7 +1592,61 @@
                 <td class="column12-5" style="text-align: center;">5</td>
                 <td class="column25" style="text-align: center;">6</td>
             </tr>
-            <tr>
+            @php
+                // Function to convert index to letter notation (e.g., 0 -> 'a', 26 -> 'aa', etc.)
+                function toLetterIndex($index) {
+                    $letters = '';
+                    while ($index >= 0) {
+                        $letters = chr(97 + ($index % 26)) . $letters;
+                        $index = floor($index / 26) - 1;
+                    }
+                    return $letters;
+                }
+            @endphp
+            @foreach ($identitasPuskesmas->ruangan_puskesmas as $index => $data)
+                @php
+                    // Query the KetersediaanRuanganPuskesmas model where ruangan_puskesmas_id matches the current data ID
+                    $ketersediaanList = \App\Models\KetersediaanRuanganPuskesmas::where('ruangan_puskesmas_id', $data['id'])->get();
+
+                    // Convert index to letter-based label
+                    $label = toLetterIndex($index);
+                @endphp
+                @foreach ($ketersediaanList as $ketersediaan)
+                    <tr>
+                        <td class="column5"></td>
+                        <td class="column30">{{ $label }}) {{ $data['nama_ruangan'] }}</td>
+                        <td class="column15">
+                            @if (isset($ketersediaan->ketersediaan))
+                                @if ($ketersediaan->ketersediaan === 1)
+                                    Ada
+                                @else
+                                    Rusak berat
+                                @endif
+                            @else
+                                Rusak berat
+                            @endif
+                        </td>
+                        <td class="column12-5">{{ $ketersediaan->tahun_pendirian ?? "" }}</td>
+                        <td class="column12-5">{{ $ketersediaan->tahun_renovasi ?? "" }}</td>
+                        <td class="column25">
+                            @if (isset($ketersediaan->kondisi))
+                                @if ($ketersediaan->kondisi === 'baik')
+                                    Baik
+                                @elseif ($ketersediaan->kondisi === 'rusak_ringan')
+                                    Rusak ringan
+                                @elseif ($ketersediaan->kondisi === 'rusak_sedang')
+                                    Rusak sedang
+                                @else
+                                    Rusak berat
+                                @endif
+                            @else
+                                Rusak berat
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            @endforeach
+            {{--<tr>
                 <td class="column5"></td>
                 <td class="column30">a) Ruangan pendaftaran dan rekam medik</td>
                 <td class="column15">
@@ -2689,7 +2743,7 @@
                         Rusak berat
                     @endif
                 </td>
-            </tr>
+            </tr>--}}
         </tbody>
     </table>
     <table>
@@ -2706,29 +2760,63 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Sumber listrik      (bisa lebih dari satu)</td>
-            <td class="column40 columGrey" colspan="2"></td>
+            <td class="column40" colspan="2">
+                <ol>
+                    @php
+                        $komponen = isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_listrik']) && 
+                            is_array($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_listrik']) 
+                            ? $identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_listrik'] 
+                            : [];
+                        if (in_array(1, $komponen)) {
+                            echo '<li>PLN</li>';
+                        }
+                        if (in_array(2, $komponen)) {
+                            echo '<li>Diesel</li>';
+                        }
+                        if (in_array(3, $komponen)) {
+                            echo '<li>Generator</li>';
+                        }
+                        if (in_array(4, $komponen)) {
+                            echo '<li>Tenaga surya</li>';
+                        }
+                        if (in_array(4, $komponen)) {
+                            echo '<li>lain</li>';
+                        }
+                    @endphp
+                </ol>
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Waktu ketersediaan listrik</td>
-            <td class="column40 columGrey" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['waktu_ketersediaan_listrik']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['waktu_ketersediaan_listrik'] === '24_jam')
+                        24 jam/hari
+                    @else
+                        <24 jam/hari
+                    @endif
+                @else
+                    <24 jam/hari
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Daya listrik terpasang</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['daya_listrik_terpasang'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">watt</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>4) Jumlah genset yang berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_genset_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">watt</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>5) Kapasitas genset yg berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['kapasitas_genset_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">watt</td>
         </tr>
         <tr>
@@ -2739,32 +2827,92 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Telepon kabel</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_kabel']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_kabel'] === 'ada_dan_baik')
+                        Ada dan baik
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_kabel'] === 'ada_tapi_tidak_bisa_dipakai')
+                        Ada, tetapi tidak bisa dipakai/rusak
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Telepon seluler</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_seluler']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_seluler'] === 'ada_dan_baik')
+                        Ada dan baik
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_seluler'] === 'ada_tapi_tidak_bisa_dipakai')
+                        Ada, tetapi tidak bisa dipakai/rusak
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Radio komunikasi</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['radio_komunikasi']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['radio_komunikasi'] === 'ada_dan_baik')
+                        Ada dan baik
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['radio_komunikasi'] === 'ada_tapi_tidak_bisa_dipakai')
+                        Ada, tetapi tidak bisa dipakai/rusak
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>4) Alat komunikasi lain</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['alat_komunikasi_lain']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['alat_komunikasi_lain'] === 'ada_dan_baik')
+                        Ada dan baik
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['alat_komunikasi_lain'] === 'ada_tapi_tidak_bisa_dipakai')
+                        Ada, tetapi tidak bisa dipakai/rusak
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>5) Jaringan internet</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['jaringan_internet']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['jaringan_internet'] === 'ada_dan_baik')
+                        Ada dan baik
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['jaringan_internet'] === 'ada_tapi_tidak_bisa_dipakai')
+                        Ada, tetapi tidak bisa dipakai/rusak
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">c. Jumlah komputer yang berfungsi baik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_komputer_berfungsi_baik'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -2780,19 +2928,19 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a) Baik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_roda_4_double_gardan_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b) Rusak ringan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_roda_4_double_gardan_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>c) Rusak berat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_roda_4_double_gardan_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -2803,19 +2951,19 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a) Baik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_roda_4_single_gardan_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b) Rusak ringan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_roda_4_single_gardan_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>c) Rusak berat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_roda_4_single_gardan_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -2826,19 +2974,19 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a) Baik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_perairan_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b) Rusak ringan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_perairan_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>c) Rusak berat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_perairan_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -2849,19 +2997,19 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a) Baik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_sepeda_motor_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b) Rusak ringan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_sepeda_motor_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>c) Rusak berat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_sepeda_motor_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -2872,19 +3020,19 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a) Baik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_sepeda_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b) Rusak ringan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_sepeda_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>c) Rusak berat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_sepeda_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -2895,19 +3043,19 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>a) Baik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_ambulance_kondisi_baik'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>b) Rusak ringan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_ambulance_kondisi_rusak_ringan'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>c) Rusak berat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kendaraan_ambulance_kondisi_rusak_berat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -2918,22 +3066,68 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Air bersih</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih'] === 'ada_memenuhi_syarat')
+                        Ada memenuhi syarat
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih'] === 'ada_tidak_memenuhi_syarat')
+                        Ada, tidak memenuhi syarat
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Air bersih tersedia 24 jam</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih_tersedia_24_jam']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih_tersedia_24_jam'] === 1)
+                        Ya
+                    @else
+                        Tidak
+                    @endif
+                @else
+                    Tidak
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Sumber air bersih     (bisa lebih dari satu)</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_air_bersih']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_air_bersih'] === 'ada_memenuhi_syarat')
+                        Ada memenuhi syarat
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_air_bersih'] === 'ada_tidak_memenuhi_syarat')
+                        Ada, tidak memenuhi syarat
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
-            <td class="column55"><span>&nbsp;&nbsp;</span>3) Sumber air bersih     (bisa lebih dari satu)</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column55"><span>&nbsp;&nbsp;</span>4) Jamban</td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_memenuhi_syarat')
+                        Ada memenuhi syarat
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_tidak_memenuhi_syarat')
+                        Ada, tidak memenuhi syarat
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
@@ -2943,27 +3137,83 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Limbah padat (insenerator)</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_memenuhi_syarat')
+                        Ada memenuhi syarat
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_tidak_memenuhi_syarat')
+                        Ada, tidak memenuhi syarat
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Limbah cair (IPAL)</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ipal']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ipal'] === 'ada_memenuhi_syarat')
+                        Ada memenuhi syarat
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ipal'] === 'ada_tidak_memenuhi_syarat')
+                        Ada, tidak memenuhi syarat
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Septiktank</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['septitank']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['septitank'] === 'ada_memenuhi_syarat')
+                        Ada memenuhi syarat
+                    @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['septitank'] === 'ada_tidak_memenuhi_syarat')
+                        Ada, tidak memenuhi syarat
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>4) MOU limbah padat/B3 ke pihak lain</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_padat_b3_ke_pihak_lain']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_padat_b3_ke_pihak_lain'] === 1)
+                        Ada
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>5) MOU limbah cair ke pihak berizin</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_cair_ke_pihak_berizin']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_cair_ke_pihak_berizin'] === 1)
+                        Ada
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
@@ -2978,13 +3228,13 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a) Berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['tabung_gas_o2_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b) Tidak berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['tabung_gas_o2_tidak_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -2995,13 +3245,13 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a) Berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['oksigen_konsentrator_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b) Tidak berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['oksigen_konsentrator_tidak_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -3012,19 +3262,29 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>a) Berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['alat_pemadam_kebakaran_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>b) Tidak berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['alat_pemadam_kebakaran_tidak_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">j. Sistem proteksi petir</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sistem_proteksi_petir']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sistem_proteksi_petir'] === 1)
+                        Ada
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5"></td>
@@ -3034,13 +3294,13 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>a) Berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_ac_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>b) Tidak berfungsi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_ac_tidak_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -3056,19 +3316,19 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>a. Jumlah Puskesmas Pembantu</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_puskesmas_pembantu'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>b. Jumlah Praktik Bidan Desa</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_praktik_bidan_desa'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>c. Puskesmas Keliling</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_puskesmas_keliling'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -3079,78 +3339,88 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>a. Jumlah klinik pratama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_klinik_pratama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>b. Jumlah klinik utama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_klinik_utama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>c. Jumlah tempat praktik mandiri dokter</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_tempat_praktik_mandiri_dokter'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>d. Jumlah tempat praktik mandiri dokter gigi</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_tempat_praktik_mandiri_dokter_gigi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>e. Jumlah tempat praktik mandiri bidan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_tempat_praktik_mandiri_bidan'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>f. Jumlah tempat praktik mandiri perawat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_tempat_praktik_mandiri_perawat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>g. Jumlah rumah sakit kelas D Pratama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_rs_kelas_d_pratama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>h. Jumlah apotek</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_apotek'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>i. Jumlah optik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_jumlah_optikac_tidak_berfungsi'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>j. Jumlah laboratorium klinik</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_lab_klinik'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>k. Jumlah Fasilitas Kesehatan Tradisional/ Griya Sehat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_faskes_tradisional'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>l. Ada program kerja sama antara puskesmas, UTD dan rumah sakit dalam pelayanan darah untuk menurunkan Angka Kematian Ibu (AKI) </td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ada_program_kerjasama_penurunan_aki']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ada_program_kerjasama_penurunan_aki'] === 1)
+                        Ada
+                    @else
+                        Tidak ada
+                    @endif
+                @else
+                    Tidak ada
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5">3</td>
             <td class="column55">Jumlah RUTAN dan LAPAS</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_rutan_dan_lapas'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -3171,25 +3441,25 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a)  Posyandu Pratama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_pratama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b)  Posyandu Madya</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_madya'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>c)  Posyandu Purnama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_purnama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>d)  Posyandu Mandiri</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_mandiri'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -3200,61 +3470,67 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>a)  Posyandu Remaja Pratama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_remaja_pratama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>b)  Posyandu Remaja Madya</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_remaja_madya'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>c)  Posyandu Remaja Purnama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_remaja_purnama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>d)  Posyandu Remaja Mandiri</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_remaja_mandiri'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>3)  Posyandu Lansia</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posyandu_lansia'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">b. Jumlah Pos Kesehatan Desa (Poskesdes)</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_poskesdes'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">c. Jumlah Pos Kesehatan Pesantren (Poskestren)</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_poskestren'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">d. Jumlah Posbindu PTM aktif</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posbindu_ptm_aktif'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
-            <td class="column55">d. Jumlah Posbindu PTM aktif</td>
-            <td class="column15"></td>
+            <td class="column55">e. Jumlah Posbindu PTM aktif</td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_desa_dengan_posbindu_ptm_aktif'] ?? 0, 0, ',', '.') }}</td>
+            <td class="column25">buah</td>
+        </tr>
+        <tr>
+            <td class="column5"></td>
+            <td class="column55">f. Jumlah Pos TB Desa aktif</td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_pos_tb_desa_aktif'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">g.  Jumlah Pos Malaria Desa (Posmaldes) aktif</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_posmaldes_aktif'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -3265,79 +3541,79 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Pos UKK Pratama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_pos_ukk_pratama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Pos UKK Madya</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_pos_ukk_madya'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Pos UKK Purnama</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_pos_ukk_purnama'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>4) Pos UKK Mandiri</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_pos_ukk_mandiri'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">i. Jumlah Pos Obat Desa (POD)</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_pod'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">j. Jumlah POLINDES (Pondok Bersalin Desa)</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_polindes'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">k. Jumlah desa dengan kegiatan dana sehat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_desa_dengan_kegiatan_dana_sehat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">l. Jumlah peserta dana sehat </td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_peserta_dana_sehat'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">m. Jumlah UKBM lainnya</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_ukbm_lainnya'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">n. Jumlah kelompok kerja operasional UKBM </td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_pokja_operasional_ukbm'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
-            <td class="column55">n. Jumlah kelompok kerja operasional UKBM </td>
-            <td class="column15"></td>
-            <td class="column25">buah</td>
-        </tr>
-        <tr>
-            <td class="column5"></td>
-            <td class="column55">p. Jumlah kelompok atau Forum Peduli Kesehatan</td>
-            <td class="column15"></td>
+            <td class="column55">o. Jumlah Pokjanal Posyandu </td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_pokjanal_posyandu'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">p. Jumlah kelompok atau Forum Peduli Kesehatan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kelompok_peduli_kesehatan'] ?? 0, 0, ',', '.') }}</td>
+            <td class="column25">buah</td>
+        </tr>
+        <tr>
+            <td class="column5"></td>
+            <td class="column55">q. Jumlah Forum Desa/Kelurahan Siaga Aktif </td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_forum_desa_siaga_aktif'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
@@ -3348,49 +3624,49 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Kader Posyandu </td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kader_posyandu'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">orang</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Kader Poskesdes </td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kader_poskesdes'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">orang</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Kader Poskestren</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kader_poskestren'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">orang</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>4) Petugas Pelaksana Posbindu PTM (kader)</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_petugas_pelaksana_posbindu_ptm'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">orang</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>5) Kader Pos TB desa</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kader_pos_tb_desa'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">orang</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>6) Kader Posmaldes</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kader_posmaldes'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">orang</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>7) Kader Pos UKK</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kader_pos_ukk'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">orang</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>8) Kader desa siaga aktif </td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kader_desa_siaga_aktif'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">orang</td>
         </tr>
         <tr>
@@ -3401,42 +3677,62 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Organisasi kemasyarakatan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_ormas'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Dunia usaha</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_dunia_usaha'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>3) INGO</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_ingo'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>4) Mitra lainnya</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_mitra_lainnya'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55">t. Jumlah kebijakan publik berwawasan kesehatan</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_kebijakan_publik_berwawasan_kesehatan'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5">5</td>
             <td class="column55">Puskesmas dimanfaatkan sebagai wahana pendidikan tenaga kesehatan</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['puskesmas_sebagai_pendidikan_nakes']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['puskesmas_sebagai_pendidikan_nakes'] === 1)
+                        Ya
+                    @else
+                        Tidak
+                    @endif
+                @else
+                    Tidak
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5">6</td>
             <td class="column55">Pelayanan kesehatan bergerak</td>
-            <td class="column40" colspan="2"></td>
+            <td class="column40" colspan="2">
+                @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_bergerak']))
+                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_bergerak'] === 1)
+                        Ya
+                    @else
+                        Tidak
+                    @endif
+                @else
+                    Tidak
+                @endif
+            </td>
         </tr>
         <tr>
             <td class="column5">7</td>
@@ -3446,19 +3742,19 @@
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>a. Jumlah SD/sederajat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_sd'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>b. Jumlah SLTP/sederajat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_sltp'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
         <tr>
             <td class="column5"></td>
             <td class="column55"><span>&nbsp;&nbsp;</span>c. Jumlah SLTA/sederajat</td>
-            <td class="column15"></td>
+            <td class="column15">{{ number_format($identitasPuskesmas->sumber_daya_puskesmas[0]['jumlah_slta'] ?? 0, 0, ',', '.') }}</td>
             <td class="column25">buah</td>
         </tr>
     </table>

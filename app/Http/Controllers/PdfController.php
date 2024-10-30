@@ -23,6 +23,7 @@ use App\Models\KeperawatanKesehatanMasyarakat;
 use App\Models\KesehatanLingkungan;
 use App\Models\LaporanKlb;
 use App\Models\KelompokPenyakit;
+use App\Models\RuanganPuskesmas;
 
 class PdfController extends Controller
 {
@@ -31,6 +32,7 @@ class PdfController extends Controller
         $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
         $wilayahKerja = WilayahKerjaPuskesmas::where('identitas_puskesmas_id', $id)->get();
         $sumberDayaPuskesmas = SumberDayaPuskesmas::where('identitas_puskesmas_id', $id)->get();
+        $ruanganPuskesmas = RuanganPuskesmas::where('identitas_puskesmas_id', $id)->get();
 
         \Log::info("data tes -> " . $sumberDayaPuskesmas);
 
@@ -38,6 +40,7 @@ class PdfController extends Controller
             'dataDasar' => $dataDasarPuskesmas,
             'wilayahKerja' => $wilayahKerja[0],
             'sumber_daya_puskesmas' => $sumberDayaPuskesmas,
+            'ruangan_puskesmas' => $ruanganPuskesmas,
         ];
 
         // Generate the first PDF and save to a temporary file

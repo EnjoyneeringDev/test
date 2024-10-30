@@ -14,6 +14,7 @@ class RuanganPuskesmasSeeder extends Seeder
     public function run(): void
     {
         DB::table('ruangan_puskesmas')->insert([
+            'identitas_puskesmas_id' => 1,
             'nama_ruangan' => 'ruangan A',
         ]);
     }
