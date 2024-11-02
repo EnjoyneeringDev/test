@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('ruangan_puskesmas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('identitas_puskesmas_id');
             $table->string('nama_ruangan')->nullable();
             $table->timestamps();
         });

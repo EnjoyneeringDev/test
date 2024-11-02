@@ -19,6 +19,6 @@ class JumlahKasusBaru extends Model
 
     public function jenisPenyakit(): BelongsTo
     {
-        return $this->belongsTo(JenisPenyakit::class);
+        return $this->belongsTo(JenisPenyakit::class, 'jenis_penyakit_id'); // Specify the foreign key here
     }
 }

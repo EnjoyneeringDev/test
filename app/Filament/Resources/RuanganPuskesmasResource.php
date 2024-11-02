@@ -7,6 +7,7 @@ use App\Filament\Resources\RuanganPuskesmasResource\RelationManagers;
 use App\Models\RuanganPuskesmas;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -29,6 +30,7 @@ class RuanganPuskesmasResource extends Resource
     {
         return $form
             ->schema([
+                Select::make('identitas_puskesmas_id')->relationship(name: 'identitasPuskesmas', titleAttribute: 'nama_puskesmas')->label('Puskesmas'),
                 Forms\Components\TextInput::make('nama_ruangan')
                     ->maxLength(255),
             ]);
@@ -38,6 +40,9 @@ class RuanganPuskesmasResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('nama_ruangan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')

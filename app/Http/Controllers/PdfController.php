@@ -22,6 +22,9 @@ use App\Models\KesakitanTerbanyak;
 use App\Models\KeperawatanKesehatanMasyarakat;
 use App\Models\KesehatanLingkungan;
 use App\Models\LaporanKlb;
+use App\Models\KelompokPenyakit;
+use App\Models\RuanganPuskesmas;
+use App\Models\SumberDayaManusia;
 
 class PdfController extends Controller
 {
@@ -30,6 +33,8 @@ class PdfController extends Controller
         $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
         $wilayahKerja = WilayahKerjaPuskesmas::where('identitas_puskesmas_id', $id)->get();
         $sumberDayaPuskesmas = SumberDayaPuskesmas::where('identitas_puskesmas_id', $id)->get();
+        $ruanganPuskesmas = RuanganPuskesmas::where('identitas_puskesmas_id', $id)->get();
+        $sdm = SumberDayaManusia::where('identitas_puskesmas_id', $id)->get();
 
         \Log::info("data tes -> " . $sumberDayaPuskesmas);
 
@@ -37,6 +42,8 @@ class PdfController extends Controller
             'dataDasar' => $dataDasarPuskesmas,
             'wilayahKerja' => $wilayahKerja[0],
             'sumber_daya_puskesmas' => $sumberDayaPuskesmas,
+            'ruangan_puskesmas' => $ruanganPuskesmas,
+            'sdm' => $sdm,
         ];
 
         // Generate the first PDF and save to a temporary file
@@ -601,12 +608,51 @@ class PdfController extends Controller
         return response()->download($mergedPdfPath, 'laporanBulananKesakitanGigiDanMulut.pdf')->deleteFileAfterSend(true);
     }
 
-    public function downloadLaporanKesakitanUmum($id)
+    // TODO: need query
+    public function downloadLaporanKesakitanUmum($record_id, $puskesmas_id)
     {
         // $dataDasarPuskesmas = IdentitasPuskesmas::find($id);
         ini_set('memory_limit', '512M');
 
-        \Log::info("data tes -> ");
+        \Log::info("record id kesakitan umum -> ", (array) $record_id);
+        \Log::info("puskesmas id kesakitan umum -> ", (array) $puskesmas_id);
+
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+
+        // Convert record_id to DateTime to extract month and year
+        $date = \Carbon\Carbon::createFromFormat('Y-m-d', $record_id);
+        $month = $date->month;
+        $year = $date->year;
+
+        // Query KelompokPenyakit and eager load related JenisPenyakit and JumlahKasusBaru
+        $dataKesakitan = KelompokPenyakit::with([
+            'jenisPenyakit' => function ($query) use ($month, $year, $puskesmas_id) {
+                $query->whereHas('jumlahKasusbaru', function ($query) use ($month, $year, $puskesmas_id) {
+                    $query->whereMonth('updated_at', $month)
+                          ->whereYear('updated_at', $year)
+                          ->where('identitas_puskesmas_id', $puskesmas_id);
+                });
+            },
+        ])->get()->map(function ($kelompok) use ($month, $year, $puskesmas_id) {
+            // Structure the response
+            $kelompok->jenisPenyakit = $kelompok->jenisPenyakit->map(function ($jenis) use ($month, $year, $puskesmas_id) {
+                // Get the related kasus baru for this jenis penyakit
+                $kasusBaru = $jenis->jumlahKasusbaru()->whereMonth('updated_at', $month)
+                    ->whereYear('updated_at', $year)
+                    ->where('identitas_puskesmas_id', $puskesmas_id)
+                    ->get();
+        
+                return [
+                    'nama' => $jenis->nama,
+                    'icd10' => $jenis->icd10,
+                    'kasusBaru' => $kasusBaru // Include the related kasus baru data
+                ];
+            });
+        
+            return $kelompok;
+        });
+
+        \Log::info("Data Kesakitan retrieved", (array) $dataKesakitan);
 
         $dataPuskesmas = (object) [
             'kelompokUmum' => [

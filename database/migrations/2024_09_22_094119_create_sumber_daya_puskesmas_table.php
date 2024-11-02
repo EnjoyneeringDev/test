@@ -54,13 +54,9 @@ return new class extends Migration
             $table->integer('jumlah_keluarga_iks_kategori_prasehat')->nullable();
             $table->integer('jumlah_keluarga_iks_kategori_tidaksehat')->nullable();
             $table->integer('jumlah_desa_yang_dilakukan_pis_pk')->nullable();
-            $table->integer('jumlah_kelurahan_yang_dilakukan_pis_pk')->nullable();
             $table->integer('jumlah_desa_kategori_sehat')->nullable();
-            $table->integer('jumlah_kelurahan_kategori_sehat')->nullable();
             $table->integer('jumlah_desa_kategori_prasehat')->nullable();
-            $table->integer('jumlah_kelurahan_kategori_prasehat')->nullable();
             $table->integer('jumlah_desa_kategori_tidaksehat')->nullable();
-            $table->integer('jumlah_kelurahan_kategori_tidaksehat')->nullable();
             $table->boolean('status_puskesma_blud')->nullable();
             $table->boolean('puskesmas_kerjasama_bpjs')->nullable();
             $table->integer('besar_kapitasi_untuk_puskesmas')->nullable();
