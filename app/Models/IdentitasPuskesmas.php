@@ -127,4 +127,49 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(JumlahKasusBaru::class);
     }
+
+    public function desaDanaUKBM(): HasMany
+    {
+        return $this->hasMany(DesaDanaUKBM::class);
+    }
+
+    public function ukbmDiwilayahKerjaPuskesmas(): HasMany
+    {
+        return $this->hasMany(UKBMDiWilayahKerjaPuskesmas::class);
+    }
+
+    public function kemitraanKesehatan(): HasMany
+    {
+        return $this->hasMany(KemitraanKesehatan::class);
+    }
+
+    public function penderitaKronisFilariasis(): HasMany
+    {
+        return $this->hasMany(PenderitaKronisFilariasis::class);
+    }
+
+    public function cakupanPOMPFilariasis(): HasMany
+    {
+        return $this->hasMany(CakupanPOMPFilariasis::class);
+    }
+
+    public function ImunisasiDTDanCampakAnakKelas1(): HasMany
+    {
+        return $this->hasMany(ImunisasiDTDanCampakAnakKelas1::class);
+    }
+
+    public function ImunisasiTdAnakSDKelas25(): HasMany
+    {
+        return $this->hasMany(ImunisasiTdAnakSDKelas25::class);
+    }
+
+    public function jumlahDesaKelurahanUCI(): HasMany
+    {
+        return $this->hasMany(JumlahDesaKelurahanUCI::class);
+    }
+
+    public function programKesehatanAnak(): HasMany
+    {
+        return $this->hasMany(ProgramKesehatanAnak::class);
+    }
 }

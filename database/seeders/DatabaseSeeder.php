@@ -4,7 +4,10 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\DesaDanaUKBM;
 use App\Models\DesaKelurahanPuskesmas;
+use App\Models\ImunisasiTdAnakSDKelas25;
+use App\Models\JumlahDesaKelurahanUCI;
 use App\Models\KelahiranDiPuskesmas;
 use App\Models\KelompokPenyakit;
 use App\Models\KeperawatanKesehatanMasyarakat;
@@ -72,7 +75,17 @@ class DatabaseSeeder extends Seeder
             KelompokPenyakitSeeder::class,
             KelompokPenyakitSeeder::class,
             JenisPenyakitSeeder::class,
-            JumlahKasusBaruSeeder::class
+            JumlahKasusBaruSeeder::class,
+            DesaDanaUKBMSeeder::class,
+            UKBMDiwilayahKerjaPuskesmasSeeder::class,
+            KemitraanKesehatanSeeder::class,
+            PenderitaKronisFilariasisSeeder::class,
+            CakupanPOMPFilariasisSeeder::class,
+            ImunisasiDTDanCampakAnakKelas1Seeder::class,
+            ImunisasiTdAnakSDKelas25Seeder::class,
+            JumlahDesaKelurahanUCISeeder::class,
+            ProgramKesehatanAnakSeeder::class,
+            SaranaPrasaranaProsesSeeder::class
         ]);
     }
 }
