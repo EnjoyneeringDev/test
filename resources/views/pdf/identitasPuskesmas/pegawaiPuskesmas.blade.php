@@ -552,11 +552,11 @@
                     <td class="column5">No.</td>
                     <td class="column20" style="text-align: center;">Nama Pelatihan</td>
                     <td class="column10" style="text-align: center;">Kode pelatihan</td>
-                    <td class="column15" style="text-align: center;">Tempat pelaksanaan</td>
-                    <td class="column15" style="text-align: center;">Tanggal pelaksanaan</td>
+                    <td class="column15" style="text-align: center;">Tempat pelak-sanaan</td>
+                    <td class="column15" style="text-align: center;">Tanggal pelak-sanaan</td>
                     <td class="column10" style="text-align: center;">Lama pelatihan</td>
                     <td class="column10" style="text-align: center;">Jumlah JPL</td>
-                    <td class="column15" style="text-align: center;">Penyelenggara</td>
+                    <td class="column15" style="text-align: center;">Penyele-nggara</td>
                 </tr>
                 @foreach ($pelatihanTeknisList as $index => $pelatihanTeknis)
                     <tr>
