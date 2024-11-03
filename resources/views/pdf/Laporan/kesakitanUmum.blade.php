@@ -229,6 +229,114 @@
       </tr>
     </thead>
     <tbody>
+      @php
+          // Function to convert index to letter notation (e.g., 0 -> 'a', 26 -> 'aa', etc.)
+          function toLetterIndex($index) {
+              $letters = '';
+              while ($index >= 0) {
+                  $letters = chr(97 + ($index % 26)) . $letters;
+                  $index = floor($index / 26) - 1;
+              }
+              return $letters;
+          }
+      @endphp
+      @foreach ($dataPuskesmas->kelompok_penyakit as $index => $kelompokPenyakit)
+        @php
+          $label = toLetterIndex($index);
+        @endphp
+        <tr>
+          <td class="column3 textCenter" style="text-transform: uppercase;">{{ $kelompokPenyakit['kode']}}</td>
+          <td class="column15" style="text-transform: capitalize; ">{{ $kelompokPenyakit['nama']}}</td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+          <td class="column3 columGrey"></td>
+        </tr>
+        @php
+          $jenisPenyakitList = \App\Models\JenisPenyakit::where('kelompok_penyakit_id', $kelompokPenyakit['id'])->get();
+        @endphp
+        
+        @foreach ($jenisPenyakitList as $index => $jenisPenyakit)
+          @php
+            // Convert $dataPuskesmas->time to a Carbon instance to extract month and year
+            $time = \Carbon\Carbon::parse($dataPuskesmas->time);
+
+            $kasusBaru = \App\Models\JumlahKasusBaru::where('identitas_puskesmas_id', $dataPuskesmas->puskesmas_id)
+                ->where('jenis_penyakit_id', $jenisPenyakit['id'])
+                ->whereMonth('created_at', $time->month)
+                ->whereYear('created_at', $time->year)
+                ->get();
+          @endphp
+
+          <tr>
+            <td class="column3 textCenter">{{ $index+1 }}</td>
+            <td class="column15" style="text-transform: capitalize; ">{{ $jenisPenyakit['nama'] ?? "" }}</td>
+            <td class="column3" style="text-transform: capitalize; ">{{ $jenisPenyakit['icd10'] ?? "" }}</td>
+            <td class="column3">{{ $kasusBaru[0]['0_7_hari'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['8_28_hari'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['1_11_bulan'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['1_4_tahun'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['5_9_tahun'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['10_14_tahun'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['15_19_tahun'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['20_44_tahun'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['45_59_tahun'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['59_plus_tahun'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['l'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['p'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['jumlah'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['jumlah_kasus_lama_l'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['jumlah_kasus_lama_p'] ?? 0 }}</td>
+            <td class="column3">{{ $kasusBaru[0]['jumlah_kasus_lama'] ?? 0 }}</td>
+          </tr>
+        @endforeach
+      @endforeach
+      <tr>
+    </tbody>
+  </table>
+
+  {{--<table style="margin-top: 20px; ">
+    <thead>
+      <tr>
+        <td class="column3 textCenter" rowspan="2">No</td>
+        <td class="column15 textCenter" rowspan="2">JENIS PENYAKIT</td>
+        <td class="column3 textCenter" rowspan="2">ICD 10</td>
+        <td class="column65 textCenter" colspan="13">JUMLAH KASUS BARU (Umur dan Jenis Kelamin)</td>
+        <td class="column15 textCenter" colspan="3">JUMLAH KASUS LAMA</td>
+      </tr>
+      <tr>
+        <td class="column3 textCenter">0-7 hari</td>
+        <td class="column3 textCenter">8-28 hari</td>
+        <td class="column3 textCenter">1-11 bl</td>
+        <td class="column3 textCenter">1-4 th</td>
+        <td class="column3 textCenter">5-9 th</td>
+        <td class="column3 textCenter">10-14 th</td>
+        <td class="column3 textCenter">15-19 th</td>
+        <td class="column3 textCenter">20-44 th</td>
+        <td class="column3 textCenter">45-59 th</td>
+        <td class="column3 textCenter">>59 th</td>
+        <td class="column3 textCenter">L</td>
+        <td class="column3 textCenter">P</td>
+        <td class="column3 textCenter">JML</td>
+        <td class="column3 textCenter">L</td>
+        <td class="column3 textCenter">P</td>
+        <td class="column3 textCenter">JML</td>
+      </tr>
+    </thead>
+    <tbody>
       <tr>
         <td class="column3 textCenter">A</td>
         <td class="column15">KELOMPOK UMUM</td>
@@ -5665,7 +5773,7 @@
         <td class="column3">{{ $dataPuskesmas->kelamin[0]['n762_l_lama'] + $dataPuskesmas->kelamin[0]['n762_p_lama'] }}</td>
       </tr>
     </tbody>
-  </table>
+  </table>--}}
 </body>
 
 </html>
