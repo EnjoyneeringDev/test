@@ -5,16 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class SaranaPrasaranaProkes extends Model
+class ProgramPelayananKesehatanTradisional extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
 
-    public function programKesehatanLingkungan(): HasMany
+    public function identitasPuskesmas(): BelongsTo
     {
-        return $this->hasMany(ProgramKesehatanLingkungan::class);
+        return $this->belongsTo(IdentitasPuskesmas::class);
     }
 }

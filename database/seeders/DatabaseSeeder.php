@@ -13,6 +13,7 @@ use App\Models\KelompokPenyakit;
 use App\Models\KeperawatanKesehatanMasyarakat;
 use App\Models\KesehatanKerjaDanOlahRaga;
 use App\Models\KetersediaanRuanganPuskesmas;
+use App\Models\PelaksanaanK3Puskesmas;
 use App\Models\Perizinan;
 use App\Models\RiwayatJabatanKedudukan;
 use App\Models\RuanganPuskesmas;
@@ -85,7 +86,10 @@ class DatabaseSeeder extends Seeder
             ImunisasiTdAnakSDKelas25Seeder::class,
             JumlahDesaKelurahanUCISeeder::class,
             ProgramKesehatanAnakSeeder::class,
-            SaranaPrasaranaProsesSeeder::class
+            SaranaPrasaranaProsesSeeder::class,
+            ProgramKesehatanLingkunganSeeder::class,
+            ProgramPelayananKesehatanTradisionalSeeder::class,
+            PelaksanaanK3PuskesmasSeeder::class
         ]);
     }
 }

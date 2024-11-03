@@ -172,4 +172,19 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(ProgramKesehatanAnak::class);
     }
+
+    public function programKesehatanLingkungan(): HasMany
+    {
+        return $this->hasMany(ProgramKesehatanLingkungan::class);
+    }
+
+    public function programPelayananKesehatanTradisional(): HasMany
+    {
+        return $this->hasMany(ProgramPelayananKesehatanTradisional::class);
+    }
+
+    public function pelaksanaanK3Puskesmas(): HasMany
+    {
+        return $this->hasMany(PelaksanaanK3Puskesmas::class);
+    }
 }
