@@ -132,21 +132,40 @@
     <p style="text-align: center;">LAPORAN BULANAN KESEHATAN KERJA DAN OLAH RAGA</p>
   </div>
 
+  @php
+    // Check if the current record exists
+    if (isset($dataPuskesmas->data[0])) {  // Access the first element of the data array
+        // Access the bulan_tahun directly as it's an object
+        $dateString = $dataPuskesmas->data[0]->bulan_tahun; // Use '->' to access object properties
+        
+        // Create a Carbon instance
+        $date = \Carbon\Carbon::parse($dateString);
+        
+        // Get the year and month name
+        $year = $date->format('Y'); // 'Y' gives a 4-digit year
+        $monthName = $date->format('m'); // 'm' gives the numeric representation of the month (e.g., "10" for October)
+    } else {
+        // Handle the case where the record is not set
+        $year = null;
+        $monthName = null;
+        // Log an error or take appropriate action
+        \Log::info("Current record is not available in dataPuskesmas.");
+    }
+  @endphp
+
   <div style="margin-top: 50px; ">
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+      @foreach (str_split($dataPuskesmas->idLaporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Bulan</span>
-            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">November</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $monthName }}</span>
         </div>
     </div>
   </div>
@@ -154,12 +173,12 @@
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
-      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->namaPuskesmas ?? "") }}</span>
     </div>
     <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Tahun</span>
-            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $year }}</span>
         </div>
     </div>
   </div>
@@ -181,24 +200,24 @@
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">a. Jumlah kelompok kerja yang dibina</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['kelompok_kerja_dibina'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_kelompok_kerja_yang_dibina'] ?? "" }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">b. Jumlah tempat kerja yang teridentifikasi potensi bahaya</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['tempat_kerja_potensi_bahaya'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_tempat_kerja_potensi_bahaya'] ?? "" }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">c. Jumlah tempat kerja yang dibina</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['tempat_kerja_dibina'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_tempat_kerja_yang_dibina'] ?? "" }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">d. Jumlah kasus penyakit pada pekerja.</td>
         <td class="column15 "></td>
       </tr>
-      @foreach ($dataPuskesmas->kesehatanKerja as $index => $data)
+      @foreach ($dataPuskesmas->kesehatan[0]['kasus_penyakit'] as $index => $data)
         <tr>
           <td class="column5  textCenter"></td>
           <td class="column80 ">&nbsp;&nbsp;{{ $index }}) {{ $data['nama_kasus'] }}</td>
@@ -213,27 +232,27 @@
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">&nbsp;&nbsp;1) Promotif</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jenis_pelayanan_promotif'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_pelayanan_promotif'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">&nbsp;&nbsp;2) Preventif</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jenis_pelayanan_preventif'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_pelayanan_preventif'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">&nbsp;&nbsp;3) Kuratif</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jenis_pelayanan_kuratif'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_pelayanan_kuratif'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">&nbsp;&nbsp;4) Rehabilitati</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jenis_pelayanan_rehabilitatif'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_pelayanan_rehabilitatif'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">f. Penerapan kewaspadaan standar di lingkungan puskesmas</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['kewaspadaan_standar_lingkungan'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['penerapan_kewaspadaan_standar_puskesmas'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter">2.</td>
@@ -243,47 +262,47 @@
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">a. Jumlah kelompok olahraga terdaftar di puskesmas pada bulan ini</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['kelompok_olahraga_terdaftar'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_kelompok_olahraga_terdaftar_puskesmas'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">b. Jumlah kelompok olahraga yang dibina puskesmas</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['kelompok_olahraga_dibina'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_kelompok_olahraga_dibina_puskesmas'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">c. Jumlah kelompok olahraga yang diperiksa kesehatan anggotanya</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['kelompok_olahraga_diperiksa_anggotanya'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_kelompok_olahraga_anggota_diperiksa'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">d. Jumlah kelompok olahraga yang dilakukan penyuluhan</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['kelompok_olahraga_dilakukan_penyuluhan'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_kelompok_olahraga_penyuluhan'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">e. Jumlah orang yang mendapatkan konsultasi kesehatan olahraga</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['orang_diukur_tingkat_kebugaran'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_orang_konsultasi_kesehatan'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">f. Jumlah orang yang diukur tingkat kebugaran jasmani</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['orang_dapat_penanganan_cedera'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_orang_diukur_kebugaran'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">g. Jumlah orang yang mendapatkan penanganan cedera olahraga akut</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['atlet_dilayani_kesehatan_saat_event'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_orang_dapat_penanganan_cidera_akut'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter"></td>
         <td class="column80 ">h. Jumlah atlet yang dilayani kesehatan pada even olahraga</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['kunjungan_dengan_pelayanan_akupresur'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_atlet_dilayani_kesehatan'] ?? 0 }}</td>
       </tr>
       <tr>
         <td class="column5  textCenter">3.</td>
         <td class="column80 ">Jumlah POS UKK yang dibina puskesmas bulan ini</td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_pos_ukk_dibina'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_pos_ukk'] ?? 0 }}</td>
       </tr>
     </tbody>
   </table>
@@ -297,7 +316,7 @@
       <tr>
         <td class="column5  textCenter">1.</td>
         <td class="column80 ">Jumlah kunjungan kasus dengan pelayanan akupresur di puskesmas </td>
-        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['kunjungan_kasus_akupresur'] }}</td>
+        <td class="column15 ">{{ $dataPuskesmas->kesehatan[0]['jumlah_kunjungan_kasus_pelayanan_akupresur'] ?? 0 }}</td>
       </tr>
     </tbody>
   </table>

@@ -27,6 +27,7 @@ use App\Models\KelompokPenyakit;
 use App\Models\RuanganPuskesmas;
 use App\Models\SumberDayaManusia;
 use App\Models\DesaKelurahanPuskesmas;
+use App\Models\KesehatanKerjaDanOlahRaga;
 
 class PdfController extends Controller
 {
@@ -862,6 +863,57 @@ class PdfController extends Controller
 
         // Return the merged PDF as a response for download
         return response()->download($mergedPdfPath, 'laporanKematian.pdf')->deleteFileAfterSend(true);
+    }
+
+    public function downloadLaporanKerjaOlahraga($record_id, $puskesmas_id)
+    {
+        $dataRecord = KesehatanKerjaDanOlahRaga::where('id', $record_id)
+            ->where('identitas_puskesmas_id', $puskesmas_id)
+            ->get();
+
+        if (!$dataRecord) {
+            // Handle case where the current record does not exist
+            \Log::info("Record with ID {$record_id} not found for puskesmas ID {$puskesmas_id}.");
+            return response()->json(['message' => 'Record not found.'], 404);
+        }
+
+        $idLaporan = sprintf('%07d', $record_id);
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+
+        $dataPuskesmas = (object) [
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'kesehatan' => $dataRecord,
+        ];
+
+        \Log::info("Data kesehatan kerja olahraga di Puskesmas: ", (array) $dataPuskesmas);
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.kesehatanKerjaOlahraga', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'kesehatan-kerja-olahraga.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanKlb24Jam($record_id, $puskesmas_id)
