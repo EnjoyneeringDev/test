@@ -148,33 +148,56 @@
     <p style="text-align: center; ">LAPORAN BULANAN KESAKITAN GIGI DAN MULUT</p>
   </div>
 
+  @php
+    $totalJumlahPuskesmasPembantu = 0;
+    $totalJumlahLaporPuskesmasPembantu = 0;
+    $totalJumlahPoskesdes = 0;
+    $totalJumlahLaporPoskesdes = 0;
+
+    if (isset($dataPuskesmas->time)) {  // Access the first element of the data array
+      // Access the bulan_tahun directly as it's an object
+      $dateString = $dataPuskesmas->time; // Use '->' to access object properties
+      
+      // Create a Carbon instance
+      $date = \Carbon\Carbon::parse($dateString);
+      
+      // Get the year and month name
+      $year = $date->format('Y'); // 'Y' gives a 4-digit year
+      $monthName = $date->format('m'); // 'm' gives the numeric representation of the month (e.g., "10" for October)
+    } else {
+      // Handle the case where the record is not set
+      $year = null;
+      $monthName = null;
+      // Log an error or take appropriate action
+      \Log::info("Current record is not available in dataPuskesmas.");
+    }
+  @endphp
+
   <div style="margin-top: 50px; ">
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+      @foreach (str_split($dataPuskesmas->id_laporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
     </div>
     <div style="width: 150px; margin-left: 50px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Bulan</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ $monthName }}</span>
         </div>
     </div>
     <div style="width: 150px; margin-left: 20px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Jml. PP</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ $totalJumlahPuskesmasPembantu }}</span>
         </div>
     </div>
     <div style="width: 200px; margin-left: 20px; display: inline-block; vertical-align: middle;  ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 120px; text-wrap: wrap; text-align: right; ">Jml Poskesdes/ bidan desa</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ $totalJumlahPoskesdes }}</span>
         </div>
     </div>
   </div>
@@ -182,30 +205,30 @@
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
-      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->namaPuskesmas ?? "") }}</span>
     </div>
     <div style="width: 150px; margin-left: 50px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Tahun</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">2024</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ $year }}</span>
         </div>
     </div>
     <div style="width: 150px; margin-left: 20px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Jml melapor</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ $totalJumlahLaporPuskesmasPembantu }}</span>
         </div>
     </div>
     <div style="width: 200px; margin-left: 20px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 120px; text-align: right; ">Jml melapor</span>
-            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">10</span>
+            <span  style="width: 50px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 10px; padding: 8px 0 0 8px; ">{{ $totalJumlahLaporPoskesdes }}</span>
         </div>
     </div>
   </div>
 
   @php
-    $rowspanCount = count($dataPuskesmas->imunisasi);
+    $rowspanCount = count($dataPuskesmas->desa);
   @endphp
 
   <table style="margin-top: 20px; ">
@@ -265,25 +288,36 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->imunisasi as $index => $data)
+      @foreach ($dataPuskesmas->desa as $index => $data)
+        @php
+          $imunisasi = \App\Models\Imunisasi::where('desa_kelurahan_puskesmas_id', $data['id'])->get();
+
+          if (isset($imunisasi[0])) {
+            $totalJumlahPuskesmasPembantu += $imunisasi[0]['jumlah_puskesmas_pembantu'];
+            $totalJumlahLaporPuskesmasPembantu += $imunisasi[0]['jumlah_lapor_puskesmas_pembantu'];
+            $totalJumlahPoskesdes += $imunisasi[0]['jumlah_poskesdes_bidan_desa'];
+            $totalJumlahLaporPoskesdes += $imunisasi[0]['jumlah_lapor_poskesdes'];
+          }
+        @endphp
+
         <tr>
           <td class="column5 textCenter " >{{ $index+1 }}</td>
-          <td class="column15 " >{{ $data['nama_desa'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_bayi_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_bayi_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_bayi_laki'] + $data['sasaran_bayi_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_infant_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_infant_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_infant_laki'] + $data['sasaran_infant_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_hbo_24jam_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_hbo_24jam_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_hbo_24jam_laki'] + $data['sasaran_hbo_24jam_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_hbo_7hari_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_hbo_7hari_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_hbo_7hari_laki'] + $data['sasaran_hbo_7hari_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_bcg_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_bcg_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_bcg_laki'] + $data['sasaran_bcg_perempuan'] }}</td>
+          <td class="column15 " >{{ $data['name'] ?? "" }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_bayi_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_bayi_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_bayi_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_surviving_infant_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_surviving_infant_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_surviving_infant_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['hbo_24_jam_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['hbo_24_jam_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['hbo_24_jam_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['hbo_seminggu_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['hbo_seminggu_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['hbo_seminggu_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['bcg_seminggu_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['bcg_seminggu_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['bcg_seminggu_jumlah'] ?? 0 }}</td>
         </tr>
       @endforeach
     </tbody>
@@ -348,25 +382,28 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->imunisasi as $index => $data)
+      @foreach ($dataPuskesmas->desa as $index => $data)
+        @php
+          $imunisasi = \App\Models\Imunisasi::where('desa_kelurahan_puskesmas_id', $data['id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter " >{{ $index+1 }}</td>
-          <td class="column15 " >{{ $data['nama_desa'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio1_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio1_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio1_laki'] + $data['sasaran_polio1_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt1_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt1_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt1_laki'] + $data['sasaran_dpt1_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio2_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio2_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio2_laki'] + $data['sasaran_polio2_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt2_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt2_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt2_laki'] + $data['sasaran_dpt2_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio3_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio3_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio3_laki'] + $data['sasaran_polio3_perempuan'] }}</td>
+          <td class="column15 " >{{ $data['name'] ?? "" }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_1_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_1_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_1_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib1_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib1_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib1_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_2_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_2_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_2_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib2_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib2_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib2_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_3_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_3_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_3_jumlah'] ?? 0 }}</td>
         </tr>
       @endforeach
     </tbody>
@@ -431,25 +468,28 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->imunisasi as $index => $data)
+      @foreach ($dataPuskesmas->desa as $index => $data)
+        @php
+          $imunisasi = \App\Models\Imunisasi::where('desa_kelurahan_puskesmas_id', $data['id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter " >{{ $index+1 }}</td>
-          <td class="column15 " >{{ $data['nama_desa'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt3_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt3_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt3_laki'] + $data['sasaran_dpt3_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio4_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio4_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_polio4_laki'] + $data['sasaran_polio4_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_ipv_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_ipv_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_ipv_laki'] + $data['sasaran_ipv_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_campak_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_campak_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_campak_laki'] + $data['sasaran_campak_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_imunisasi_dasar_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_imunisasi_dasar_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_imunisasi_dasar_laki'] + $data['sasaran_imunisasi_dasar_perempuan'] }}</td>
+          <td class="column15 " >{{ $data['name'] ?? "" }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib3_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib3_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib3_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_4_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_4_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['polio_4_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['ipv_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['ipv_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['ipv_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['campak_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['campak_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['campak_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dasar_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dasar_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dasar_jumlah'] ?? 0 }}</td>
         </tr>
       @endforeach
     </tbody>
@@ -508,25 +548,28 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->imunisasi as $index => $data)
+      @foreach ($dataPuskesmas->desa as $index => $data)
+        @php
+          $imunisasi = \App\Models\Imunisasi::where('desa_kelurahan_puskesmas_id', $data['id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter " >{{ $index+1 }}</td>
-          <td class="column15 " >{{ $data['nama_desa'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_baduta_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_baduta_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_baduta_laki'] + $data['sasaran_baduta_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt4_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt4_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_dpt4_laki'] + $data['sasaran_dpt4_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_campak2_laki'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_campak2_perempuan'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_campak2_laki'] + $data['sasaran_campak2_perempuan'] }}</td>
-          <td class="column7-5 textCenter " >{{ $data['sasaran_wus'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_td1'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_td2'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_td3'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_td4'] }}</td>
-          <td class="column5 textCenter " >{{ $data['sasaran_td5'] }}</td>
+          <td class="column15 " >{{ $data['name'] ?? "" }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib4_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib4_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['dpt_hb_hib4_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['campak_2_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['campak_2_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['campak_2_jumlah'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_campak2_l'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_campak2_p'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['sasaran_campak2_jumlah'] ?? 0 }}</td>
+          <td class="column7-5 textCenter " >{{ $imunisasi[0]['sasaran_wus'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['td1'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['td2'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['td3'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['td4'] ?? 0 }}</td>
+          <td class="column5 textCenter " >{{ $imunisasi[0]['td5'] ?? 0 }}</td>
         </tr>
       @endforeach
     </tbody>

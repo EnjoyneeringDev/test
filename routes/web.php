@@ -56,3 +56,6 @@ Route::get('/admin/laporan/klb-24-jam/download-pdf/{record_id}/{puskesmas_id}', 
 
 Route::get('/admin/laporan/kesakitan-umum/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKesakitanUmum'])
     ->name('download.laporan.kesakitanUmum.pdf');
+
+Route::get('/admin/laporan/imunisasi/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanImunisasi'])
+    ->name('download.laporan.imunisasi.pdf');
