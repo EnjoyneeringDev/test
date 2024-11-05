@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Filament\Facades\Filament;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,6 +47,9 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
-        \Illuminate\Support\Facades\URL::forceScheme('http');
+        // \Illuminate\Support\Facades\URL::forceScheme('http');
+        if (app()->environment('local')) {
+            URL::forceScheme('https');
+        }
     }
 }
