@@ -28,6 +28,9 @@ use App\Models\RuanganPuskesmas;
 use App\Models\SumberDayaManusia;
 use App\Models\DesaKelurahanPuskesmas;
 use App\Models\KesehatanKerjaDanOlahRaga;
+use App\Models\DesaDanaUKBM;
+use App\Models\UKBMDiWilayahKerjaPuskesmas;
+use App\Models\KemitraanKesehatan;
 
 class PdfController extends Controller
 {
@@ -960,6 +963,61 @@ class PdfController extends Controller
 
         // Return the merged PDF as a response for download
         return response()->download($mergedPdfPath, 'klb-24-jam.pdf')->deleteFileAfterSend(true);
+    }
+
+    public function downloadLaporanTahunan($record_id, $puskesmas_id, $year)
+    {
+        $idLaporan = sprintf('%07d', $record_id);
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+        $ukbmPuskesmas = DesaDanaUKBM::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $ukbmWilayahKerjaPuskesmas = UKBMDiWilayahKerjaPuskesmas::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $kemitraanKesehatan = KemitraanKesehatan::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $dataPuskesmas = (object) [
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'promosiKesehatan' => $ukbmPuskesmas,
+            'ukbm' => $ukbmWilayahKerjaPuskesmas,
+            'kemitraan' => $kemitraanKesehatan,
+            'year' => $year,
+        ];
+
+        \Log::info("Data laporan tahunan Puskesmas: ", (array) $dataPuskesmas);
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.kesehatanKerjaOlahraga', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'kesehatan-kerja-olahraga.pdf')->deleteFileAfterSend(true);
     }
 
     // Function to count total pages in multiple PDFs

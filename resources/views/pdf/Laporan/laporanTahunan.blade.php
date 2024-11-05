@@ -145,25 +145,23 @@
   <div style="margin-top: 50px; "></div>
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">1</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">2</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">3</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">4</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">5</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">6</span>
-      <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">7</span>
+      @foreach (str_split($dataPuskesmas->idLaporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
     </div>
   </div>
 
   <div style="margin-top: 20px; " >
     <div style="width: 400px; display: inline-block; vertical-align: middle; ">
       <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
-      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">Puskesmas Pucang Sewu</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ ($dataPuskesmas->namaPuskesmas ?? "") }}</span>
     </div>
     <div style="width: 250px; margin-left: 300px; display: inline-block; vertical-align: middle; ">
         <div>
             <span  style="display: inline-block; vertical-align: middle; width: 50px; text-align: right; ">Tahun</span>
-            <span  style="width: 150px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">2024</span>
+            <span  style="width: 150px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $year }}</span>
         </div>
     </div>
   </div>
@@ -196,13 +194,16 @@
     </thead>
     <tbody>
       @foreach ($dataPuskesmas->promosiKesehatan as $index => $data)
+        @php
+          $desa = \App\Models\DesaKelurahanPuskesmas::where('desa_kelurahan_puskesmas_id', $data['desa_kelurahan_puskesmas_id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter">{{ $index + 1 }}</td>
-          <td class="column25">{{ $data['namaDesa'] }}</td>
-          <td class="column20">{{ $data['totalDana'] }}</td>
-          <td class="column20">{{ $data['kegiatan'] }}</td>
-          <td class="column20">{{ $data['anggaran'] }}</td>
-          <td class="column10">{{ $data['anggaran']/$data['totalDana']*100% }}</td>
+          <td class="column25">{{ $desa['name'] ?? "" }}</td>
+          <td class="column20">{{ $data['total_dana_desa'] ?? 0 }}</td>
+          <td class="column20">{{ $data['kegiatan_untuk_dukung_kesehatan'] ?? 0 }}</td>
+          <td class="column20">{{ $data['anggaran_untuk_mendukung_kesehatan'] ?? 0 }}</td>
+          <td class="column10">{{ $data['persentase'] ?? 0 }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -319,39 +320,42 @@
     </thead>
     <tbody>
       @foreach ($dataPuskesmas->ukbm as $index => $data)
+        @php
+          $desa = \App\Models\DesaKelurahanPuskesmas::where('desa_kelurahan_puskesmas_id', $data['desa_kelurahan_puskesmas_id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter">{{ $index + 1 }}</td>
-          <td class="column25">{{ $data['namaDesa'] }}</td>
-          <td class="column5">{{ $data['pratama'] }}</td>
-          <td class="column5">{{ $data['madya'] }}</td>
-          <td class="column5">{{ $data['purnama'] }}</td>
-          <td class="column5">{{ $data['mandiri'] }}</td>
-          <td class="column5">{{ $data['poskesdes'] }}</td>
-          <td class="column5">{{ $data['posbindu'] }}</td>
-          <td class="column5">{{ $data['posyandu'] }}</td>
-          <td class="column5">{{ $data['tb'] }}</td>
-          <td class="column5">{{ $data['posmaldes'] }}</td>
-          <td class="column5">{{ $data['poskestren'] }}</td>
-          <td class="column5">{{ $data['ukk'] }}</td>
-          <td class="column5">{{ $data['ukbm'] }}</td>
-          <td class="column5">{{ $data['kader'] }}</td>
-          <td class="column5">{{ $data['kaderDilatih'] }}</td>
+          <td class="column25">{{ $desa['name'] ?? "" }}</td>
+          <td class="column5">{{ $data['posyandu_pratama'] ?? 0 }}</td>
+          <td class="column5">{{ $data['posyandu_madya'] ?? 0 }}</td>
+          <td class="column5">{{ $data['posyandu_purnama'] ?? 0 }}</td>
+          <td class="column5">{{ $data['posyandu_mandiri'] ?? 0 }}</td>
+          <td class="column5">{{ $data['poskesdes'] ?? 0 }}</td>
+          <td class="column5">{{ $data['posbindu_ptm'] ?? 0 }}</td>
+          <td class="column5">{{ $data['posyandu_lansia'] ?? 0 }}</td>
+          <td class="column5">{{ $data['pos_tb_desa'] ?? 0 }}</td>
+          <td class="column5">{{ $data['posmaldes'] ?? 0 }}</td>
+          <td class="column5">{{ $data['poskestren'] ?? 0 }}</td>
+          <td class="column5">{{ $data['pos_ukk'] ?? 0 }}</td>
+          <td class="column5">{{ $data['ukbm_lainnya'] ?? 0 }}</td>
+          <td class="column5">{{ $data['jumlah_kader'] ?? 0 }}</td>
+          <td class="column5">{{ $data['jumlah_kader_dilatih'] ?? 0 }}</td>
         </tr>
         @php
-          $totalUkbm['pratama'] += $data['pratama'];
-          $totalUkbm['madya'] += $data['madya'];
-          $totalUkbm['purnama'] += $data['purnama'];
-          $totalUkbm['mandiri'] += $data['mandiri'];
-          $totalUkbm['poskesdes'] += $data['poskesdes'];
-          $totalUkbm['posbindu'] += $data['posbindu'];
-          $totalUkbm['posyandu'] += $data['posyandu'];
-          $totalUkbm['tb'] += $data['tb'];
-          $totalUkbm['posmaldes'] += $data['posmaldes'];
-          $totalUkbm['poskestren'] += $data['poskestren'];
-          $totalUkbm['ukk'] += $data['ukk'];
-          $totalUkbm['ukbm'] += $data['ukbm'];
-          $totalUkbm['kader'] += $data['kader'];
-          $totalUkbm['kaderDilatih'] += $data['kaderDilatih'];
+          $totalUkbm['pratama'] += $data['posyandu_pratama'] ?? 0;
+          $totalUkbm['madya'] += $data['posyandu_madya'] ?? 0;
+          $totalUkbm['purnama'] += $data['posyandu_purnama'] ?? 0;
+          $totalUkbm['mandiri'] += $data['posyandu_mandiri'] ?? 0;
+          $totalUkbm['poskesdes'] += $data['poskesdes'] ?? 0;
+          $totalUkbm['posbindu'] += $data['posbindu_ptm'] ?? 0;
+          $totalUkbm['posyandu'] += $data['posyandu_lansia'] ?? 0;
+          $totalUkbm['tb'] += $data['pos_tb_desa'] ?? 0;
+          $totalUkbm['posmaldes'] += $data['posmaldes'] ?? 0;
+          $totalUkbm['poskestren'] += $data['poskestren'] ?? 0;
+          $totalUkbm['ukk'] += $data['pos_ukk'] ?? 0;
+          $totalUkbm['ukbm'] += $data['ukbm_lainnya'] ?? 0;
+          $totalUkbm['kader'] += $data['jumlah_kader'] ?? 0;
+          $totalUkbm['kaderDilatih'] += $data['jumlah_kader_dilatih'] ?? 0;
         @endphp
       @endforeach
       <tr>
@@ -376,6 +380,13 @@
   </table>
 
   <div style="page-break-before: always;"></div>
+
+  @php
+    $kemitraan = [
+      'sdMemilikiUks' => 0,
+      'sltpMemilikiUks' => 0,
+    ];
+  @endphp
 
   <table>
     <thead>
@@ -411,6 +422,10 @@
           <td class="column15">{{ $data['ruangLingkung'] }}</td>
           <td class="column20">{{ $data['lokasiKemitraan'] }}</td>
         </tr>
+        @php
+          $kemitraan['sdMemilikiUks'] += $data['posyandu_pratama'] ?? 0;
+          $kemitraan['sltpMemilikiUks'] += $data['posyandu_madya'] ?? 0;
+        @endphp
         @endforeach
     </tbody>
   </table>
@@ -419,12 +434,12 @@
     <tbody>
       <tr>
         <td class="column75">d. Jumlah SD/sederajat yang memiliki UKS</td>
-        <td class="column15">{{ $dataPuskesmas->sdMemilikiUks }}</td>
+        <td class="column15">{{ $kemitraan[0]['sdMemilikiUks'] }}</td>
         <td class="column10">Sekolah</td>
       </tr>
       <tr>
         <td class="column75">e. Jumlah SLTP/sederajat yang memiliki UKS</td>
-        <td class="column15">{{ $dataPuskesmas->sltpMemilikiUks }}</td>
+        <td class="column15">{{ $kemitraan[0]['sltpMemilikiUks'] }}</td>
         <td class="column10">Sekolah</td>
       </tr>
     </tbody>
