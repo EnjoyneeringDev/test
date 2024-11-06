@@ -83,6 +83,8 @@ class GiziIbuAnakResource extends Resource
                     ->numeric(),
                 Forms\Components\TextInput::make('jumlah_balita_kurus_dapat_pmt')
                     ->numeric(),
+                Forms\Components\TextInput::make('jumlah_balita_gizi_buruk')
+                    ->numeric(),
                 Forms\Components\TextInput::make('jumlah_kunjungan_k4_ibu_hamil')
                     ->numeric(),
                 Forms\Components\TextInput::make('jumlah_ibu_hamil_malaria')
@@ -106,8 +108,6 @@ class GiziIbuAnakResource extends Resource
                 Forms\Components\TextInput::make('jumlah_peserta_kb_mkjp')
                     ->numeric(),
                 Forms\Components\TextInput::make('jumlah_peserta_kb_non_mkjp')
-                    ->numeric(),
-                Forms\Components\TextInput::make('calon_donor_darah_pendamping')
                     ->numeric(),
                 Forms\Components\TextInput::make('jumlah_pendonor_dilakukan_seleksi')
                     ->numeric(),
@@ -237,6 +237,9 @@ class GiziIbuAnakResource extends Resource
                 Tables\Columns\TextColumn::make('jumlah_balita_kurus_dapat_pmt')
                     ->numeric()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('jumlah_balita_gizi_buruk')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah_kunjungan_k4_ibu_hamil')
                     ->numeric()
                     ->sortable(),
@@ -271,9 +274,6 @@ class GiziIbuAnakResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah_peserta_kb_non_mkjp')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('calon_donor_darah_pendamping')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah_pendonor_dilakukan_seleksi')

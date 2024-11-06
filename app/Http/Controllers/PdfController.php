@@ -9,6 +9,8 @@ use Illuminate\Http\Response;
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdi\PdfReader;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 use App\Models\IdentitasPuskesmas;
 use App\Models\WilayahKerjaPuskesmas;
@@ -41,6 +43,7 @@ use App\Models\ImunisasiDTDanCampakAnakKelas1;
 use App\Models\ImunisasiTdAnakSDKelas25;
 use App\Models\JumlahDesaKelurahanUCI;
 use App\Models\ProgramKesehatanAnak;
+use App\Models\GiziIbuAnak;
 
 class PdfController extends Controller
 {
@@ -823,6 +826,73 @@ class PdfController extends Controller
 
         // Return the merged PDF as a response for download
         return response()->download($mergedPdfPath, 'kesakitan-terbanyak.pdf')->deleteFileAfterSend(true);
+    }
+
+    public function downloadLaporanGiziIbuAnak($record_id, $puskesmas_id)
+    {
+        $date = \Carbon\Carbon::createFromFormat('Y-m-d', $record_id);
+        $month = $date->month;
+        $year = $date->year;
+
+        Log::info("Fetching GiziIbuAnak records", [
+            'record_id' => $record_id,
+            'puskesmas_id' => $puskesmas_id,
+            'year' => $year,
+            'month' => $month,
+        ]);
+
+        $dataRecord = GiziIbuAnak::where('identitas_puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->get();
+
+        Log::info("Fetched GiziIbuAnak records", [
+            'dataRecord' => $dataRecord->toArray(),
+        ]);
+
+        if (!$dataRecord) {
+            // Handle case where the current record does not exist
+            Log::info("Record with ID {$record_id} not found for puskesmas ID {$puskesmas_id}.");
+            return response()->json(['message' => 'Record not found.'], 404);
+        }
+
+        $idLaporan = sprintf('%07d', $record_id);
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+
+        $dataPuskesmas = (object) [
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'data' => $dataRecord,
+        ];
+
+        \Log::info("Data Laporan Gizi Ibu Anak: ", (array) $dataPuskesmas);
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.giziIbuAnak', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'gizi-ibu-dan-anak.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanKematian($record_id, $puskesmas_id)
