@@ -71,28 +71,43 @@ class PdfController extends Controller
             'identitasPuskesmas' => $identitasPuskesmas,
         ])->save($pdf1Path);
         // Generate the third PDF and save to a temporary file
-        $pdf3Path = tempnam(sys_get_temp_dir(), 'pdf3');
+        $pdf2Path = tempnam(sys_get_temp_dir(), 'pdf3');
         Pdf::loadView('pdf.identitasPuskesmas.pegawaiPuskesmas', [
+            'identitasPuskesmas' => $identitasPuskesmas,
+        ])->save($pdf2Path);
+
+        $pdf2Path = tempnam(sys_get_temp_dir(), 'pdf3');
+        Pdf::loadView('pdf.identitasPuskesmas.pegawaiPuskesmas', [
+            'identitasPuskesmas' => $identitasPuskesmas,
+        ])->save($pdf2Path);
+
+        $pdf3Path = tempnam(sys_get_temp_dir(), 'pdf3');
+        Pdf::loadView('pdf.identitasPuskesmas.peralatanPuskesmas', [
             'identitasPuskesmas' => $identitasPuskesmas,
         ])->save($pdf3Path);
 
         // Get total page count across all PDFs
-        $pdfPaths = [$pdf1Path, $pdf3Path];
+        $pdfPaths = [$pdf1Path, $pdf2Path, $pdf3Path];
         $totalPages = $this->getTotalPageCount($pdfPaths);
 
         // Add page numbers to each PDF with continuous numbering
         $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
         $this->addContinuousPageNumbersToPdf($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
 
-        $pdf3PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf3_with_pages');
+        $pdf2PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf3_with_pages');
         $startPage = $this->getLastPageNumber($pdf1PathWithPageNumbers) + 1;
-        $this->addContinuousPageNumbersToPdf($pdf3Path, $pdf3PathWithPageNumbers, $startPage, $totalPages);
+        $this->addContinuousPageNumbersToPdf($pdf2Path, $pdf2PathWithPageNumbers, $startPage, $totalPages);
+
+        $pdf3PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf3_with_pages');
+        $startPage = $this->getLastPageNumber($pdf2PathWithPageNumbers) + 1;
+        $this->addContinuousPageNumbersToPdfLandscape($pdf3Path, $pdf3PathWithPageNumbers, $startPage, $totalPages);
 
         // Create a new PDF merger instance
         $pdfMerger = new PDFMerger;
 
         // Add each PDF to the merger using the file paths with page numbers
         $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+        $pdfMerger->addPDF($pdf2PathWithPageNumbers, 'all');
         $pdfMerger->addPDF($pdf3PathWithPageNumbers, 'all');
 
         // Merge all PDFs and output as a download

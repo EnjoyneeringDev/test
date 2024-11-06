@@ -3,9 +3,16 @@
 <head>
     <title>Identitas Puskesmas Report</title>
     <style>
+         @page {
+            size: A4 landscape;
+            padding: 0;
+        }
+
         body {
             font-family: Arial, sans-serif;
+            padding: 50px 0 50px;
         }
+            
         table {
             width: 100%;
             border-collapse: collapse;
@@ -108,16 +115,56 @@
                 <td class="column10" rowspan="2">Negara Pembuat</td>
             </tr>
             <tr>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0;">Perolehan</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0;">Operasional</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0;">Berfungsi</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0; text-wrap: nowrap;">Tidak berfungsi</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0; text-wrap: nowrap;">Ya (tahun)</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0;">Tidak</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0;">APBN</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0; text-wrap: nowrap;">APBD 1</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0; text-wrap: nowrap;">APBD 2</td>
-                <td class="column2-5" style="rotate: -90deg; height: 130px; padding: 0;">Hibah</td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                    <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    Perolehan
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    Operasional
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    Berfungsi
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    Tidak berfungsi
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    Ya (tahun)
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    Tidak
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    APBN
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    APBD 1
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    APBD 2
+                    </span>
+                </td>
+                <td class="column2-5 textCenter" style="width: 20px; height: 120px;">
+                   <span style="display: inline-block; transform: rotate(90deg); transform-origin: center; white-space: nowrap; margin: 0; margin-left: 10px; margin-top: -40px; width: 10px; padding-top: -30px; ">
+                    Hibah
+                    </span>
+                </td>
             </tr>
             <tr>
                 <td class="column5">1</td>
