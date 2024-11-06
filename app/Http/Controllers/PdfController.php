@@ -31,6 +31,7 @@ use App\Models\KesehatanKerjaDanOlahRaga;
 use App\Models\DesaDanaUKBM;
 use App\Models\UKBMDiWilayahKerjaPuskesmas;
 use App\Models\KemitraanKesehatan;
+use App\Models\PemakaianPermintaanObat;
 
 class PdfController extends Controller
 {
@@ -378,6 +379,55 @@ class PdfController extends Controller
 
         // Return the merged PDF as a response for download
         return response()->download($mergedPdfPath, 'kesakitanBerdasarkanGejala.pdf')->deleteFileAfterSend(true);
+    }
+
+    public function downloadLaporanPermintaanObat($record_id, $puskesmas_id)
+    {
+        $permintaanObat = PemakaianPermintaanObat::where('id', $record_id)
+        ->where('identitas_puskesmas_id', $puskesmas_id)
+        ->first();
+
+        if (!$permintaanObat) {
+            // Handle case where the current record does not exist
+            \Log::info("Record with ID {$record_id} not found for puskesmas ID {$puskesmas_id}.");
+            return response()->json(['message' => 'Record not found.'], 404);
+        }
+
+        $idLaporan = sprintf('%07d', $record_id);
+        $dataDasarPuskesmas = IdentitasPuskesmas::find($puskesmas_id);
+
+        $dataPuskesmas = (object) [
+            'idLaporan' => $idLaporan,
+            'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
+            'permintaanObat' => $permintaanObat,
+        ];
+
+        // Generate the first PDF and save to a temporary file
+        $pdf1Path = tempnam(sys_get_temp_dir(), 'pdf1');
+        Pdf::loadView('pdf.Laporan.permintaanObat', [
+            'dataPuskesmas' => $dataPuskesmas,
+        ])->save($pdf1Path);
+
+        // Get total page count across all PDFs
+        $pdfPaths = [$pdf1Path];
+        $totalPages = $this->getTotalPageCount($pdfPaths);
+
+        // Add page numbers to each PDF with continuous numbering
+        $pdf1PathWithPageNumbers = tempnam(sys_get_temp_dir(), 'pdf1_with_pages');
+        $this->addContinuousPageNumbersToPdfLandscape($pdf1Path, $pdf1PathWithPageNumbers, 1, $totalPages);
+
+        // Create a new PDF merger instance
+        $pdfMerger = new PDFMerger;
+
+        // Add each PDF to the merger using the file paths with page numbers
+        $pdfMerger->addPDF($pdf1PathWithPageNumbers, 'all');
+
+        // Merge all PDFs and output as a download
+        $mergedPdfPath = tempnam(sys_get_temp_dir(), 'merged');
+        $pdfMerger->merge('file', $mergedPdfPath);
+
+        // Return the merged PDF as a response for download
+        return response()->download($mergedPdfPath, 'permintaan-obat.pdf')->deleteFileAfterSend(true);
     }
 
     public function downloadLaporanImunisasi($record_id, $puskesmas_id)
