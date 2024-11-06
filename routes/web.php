@@ -56,3 +56,15 @@ Route::get('/admin/laporan/klb-24-jam/download-pdf/{record_id}/{puskesmas_id}', 
 
 Route::get('/admin/laporan/kesakitan-umum/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKesakitanUmum'])
     ->name('download.laporan.kesakitanUmum.pdf');
+
+Route::get('/admin/laporan/imunisasi/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanImunisasi'])
+    ->name('download.laporan.imunisasi.pdf');
+
+Route::get('/admin/laporan/kesehatanKerjaOlahraga/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanKerjaOlahraga'])
+    ->name('download.laporan.kesehatanKerjaOlahraga.pdf');
+
+Route::get('/admin/laporan/permintaanObat/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanPermintaanObat'])
+    ->name('download.laporan.permintaanObat.pdf');
+
+Route::get('/admin/laporan/giziIbuAnak/download-pdf/{record_id}/{puskesmas_id}', [PdfController::class, 'downloadLaporanGiziIbuAnak'])
+    ->name('download.laporan.giziIbuAnak.pdf');

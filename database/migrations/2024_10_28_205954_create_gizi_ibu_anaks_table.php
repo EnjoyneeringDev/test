@@ -40,6 +40,7 @@ return new class extends Migration
             $table->integer('jumlah_balita_bgm')->nullable();
             $table->integer('jumlah_balita_kurus')->nullable();
             $table->integer('jumlah_balita_kurus_dapat_pmt')->nullable();
+            $table->integer('jumlah_balita_gizi_buruk')->nullable();
             $table->integer('jumlah_kunjungan_k4_ibu_hamil')->nullable();
             $table->integer('jumlah_ibu_hamil_malaria')->nullable();
             $table->integer('jumlah_ibu_hamil_tb')->nullable();
@@ -52,7 +53,6 @@ return new class extends Migration
             $table->integer('jumlah_ibu_nifas_dapat_kf4')->nullable();
             $table->integer('jumlah_peserta_kb_mkjp')->nullable();
             $table->integer('jumlah_peserta_kb_non_mkjp')->nullable();
-            $table->integer('calon_donor_darah_pendamping')->nullable();
             $table->integer('jumlah_pendonor_dilakukan_seleksi')->nullable();
             $table->integer('jumlah_pendonor_tidak_lolos_seleksi')->nullable();
             $table->integer('jumlah_pendonor_lolos_seleksi')->nullable();
