@@ -17,6 +17,10 @@ class KemitraanKesehatanResource extends Resource
 {
     protected static ?string $model = KemitraanKesehatan::class;
 
+    protected static ?string $navigationLabel = '1c. Kemitraan Kesehatan';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

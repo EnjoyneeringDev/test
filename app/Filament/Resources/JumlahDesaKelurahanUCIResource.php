@@ -17,6 +17,10 @@ class JumlahDesaKelurahanUCIResource extends Resource
 {
     protected static ?string $model = JumlahDesaKelurahanUCI::class;
 
+    protected static ?string $navigationLabel = '3c. Jumlah Desa/Kelurahan UCI (Imunisasi Dasar Lengkap)';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

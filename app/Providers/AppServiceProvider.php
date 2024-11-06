@@ -42,7 +42,8 @@ class AppServiceProvider extends ServiceProvider
                 'Form 16. PEMAKAIAN DAN LEMBAR PERMINTAAN OBAT',
                 'Form 17. PENYAKIT MENULAR POTENSI KLB',
                 'Form 18. KLB 24 Jam',
-                'Form 19. DATA KELAHIRAN DI PUSKESMAS'
+                'Form 19. DATA KELAHIRAN DI PUSKESMAS',
+                'Form 20. LAPORAN TAHUNAN PROGRAM',
             ]);
         });
 

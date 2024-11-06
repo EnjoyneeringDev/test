@@ -17,6 +17,10 @@ class UKBMDiwilayahKerjaPuskesmasResource extends Resource
 {
     protected static ?string $model = UKBMDiwilayahKerjaPuskesmas::class;
 
+    protected static ?string $navigationLabel = '1b. UKBM Di Wilayah Kerja Puskesmas';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

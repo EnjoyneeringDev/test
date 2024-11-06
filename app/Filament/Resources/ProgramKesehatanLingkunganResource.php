@@ -17,6 +17,10 @@ class ProgramKesehatanLingkunganResource extends Resource
 {
     protected static ?string $model = ProgramKesehatanLingkungan::class;
 
+    protected static ?string $navigationLabel = '5. Program Kesehatan Lingkungan';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

@@ -17,6 +17,10 @@ class PenderitaKronisFilariasisResource extends Resource
 {
     protected static ?string $model = PenderitaKronisFilariasis::class;
 
+    protected static ?string $navigationLabel = '2a. Jumlah Penderita Kronis Filariasis';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

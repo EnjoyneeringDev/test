@@ -17,6 +17,10 @@ class SaranaPrasaranaProkesResource extends Resource
 {
     protected static ?string $model = SaranaPrasaranaProkes::class;
 
+    protected static ?string $navigationLabel = '5. Sarana Prasarana Prokes';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

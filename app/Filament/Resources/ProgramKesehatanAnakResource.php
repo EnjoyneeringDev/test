@@ -17,6 +17,10 @@ class ProgramKesehatanAnakResource extends Resource
 {
     protected static ?string $model = ProgramKesehatanAnak::class;
 
+    protected static ?string $navigationLabel = '4. Program Kesehatan Anak';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

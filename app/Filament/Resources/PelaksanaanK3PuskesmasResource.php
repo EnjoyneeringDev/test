@@ -17,6 +17,10 @@ class PelaksanaanK3PuskesmasResource extends Resource
 {
     protected static ?string $model = PelaksanaanK3Puskesmas::class;
 
+    protected static ?string $navigationLabel = '7. Pelaksanaan K3 Di Lingkungan Puskesmas';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

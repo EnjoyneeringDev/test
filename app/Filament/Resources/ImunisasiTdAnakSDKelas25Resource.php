@@ -17,6 +17,10 @@ class ImunisasiTdAnakSDKelas25Resource extends Resource
 {
     protected static ?string $model = ImunisasiTdAnakSDKelas25::class;
 
+    protected static ?string $navigationLabel = '3b. Imunisasi Td Anak Sekolah Dasar (sederajat) Kelas 2 Dan 5';
+
+    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
