@@ -32,6 +32,15 @@ use App\Models\DesaDanaUKBM;
 use App\Models\UKBMDiWilayahKerjaPuskesmas;
 use App\Models\KemitraanKesehatan;
 use App\Models\PemakaianPermintaanObat;
+use App\Models\PelaksanaanK3Puskesmas;
+use App\Models\ProgramPelayananKesehatanTradisional;
+use App\Models\ProgramKesehatanLingkungan;
+use App\Models\PenderitaKronisFilariasis;
+use App\Models\CakupanPOMPFilariasis;
+use App\Models\ImunisasiDTDanCampakAnakKelas1;
+use App\Models\ImunisasiTdAnakSDKelas25;
+use App\Models\JumlahDesaKelurahanUCI;
+use App\Models\ProgramKesehatanAnak;
 
 class PdfController extends Controller
 {
@@ -1031,12 +1040,57 @@ class PdfController extends Controller
             ->whereYear('created_at', $year)
             ->get();
 
+        $k3 = PelaksanaanK3Puskesmas::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $kesehatanTradisional = ProgramPelayananKesehatanTradisional::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $kesehatanLingkungan = ProgramKesehatanLingkungan::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $kronisFilariasis = PenderitaKronisFilariasis::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $pomFilariasis = CakupanPOMPFilariasis::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $dtKelas1 = ImunisasiDTDanCampakAnakKelas1::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $dtKelas2 = ImunisasiTdAnakSDKelas25::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $uci = JumlahDesaKelurahanUCI::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
+        $anak = ProgramKesehatanAnak::where('puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->get();
+
         $dataPuskesmas = (object) [
             'idLaporan' => $idLaporan,
             'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
             'promosiKesehatan' => $ukbmPuskesmas,
             'ukbm' => $ukbmWilayahKerjaPuskesmas,
             'kemitraan' => $kemitraanKesehatan,
+            'kronisFilariasis' => $kronisFilariasis,
+            'pomFilariasis' => $pomFilariasis,
+            'dtKelas1' => $dtKelas1,
+            'dtKelas2' => $dtKelas2,
+            'uci' => $uci,
+            'anak' => $anak,
+            'kesehatanLingkungan' => $kesehatanLingkungan,
+            'kesehatanTradisional' => $kesehatanTradisional,
+            'k3' => $k3,
             'year' => $year,
         ];
 

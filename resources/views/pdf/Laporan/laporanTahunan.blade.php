@@ -477,14 +477,17 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->filiriasis as $index => $data)
+      @foreach ($dataPuskesmas->kronisFilariasis as $index => $data)
+        @php
+          $desa = \App\Models\DesaKelurahanPuskesmas::where('desa_kelurahan_puskesmas_id', $data['desa_kelurahan_puskesmas_id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter">{{ $index + 1 }}</td>
-          <td class="column55">{{ $data['namaDesa'] }}</td>
-          <td class="column10">{{ $data['5th'] }}</td>
-          <td class="column10">{{ $data['14th'] }}</td>
-          <td class="column10">{{ $data['lebih14th'] }}</td>
-          <td class="column10">{{ $data['5th'] + $data['14th'] + $data['lebih14th'] }}</td>
+          <td class="column55">{{ $desa['name'] }}</td>
+          <td class="column10">{{ $data['kurang_dari_5_tahun'] }}</td>
+          <td class="column10">{{ $data['5_14_tahun'] }}</td>
+          <td class="column10">{{ $data['lebih_dari_14_tahun'] }}</td>
+          <td class="column10">{{ $data['kurang_dari_5_tahun'] + $data['145_14_tahunth'] + $data['lebih_dari_14_tahun'] }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -537,22 +540,25 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->filiriasis as $index => $data)
+      @foreach ($dataPuskesmas->pomFilariasis as $index => $data)
+        @php
+          $desa = \App\Models\DesaKelurahanPuskesmas::where('desa_kelurahan_puskesmas_id', $data['desa_kelurahan_puskesmas_id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter">{{ $index + 1 }}</td>
-          <td class="column55">{{ $data['namaDesa'] }}</td>
-          <td class="column5">{{ $data['sasaran2'] }}</td>
-          <td class="column5">{{ $data['sasaran5'] }}</td>
-          <td class="column5">{{ $data['sasaran14'] }}</td>
-          <td class="column5">{{ $data['sasaran2'] + $data['sasaran5'] + $data['sasaran14'] }}</td>
-          <td class="column5">{{ $data['obat2'] }}</td>
-          <td class="column5">{{ $data['obat5'] }}</td>
-          <td class="column5">{{ $data['obat14'] }}</td>
-          <td class="column5">{{ $data['obat2'] + $data['obat5'] + $data['obat14'] }}</td>
-          <td class="column5">{{ $data['cakupan2'] }}</td>
-          <td class="column5">{{ $data['cakupan5'] }}</td>
-          <td class="column5">{{ $data['cakupan14'] }}</td>
-          <td class="column5">{{ $data['cakupan2'] + $data['cakupan5'] + $data['cakupan14'] }}</td>
+          <td class="column55">{{ $desa['name'] }}</td>
+          <td class="column5">{{ $data['sasaran_2_4'] }}</td>
+          <td class="column5">{{ $data['sasaran_5_14'] }}</td>
+          <td class="column5">{{ $data['sasaran_14'] }}</td>
+          <td class="column5">{{ $data['sasaran_total'] }}</td>
+          <td class="column5">{{ $data['mendapat_obat_2_4'] }}</td>
+          <td class="column5">{{ $data['mendapat_obat_5_14'] }}</td>
+          <td class="column5">{{ $data['mendapat_obat_14'] }}</td>
+          <td class="column5">{{ $data['mendapat_obat_total'] }}</td>
+          <td class="column5">{{ $data['cakupan_2_4'] }}</td>
+          <td class="column5">{{ $data['cakupan_5_14'] }}</td>
+          <td class="column5">{{ $data['cakupan_14'] }}</td>
+          <td class="column5">{{ $data['cakupan_total'] }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -616,23 +622,26 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->imunisasiSdKelas1 as $index => $data)
+      @foreach ($dataPuskesmas->dtKelas1 as $index => $data)
+        @php
+          $desa = \App\Models\DesaKelurahanPuskesmas::where('desa_kelurahan_puskesmas_id', $data['desa_kelurahan_puskesmas_id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter">{{ $index + 1 }}</td>
-          <td class="column20">{{ $data['namaSekolah'] }}</td>
-          <td class="column15">{{ $data['desa'] }}</td>
-          <td class="column5">{{ $data['sasaranL'] }}</td>
-          <td class="column5">{{ $data['sasaranP'] }}</td>
-          <td class="column5">{{ $data['dtHasilL'] }}</td>
-          <td class="column5">{{ $data['dtHasilP'] }}</td>
-          <td class="column5">{{ $data['dtCakupanlL'] }}</td>
-          <td class="column5">{{ $data['dtCakupanlP'] }}</td>
-          <td class="column5">{{ $data['dtCakupanlL'] + $data['dtCakupanlP'] }}</td>
-          <td class="column5">{{ $data['campakHasilL'] }}</td>
-          <td class="column5">{{ $data['campakHasilP'] }}</td>
-          <td class="column5">{{ $data['campakCakupanlL'] }}</td>
-          <td class="column5">{{ $data['campakCakupanlP'] }}</td>
-          <td class="column5">{{ $data['campakCakupanlL'] + $data['campakCakupanlP'] }}</td>
+          <td class="column20">{{ $data['namaSekolah'] ?? "" }}</td>
+          <td class="column15">{{ $desa['name'] }}</td>
+          <td class="column5">{{ $data['sasaran_l'] }}</td>
+          <td class="column5">{{ $data['sasaran_p'] }}</td>
+          <td class="column5">{{ $data['imunisasi_dt_hasil_l'] }}</td>
+          <td class="column5">{{ $data['imunisasi_dt_hasil_p'] }}</td>
+          <td class="column5">{{ $data['imunisasi_dt_cakupan_l'] }}</td>
+          <td class="column5">{{ $data['imunisasi_dt_cakupan_p'] }}</td>
+          <td class="column5">{{ $data['imunisasi_dt_cakupan_t'] }}</td>
+          <td class="column5">{{ $data['imunisasi_campak_hasil_l'] }}</td>
+          <td class="column5">{{ $data['imunisasi_campak_hasil_p'] }}</td>
+          <td class="column5">{{ $data['imunisasi_campak_cakupan_l'] }}</td>
+          <td class="column5">{{ $data['imunisasi_campak_cakupan_p'] }}</td>
+          <td class="column5">{{ $data['imunisasi_campak_cakupan_t'] }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -680,18 +689,21 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->imunisasiSdKelas2 as $index => $data)
+      @foreach ($dataPuskesmas->dtKelas2 as $index => $data)
+        @php
+          $desa = \App\Models\DesaKelurahanPuskesmas::where('desa_kelurahan_puskesmas_id', $data['desa_kelurahan_puskesmas_id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter">{{ $index + 1 }}</td>
-          <td class="column30">{{ $data['namaSekolah'] }}</td>
-          <td class="column30">{{ $data['desa'] }}</td>
-          <td class="column5">{{ $data['sasaranL'] }}</td>
-          <td class="column5">{{ $data['sasaranP'] }}</td>
-          <td class="column5">{{ $data['dtHasilL'] }}</td>
-          <td class="column5">{{ $data['dtHasilP'] }}</td>
-          <td class="column5">{{ $data['dtCakupanlL'] }}</td>
-          <td class="column5">{{ $data['dtCakupanlP'] }}</td>
-          <td class="column5">{{ $data['dtCakupanlL'] + $data['dtCakupanlP'] }}</td>
+          <td class="column30">{{ $data['namaSekolah'] ?? "" }}</td>
+          <td class="column30">{{ $desa['name'] }}</td>
+          <td class="column5">{{ $data['sasaran_l'] }}</td>
+          <td class="column5">{{ $data['sasaran_p'] }}</td>
+          <td class="column5">{{ $data['hasil_l'] }}</td>
+          <td class="column5">{{ $data['hasil_p'] }}</td>
+          <td class="column5">{{ $data['cakupan_l'] }}</td>
+          <td class="column5">{{ $data['cakupan_p'] }}</td>
+          <td class="column5">{{ $data['cakupan_t'] }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -721,13 +733,16 @@
       </tr>
     </thead>
     <tbody>
-      @foreach ($dataPuskesmas->imunisasiLengkap as $index => $data)
+      @foreach ($dataPuskesmas->uci as $index => $data)
+        @php
+          $desa = \App\Models\DesaKelurahanPuskesmas::where('desa_kelurahan_puskesmas_id', $data['desa_kelurahan_puskesmas_id'])->get();
+        @endphp
         <tr>
           <td class="column5 textCenter">{{ $index + 1 }}</td>
-          <td class="column30">{{ $data['namaDesa'] }}</td>
+          <td class="column30">{{ $desa['name'] }}</td>
           <td class="column25">{{ $data['sasaran'] }}</td>
-          <td class="column20">{{ $data['idl'] }}</td>
-          <td class="column20">{{ $data['cakupanIdl'] }}</td>
+          <td class="column20">{{ $data['bayi_mendapatkan_idl'] }}</td>
+          <td class="column20">{{ $data['cakupan_bayi_mendapatkan_idl'] }}</td>
         </tr>
         @endforeach
     </tbody>
@@ -754,17 +769,17 @@
     <tbody>
       <tr>
         <td class="column75">a. Jumlah Balita yang telah mendapatkan pelayanan stimulasi deteksi dan intervensi dini tumbuh kembang (SDIDTK) sebanyak  2 kali dalam tahun ini.</td>
-        <td class="column15">{{ $dataPuskesmas->kesehatanAnak[0]['balita'] }}</td>
+        <td class="column15">{{ $dataPuskesmas->anak[0]['jumlah_balita_dapat_SDIDTK_2x_setahun'] }}</td>
         <td class="column10">Balita</td>
       </tr>
       <tr>
         <td class="column75">b. Jumlah anak prasekolah yang dilakukan pemeriksaan indeks karies</td>
-        <td class="column15">{{ $dataPuskesmas->kesehatanAnak[0]['anak'] }}</td>
+        <td class="column15">{{ $dataPuskesmas->anak[0]['jumlah_anak_prasekolah_periksa_indeks_karies'] }}</td>
         <td class="column10">Balita</td>
       </tr>
       <tr>
         <td class="column75">c.   Puskesmas mampu tata laksana kekerasan terhadap perempuan dan anak</td>
-        <td class="column25" colspan="2">{{ $dataPuskesmas->kesehatanAnak[0]['perempuan'] }}</td>
+        <td class="column25" colspan="2">{{ $dataPuskesmas->anak[0]['puskesmas_mampu_tata_laksana_kekerasan'] ? "Ya" : "Tidak" }}</td>
       </tr>
     </tbody>
   </table>
@@ -1106,12 +1121,12 @@
     <tbody>
       <tr>
         <td class="column75">a. Jumlah tenaga Penyehat Tradisional (Hattra) di wilayah puskesmas terdaftar (STPT)</td>
-        <td class="column15">{{ $dataPuskesmas->kesehatanTradisional[0]['orang'] }}</td>
+        <td class="column15">{{ $dataPuskesmas->kesehatanTradisional[0]['jumlah_hattra_stpt'] ?? 0 }}</td>
         <td class="column10">Balita</td>
       </tr>
       <tr>
         <td class="column75">b. Jumlah posyandu yang melaksanakan asuhan Mandiri Kesehatan Tradisional </td>
-        <td class="column15">{{ $dataPuskesmas->kesehatanTradisional[0]['posyandu'] }}</td>
+        <td class="column15">{{ $dataPuskesmas->kesehatanTradisional[0]['jumlah_posyandu_asuhan_kesehatan_tradisional'] ?? 0 }}</td>
         <td class="column10">Balita</td>
       </tr>
     </tbody>
@@ -1137,15 +1152,15 @@
     <tbody>
       <tr>
         <td class="column75">a. Terdapat kebijakan tertulis pelaksanaan K3 di Lingkungan Sekolah</td>
-        <td class="column25">{{ $dataPuskesmas->lingkunganPuskesmas[0]['k3'] }}</td>
+        <td class="column25">{{ $dataPuskesmas->k3[0]['terdapat_kebijakan_tertulis_k3'] ? "Ya" : "Tidak" }}</td>
       </tr>
       <tr>
         <td class="column75">b. Tim K3 di Puskesmas (SK Kepala Puskesmas)</td>
-        <td class="column25">{{ $dataPuskesmas->lingkunganPuskesmas[0]['timK3'] }}</td>
+        <td class="column25">{{ $dataPuskesmas->k3[0]['tim_k3_puskesmas'] ? "Ya" : "Tidak" }}</td>
       </tr>
       <tr>
         <td class="column75">c. Penerapan Kewaspadaan Standar di Lingkungan Puskesmas</td>
-        <td class="column25">{{ $dataPuskesmas->lingkunganPuskesmas[0]['penerapanKewaspadaan'] }}</td>
+        <td class="column25">{{ $dataPuskesmas->k3[0]['penerapan_kewaspadaan_standar_puskesmas'] ? "Ya" : "Tidak" }}</td>
       </tr>
     </tbody>
   </table>
