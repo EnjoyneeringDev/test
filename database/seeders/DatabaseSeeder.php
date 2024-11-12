@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
             PromosiKesehatanSekolahDasarSeeder::class,
             PromosiKesehatanPengendalianPenyakitTidakMenularSeeder::class,
             PromosiKesehatanJiwaNapzaSeeder::class,
+            KesehatanLingkunganSeeder::class,
             PengendalianPenyakitTidakMenularSeeder::class,
             KeperawatanKesehatanMasyarakatSeeder::class,
             KematianDiPuskesmasSeeder::class,

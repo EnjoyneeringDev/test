@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PromosiKesehatanJiwaNapzaResource extends Resource
 {
@@ -23,17 +24,19 @@ class PromosiKesehatanJiwaNapzaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 8;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
+                    ->required()->label('Tanggal'),
                 Forms\Components\Select::make('identitas_puskesmas_id')
                     ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required(),
+                    ->required()->label('Nama Puskesmas'),
                 Forms\Components\TextInput::make('jumlah_kegiatan_penyuluhan')
-                    ->numeric(),
+                    ->numeric()->label('Jumlah kegiatan penyuluhan kesehatan jiwa masyarakat dan NAPZA di puskesmas dan jaringannya'),
             ]);
     }
 
@@ -77,6 +80,11 @@ class PromosiKesehatanJiwaNapzaResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

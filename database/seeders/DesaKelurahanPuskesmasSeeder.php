@@ -17,5 +17,16 @@ class DesaKelurahanPuskesmasSeeder extends Seeder
             'identitas_puskesmas_id' => 1,
             'name' => 'desa A'
         ]);
+
+
+        DB::table('desa_kelurahan_puskesmas')->insert([
+            'identitas_puskesmas_id' => 1,
+            'name' => 'desa AA'
+        ]);
+
+        DB::table('desa_kelurahan_puskesmas')->insert([
+            'identitas_puskesmas_id' => 2,
+            'name' => 'desa B'
+        ]);
     }
 }

@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class KetersediaanRuanganPuskesmasResource extends Resource
 {
@@ -81,6 +82,11 @@ class KetersediaanRuanganPuskesmasResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

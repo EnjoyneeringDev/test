@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class TopikPromosiKesehatanResource extends Resource
 {
@@ -23,16 +24,18 @@ class TopikPromosiKesehatanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('identitas_puskesmas_id')
                     ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required(),
+                    ->required()->label('Nama Puskesmas'),
                 Forms\Components\TextInput::make('nama_topik')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Nama Topik'),
             ]);
     }
 
@@ -42,17 +45,9 @@ class TopikPromosiKesehatanResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('nama_topik')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable()->label('Nama Topik'),
             ])
             ->filters([
                 //
@@ -72,6 +67,11 @@ class TopikPromosiKesehatanResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

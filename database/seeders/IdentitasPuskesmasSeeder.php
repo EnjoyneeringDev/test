@@ -17,5 +17,10 @@ class IdentitasPuskesmasSeeder extends Seeder
             'nama_puskesmas' => 'puskesmas A',
             'kode_registrasi_puskesmas' => 'ABC123',
         ]);
+
+        DB::table('identitas_puskesmas')->insert([
+            'nama_puskesmas' => 'puskesmas Amir',
+            'kode_registrasi_puskesmas' => 'CDBA',
+        ]);
     }
 }

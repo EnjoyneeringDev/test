@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PromosiKesehatanPenyakitMenularResource extends Resource
 {
@@ -23,19 +24,21 @@ class PromosiKesehatanPenyakitMenularResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
                 Forms\Components\Select::make('identitas_puskesmas_id')
                     ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required(),
+                    ->required()->label('Nama Puskesmas'),
+                Forms\Components\DatePicker::make('bulan_tahun')
+                    ->required()->label('Tanggal'),
                 Forms\Components\Select::make('topik_promosi_kesehatan_id')
                     ->relationship('topikPromosiKesehatan', 'nama_topik')
-                    ->required(),
-                Forms\Components\TextInput::make('jumlah_kegiatan_penyuluhan')
+                    ->required()->label('Topik Promosi Kesehatan'),
+                Forms\Components\TextInput::make('jumlah_kegiatan_penyuluhan')->label('Jumlah')
                     ->required()
                     ->numeric(),
             ]);
@@ -45,26 +48,18 @@ class PromosiKesehatanPenyakitMenularResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('bulan_tahun')
-                    ->date()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('topikPromosiKesehatan.nama_topik')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Topik Promosi Kesehatan'),
                 Tables\Columns\TextColumn::make('jumlah_kegiatan_penyuluhan')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Jumlah'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //
@@ -84,6 +79,11 @@ class PromosiKesehatanPenyakitMenularResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

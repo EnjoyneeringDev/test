@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PengendalianPenyakitMenularResource extends Resource
 {
@@ -295,7 +296,7 @@ class PengendalianPenyakitMenularResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                    Tables\Columns\TextColumn::make('suspek_malaria')
+                Tables\Columns\TextColumn::make('suspek_malaria')
                     ->label('Jumlah suspek malaria ditemukan')
                     ->numeric()
                     ->sortable(),
@@ -656,6 +657,11 @@ class PengendalianPenyakitMenularResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

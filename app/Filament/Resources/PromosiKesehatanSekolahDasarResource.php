@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PromosiKesehatanSekolahDasarResource extends Resource
 {
@@ -23,18 +24,20 @@ class PromosiKesehatanSekolahDasarResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 6;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
                 Forms\Components\Select::make('identitas_puskesmas_id')
                     ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required(),
+                    ->required()->label('Nama Puskesmas'),
+                Forms\Components\DatePicker::make('bulan_tahun')
+                    ->required()->label('Tanggal'),
                 Forms\Components\TextInput::make('jumlah_melakukan_sikat_gigi_bersama')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_melaksanakan_aplikasi_flour')
+                    ->numeric()->label('1. Jumlah SD/MI melaksanakan sikat gigi bersama'),
+                Forms\Components\TextInput::make('jumlah_melaksanakan_aplikasi_flour')->label('2. Jumlah SD/MI melaksanakan aplikasi flour')
                     ->numeric(),
             ]);
     }
@@ -43,26 +46,18 @@ class PromosiKesehatanSekolahDasarResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('bulan_tahun')
-                    ->date()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('jumlah_melakukan_sikat_gigi_bersama')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Jumlah Melakukan Sikat Gigi Bersama'),
                 Tables\Columns\TextColumn::make('jumlah_melaksanakan_aplikasi_flour')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Jumlah Melaksanakan Aplikasi Flour'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //
@@ -82,6 +77,11 @@ class PromosiKesehatanSekolahDasarResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

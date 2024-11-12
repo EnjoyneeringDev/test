@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PelaksanaanKegiatanPromosiKesehatanResource extends Resource
 {
@@ -23,32 +24,37 @@ class PelaksanaanKegiatanPromosiKesehatanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Select::make('identitas_puskesmas_id')
                     ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required(),
+                    ->required()->label('Nama Puskemas'),
                 Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
                     ->relationship('desaKelurahanPuskesmas', 'name')
-                    ->required(),
-                Forms\Components\DatePicker::make('bulan_tahun'),
+                    ->required()->label('Nama Desa/Kelurahan Puskesmas'),
+                Forms\Components\DatePicker::make('bulan_tahun')->label('Tanggal'),
                 Forms\Components\TextInput::make('jumlah_kegiatan_advokasi')
-                    ->numeric(),
+                    ->numeric()->label('1. Jumlah kegiatan advokasi tingkat desa/kelurahan dan kecamatan bidang kesehatan'),
                 Forms\Components\TextInput::make('jumlah_kegiatan_dengan_dunia_usaha_dan_lintas_sektor')
-                    ->numeric(),
+                    ->numeric()->label('2. Jumlah kegiatan penggalangan kemitraan dengan dunia usaha dan lintas sektor tingkat desa/kelurahan dan kecamatan bidang kesehatan'),
                 Forms\Components\TextInput::make('jumlah_kegiatan_pembinaan_ukbm')
-                    ->numeric(),
+                    ->numeric()->label('3. Jumlah kegiatan pembinaan UKBM atau kelompok masyarakat'),
                 Forms\Components\TextInput::make('jumlah_kegiatan_penyuluhan_kelompok')
-                    ->numeric(),
+                    ->numeric()->label('4. Jumlah kegiatan penyuluhan kelompok'),
                 Forms\Components\TextInput::make('jumlah_kunjungan_rumah')
-                    ->numeric(),
+                    ->numeric()->label('5. Jumlah kunjungan rumah'),
                 Forms\Components\TextInput::make('jumlah_jenis_media')
-                    ->numeric(),
+                    ->numeric()->label('6. Jumlah jenis media yang
+digunakan dalam
+penyebarluasan Informasi'),
                 Forms\Components\TextInput::make('jumlah_kegiatan_pembinaan_ukgm')
-                    ->numeric(),
-                Forms\Components\Toggle::make('puskesmas_melakukan_promosi_kesehatan'),
+                    ->numeric()->label('7. Jumlah kegiatan pembinaan UKGM pada kelompok masyarakat'),
+                Forms\Components\Toggle::make('puskesmas_melakukan_promosi_kesehatan')->label('8. Puskesmas Melaksanakan
+Promosi Kesehatan'),
             ]);
     }
 
@@ -58,44 +64,13 @@ class PelaksanaanKegiatanPromosiKesehatanResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskemas'),
                 Tables\Columns\TextColumn::make('desaKelurahanPuskesmas.name')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Desa/Kelurahan Puskesmas'),
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_kegiatan_advokasi')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_kegiatan_dengan_dunia_usaha_dan_lintas_sektor')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_kegiatan_pembinaan_ukbm')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_kegiatan_penyuluhan_kelompok')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_kunjungan_rumah')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_jenis_media')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_kegiatan_pembinaan_ukgm')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('puskesmas_melakukan_promosi_kesehatan')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //
@@ -115,6 +90,11 @@ class PelaksanaanKegiatanPromosiKesehatanResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

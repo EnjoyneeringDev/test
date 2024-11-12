@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PromosiKesehatanKIAResource extends Resource
 {
@@ -23,25 +24,27 @@ class PromosiKesehatanKIAResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?int $navigationSort = 5;
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
                 Forms\Components\Select::make('identitas_puskesmas_id')
                     ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required(),
+                    ->required()->label('Nama Puskesmas'),
+                Forms\Components\DatePicker::make('bulan_tahun')
+                    ->required()->label('Tanggal'),
                 Forms\Components\TextInput::make('jumlah_sekolah_terlaksana_kie')
-                    ->numeric(),
+                    ->numeric()->label('1. Jumlah Sekolah terlaksana kegiatan KIE/penyuluhan kesehatan remaja oleh tenaga kesehatan'),
                 Forms\Components\TextInput::make('jumlah_kelompok_remaja_diluar_sekolah_yang_mendapatkan_kie')
-                    ->numeric(),
+                    ->numeric()->label('2. Jumlah kelompok remaja diluar sekolah (karang taruna, remaja mesjid, gereja, pura, wihara, dll) yang mendapatkan KIE/penyuluhan kesehatan remaja'),
                 Forms\Components\TextInput::make('jumlah_remaja_mendapatkan_konseling')
-                    ->numeric(),
+                    ->numeric()->label('3. Jumlah remaja mendapatkan konseling oleh tenaga kesehatan'),
                 Forms\Components\TextInput::make('jumlah_remaja_mendapatkan_konseling_kasus_baru')
-                    ->numeric(),
+                    ->numeric()->label('4. Jumlah remaja (10-18 tahun) yang mendapatkan konseling kasus baru remaja oleh tenaga kesehatan'),
                 Forms\Components\TextInput::make('jumlah_remaja_mendapatkan_kie_reproduksi')
-                    ->numeric(),
+                    ->numeric()->label('5. Jumlah remaja mendapat KIE/penyuluhan kesehatan reproduksi'),
             ]);
     }
 
@@ -49,35 +52,15 @@ class PromosiKesehatanKIAResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('bulan_tahun')
-                    ->date()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('jumlah_sekolah_terlaksana_kie')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_kelompok_remaja_diluar_sekolah_yang_mendapatkan_kie')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_remaja_mendapatkan_konseling')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_remaja_mendapatkan_konseling_kasus_baru')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_remaja_mendapatkan_kie_reproduksi')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Jumlah Sekolah Terlaksana KIE'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //
@@ -97,6 +80,11 @@ class PromosiKesehatanKIAResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array
