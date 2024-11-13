@@ -6,6 +6,7 @@ use App\Filament\Resources\PengendalianPenyakitTidakMenularResource\Pages;
 use App\Filament\Resources\PengendalianPenyakitTidakMenularResource\RelationManagers;
 use App\Models\PengendalianPenyakitTidakMenular;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,67 +29,83 @@ class PengendalianPenyakitTidakMenularResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('jumlah_perempuan_30_50_periksa_payudara_klinis')
-                    ->numeric(),
-                Forms\Components\TextInput::make('persentase_perempuan_30_50_periksa_payudara_klinis')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_perempuan_iva_positif')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_perempuan_dicurigai_kanker_serviks')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_perempuan_kelainan_ginekologi_lain')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_perempuan_pap_smear_positif')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_perempuan_iva_positif_sudah_dikiroterapi')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_perempuan_dengan_benjolan_payudara')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_perempuan_dicurigai_kanker_payudara')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_perempuan_dengan_kelainan_payudara_lainnya')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_penduduk_15_59_periksa_posbindu')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_merokok')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_kurang_konsumsi_buah_sayur')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_kurang_aktivitas_fisik')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_konsumsi_alcohol')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_obesitas')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_obesitas_sentral')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_tekanan_darah_tinggi')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_hiperglikemia')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_hiperkolesterolemia')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_penglihatan')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_pendengaran')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_emosi_mental')
-                    ->numeric(),
-                Forms\Components\TextInput::make('gangguan_ptm_diabetes_melitus_tb')
-                    ->numeric(),
-                Forms\Components\TextInput::make('gangguan_ptm_diabetes_melitus_gestasional')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_penduduk_mengikuti_konseling_diet')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_penduduk_mengikuti_konseling_berhenti_merokok')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_penduduk_mengikuti_konseling_iva_sadanis')
-                    ->numeric(),
+                Fieldset::make('')->schema([
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required(),
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                        ->required()->label('Nama Puskesmas'),
+                ]),
+                Fieldset::make('A. Deteksi Dini Kanker Leher Rahim dan Payudara')->schema([
+                    Forms\Components\TextInput::make('jumlah_perempuan_30_50_periksa_payudara_klinis')
+                        ->numeric()->label('1. Jumlah perempuan 30-50 tahun yang diperiksa IVASADANIS (pemeriksaan payudara klinis)'),
+                    Forms\Components\TextInput::make('persentase_perempuan_30_50_periksa_payudara_klinis')
+                        ->numeric()->label('2. Persentase cakupan perempuan 30-50 tahun yang diperiksa IVA-SADANIS'),
+                    Fieldset::make('3. Jumlah perempuan usia 30-50 tahun dengan:')->schema([
+                        Forms\Components\TextInput::make('jumlah_perempuan_iva_positif')
+                            ->numeric()->label('a. IVA positif'),
+                        Forms\Components\TextInput::make('jumlah_perempuan_dicurigai_kanker_serviks')
+                            ->numeric()->label('b. dicurigai kanker serviks'),
+                        Forms\Components\TextInput::make('jumlah_perempuan_kelainan_ginekologi_lain')
+                            ->numeric()->label('c. kelainan ginekologi lain'),
+                        Forms\Components\TextInput::make('jumlah_perempuan_pap_smear_positif')
+                            ->numeric()->label('d. pap smear positif'),
+                        Forms\Components\TextInput::make('jumlah_perempuan_iva_positif_sudah_dikiroterapi')
+                            ->numeric()->label('e. IVA positif yang sudah dikrioterapi'),
+                        Forms\Components\TextInput::make('jumlah_perempuan_dengan_benjolan_payudara')
+                            ->numeric()->label('f. benjolan payudara'),
+                        Forms\Components\TextInput::make('jumlah_perempuan_dicurigai_kanker_payudara')
+                            ->numeric()->label('g. dicurigai kanker payudara'),
+                        Forms\Components\TextInput::make('jumlah_perempuan_dengan_kelainan_payudara_lainnya')->numeric()->label('h. kelainan payudara lainnya'),
+                    ]),
+
+                ]),
+                Fieldset::make('B. Pemeriksaan Faktor Risiko PTM')->schema([
+                    Forms\Components\TextInput::make('jumlah_penduduk_15_59_periksa_posbindu')
+                        ->numeric()->label('1. Jumlah penduduk berusia 15-59 tahun melakukan pemeriksaan di Posbindu PTM'),
+                    Fieldset::make('2. Jumlah penduduk berusia ≥15 tahun melakukan pemeriksaan di Posbindu PTM dengan masalah kesehatan sebagai berikut:')->schema([
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_merokok')
+                            ->numeric()->label('a. merokok '),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_kurang_konsumsi_buah_sayur')
+                            ->numeric()->label('b. kurang mengkonsumsi buah dan sayur'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_kurang_aktivitas_fisik')
+                            ->numeric()->label('c. kurang melakukan aktivitas fisik'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_konsumsi_alcohol')
+                            ->numeric()->label('d. mengkonsumi alcohol'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_obesitas')
+                            ->numeric()->label('e. obesitas'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_obesitas_sentral')
+                            ->numeric()->label('f. obesitas sentral'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_tekanan_darah_tinggi')
+                            ->numeric()->label('g. menderita tekanan darah tinggi'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_hiperglikemia')
+                            ->numeric()->label('h. Hiperglikemia'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_hiperkolesterolemia')
+                            ->numeric()->label('i. Hiperkolesterolemia'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_penglihatan')
+                            ->numeric()->label('j. gangguan penglihatan '),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_pendengaran')
+                            ->numeric()->label('k. gangguan pendengaran'),
+                        Forms\Components\TextInput::make('jumlah_periksa_posbindu_masalah_emosi_mental')
+                            ->numeric()->label('l. gangguan emosi mental '),
+                    ]),
+                    Fieldset::make('3. Gangguan PTM dengan penyakit penyerta Lain')->schema([
+                        Forms\Components\TextInput::make('gangguan_ptm_diabetes_melitus_tb')
+                            ->numeric()->label('a. diabetes melitus dengan TB'),
+                        Forms\Components\TextInput::make('gangguan_ptm_diabetes_melitus_gestasional')
+                            ->numeric()->label('b. diabetes melitus gestasional'),
+                    ]),
+                    Fieldset::make('4. Jumlah penduduk mengikuti konseling kesehatan:')->schema([
+                        Forms\Components\TextInput::make('jumlah_penduduk_mengikuti_konseling_diet')
+                            ->numeric()->label('a. mengikuti konseling diet'),
+                        Forms\Components\TextInput::make('jumlah_penduduk_mengikuti_konseling_berhenti_merokok')
+                            ->numeric()->label('b. mengikuti konseling berhenti merokok'),
+                        Forms\Components\TextInput::make('jumlah_penduduk_mengikuti_konseling_iva_sadanis')
+                            ->numeric()->label('c. mengikuti konseling IVA-SADANIS'),
+                    ]),
+                ]),
+
+
             ]);
     }
 
@@ -96,104 +113,12 @@ class PengendalianPenyakitTidakMenularResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_30_50_periksa_payudara_klinis')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('persentase_perempuan_30_50_periksa_payudara_klinis')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_iva_positif')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_dicurigai_kanker_serviks')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_kelainan_ginekologi_lain')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_pap_smear_positif')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_iva_positif_sudah_dikiroterapi')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_dengan_benjolan_payudara')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_dicurigai_kanker_payudara')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_perempuan_dengan_kelainan_payudara_lainnya')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_penduduk_15_59_periksa_posbindu')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_merokok')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_kurang_konsumsi_buah_sayur')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_kurang_aktivitas_fisik')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_konsumsi_alcohol')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_obesitas')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_obesitas_sentral')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_tekanan_darah_tinggi')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_hiperglikemia')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_hiperkolesterolemia')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_penglihatan')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_pendengaran')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_periksa_posbindu_masalah_emosi_mental')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('gangguan_ptm_diabetes_melitus_tb')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('gangguan_ptm_diabetes_melitus_gestasional')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_penduduk_mengikuti_konseling_diet')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_penduduk_mengikuti_konseling_berhenti_merokok')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_penduduk_mengikuti_konseling_iva_sadanis')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //
@@ -227,7 +152,7 @@ class PengendalianPenyakitTidakMenularResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

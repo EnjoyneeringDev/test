@@ -6,6 +6,8 @@ use App\Filament\Resources\KeperawatanKesehatanMasyarakatResource\Pages;
 use App\Filament\Resources\KeperawatanKesehatanMasyarakatResource\RelationManagers;
 use App\Models\KeperawatanKesehatanMasyarakat;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,41 +30,49 @@ class KeperawatanKesehatanMasyarakatResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\TextInput::make('identitas_puskesmas_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_individu_mendapatkan_asuhan_keperawatan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_individu_asuhan_keperawatan_perlu_tindak_lanjut')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_keluarga_binaan_dapat_asuhan_keperawatan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_km1')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_km2')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_km3')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_km4')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_lepas_bina')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_kelompok_binaan_dapat_asuhan_keperawatan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_kelompok_binaan_asuhan_km1')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_kelompok_binaan_asuhan_km2')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_kelompok_binaan_asuhan_km3')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_kelompok_binaan_asuhan_km4')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_desa_kelurahan_binaan_dapat_asuhan_keperawatan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('jumlah_desa_kelurahan_binaan_pis_pk')
-                    ->maxLength(255),
+                Fieldset::make('')->schema([
+                    Select::make('identitas_puskesmas_id')->relationship('identitasPuskesmas', 'nama_puskesmas')->required()->label('Nama Puskesmas'),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                ]),
+                Fieldset::make('1. SASARAN INDIVIDU')->schema([
+                    Forms\Components\TextInput::make('jumlah_individu_mendapatkan_asuhan_keperawatan')
+                        ->maxLength(255)->label('a. Jumlah individu yang mendapatkan asuhan keperawatan di puskesmas'),
+                    Forms\Components\TextInput::make('jumlah_individu_asuhan_keperawatan_perlu_tindak_lanjut')
+                        ->maxLength(255)->label('b. Jumlah individu dengan hasil asuhan keperawatan membutuhkan tindak lanjut perawatan'),
+                ]),
+                Fieldset::make('2. SASARAN KELUARGA')->schema([
+                    Forms\Components\TextInput::make('jumlah_keluarga_binaan_dapat_asuhan_keperawatan')
+                        ->maxLength(255)->label('a. Jumlah keluarga binaan yang mendapatkan asuhan keperawatan '),
+                    Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_km1')
+                        ->maxLength(255)->label('b. Jumlah keluarga binaan dengan hasil asuhan KM-I'),
+                    Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_km2')
+                        ->maxLength(255)->label('c. Jumlah keluarga binaan dengan hasil asuhan KM-II'),
+                    Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_km3')
+                        ->maxLength(255)->label('d. Jumlah keluarga binaan dengan hasil asuhan KM-III'),
+                    Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_km4')
+                        ->maxLength(255)->label('e. Jumlah keluarga binaan dengan hasil asuhan KM-IV'),
+                    Forms\Components\TextInput::make('jumlah_keluarga_binaan_asuhan_lepas_bina')
+                        ->maxLength(255)->label('f. Jumlah keluarga binaan dengan hasil asuhan lepas bina'),
+                ]),
+                Fieldset::make('3. SASARAN KELOMPOK')->schema([
+                    Forms\Components\TextInput::make('jumlah_kelompok_binaan_dapat_asuhan_keperawatan')
+                        ->maxLength(255)->label('a. Jumlah kelompok binaan yang mendapatkan asuhan keperawatan '),
+                    Forms\Components\TextInput::make('jumlah_kelompok_binaan_asuhan_km1')
+                        ->maxLength(255)->label('b. Jumlah kelompok binaan dengan hasil asuhan KM-I '),
+                    Forms\Components\TextInput::make('jumlah_kelompok_binaan_asuhan_km2')
+                        ->maxLength(255)->label('c. Jumlah kelompok binaan dengan hasil asuhan KM-II'),
+                    Forms\Components\TextInput::make('jumlah_kelompok_binaan_asuhan_km3')
+                        ->maxLength(255)->label('d. Jumlah kelompok binaan dengan hasil asuhan KM-III'),
+                    Forms\Components\TextInput::make('jumlah_kelompok_binaan_asuhan_km4')
+                        ->maxLength(255)->label('e. Jumlah kelompok binaan dengan hasil asuhan KM-IV'),
+                ]),
+                Fieldset::make('4. SASARAN DESA/KELURAHAN BINAAN')->schema([
+                    Forms\Components\TextInput::make('jumlah_desa_kelurahan_binaan_dapat_asuhan_keperawatan')
+                        ->maxLength(255)->label('a. Jumlah desa/kelurahan binaan yang mendapatkan asuhan keperawatan'),
+                    Forms\Components\TextInput::make('jumlah_desa_kelurahan_binaan_pis_pk')
+                        ->maxLength(255)->label('b. Jumlah desa/kelurahan binaan yang sudah total coverage dalam melaksanakan kegiatan PIS/PK'),
+                ]),
             ]);
     }
 
@@ -70,50 +80,12 @@ class KeperawatanKesehatanMasyarakatResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitas_puskesmas_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_individu_mendapatkan_asuhan_keperawatan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_individu_asuhan_keperawatan_perlu_tindak_lanjut')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_keluarga_binaan_dapat_asuhan_keperawatan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_keluarga_binaan_asuhan_km1')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_keluarga_binaan_asuhan_km2')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_keluarga_binaan_asuhan_km3')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_keluarga_binaan_asuhan_km4')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_keluarga_binaan_asuhan_lepas_bina')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_kelompok_binaan_dapat_asuhan_keperawatan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_kelompok_binaan_asuhan_km1')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_kelompok_binaan_asuhan_km2')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_kelompok_binaan_asuhan_km3')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_kelompok_binaan_asuhan_km4')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_desa_kelurahan_binaan_dapat_asuhan_keperawatan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('jumlah_desa_kelurahan_binaan_pis_pk')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //
@@ -147,7 +119,7 @@ class KeperawatanKesehatanMasyarakatResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

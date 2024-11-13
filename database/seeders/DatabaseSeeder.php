@@ -90,7 +90,9 @@ class DatabaseSeeder extends Seeder
             SaranaPrasaranaProsesSeeder::class,
             ProgramKesehatanLingkunganSeeder::class,
             ProgramPelayananKesehatanTradisionalSeeder::class,
-            PelaksanaanK3PuskesmasSeeder::class
+            PelaksanaanK3PuskesmasSeeder::class,
+            PengendalianPenyakitMenularSeeder::class,
+            PelayananPuskesmasSeeder::class
         ]);
     }
 }
