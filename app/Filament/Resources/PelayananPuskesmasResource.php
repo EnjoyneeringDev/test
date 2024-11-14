@@ -55,7 +55,10 @@ class PelayananPuskesmasResource extends Resource
                 Fieldset::make('I. KUNJUNGAN PUSKESMAS')->schema([
                     Fieldset::make('1. Jumlah kunjungan puskesmas (baru dan lama)')->schema([
                         Forms\Components\TextInput::make('kunjungan_puskesmas_baru')
-                            ->label('Jumlah kunjungan puskesmas')
+                            ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('kunjungan_puskesmas_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('2. Jumlah kunjungan peserta JKN')->schema([
@@ -66,9 +69,6 @@ class PelayananPuskesmasResource extends Resource
                     Fieldset::make('3. Jumlah kunjungan peserta asuransi kesehatan lainnya')->schema([
                         Forms\Components\TextInput::make('kunjungan_peserta_asuransi_baru')
                             ->label('Baru (orang)')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('kunjungan_peserta_asuransi_lama')
-                            ->label('Lama (orang)')
                             ->numeric(),
                     ]),
                     Fieldset::make('4. Jumlah penderita yang dirujuk ke')->schema([
@@ -84,7 +84,7 @@ class PelayananPuskesmasResource extends Resource
                         ->numeric(),
                     Fieldset::make('6. Jumlah penderita yang dirujuk balik dari:')->schema([
                         Forms\Components\TextInput::make('dirujuk_dari_puskesmas_rawat_inap_baru')
-                            ->label('Jumlah penderita yang dirujuk balik dari puskesmas rawat inap')
+                            ->label('a. Puskesmas rawat inap')
                             ->numeric(),
                         Forms\Components\TextInput::make('pelayanan_kesehatan_rujukan_tingkat_lanjut_baru')
                             ->label('b. Fasilitas pelayanan kesehatan rujukan tingkat lanjut')
@@ -122,23 +122,38 @@ class PelayananPuskesmasResource extends Resource
                         Forms\Components\TextInput::make('penambalan_gigi_tetap_baru')
                             ->label('Baru')
                             ->numeric(),
+                        Forms\Components\TextInput::make('penambalan_gigi_tetap_lama')
+                            ->label('Lama')
+                            ->numeric(),
                     ]),
                     Fieldset::make('2. Jumlah penambalan gigi sulung')->schema([
                         Forms\Components\TextInput::make('penambalan_gigi_sulung_baru')
                             ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('penambalan_gigi_sulung_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('3. Jumlah pencabutan gigi tetap')->schema([
                         Forms\Components\TextInput::make('pencabutan_gigi_tetap_baru')
                             ->label('Baru')
                             ->numeric(),
+                        Forms\Components\TextInput::make('pencabutan_gigi_tetap_lama')
+                            ->label('Lama')
+                            ->numeric(),
                     ]),
                     Fieldset::make('4. Jumlah pencabutan gigi sulung')->schema([
                         Forms\Components\TextInput::make('pencabutan_gigi_sulung_baru')
                             ->label('Baru')
                             ->numeric(),
+                        Forms\Components\TextInput::make('pencabutan_gigi_sulung_lama')
+                            ->label('Lama')
+                            ->numeric(),
                     ]),
                     Fieldset::make('5. Jumlah pembersihan karang gigi')->schema([
+                        Forms\Components\TextInput::make('pembersihan_karang_gigi_baru')
+                            ->label('Baru')
+                            ->numeric(),
                         Forms\Components\TextInput::make('pembersihan_karang_gigi_lama')
                             ->label('Lama')
                             ->numeric(),
@@ -147,35 +162,56 @@ class PelayananPuskesmasResource extends Resource
                         Forms\Components\TextInput::make('premedikasi_baru')
                             ->label('Baru')
                             ->numeric(),
+                        Forms\Components\TextInput::make('premedikasi_lama')
+                            ->label('Lama')
+                            ->numeric(),
                     ]),
                     Fieldset::make('7. Jumlah pelayanan rujukan gigi')->schema([
                         Forms\Components\TextInput::make('pelayanan_rujukan_gigi_baru')
-                            ->label('Jumlah pelayanan rujukan gigi')
+                            ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('pelayanan_rujukan_gigi_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('8. Jumlah SD/MI dilaksanakan pemeriksaan kesehatan gigi dan mulut')->schema([
                         Forms\Components\TextInput::make('sd_pemeriksaan_gigi_baru')
                             ->label('Baru')
                             ->numeric(),
+                        Forms\Components\TextInput::make('sd_pemeriksaan_gigi_lama')
+                            ->label('Lama')
+                            ->numeric(),
                     ]),
                     Fieldset::make('9. Jumlah murid SD/MI perlu perawatan kesehatan gigi')->schema([
-                        Forms\Components\TextInput::make('sd_perlu_perawatan_kesehatan_gigi_baru')
+                        Forms\Components\TextInput::make('sd_perawatan_kesehatan_gigi_baru')
                             ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('sd_perawatan_kesehatan_gigi_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('10. Jumlah murid SD/MI yang mendapat perawatan kesehatan gigi')->schema([
-                        Forms\Components\TextInput::make('sd_perawatan_kesehatan_gigi_baru')
-                            ->label('Jumlah murid SD/MI yang mendapat perawatan kesehatan gigi')
+                        Forms\Components\TextInput::make('sd_mendapat_perawatan_gigi_baru')
+                            ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('sd_mendapat_perawatan_gigi_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('11. Jumlah pemasangan gigi tiruan')->schema([
                         Forms\Components\TextInput::make('pemasangan_gigi_tiruan_baru')
-                            ->label('Jumlah pemasangan gigi tiruan')
+                            ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('pemasangan_gigi_tiruan_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('12. Jumlah ibu hamil yang mendapatkan perawatan gigi ')->schema([
                         Forms\Components\TextInput::make('ibu_hamil_perawatan_gigi_baru')
                             ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('ibu_hamil_perawatan_gigi_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('13. Jumlah TK/PAUD yang dilakukan pemeriksaan kesehatan gigi dan mulut')->schema([
@@ -209,20 +245,32 @@ class PelayananPuskesmasResource extends Resource
                         Forms\Components\TextInput::make('resep_rawat_jalan_baru')
                             ->label('Baru')
                             ->numeric(),
+                        Forms\Components\TextInput::make('resep_rawat_jalan_lama')
+                            ->label('Lama')
+                            ->numeric(),
                     ]),
                     Fieldset::make('2. Jumlah resep dari rawat inap')->schema([
                         Forms\Components\TextInput::make('resep_rawat_inap_baru')
                             ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('resep_rawat_inap_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('3. Jumlah konseling obat')->schema([
                         Forms\Components\TextInput::make('konseling_obat_baru')
                             ->label('Baru')
                             ->numeric(),
+                        Forms\Components\TextInput::make('konseling_obat_lama')
+                            ->label('Lama')
+                            ->numeric(),
                     ]),
                     Fieldset::make('4. Jumlah pemberian informasi obat')->schema([
                         Forms\Components\TextInput::make('pemberian_informasi_obat_baru')
                             ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('pemberian_informasi_obat_lama')
+                            ->label('Lama')
                             ->numeric(),
                     ]),
                     Fieldset::make('5')->schema([
@@ -230,10 +278,16 @@ class PelayananPuskesmasResource extends Resource
                             Forms\Components\TextInput::make('antibiotik_ispa_non_pneumonia_baru')
                                 ->label('Baru')
                                 ->numeric(),
+                            Forms\Components\TextInput::make('antibiotik_ispa_non_pneumonia_lama')
+                                ->label('Lama')
+                                ->numeric(),
                         ]),
                         Fieldset::make('Jumlah kasus ISPA Non-Pneumonia')->schema([
                             Forms\Components\TextInput::make('ispa_non_pneumonia_baru')
                                 ->label('Baru')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('ispa_non_pneumonia_lama')
+                                ->label('Lama')
                                 ->numeric(),
                         ])
 
@@ -243,10 +297,16 @@ class PelayananPuskesmasResource extends Resource
                             Forms\Components\TextInput::make('antibiotik_diare_non_spesifik_baru')
                                 ->label('Baru')
                                 ->numeric(),
+                            Forms\Components\TextInput::make('antibiotik_diare_non_spesifik_lama')
+                                ->label('Lama')
+                                ->numeric(),
                         ]),
                         Fieldset::make('Jumlah kasus Diare Non-Spesifik')->schema([
                             Forms\Components\TextInput::make('diare_non_spesifik_baru')
                                 ->label('Baru')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('diare_non_spesifik_lama')
+                                ->label('Lama')
                                 ->numeric(),
                         ])
                     ]),
@@ -255,16 +315,27 @@ class PelayananPuskesmasResource extends Resource
                             Forms\Components\TextInput::make('injeksi_pada_myalgia_baru')
                                 ->label('Baru')
                                 ->numeric(),
+                            Forms\Components\TextInput::make('injeksi_pada_myalgia_lama')
+                                ->label('Lama')
+                                ->numeric(),
                         ]),
                         Fieldset::make('Jumlah kasus Myalgia')->schema([
                             Forms\Components\TextInput::make('kasus_myalgia_baru')
                                 ->label('Baru')
                                 ->numeric(),
+                            Forms\Components\TextInput::make('kasus_myalgia_lama')
+                                ->label('Lama')
+                                ->numeric(),
                         ]),
                     ]),
-                    Forms\Components\TextInput::make('obat_semua_resep_baru')
-                        ->label('8. Jumlah item obat semua resep')
-                        ->numeric(),
+                    Fieldset::make('8. Jumlath item obat semua resep')->schema([
+                        Forms\Components\TextInput::make('obat_semua_resep_baru')
+                            ->label('Baru')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('obat_semua_resep_lama')
+                            ->label('Lama')
+                            ->numeric(),
+                    ])
                 ]),
             ]);
     }
