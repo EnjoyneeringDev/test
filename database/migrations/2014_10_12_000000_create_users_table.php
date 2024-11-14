@@ -53,6 +53,11 @@ return new class extends Migration
             $table->string('kecamatan')->nullable();
             $table->string('kabupaten_kota')->nullable();
             $table->string('provinsi')->nullable();
+            $table->string('nama_pasangan')->nullable();
+            $table->date('tanggal_lahir_pasangan')->nullable();
+            $table->date('tanggal_perkawinan')->nullable();
+            $table->string('pekerjaan_pasangan')->nullable();
+            $table->string('karis_karsu')->nullable();
             $table->timestamps();
         });
     }

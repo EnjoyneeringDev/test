@@ -593,7 +593,7 @@
                     <tr>
                         <td class="column5">{{ $index+1 }}</td>
                         <td class="column60">{{ $registrasi->str ?? "" }}</td>
-                        <td class="column35"><{{ \Carbon\Carbon::parse($registrasi->tanggal_penerbitan_str)->translatedFormat('d F Y') }}</td>
+                        <td class="column35">{{ \Carbon\Carbon::parse($registrasi->tanggal_penerbitan_str)->translatedFormat('d F Y') }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -672,23 +672,23 @@
                 </tr>
                 <tr>
                     <td class="column40">1) Nama</td>
-                    <td class="column55"></td>
+                    <td class="column55">{{ $dataSdm['nama_pasangan'] }}</td>
                 </tr>
                 <tr>
                     <td class="column40">2) Tanggal lahir</td>
-                    <td class="column55"></td>
+                    <td class="column55">{{ \Carbon\Carbon::parse($dataSdm['tanggal_lahir_pasangan'])->translatedFormat('d F Y') }}</td>
                 </tr>
                 <tr>
                     <td class="column40">3) Tanggal perkawinan</td>
-                    <td class="column55"></td>
+                    <td class="column55">{{ \Carbon\Carbon::parse($dataSdm['tanggal_perkawinan'])->translatedFormat('d F Y') }}</td>
                 </tr>
                 <tr>
                     <td class="column40">4) Pekerjaan</td>
-                    <td class="column55"></td>
+                    <td class="column55">{{ $dataSdm['pekerjaan_pasangan'] }}</td>
                 </tr>
                 <tr>
                     <td class="column40">5) No. Seri KARIS/ KARSU</td>
-                    <td class="column55"></td>
+                    <td class="column55">{{ $dataSdm['karis_karsu'] }}</td>
                 </tr>
             </tbody>
         </table>
@@ -703,10 +703,23 @@
                     <td class="column25" style="text-align: center;">Tanggal Lahir</td>
                     <td class="column25" style="text-align: center;">Jenis Kelamin</td>
                 </tr>
+                @php
+                    $anakList = \App\Models\AnakPegawai::where('sumber_daya_manusia_id', $dataSdm['id'])->get();
+                @endphp
                 <tr>
-                    <td class="column45">nama</td>
-                    <td class="column25"></td>
-                    <td class="column25"></td>
+                    <td class="column45">{{ $anakList->nama }}</td>
+                    <td class="column25">{{ \Carbon\Carbon::parse($anakList->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+                    <td class="column25">
+                        @if (isset($anakList['jenis_kelamin']))
+                            @if ($anakList['jenis_kelamin'] === 'male')
+                                Laki-laki
+                            @else
+                                Perempuan
+                            @endif
+                        @else
+                            Perempuan
+                        @endif
+                    </td>
                 </tr>
             </tbody>
         </table>

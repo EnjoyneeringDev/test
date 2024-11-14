@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>12 SPM</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      text-align: center;
+      font-weight: 400;
+    }
+
+    .column2-5 {
+      width: 2.5%;
+    }
+
+    .column5 {
+      width: 5%;
+    }
+
+    .column7-5 {
+      width: 7.5%;
+    }
+
+    .column10 {
+      width: 10%;
+    }
+
+    .column12-5 {
+      width: 12.5%;
+    }
+
+    .column15 {
+      width: 15%;
+    }
+
+    .column20 {
+      width: 20%;
+    }
+
+    .column25 {
+      width: 25%;
+    }
+
+    .column30 {
+      width: 30%;
+    }
+
+    .column35 {
+      width: 35%;
+    }
+
+    .column40 {
+      width: 40%;
+    }
+
+    .column45 {
+      width: 45%;
+    }
+
+    .column50 {
+      width: 50%;
+    }
+
+    .column55 {
+      width: 55%;
+    }
+
+    .column60 {
+      width: 60%;
+    }
+
+    .column65 {
+      width: 60%;
+    }
+
+    .column70 {
+      width: 60%;
+    }
+
+    .column75 {
+      width: 60%;
+    }
+
+    .column80 {
+      width: 60%;
+    }
+
+    .column95 {
+      width: 95%;
+    }
+
+    .columGrey {
+      background: #F1F1F1;
+    }
+
+    .head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .head p {
+      margin: 0;
+    }
+
+    .textCenter {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="head">
+    <p style="text-align: center;">12 SPM</p>
+  </div>
+
+  @php
+    $dateString = $dataPuskesmas->data[0]['bulan_tahun'];
+    $date = \Carbon\Carbon::parse($dateString);
+    $year = $date->format('Y');
+  @endphp
+
+  <div style="margin-top: 50px; ">
+    <div style="width: 400px; display: inline-block; vertical-align: middle; ">
+      <span style="display: inline-block; vertical-align: middle; margin: 0 60px 0 15px; ">Kode</span>
+      @foreach (str_split($dataPuskesmas->idLaporan) as $digit)
+        <span style="width: 20px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px;">
+          {{ $digit }}
+        </span>
+      @endforeach
+    </div>
+  </div>
+
+  <div style="margin-top: 20px; " >
+    <div style="width: 400px; display: inline-block; vertical-align: middle; ">
+      <span style="display: inline-block; vertical-align: middle; margin: 0 15px 0 15px; ">Puskesmas</span>
+      <span style="width: 270px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin: 0 -3px !important; padding: 8px 0 0 8px; ">{{ $dataPuskesmas->namaPuskesmas ?? "" }}</span>
+    </div>
+    <div style="width: 200px; margin-left: 80px; display: inline-block; vertical-align: middle; ">
+        <div>
+            <span  style="display: inline-block; vertical-align: middle; width: 50px; ">Tahun</span>
+            <span  style="width: 100px; height: 30px; display: inline-block; vertical-align: middle; border: 1px solid black; margin-left: 20px; padding: 8px 0 0 8px; ">{{ $year }}</span>
+        </div>
+    </div>
+  </div>
+
+  <h3>desain 1 :</h3>
+  <table style="margin-top: 20px; ">
+    <thead>
+      <tr>
+        <td class="column5 textCenter" rowspan="2">No</td>
+        <td class="column15 textCenter" rowspan="2">Nama Puskesmas</td>
+        <td class="column15 textCenter" rowspan="2">Vaksin Tetanus Difteri (Td)</td>
+        <td class="column15 textCenter" rowspan="2">Tablet tambah darah</td>
+        <td class="column20 textCenter" colspan="4">Alat deteksi risiko ibu hamil</td>
+        <td class="column15 textCenter" rowspan="2">Kartu ibu/rekam medis ibu</td>
+        <td class="column15 textCenter" rowspan="2">Buku KIA</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter">tes kehamilan</td>
+        <td class="column5 textCenter">pemeriksaan Hb</td>
+        <td class="column5 textCenter">tpemeriksaan golongan darah</td>
+        <td class="column5 textCenter">Pemeriksaan glukoprotein urin</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="column5 textCenter">1.</td>
+        <td class="column15">puskesmas a</td>
+        <td class="column15 textCenter">1</td>
+        <td class="column15 textCenter">1</td>
+        <td class="column5 textCenter">2</td>
+        <td class="column5 textCenter">2</td>
+        <td class="column5 textCenter">2</td>
+        <td class="column5 textCenter">2</td>
+        <td class="column15 textCenter">1</td>
+        <td class="column15 textCenter">1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>desain 2 :</h3>
+  <table style="margin-top: 20px; ">
+    <thead>
+      <tr>
+        <td class="column5 textCenter">No</td>
+        <td class="column25 textCenter">Lokasi Pelayanan</td>
+        <td class="column15 textCenter">Jumlah Ibu hamil di Kab (proyeksi)</td>
+        <td class="column15 textCenter">Mendapat pelayanan Sesuai standar</td>
+        <td class="column15 textCenter">Mendapat pelayanan Tidak sesuai standar</td>
+        <td class="column25 textCenter">Keterangan</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="column5 textCenter">No</td>
+        <td class="column25">Nama Puskesmas</td>
+        <td class="column15 textCenter">1</td>
+        <td class="column15 textCenter">2</td>
+        <td class="column15 textCenter">3</td>
+        <td class="column25">Keterangan</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>desain 3 :</h3>
+  <table style="margin-top: 20px; ">
+    <thead>
+      <tr>
+        <td class="column5 textCenter">No</td>
+        <td class="column25 textCenter">Lokasi Pelayanan</td>
+        <td class="column25 textCenter">Jenis Kegiatan</td>
+        <td class="column20 textCenter">Jumlah</td>
+        <td class="column25 textCenter">Keterangan</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="column5 textCenter">No</td>
+        <td class="column25">Lokasi Pelayanan</td>
+        <td class="column25">Ibu Hamil Mendapat pelayanan Sesuai standar</td>
+        <td class="column20 textCenter">2</td>
+        <td class="column25">Keterangan</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>desain 4 :</h3>
+  <table style="margin-top: 20px; ">
+    <thead>
+      <tr>
+        <td class="column5 textCenter">No</td>
+        <td class="column25 textCenter">Lokasi Pelayanan</td>
+        <td class="column25 textCenter">Jenis Kegiatan/Barang</td>
+        <td class="column20 textCenter">Jumlah</td>
+        <td class="column25 textCenter">Keterangan</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="column5 textCenter">No</td>
+        <td class="column25">Lokasi Pelayanan</td>
+        <td class="column25">Vaksin Tetanus Difteri (Td)</td>
+        <td class="column20 textCenter">2</td>
+        <td class="column25">Keterangan</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+
+</html>
