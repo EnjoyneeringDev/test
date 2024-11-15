@@ -65,6 +65,9 @@ return new class extends Migration
             $table->integer('dasar_l')->nullable();
             $table->integer('dasar_p')->nullable();
             $table->integer('dasar_jumlah')->nullable();
+            $table->integer('sasaran_baduta_l')->nullable();
+            $table->integer('sasaran_baduta_p')->nullable();
+            $table->integer('sasaran_baduta_jumlah')->nullable();
             $table->integer('dpt_hb_hib4_l')->nullable();
             $table->integer('dpt_hb_hib4_p')->nullable();
             $table->integer('dpt_hb_hib4_jumlah')->nullable();

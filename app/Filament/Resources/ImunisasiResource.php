@@ -157,7 +157,14 @@ class ImunisasiResource extends Resource
                             Forms\Components\TextInput::make('ipv_jumlah')
                                 ->numeric(),
                         ])->columns(3),
-                        Fieldset::make('Campak/MR')->schema([])->columns(3),
+                        Fieldset::make('Campak/MR')->schema([
+                            Forms\Components\TextInput::make('campak_l')
+                                ->numeric()->label('L'),
+                            Forms\Components\TextInput::make('campak_p')
+                                ->numeric()->label('P'),
+                            Forms\Components\TextInput::make('campak_jumlah')
+                                ->numeric()->label('Jumlah'),
+                        ])->columns(3),
                         Fieldset::make('Imunisasi Dasar Lengkap')->schema([
                             Forms\Components\TextInput::make('dasar_l')
                                 ->numeric()->label('L'),
@@ -167,7 +174,14 @@ class ImunisasiResource extends Resource
                                 ->numeric()->label('Jumlah'),
                         ])->columns(3),
                     ]),
-                    Fieldset::make('Sasaran BADUTA')->schema([])->columns(3),
+                    Fieldset::make('Sasaran BADUTA')->schema([
+                        Forms\Components\TextInput::make('sasaran_baduta_l')
+                            ->numeric()->label('L'),
+                        Forms\Components\TextInput::make('sasaran_baduta_p')
+                            ->numeric()->label('P'),
+                        Forms\Components\TextInput::make('sasaran_baduta_jumlah')
+                            ->numeric()->label('Jumlah'),
+                    ])->columns(3),
                     Fieldset::make('Hasil Imunisasi Lanjutan BADUTA')->schema([
                         Fieldset::make('DPT-HB-Hib4')->schema([
                             Forms\Components\TextInput::make('dpt_hb_hib4_l')
@@ -203,7 +217,6 @@ class ImunisasiResource extends Resource
                             ->numeric()->label('Td5'),
                     ])->columns(5)
                 ]),
-
             ]);
     }
 
