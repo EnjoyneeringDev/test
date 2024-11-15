@@ -22,6 +22,8 @@ class JumlahKasusBaruResource extends Resource
 
     protected static ?string $navigationGroup = 'Form 11. LAPORAN BULANAN KESAKITAN UMUM';
 
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form

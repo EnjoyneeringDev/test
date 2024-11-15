@@ -96,7 +96,8 @@ class DatabaseSeeder extends Seeder
             PelaksanaanK3PuskesmasSeeder::class,
             PengendalianPenyakitMenularSeeder::class,
             PelayananPuskesmasSeeder::class,
-            ProgramUsahaKesehatanSekolahSeeder::class
+            ProgramUsahaKesehatanSekolahSeeder::class,
+            KesakitanBerdasarkanGejalaSeeder::class
         ]);
     }
 }
