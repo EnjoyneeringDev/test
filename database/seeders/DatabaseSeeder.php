@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             SumberDayaPuskesmasSeeder::class,
             RuanganPuskesmasSeeder::class,
             KetersediaanRuanganPuskesmasSeeder::class,
+            KetersediaanPeralatanPuskesmasSeeder::class,
             UserSeeder::class,
             SumberDayaManusiaSeeder::class,
             RiwayatKepangkatanDanGolonganSeeder::class,

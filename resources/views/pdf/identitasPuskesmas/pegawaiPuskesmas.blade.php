@@ -706,21 +706,23 @@
                 @php
                     $anakList = \App\Models\AnakPegawai::where('sumber_daya_manusia_id', $dataSdm['id'])->get();
                 @endphp
-                <tr>
-                    <td class="column45">{{ $anakList->nama }}</td>
-                    <td class="column25">{{ \Carbon\Carbon::parse($anakList->tanggal_lahir)->translatedFormat('d F Y') }}</td>
-                    <td class="column25">
-                        @if (isset($anakList['jenis_kelamin']))
-                            @if ($anakList['jenis_kelamin'] === 'male')
-                                Laki-laki
+                @foreach ($anakList as $index => $anak)
+                    <tr>
+                        <td class="column45">{{ $anak->nama }}</td>
+                        <td class="column25">{{ \Carbon\Carbon::parse($anak->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+                        <td class="column25">
+                            @if (isset($anak['jenis_kelamin']))
+                                @if ($anak['jenis_kelamin'] === 'male')
+                                    Laki-laki
+                                @else
+                                    Perempuan
+                                @endif
                             @else
                                 Perempuan
                             @endif
-                        @else
-                            Perempuan
-                        @endif
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     @endforeach

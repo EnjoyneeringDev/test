@@ -44,6 +44,7 @@ use App\Models\ImunisasiTdAnakSDKelas25;
 use App\Models\JumlahDesaKelurahanUCI;
 use App\Models\ProgramKesehatanAnak;
 use App\Models\GiziIbuAnak;
+use App\Models\KetersediaanPeralatanPuskesmas;
 
 class PdfController extends Controller
 {
@@ -54,6 +55,7 @@ class PdfController extends Controller
         $sumberDayaPuskesmas = SumberDayaPuskesmas::where('identitas_puskesmas_id', $id)->get();
         $ruanganPuskesmas = RuanganPuskesmas::where('identitas_puskesmas_id', $id)->get();
         $sdm = SumberDayaManusia::where('identitas_puskesmas_id', $id)->get();
+        $peralatan = KetersediaanPeralatanPuskesmas::where('identitas_puskesmas_id', $id)->get();
 
         \Log::info("data tes -> " . $sumberDayaPuskesmas);
 
@@ -63,6 +65,7 @@ class PdfController extends Controller
             'sumber_daya_puskesmas' => $sumberDayaPuskesmas,
             'ruangan_puskesmas' => $ruanganPuskesmas,
             'sdm' => $sdm,
+            'peralatan' => $peralatan,
         ];
 
         // Generate the first PDF and save to a temporary file
