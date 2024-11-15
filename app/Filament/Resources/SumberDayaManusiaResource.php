@@ -110,6 +110,16 @@ class SumberDayaManusiaResource extends Resource
                             Forms\Components\TextInput::make('provinsi')
                                 ->maxLength(255)->label('7) Provinsi'),
                         ]),
+                    ]),
+                    Fieldset::make('3. Keluarga')->schema([
+                        Forms\Components\TextInput::make('nama_pasangan')
+                            ->maxLength(255)->label('1) Nama Suami/Istri'),
+                        Forms\Components\DatePicker::make('tanggal_lahir_pasangan')->label('2) Tanggal Lahir'),
+                        Forms\Components\DatePicker::make('tanggal_perkawinan')->label('3) Tanggal Perkawinan'),
+                        Forms\Components\TextInput::make('pekerjaan_pasangan')
+                            ->maxLength(255)->label('4) Pekerjaan'),
+                        Forms\Components\TextInput::make('karis_karsu')
+                            ->maxLength(255)->label('5) No. Seri KARIS/ KARSU '),
                     ])
                 ]),
             ]);

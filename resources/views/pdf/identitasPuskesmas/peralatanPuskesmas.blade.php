@@ -98,7 +98,7 @@
 </head>
 <body>
     <table>
-        <tbody>
+        <thead>
             <tr>
                 <td class="column5" rowspan="2">No</td>
                 <td class="column10" rowspan="2">Jenis/ Nama Ruangan</td>
@@ -166,27 +166,44 @@
                     </span>
                 </td>
             </tr>
-            <tr>
-                <td class="column5">1</td>
-                <td class="column10">Jenis/ Nama Ruangan</td>
-                <td class="column10">Nama Alat</td>
-                <td class="column10">No Seri</td>
-                <td class="column10">Merk</td>
-                <td class="column10">Type</td>
-                <td class="column2-5">2018</td>
-                <td class="column2-5">2018</td>
-                <td class="column2-5">3</td>
-                <td class="column2-5">0</td>
-                <td class="column2-5">2020</td>
-                <td class="column2-5"></td>
-                <td class="column5">Distributor</td>
-                <td class="column10">Harga Alat</td>
-                <td class="column2-5">APBN</td>
-                <td class="column2-5">APBD 1</td>
-                <td class="column2-5">APBD 2</td>
-                <td class="column2-5">Hibah</td>
-                <td class="column10">Negara Pembuat</td>
-            </tr>
+        </thead>
+        <tbody>
+            @foreach ($identitasPuskesmas->peralatan as $index => $dataPeralatan)
+                @php
+                    $ruanganPuskesmas = \App\Models\RuanganPuskesmas::where('id', $dataPeralatan['ruangan_puskesmas_id'])->get();
+                @endphp
+                <tr>
+                    <td class="column5">{{ $index+1 }}</td>
+                    <td class="column10">{{ $ruanganPuskesmas[0]['nama_ruangan'] ?? "" }}</td>
+                    <td class="column10">{{ $dataPeralatan['nama_alat'] ?? "" }}</td>
+                    <td class="column10">{{ $dataPeralatan['no_seri'] ?? "" }}</td>
+                    <td class="column10">{{ $dataPeralatan['merk'] ?? "" }}</td>
+                    <td class="column10">{{ $dataPeralatan['type'] ?? "" }}</td>
+                    <td class="column2-5">{{ $dataPeralatan['tahun_perolehan'] ?? "" }}</td>
+                    <td class="column2-5">{{ $dataPeralatan['tahun_operasional'] ?? "" }}</td>
+                    <td class="column2-5">
+                        @if($dataPeralatan['kondisi'])
+                        &#10003;
+                        @else
+                        @endif
+                    </td>
+                    <td class="column2-5">
+                        @if($dataPeralatan['kondisi'])
+                        @else
+                        &#10003;
+                        @endif
+                    </td>
+                    <td class="column2-5">{{ $dataPeralatan['kalibrasi'] ? $dataPeralatan['tahun_kalibrasi'] ?? "" : "" }}</td>
+                    <td class="column2-5">{{ $dataPeralatan['kalibrasi'] ? "✓" : "" }}</td>
+                    <td class="column5">{{ $dataPeralatan['distributor'] ?? "" }}</td>
+                    <td class="column10">{{ $dataPeralatan['harga_alat'] ?? "" }}</td>
+                    <td class="column2-5">{{ $dataPeralatan['sumber_dana'] == "apbn" ? "✓" : "" }}</td>
+                    <td class="column2-5">{{ $dataPeralatan['sumber_dana'] == "apbd1" ? "✓" : "" }}</td>
+                    <td class="column2-5">{{ $dataPeralatan['sumber_dana'] == "apbd2" ? "✓" : "" }}</td>
+                    <td class="column2-5">{{ $dataPeralatan['sumber_dana'] == "hibah" ? "✓" : "" }}</td>
+                    <td class="column10">{{ $dataPeralatan['negara_pembuat'] ?? "" }}</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 </body>

@@ -15,6 +15,7 @@ use App\Models\KesehatanKerjaDanOlahRaga;
 use App\Models\KetersediaanRuanganPuskesmas;
 use App\Models\PelaksanaanK3Puskesmas;
 use App\Models\Perizinan;
+use App\Models\AnakPegawai;
 use App\Models\RiwayatJabatanKedudukan;
 use App\Models\RuanganPuskesmas;
 use App\Models\SumberDayaManusia;
@@ -42,6 +43,7 @@ class DatabaseSeeder extends Seeder
             SumberDayaPuskesmasSeeder::class,
             RuanganPuskesmasSeeder::class,
             KetersediaanRuanganPuskesmasSeeder::class,
+            KetersediaanPeralatanPuskesmasSeeder::class,
             UserSeeder::class,
             SumberDayaManusiaSeeder::class,
             RiwayatKepangkatanDanGolonganSeeder::class,
@@ -52,6 +54,7 @@ class DatabaseSeeder extends Seeder
             RegistrasiSeeder::class,
             PerizinanSeeder::class,
             PenghargaanSeeder::class,
+            AnakPegawaiSeeder::class,
             KetersediaanKondisiPeralatanPuskesmasSeeder::class,
             DesaKelurahanPuskesmasSeeder::class,
             PelaksanaanKegiatanPromosiKesehatanSeeder::class,
