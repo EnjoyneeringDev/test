@@ -45,6 +45,7 @@ use App\Models\JumlahDesaKelurahanUCI;
 use App\Models\ProgramKesehatanAnak;
 use App\Models\GiziIbuAnak;
 use App\Models\KetersediaanPeralatanPuskesmas;
+use App\Models\ProgramUsahaKesehatanSekolah;
 
 class PdfController extends Controller
 {
@@ -864,6 +865,24 @@ class PdfController extends Controller
             ->whereMonth('created_at', $month)
             ->get();
 
+        $kelas1 = ProgramUsahaKesehatanSekolah::where('identitas_puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->whereMonth('kelas', 1)
+            ->get();
+
+        $kelas7 = ProgramUsahaKesehatanSekolah::where('identitas_puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->whereMonth('kelas', 7)
+            ->get();
+
+        $kelas10 = ProgramUsahaKesehatanSekolah::where('identitas_puskesmas_id', $puskesmas_id)
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->whereMonth('kelas', 10)
+            ->get();
+
         Log::info("Fetched GiziIbuAnak records", [
             'dataRecord' => $dataRecord->toArray(),
         ]);
@@ -881,6 +900,9 @@ class PdfController extends Controller
             'idLaporan' => $idLaporan,
             'namaPuskesmas' => $dataDasarPuskesmas->nama_puskesmas,
             'data' => $dataRecord,
+            'kelas1' => $kelas1,
+            'kelas7' => $kelas7,
+            'kelas10' => $kelas10,
         ];
 
         \Log::info("Data Laporan Gizi Ibu Anak: ", (array) $dataPuskesmas);
