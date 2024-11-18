@@ -30,17 +30,17 @@ class PenyakitMenularPotensiKlbResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\TextInput::make('minggu')
-                    ->required()
-                    ->numeric(),
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                    ->required()->label('Nama Puskesmas'),
                 Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
                     ->relationship('desa_kelurahan_puskesmas', 'name')
-                    ->required(),
+                    ->required()->label('Nama Desa/Kelurahan'),
+                Forms\Components\TextInput::make('minggu')
+                    ->required()
+                    ->numeric()->label('Minggu'),
+                Forms\Components\DatePicker::make('bulan_tahun')
+                    ->required()->label('Tanggal'),
                 Forms\Components\TextInput::make('jumlah_pp')
                     ->numeric(),
                 Forms\Components\TextInput::make('jumlah_melapor_pp')
@@ -65,44 +65,18 @@ class PenyakitMenularPotensiKlbResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('bulan_tahun')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('minggu')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
-                    ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskemas'),
                 Tables\Columns\TextColumn::make('desa_kelurahan_puskesmas.name')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_pp')
+                    ->sortable()->label('Nama Desa/Kelurahan'),
+                Tables\Columns\TextColumn::make('minggu')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_melapor_pp')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_polkesdes')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_melapor_poskesdes')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('total_kunjungan')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_total_meninggal')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Minggu Ke'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

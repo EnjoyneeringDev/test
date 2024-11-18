@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
                 'Form 11. LAPORAN BULANAN KESAKITAN UMUM',
                 'Form 12. KESAKITAN BERDASARKAN GEJALA, PENYEBAB PENYAKIT ATAU KONDISI PASIEN',
                 'Form 13. KESAKITAN GIGI DAN MULUT',
-                'Form 14. KESAKITAN TERBANYAK',
+                'Form 14. LAPORAN BULANAN KESAKITAN TERBANYAK',
                 'Form 15. DATA KEMATIAN DI PUSKESMAS',
                 'Form 16. PEMAKAIAN DAN LEMBAR PERMINTAAN OBAT',
                 'Form 17. PENYAKIT MENULAR POTENSI KLB',

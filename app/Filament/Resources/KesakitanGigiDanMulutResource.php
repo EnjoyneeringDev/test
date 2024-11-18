@@ -6,6 +6,7 @@ use App\Filament\Resources\KesakitanGigiDanMulutResource\Pages;
 use App\Filament\Resources\KesakitanGigiDanMulutResource\RelationManagers;
 use App\Models\KesakitanGigiDanMulut;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,538 +29,566 @@ class KesakitanGigiDanMulutResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('jumlah_puskesmas_pembantu')
-                    ->label('Jumlah Puskesmas Pembantu')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_laporan_puskesma_pembantu')
-                    ->label('Jumlah Laporan Puskesmas Pembantu')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_poskesdes')
-                    ->label('Jumlah Poskesdes')
-                    ->numeric(),
-                Forms\Components\Fieldset::make('Kasus Baru Persistensi Gigi Sulung')
+                Fieldset::make('')->schema([
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                        ->required()->label('Nama Puskesmas'),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                    Forms\Components\TextInput::make('jumlah_puskesmas_pembantu')
+                        ->label('Jumlah Puskesmas Pembantu')
+                        ->numeric(),
+                    Forms\Components\TextInput::make('jumlah_laporan_puskesma_pembantu')
+                        ->label('Jumlah Laporan Puskesmas Pembantu')
+                        ->numeric(),
+                    Forms\Components\TextInput::make('jumlah_poskesdes')
+                        ->label('Jumlah Poskesdes')
+                        ->numeric(),
+                ]),
+                Forms\Components\Fieldset::make('1. Persistensi gigi sulung')
                     ->schema([
-                        Forms\Components\TextInput::make('k0_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k0_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k0_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k0_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Impaksi M3 klasifikasi IA')
+                Forms\Components\Fieldset::make('2. Impaksi M3 klasifikasi IA')
                     ->schema([
-                        Forms\Components\TextInput::make('k1_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k1_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k1_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k1_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Karies gigi')
+                Forms\Components\Fieldset::make('3. Karies gigi')
                     ->schema([
-                        Forms\Components\TextInput::make('k2_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k2_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k2_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k2_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Penyakit jaringan keras gigi lainnya')
+                Forms\Components\Fieldset::make('4. Penyakit jaringan keras gigi lainnya')
                     ->schema([
-                        Forms\Components\TextInput::make('k3_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k3_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k3_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k3_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Penyakit pulpa dan jaringan periapikal')
+                Forms\Components\Fieldset::make('5. Penyakit pulpa dan jaringan periapikal')
                     ->schema([
-                        Forms\Components\TextInput::make('k4_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k4_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k4_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k4_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Gingivitis dan penyakit periodental')
+                Forms\Components\Fieldset::make('6. Gingivitis dan penyakit periodental')
                     ->schema([
-                        Forms\Components\TextInput::make('k5_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k5_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k5_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k5_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Anomali dentofasial')
+                Forms\Components\Fieldset::make('7. Anomali dentofasial')
                     ->schema([
-                        Forms\Components\TextInput::make('k7_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k7_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k7_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k7_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Gangguan gigi dan jaringan penyangga lainnya')
+                Forms\Components\Fieldset::make('8. Gangguan gigi dan jaringan penyangga lainnya')
                     ->schema([
-                        Forms\Components\TextInput::make('k8_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k8_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k8_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k8_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Stomatitis dan lesilesi berhubungan')
+                Forms\Components\Fieldset::make('9. Stomatitis dan lesilesi berhubungan')
                     ->schema([
-                        Forms\Components\TextInput::make('k12_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k12_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k12_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k12_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Angular Cheilitis')
+                Forms\Components\Fieldset::make('10. Angular Cheilitis')
                     ->schema([
-                        Forms\Components\TextInput::make('k13_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k13_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k13_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k13_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Eritema Multiformis')
+                Forms\Components\Fieldset::make('11. Eritema Multiformis')
                     ->schema([
-                        Forms\Components\TextInput::make('k51_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('k51_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('k51_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('k51_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Nyeri orfasial')
+                Forms\Components\Fieldset::make('12. Nyeri orfasial')
                     ->schema([
-                        Forms\Components\TextInput::make('r51_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('r51_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('r51_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('r51_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Kasus Baru Fraktur mahkota yang tidak merusak pulpa')
+                Forms\Components\Fieldset::make('13. Fraktur mahkota yang tidak merusak pulpa')
                     ->schema([
-                        Forms\Components\TextInput::make('s2_4_tahun')
-                            ->label('0-4 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_6_tahun')
-                            ->label('5-6 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_11_tahun')
-                            ->label('7-11 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_12_tahun')
-                            ->label('12 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_14_tahun')
-                            ->label('13-14 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_18_tahun')
-                            ->label('15-18 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_34_tahun')
-                            ->label('19-34 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_44_tahun')
-                            ->label('35-44 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_64_tahun')
-                            ->label('45-64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_lebih_64_tahun')
-                            ->label('>64 Tahun')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_l')
-                            ->label('Laki-laki')
-                            ->numeric(),
-                        Forms\Components\TextInput::make('s2_p')
-                            ->label('Perempuan')
-                            ->numeric(),
+                        Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin)')->schema([
+                            Forms\Components\TextInput::make('s2_4_tahun')
+                                ->label('0-4 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_6_tahun')
+                                ->label('5-6 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_11_tahun')
+                                ->label('7-11 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_12_tahun')
+                                ->label('12 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_14_tahun')
+                                ->label('13-14 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_18_tahun')
+                                ->label('15-18 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_34_tahun')
+                                ->label('19-34 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_44_tahun')
+                                ->label('35-44 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_64_tahun')
+                                ->label('45-64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_lebih_64_tahun')
+                                ->label('>64 Tahun')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_l')
+                                ->label('Laki-laki')
+                                ->numeric(),
+                            Forms\Components\TextInput::make('s2_p')
+                                ->label('Perempuan')
+                                ->numeric(),
+                        ]),
                     ])
                     ->columns(3),
             ]);

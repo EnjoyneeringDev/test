@@ -6,6 +6,7 @@ use App\Filament\Resources\PemakaianPermintaanObatResource\Pages;
 use App\Filament\Resources\PemakaianPermintaanObatResource\RelationManagers;
 use App\Models\PemakaianPermintaanObat;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -31,19 +32,26 @@ class PemakaianPermintaanObatResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('jumlah_pp')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_melapor_pp')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_poskesdes')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_melapor_poskesdes')
-                    ->numeric(),
+                Fieldset::make('')->schema([
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                        ->required(),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                    Fieldset::make('')->schema([
+                        Forms\Components\TextInput::make('jumlah_pp')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('jumlah_melapor_pp')
+                            ->numeric(),
+                    ]),
+                    Fieldset::make('')->schema([
+                        Forms\Components\TextInput::make('jumlah_poskesdes')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('jumlah_melapor_poskesdes')
+                            ->numeric(),
+                    ])
+                ]),
+
                 Repeater::make('permintaan_obat')->schema([
                     TextInput::make('no'),
                     TextInput::make('kode_obat'),
@@ -58,14 +66,14 @@ class PemakaianPermintaanObatResource extends Resource
                     TextInput::make('permintaan'),
                     TextInput::make('pemberian'),
                     TextInput::make('keterangan_rusak')
-                ]),
+                ])->label('Jumlah Permintaan Obat'),
                 Repeater::make('kunjungan_resep')->schema([
                     TextInput::make('jumlah_kunjungan_resep'),
                     TextInput::make('umum_bayar'),
                     TextInput::make('umum_tidak_bayar'),
                     TextInput::make('jkn'),
                     TextInput::make('jumlah'),
-                ]),
+                ])->label('Jumlah Kunjungan Resep'),
             ]);
     }
 
@@ -73,32 +81,12 @@ class PemakaianPermintaanObatResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_pp')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_melapor_pp')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_poskesdes')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_melapor_poskesdes')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

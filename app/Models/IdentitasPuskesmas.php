@@ -187,4 +187,9 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(PelaksanaanK3Puskesmas::class);
     }
+
+    public function kematianDiPuskesmas(): HasMany
+    {
+        return $this->hasMany(KematianDiPuskesmas::class);
+    }
 }

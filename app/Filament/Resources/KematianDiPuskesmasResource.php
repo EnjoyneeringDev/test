@@ -6,6 +6,7 @@ use App\Filament\Resources\KematianDiPuskesmasResource\Pages;
 use App\Filament\Resources\KematianDiPuskesmasResource\RelationManagers;
 use App\Models\KematianDiPuskesmas;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,24 +29,30 @@ class KematianDiPuskesmasResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('identitas_puskesmas_id')
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                    ->required()->label('Nama Puskesmas'),
                 Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\TextInput::make('identitas_puskesmas_id')
-                    ->required()
-                    ->numeric(),
+                    ->required()->label('Tanggal'),
                 Forms\Components\TextInput::make('nik')
-                    ->maxLength(255),
+                    ->maxLength(255)->label('NIK'),
                 Forms\Components\TextInput::make('nama')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('alamat')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('umur')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('kelamin'),
+                Select::make('kelamin')
+                    ->options([
+                        'l' => 'Laki-Laki',
+                        'p' => 'Perempuan',
+                    ]),
+                Forms\Components\TextInput::make('tempat_meninggal'),
                 Forms\Components\DatePicker::make('tanggal_meninggal'),
-                Forms\Components\DatePicker::make('tempat_meninggal'),
-                Forms\Components\DatePicker::make('diagnosa'),
-                Forms\Components\DatePicker::make('icd10'),
+                Forms\Components\TextInput::make('diagnosa')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('icd10')
+                    ->maxLength(255)->label('ICD10'),
             ]);
     }
 
@@ -53,20 +60,15 @@ class KematianDiPuskesmasResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('bulan_tahun')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitas_puskesmas_id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('nik')
-                    ->searchable(),
+                    ->searchable()->label('NIK'),
                 Tables\Columns\TextColumn::make('nama')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('alamat')
-                    ->searchable(),
+                    ->searchable()->label('Nama'),
                 Tables\Columns\TextColumn::make('umur')
-                    ->searchable(),
+                    ->searchable()->label('Umur'),
                 Tables\Columns\TextColumn::make('kelamin'),
                 Tables\Columns\TextColumn::make('tanggal_meninggal')
                     ->date()
@@ -74,20 +76,9 @@ class KematianDiPuskesmasResource extends Resource
                 Tables\Columns\TextColumn::make('tempat_meninggal')
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('diagnosa')
+                Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('icd10')
-                    ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

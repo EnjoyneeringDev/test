@@ -20,9 +20,9 @@ class KesakitanTerbanyakResource extends Resource
 {
     protected static ?string $model = KesakitanTerbanyak::class;
 
-    protected static ?string $navigationLabel = 'Kesakitan Terbanyak';
+    protected static ?string $navigationLabel = 'Laporan Bulanan Kesakitan Terbanyak';
 
-    protected static ?string $navigationGroup = 'Form 14. KESAKITAN TERBANYAK';
+    protected static ?string $navigationGroup = 'Form 14. LAPORAN BULANAN KESAKITAN TERBANYAK';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -30,11 +30,11 @@ class KesakitanTerbanyakResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                    ->required()->label('Nama Puskesmas'),
+                Forms\Components\DatePicker::make('bulan_tahun')
+                    ->required()->label('Tanggal'),
                 Forms\Components\TextInput::make('jumlah_puskesmas_pembantu')
                     ->numeric(),
                 Forms\Components\TextInput::make('jumlah_lapor_puskesmas_pembantu')
@@ -45,10 +45,10 @@ class KesakitanTerbanyakResource extends Resource
                     ->numeric(),
                 Repeater::make('penyakit')->schema([
                     TextInput::make('jenis_penyakit_terbanyak'),
-                    TextInput::make('icd10'),
+                    TextInput::make('icd10')->label('ICD10'),
                     TextInput::make('jumlah_kasus_baru'),
                     TextInput::make('jumlah_kasus_lama'),
-                ]),
+                ])->label('Jenis Penyakit Terbanyak'),
             ]);
     }
 
@@ -56,32 +56,12 @@ class KesakitanTerbanyakResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_puskesmas_pembantu')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_lapor_puskesmas_pembantu')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_poskesdes')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_lapor_poskesdes')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //
@@ -115,7 +95,7 @@ class KesakitanTerbanyakResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

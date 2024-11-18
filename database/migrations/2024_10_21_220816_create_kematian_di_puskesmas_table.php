@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('umur')->nullable();
             $table->enum('kelamin', ['l', 'p'])->nullable();
             $table->date('tanggal_meninggal')->nullable();
-            $table->date('tempat_meninggal')->nullable();
-            $table->date('diagnosa')->nullable();
-            $table->date('icd10')->nullable();
+            $table->string('tempat_meninggal')->nullable();
+            $table->string('diagnosa')->nullable();
+            $table->string('icd10')->nullable();
             $table->timestamps();
         });
     }
