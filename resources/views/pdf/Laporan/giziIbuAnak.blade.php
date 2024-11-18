@@ -765,11 +765,11 @@
           <td class="column5 textCenter">11</td>
           <td class="column45">Jumlah Peserta KB Pasca Persalinan (per metode kontrasepsi) </td>
           @foreach ($desaChunk as $desa)
-            <td class="column10 textCenter"></td>
+            <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->email ?? 0 }}</td>
           @endforeach
 
           @if ($isLastChunk)
-            <td class="column10 textCenter"></td>
+            <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->email ?? 0 }}</td>
           @endif
         </tr>
         <tr>
@@ -804,11 +804,11 @@
           <td class="column5 textCenter">12</td>
           <td class="column45">Calon pendonor darah pendamping ibu hamil</td>
           @foreach ($desaChunk as $desa)
-            <td class="column10 textCenter"></td>
+            <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->email ?? 0 }}</td>
           @endforeach
 
           @if ($isLastChunk)
-            <td class="column10 textCenter"></td>
+            <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->email ?? 0 }}</td>
           @endif
         </tr>
         <tr>
@@ -1114,157 +1114,150 @@
       </tbody>
     </table>
 
-    <table style="margin-top: 20px; ">
-      <thead>
-        <tr>
-          <td class="column5 textCenter">No</td>
-          <td class="column55 textCenter">Kegiatan</td>
-          <td class="column10 textCenter">Kelas 1</td>
-          <td class="column10 textCenter">Kelas 7</td>
-          <td class="column10 textCenter">Kelas 10</td>
-          <td class="column10 textCenter">Jumlah</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="column5 textCenter">1</td>
-          <td class="column55">Jumlah sekolah yang mendapatkan penjaringan kesehatan</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter">2</td>
-          <td class="column55">Jumlah peserta didik yang mendapatkan penjaringan kesehatan</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter">3</td>
-          <td class="column55">Jumlah anak pendidikan dasar (kelas 19) yang mendapatkan pelayanan kesehatan sesuai standar </td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter">4</td>
-          <td class="column55">Jumlah kasus yang ditemukan pada penjaringan kesehatan:</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; a. Hipertensi </td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; b. Anemia Klinis</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; c. Kurus dan sangat kurus</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; Jumlah kasus yang ditemukan pada penjaringan kesehatan:</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; d. Gemuk dan sangat gemuk</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; e. Karies</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; f. Gangguan penglihatan</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; g. Gangguan pendengaran</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; h. Dugaan IMS</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter"></td>
-          <td class="column55">&nbsp;&nbsp; i. Dugaan mengalami kekerasan seksual </td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter">5</td>
-          <td class="column55">Jumlah peserta didik yang mendapatkan rujukan ke puskesmas</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter">6</td>
-          <td class="column55">Jumlah peserta didik yang mendapatkan Pelayanan Kesehatan Peduli Remaja (PKPR)</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-        <tr>
-          <td class="column5 textCenter">7</td>
-          <td class="column55">Jumlah remaja putri yang telah mendapat tablet tambah darah dalam bulan ini (TTD)</td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-          <td class="column10 textCenter"></td>
-        </tr>
-      </tbody>
-    </table>
   @endforeach
+  
+  <table style="margin-top: 20px; ">
+    <thead>
+      <tr>
+        <td class="column5 textCenter">No</td>
+        <td class="column55 textCenter">Kegiatan</td>
+        <td class="column10 textCenter">Kelas 1</td>
+        <td class="column10 textCenter">Kelas 7</td>
+        <td class="column10 textCenter">Kelas 10</td>
+        <td class="column10 textCenter">Jumlah</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="column5 textCenter">1</td>
+        <td class="column55">Jumlah sekolah yang mendapatkan penjaringan kesehatan</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_sekolah_penjaringan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_sekolah_penjaringan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_sekolah_penjaringan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_sekolah_penjaringan_kesehatan + $identitasPuskesmas->kelas7->jumlah_sekolah_penjaringan_kesehatan + $identitasPuskesmas->kelas10->jumlah_sekolah_penjaringan_kesehatan }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter">2</td>
+        <td class="column55">Jumlah peserta didik yang mendapatkan penjaringan kesehatan</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_peserta_penjaringan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_peserta_penjaringan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_peserta_penjaringan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_peserta_penjaringan_kesehatan + $identitasPuskesmas->kelas10->jumlah_peserta_penjaringan_kesehatan + $identitasPuskesmas->kelas10->jumlah_peserta_penjaringan_kesehatan }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter">3</td>
+        <td class="column55">Jumlah anak pendidikan dasar (kelas 19) yang mendapatkan pelayanan kesehatan sesuai standar </td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_anak_pelayanan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_anak_pelayanan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_anak_pelayanan_kesehatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_anak_pelayanan_kesehatan + $identitasPuskesmas->kelas7->jumlah_anak_pelayanan_kesehatan + $identitasPuskesmas->kelas10->jumlah_anak_pelayanan_kesehatan }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter">4</td>
+        <td class="column55">Jumlah kasus yang ditemukan pada penjaringan kesehatan:</td>
+        <td class="column10 textCenter columGrey"></td>
+        <td class="column10 textCenter columGrey"></td>
+        <td class="column10 textCenter columGrey"></td>
+        <td class="column10 textCenter columGrey"></td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; a. Hipertensi </td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_hipertensi ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_hipertensi ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_hipertensi ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_hipertensi + $identitasPuskesmas->kelas7->jumlah_hipertensi + $identitasPuskesmas->kelas10->jumlah_hipertensi }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; b. Anemia Klinis</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_anemia_klinis ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_anemia_klinis ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_anemia_klinis ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_anemia_klinis + $identitasPuskesmas->kelas7->jumlah_anemia_klinis + $identitasPuskesmas->kelas10->jumlah_anemia_klinis }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; c. Kurus dan sangat kurus</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_kurus_sangat_kurus ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_kurus_sangat_kurus ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_kurus_sangat_kurus ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_kurus_sangat_kurus + $identitasPuskesmas->kelas7->jumlah_kurus_sangat_kurus + $identitasPuskesmas->kelas10->jumlah_kurus_sangat_kurus }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; d. Gemuk dan sangat gemuk</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_gemuk_sangat_gemuk ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_gemuk_sangat_gemuk ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_gemuk_sangat_gemuk ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_gemuk_sangat_gemuk + $identitasPuskesmas->kelas7->jumlah_gemuk_sangat_gemuk + $identitasPuskesmas->kelas10->jumlah_gemuk_sangat_gemuk }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; e. Karies</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_karies ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_karies ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_karies ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_karies + $identitasPuskesmas->kelas7->jumlah_karies + $identitasPuskesmas->kelas10->jumlah_karies }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; f. Gangguan penglihatan</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_gangguan_penglihatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_gangguan_penglihatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_gangguan_penglihatan ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_gangguan_penglihatan + $identitasPuskesmas->kelas7->jumlah_gangguan_penglihatan + $identitasPuskesmas->kelas10->jumlah_gangguan_penglihatan }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; g. Gangguan pendengaran</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_gangguan_pendengaran ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_gangguan_pendengaran ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_gangguan_pendengaran ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_gangguan_pendengaran + $identitasPuskesmas->kelas7->jumlah_gangguan_pendengaran + $identitasPuskesmas->kelas10->jumlah_gangguan_pendengaran }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; h. Dugaan IMS</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_dugaan_ims ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_dugaan_ims ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_dugaan_ims ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_dugaan_ims + $identitasPuskesmas->kelas7->jumlah_dugaan_ims + $identitasPuskesmas->kelas10->jumlah_dugaan_ims }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter"></td>
+        <td class="column55">&nbsp;&nbsp; i. Dugaan mengalami kekerasan seksual </td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_dugaan_kekerasan_seksual ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_dugaan_kekerasan_seksual ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_dugaan_kekerasan_seksual ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_dugaan_kekerasan_seksual + $identitasPuskesmas->kelas7->jumlah_dugaan_kekerasan_seksual + $identitasPuskesmas->kelas10->jumlah_dugaan_kekerasan_seksual }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter">5</td>
+        <td class="column55">Jumlah peserta didik yang mendapatkan rujukan ke puskesmas</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_dapat_rujukan_puskesmas ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_dapat_rujukan_puskesmas ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_dapat_rujukan_puskesmas ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_dapat_rujukan_puskesmas + $identitasPuskesmas->kelas7->jumlah_dapat_rujukan_puskesmas + $identitasPuskesmas->kelas10->jumlah_dapat_rujukan_puskesmas }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter">6</td>
+        <td class="column55">Jumlah peserta didik yang mendapatkan Pelayanan Kesehatan Peduli Remaja (PKPR)</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_mendapatkan_pkpr ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_mendapatkan_pkpr ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_mendapatkan_pkpr ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_mendapatkan_pkpr + $identitasPuskesmas->kelas7->jumlah_mendapatkan_pkpr + $identitasPuskesmas->kelas10->jumlah_mendapatkan_pkpr }}</td>
+      </tr>
+      <tr>
+        <td class="column5 textCenter">7</td>
+        <td class="column55">Jumlah remaja putri yang telah mendapat tablet tambah darah dalam bulan ini (TTD)</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_mendapatkan_ttd ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas7->jumlah_mendapatkan_ttd ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas10->jumlah_mendapatkan_ttd ?? 0 }}</td>
+        <td class="column10 textCenter">{{ $identitasPuskesmas->kelas1->jumlah_mendapatkan_ttd + $identitasPuskesmas->kelas7->jumlah_mendapatkan_ttd + $identitasPuskesmas->kelas10->jumlah_mendapatkan_ttd }}</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 
 </html>
