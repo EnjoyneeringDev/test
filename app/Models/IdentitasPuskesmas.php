@@ -192,4 +192,9 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(KematianDiPuskesmas::class);
     }
+
+    public function sasaranProgram(): HasMany
+    {
+        return $this->hasMany(SasaranProgram::class);
+    }
 }

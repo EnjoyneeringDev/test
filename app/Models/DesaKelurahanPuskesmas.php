@@ -72,4 +72,9 @@ class DesaKelurahanPuskesmas extends Model
     {
         return $this->hasMany(JumlahDesaKelurahanUCI::class);
     }
+
+    public function sasaranProgram(): HasMany
+    {
+        return $this->hasMany(SasaranProgram::class);
+    }
 }
