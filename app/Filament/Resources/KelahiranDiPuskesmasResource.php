@@ -6,6 +6,7 @@ use App\Filament\Resources\KelahiranDiPuskesmasResource\Pages;
 use App\Filament\Resources\KelahiranDiPuskesmasResource\RelationManagers;
 use App\Models\KelahiranDiPuskesmas;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -28,29 +29,33 @@ class KelahiranDiPuskesmasResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\TextInput::make('identitas_puskesmas_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('nama_bayi')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kelamin'),
-                Forms\Components\TextInput::make('nama_orang_tua')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('nkk')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('alamat')
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('tanggal_lahir'),
-                Forms\Components\TextInput::make('umur')
-                    ->numeric(),
-                Forms\Components\TextInput::make('bb')
-                    ->numeric(),
-                Forms\Components\TextInput::make('tb')
-                    ->numeric(),
-                Forms\Components\TextInput::make('normal_dirujuk')
-                    ->maxLength(255),
+                Fieldset::make('')->schema([
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                        ->required()->label('Nama Puskesmas'),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                ]),
+                Fieldset::make('')->schema([
+                    Forms\Components\TextInput::make('nama_bayi')
+                        ->maxLength(255)->label('Nama ')->label('Nama Bayi'),
+                    Forms\Components\TextInput::make('kelamin')->label('L/P'),
+                    Forms\Components\TextInput::make('nama_orang_tua')
+                        ->maxLength(255)->label('Nama Orangtua'),
+                    Forms\Components\TextInput::make('nkk')
+                        ->maxLength(255)->label('NKK'),
+                    Forms\Components\TextInput::make('alamat')
+                        ->maxLength(255)->label('Alamat lengkap (Nama Jalan, RT/RW, No. rumah, Desa, Kecamatan, kab/kota,Provinsi)'),
+                    Forms\Components\DateTimePicker::make('tanggal_lahir')->label('Tanggal Dan Jam Lahir'),
+                    Forms\Components\TextInput::make('umur')
+                        ->numeric()->label('Umur Kehamilan Saat Lahir'),
+                    Forms\Components\TextInput::make('bb')
+                        ->numeric()->label('Berat Badan'),
+                    Forms\Components\TextInput::make('tb')
+                        ->numeric()->label('Tinggi Badan'),
+                    Forms\Components\TextInput::make('normal_dirujuk')
+                        ->maxLength(255)->label('Normal/Dirujuk'),
+                ]),
             ]);
     }
 
@@ -58,59 +63,26 @@ class KelahiranDiPuskesmasResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable()->label('Nama Puskemas'),
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitas_puskesmas_id')
-                    ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Tanggal'),
                 Tables\Columns\TextColumn::make('nama_bayi')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kelamin'),
+                    ->searchable()->label('Nama Bayi'),
+                Tables\Columns\TextColumn::make('kelamin')->label('Jenis Kelamin'),
                 Tables\Columns\TextColumn::make('nama_orang_tua')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('nkk')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('alamat')
-                    ->searchable(),
+                    ->searchable()->label('Nama Orang Tua'),
                 Tables\Columns\TextColumn::make('tanggal_lahir')
                     ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('umur')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('bb')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('tb')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('normal_dirujuk')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal Lahir'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('downloadPdf')
-                    ->label('Download PDF')
-                    ->color('primary')
-                    ->action(function (KelahiranDiPuskesmas $record) {
-                        // Pass both the record's id and identitasPuskesmas.id to the route
-                        return redirect()->route('download.laporan.kelahiran.pdf', [
-                            'record_id' => $record->id, // the record's own id
-                            'puskesmas_id' => $record->identitas_puskesmas_id, // the identitasPuskesmas id
-                        ]);
-                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -128,7 +100,7 @@ class KelahiranDiPuskesmasResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

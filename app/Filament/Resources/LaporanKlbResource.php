@@ -6,6 +6,7 @@ use App\Filament\Resources\LaporanKlbResource\Pages;
 use App\Filament\Resources\LaporanKlbResource\RelationManagers;
 use App\Models\LaporanKlb;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -18,8 +19,6 @@ class LaporanKlbResource extends Resource
 {
     protected static ?string $model = LaporanKlb::class;
 
-
-
     protected static ?string $navigationLabel = 'KLB 24 Jam';
 
     protected static ?string $navigationGroup = 'Form 18. KLB 24 Jam';
@@ -30,45 +29,47 @@ class LaporanKlbResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('kepada')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('tanggal')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('desa_kelurahan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('kecamatan')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('penderita')
-                    ->numeric(),
-                Forms\Components\TextInput::make('kematian')
-                    ->numeric(),
-                Forms\Components\Fieldset::make('Penyakit')
+                Fieldset::make('')->schema([
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                        ->required(),
+                    Forms\Components\TextInput::make('kepada')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('tanggal')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('desa_kelurahan')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('kecamatan')
+                        ->maxLength(255),
+                    Forms\Components\TextInput::make('penderita')
+                        ->numeric(),
+                    Forms\Components\TextInput::make('kematian')
+                        ->numeric(),
+                ]),
+                Forms\Components\Fieldset::make('Tersangka Penyakit')
                     ->schema([
-                        Forms\Components\Toggle::make('kolera'),
-                        Forms\Components\Toggle::make('Pes'),
-                        Forms\Components\Toggle::make('dbd'),
-                        Forms\Components\Toggle::make('campak'),
-                        Forms\Components\Toggle::make('polio'),
-                        Forms\Components\Toggle::make('difteri'),
-                        Forms\Components\Toggle::make('pertusis'),
-                        Forms\Components\Toggle::make('rabies'),
-                        Forms\Components\Toggle::make('malaria'),
-                        Forms\Components\Toggle::make('avian'),
-                        Forms\Components\Toggle::make('antraks'),
-                        Forms\Components\Toggle::make('leptospirosis'),
-                        Forms\Components\Toggle::make('chikungunya'),
-                        Forms\Components\Toggle::make('keracunan'),
+                        Forms\Components\Toggle::make('kolera')->label('Kolera'),
+                        Forms\Components\Toggle::make('Pes')->label('Pes'),
+                        Forms\Components\Toggle::make('dbd')->label('DBD'),
+                        Forms\Components\Toggle::make('campak')->label('Campak'),
+                        Forms\Components\Toggle::make('polio')->label('Polio'),
+                        Forms\Components\Toggle::make('difteri')->label('Difteri'),
+                        Forms\Components\Toggle::make('pertusis')->label('Pertusis'),
+                        Forms\Components\Toggle::make('rabies')->label('Rabies'),
+                        Forms\Components\Toggle::make('malaria')->label('Malaria'),
+                        Forms\Components\Toggle::make('avian')->label('Avian'),
+                        Forms\Components\Toggle::make('antraks')->label('Antraks'),
+                        Forms\Components\Toggle::make('leptospirosis')->label('Leptospiroris'),
+                        Forms\Components\Toggle::make('chikungunya')->label('Chikungunya'),
+                        Forms\Components\Toggle::make('keracunan')->label('Keracunan'),
                     ])
                     ->columns(3),
-                Forms\Components\Fieldset::make('Gejala')
+                Forms\Components\Fieldset::make('Dengan gejala-gejala sebagai berikut ')
                     ->schema([
-                        Forms\Components\Toggle::make('muntah'),
-                        Forms\Components\Toggle::make('berak'),
+                        Forms\Components\Toggle::make('muntah')->label('Muntah'),
+                        Forms\Components\Toggle::make('berak')->label('Berak-berak'),
                         Forms\Components\Toggle::make('menggigil'),
                         Forms\Components\Toggle::make('turgor_jelek'),
                         Forms\Components\Toggle::make('kaku_kuduk'),
@@ -94,13 +95,13 @@ class LaporanKlbResource extends Resource
                     ])
                     ->columns(3),
                 Forms\Components\TextInput::make('tindakan')
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Tindakan yang telah diambil'),
                 Forms\Components\TextInput::make('telpon')
                     ->tel()
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Telp'),
                 Forms\Components\TextInput::make('email')
                     ->email()
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Email'),
             ]);
     }
 
@@ -108,116 +109,18 @@ class LaporanKlbResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable()->label('Nama Puskesmas'),
+                Tables\Columns\TextColumn::make('kepada')
+                    ->searchable()->label('Kepada'),
+                Tables\Columns\TextColumn::make('tanggal')
+                    ->searchable()->label('Tanggal'),
+                Tables\Columns\TextColumn::make('desa_kelurahan')
+                    ->searchable()->label('Desa/Kelurahan'),
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('kepada')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('tanggal')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('desa_kelurahan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kecamatan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('penderita')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('kematian')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('kolera')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('Pes')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('dbd')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('campak')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('polio')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('difteri')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('pertusis')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('rabies')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('malaria')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('avian')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('antraks')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('leptospirosis')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('chikungunya')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('keracunan')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('muntah')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('berak')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('menggigil')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('turgor_jelek')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('kaku_kuduk')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('sakit_perut')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('hidrofobi')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('kejang')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('syok')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('batuk_beruntun')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('panas_demam')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('batuk')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('pilek')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('pusing')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('kesadaran_menurun')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('pingsan')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('bercak_merah_kulit')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('lumpuh')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('ikterus')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('mulut_suka_dibuka')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('bercak_putih_faring')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('meringkil')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('pendarahan')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('gatal')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('tindakan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('telpon')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

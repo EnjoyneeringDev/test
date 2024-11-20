@@ -6,6 +6,7 @@ use App\Filament\Resources\PenyakitMenularPotensiKlbResource\Pages;
 use App\Filament\Resources\PenyakitMenularPotensiKlbResource\RelationManagers;
 use App\Models\PenyakitMenularPotensiKlb;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -30,34 +31,36 @@ class PenyakitMenularPotensiKlbResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required()->label('Nama Puskesmas'),
-                Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
-                    ->relationship('desa_kelurahan_puskesmas', 'name')
-                    ->required()->label('Nama Desa/Kelurahan'),
-                Forms\Components\TextInput::make('minggu')
-                    ->required()
-                    ->numeric()->label('Minggu'),
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required()->label('Tanggal'),
-                Forms\Components\TextInput::make('jumlah_pp')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_melapor_pp')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_polkesdes')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_melapor_poskesdes')
-                    ->numeric(),
-                Repeater::make('penyakit')->schema([
-                    TextInput::make('nama_penyakit'),
-                    TextInput::make('kasus'),
-                    TextInput::make('meninggal'),
+                Fieldset::make('')->schema([
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                        ->required()->label('Nama Puskesmas'),
+                    Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
+                        ->relationship('desa_kelurahan_puskesmas', 'name')
+                        ->required()->label('Nama Desa/Kelurahan'),
+                    Forms\Components\TextInput::make('minggu')
+                        ->required()
+                        ->numeric()->label('Minggu'),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                    Fieldset::make('')->schema([
+                        Forms\Components\TextInput::make('jumlah_pp')
+                            ->numeric()->label('Jumlah PP'),
+                        Forms\Components\TextInput::make('jumlah_melapor_pp')
+                            ->numeric()->label('Jumlah Melapor'),
+                    ]),
+                    Fieldset::make('')->schema([
+                        Forms\Components\TextInput::make('jumlah_polkesdes')
+                            ->numeric()->label('Jumlah Poskesdes/Bidan Desa'),
+                        Forms\Components\TextInput::make('jumlah_melapor_poskesdes')
+                            ->numeric()->label('jumlah Melapor'),
+                    ]),
                 ]),
-                Forms\Components\TextInput::make('total_kunjungan')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_total_meninggal')
-                    ->numeric(),
+                Repeater::make('penyakit')->schema([
+                    TextInput::make('nama_penyakit')->label('Nama Penyakit'),
+                    TextInput::make('kasus')->label('Jumlah Kasus'),
+                    TextInput::make('meninggal')->label('Jumlah Meninggal'),
+                ]),
             ]);
     }
 
