@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('spm_dinkes', function (Blueprint $table) {
+        Schema::create('spm_puskesmas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('identitas_puskesmas_id');
             $table->integer('vaksin_td')->nullable(); //spm 1
             $table->integer('tablet_tambah_darah')->nullable();
             $table->integer('tes_kehamilan')->nullable();
             $table->integer('pemeriksaan_hb')->nullable();
-            $table->integer('vaksin_td')->nullable();
             $table->integer('pemeriksaan_golongan_darah')->nullable();
             $table->integer('pemeriksaan_glukoprotein_urin')->nullable();
-            $table->integer('vaksin_td')->nullable();
             $table->integer('kartu_ibu')->nullable();
             $table->integer('buku_kia')->nullable();
             $table->integer('dokter_ibu_hamil')->nullable();
@@ -94,7 +92,7 @@ return new class extends Migration
             $table->integer('alat_ukur_berat_badan')->nullable();
             $table->integer('alat_ukur_tinggi_badan')->nullable();
             $table->integer('alat_ukur_lingkar_perut')->nullable();
-            $table->integer('tensimeter')->nullable();
+            $table->integer('tensimeter_usia_produktif')->nullable();
             $table->integer('glukometer')->nullable();
             $table->integer('tes_strip_gula_darah')->nullable();
             $table->integer('lancet')->nullable();
@@ -138,6 +136,8 @@ return new class extends Migration
             $table->integer('strip_tes_gula_darah_diabetes_melitus')->nullable();
             $table->integer('kapas_alkohol_dibates_melitus')->nullable();
             $table->integer('lancet_diabetes_melitus')->nullable();
+            $table->integer('si_ptm_diabetes_melitus')->nullable();
+            $table->integer('media_kie_diabetes_melitus')->nullable();
             $table->integer('dokter_diabetes_melitus')->nullable(); 
             $table->integer('bidan_diabetes_melitus')->nullable();
             $table->integer('perawat_diabetes_melitus')->nullable();
@@ -150,6 +150,9 @@ return new class extends Migration
             $table->integer('kit_2_alat_fiksasi')->nullable();
             $table->integer('formulir_pencatatan_pelaporan')->nullable();
             $table->integer('media_kie')->nullable();
+            $table->integer('proyeksi_odgj')->nullable();
+            $table->integer('odgj_mendapat_pelayanan_sesuai_standar')->nullable();
+            $table->integer('odgj_mendapat_pelayanan_tidak_sesuai_standar')->nullable();
             $table->integer('media_kie_tuberkulosis')->nullable(); //spm 11
             $table->integer('reagen_zn_tb')->nullable();
             $table->integer('masker_rumah_tangga_n95')->nullable();
@@ -158,9 +161,8 @@ return new class extends Migration
             $table->integer('formulir_pencatatan_pelaporan_tuberkolosis')->nullable();
             $table->integer('pedoman_operasional_tuberkolosis')->nullable();
             $table->integer('dokter_tuberkolosis')->nullable();
-            $table->integer('bidan_tuberkolosis')->nullable();
-            $table->integer('perawat_tuberkolosis')->nullable();
-            $table->integer('gizi_tuberkolosis')->nullable();
+            $table->integer('atlm_tuberkolosis')->nullable();
+            $table->integer('penata_rontgen_tuberkolosis')->nullable();
             $table->integer('nakes_masyarakat_tuberkolosis')->nullable();
             $table->integer('tenaga_non_kesehatan_terlatiah_tuberkolosis')->nullable();
             $table->integer('proyeksi_tuberkolosis')->nullable();
@@ -173,6 +175,7 @@ return new class extends Migration
             $table->integer('plester')->nullable();
             $table->integer('lancet_jarum_steril')->nullable();
             $table->integer('vacutainer_dan_jarum_sesuai')->nullable();
+            $table->integer('alat_tulis_virus')->nullable();
             $table->integer('rekam_medis_virus')->nullable();
             $table->integer('dokter_virus')->nullable();
             $table->integer('bidan_virus')->nullable();
@@ -193,6 +196,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('spm_dinkes');
+        Schema::dropIfExists('spm_puskesmas');
     }
 };
