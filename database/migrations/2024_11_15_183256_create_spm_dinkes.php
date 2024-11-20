@@ -138,7 +138,7 @@ return new class extends Migration
             $table->integer('strip_tes_gula_darah_diabetes_melitus')->nullable();
             $table->integer('kapas_alkohol_dibates_melitus')->nullable();
             $table->integer('lancet_diabetes_melitus')->nullable();
-            $table->integer('dokter_diabetes_melitus')->nullable();
+            $table->integer('dokter_diabetes_melitus')->nullable(); 
             $table->integer('bidan_diabetes_melitus')->nullable();
             $table->integer('perawat_diabetes_melitus')->nullable();
             $table->integer('gizi_diabetes_melitus')->nullable();
