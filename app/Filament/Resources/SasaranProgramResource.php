@@ -15,6 +15,12 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SasaranProgramResource extends Resource
 {
+    protected static ?int $navigationSort = 7;
+
+    protected static ?string $navigationLabel = 'V. SASARAN PROGRAM';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR';
+
     protected static ?string $model = SasaranProgram::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
