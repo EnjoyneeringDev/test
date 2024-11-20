@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('jumlah_kasus_barus', function (Blueprint $table) {
             $table->id();
+            $table->date('bulan_tahun');
             $table->foreignId("identitas_puskesmas_id");
             $table->foreignId("jenis_penyakit_id");
             $table->integer("0_7_hari")->nullable();

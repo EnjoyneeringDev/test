@@ -44,13 +44,13 @@ class JenisPenyakitResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('kelompokPenyakit.id')
+                Tables\Columns\TextColumn::make('kelompokPenyakit.nama')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Kelompok Penyakit'),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('icd10')
-                    ->searchable(),
+                    ->searchable()->label('ICD10'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

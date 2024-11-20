@@ -14,6 +14,7 @@ class JumlahKasusBaruSeeder extends Seeder
     public function run(): void
     {
         DB::table('jumlah_kasus_barus')->insert([
+            'bulan_tahun' => '2024-10-10',
             "identitas_puskesmas_id" => 1,
             'jenis_penyakit_id' => 1
         ]);
