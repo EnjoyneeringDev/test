@@ -14,8 +14,8 @@ class UKBMDiwilayahKerjaPuskesmasSeeder extends Seeder
     public function run(): void
     {
         //
-        DB::table('u_k_b_m_di_wilayah_kerja_puskesmas')->insert([
-            'bulan_tahun' => '2024/10/12',
+        DB::table('ukbm_di_wilayah_kerja_puskesmas')->insert([
+            'bulan_tahun' => '2024-10-12',
             'identitas_puskesmas_id' => 1,
             'desa_kelurahan_puskesmas_id' => 1
         ]);

@@ -17,7 +17,7 @@ class DesaDanaUKBM extends Model
         return $this->belongsTo(IdentitasPuskesmas::class);
     }
 
-    public function desaKalurahanPuskesmas(): BelongsTo
+    public function desaKelurahanPuskesmas(): BelongsTo
     {
         return $this->belongsTo(DesaKelurahanPuskesmas::class);
     }

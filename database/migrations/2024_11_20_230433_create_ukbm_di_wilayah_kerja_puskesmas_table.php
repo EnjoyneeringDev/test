@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('u_k_b_m_di_wilayah_kerja_puskesmas', function (Blueprint $table) {
+        Schema::create('ukbm_di_wilayah_kerja_puskesmas', function (Blueprint $table) {
             $table->id();
             $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('u_k_b_m_di_wilayah_kerja_puskesmas');
+        Schema::dropIfExists('ukbm_di_wilayah_kerja_puskesmas');
     }
 };

@@ -18,10 +18,8 @@ return new class extends Migration
             $table->integer('tablet_tambah_darah')->nullable();
             $table->integer('tes_kehamilan')->nullable();
             $table->integer('pemeriksaan_hb')->nullable();
-            $table->integer('vaksin_td')->nullable();
             $table->integer('pemeriksaan_golongan_darah')->nullable();
             $table->integer('pemeriksaan_glukoprotein_urin')->nullable();
-            $table->integer('vaksin_td')->nullable();
             $table->integer('kartu_ibu')->nullable();
             $table->integer('buku_kia')->nullable();
             $table->integer('dokter_ibu_hamil')->nullable();
@@ -124,7 +122,6 @@ return new class extends Migration
             $table->integer('usia_lanjut_mendapat_pelayanan_sesuai_standar')->nullable();
             $table->integer('usia_lanjut_mendapat_pelayanan_tidak_sesuai_standar')->nullable();
             $table->integer('pengendalian_hipertensi_dan_media_kie')->nullable(); //spm 8
-            $table->integer('tensimeter')->nullable();
             $table->integer('formulir_pencatatan_dan_pelaporan_app_ptm')->nullable();
             $table->integer('dokter_hipertensi')->nullable();
             $table->integer('bidan_hipertensi')->nullable();

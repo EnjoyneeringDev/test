@@ -6,6 +6,7 @@ use App\Filament\Resources\CakupanPOMPFilariasisResource\Pages;
 use App\Filament\Resources\CakupanPOMPFilariasisResource\RelationManagers;
 use App\Models\CakupanPOMPFilariasis;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -18,6 +19,8 @@ class CakupanPOMPFilariasisResource extends Resource
 {
     protected static ?string $model = CakupanPOMPFilariasis::class;
 
+    protected static ?int $navigationSort = 5;
+
     protected static ?string $navigationLabel = '2b. Cakupan POMP Filariasis';
 
     protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
@@ -28,38 +31,50 @@ class CakupanPOMPFilariasisResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('bulan_tahun')
-                    ->required(),
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('desa_kelurahan_puskesmas_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('sasaran_2_4')
-                    ->numeric(),
-                Forms\Components\TextInput::make('sasaran_5_14')
-                    ->numeric(),
-                Forms\Components\TextInput::make('sasaran_14')
-                    ->numeric(),
-                Forms\Components\TextInput::make('sasaran_total')
-                    ->numeric(),
-                Forms\Components\TextInput::make('mendapat_obat_2_4')
-                    ->numeric(),
-                Forms\Components\TextInput::make('mendapat_obat_5_14')
-                    ->numeric(),
-                Forms\Components\TextInput::make('mendapat_obat_14')
-                    ->numeric(),
-                Forms\Components\TextInput::make('mendapat_obat_total')
-                    ->numeric(),
-                Forms\Components\TextInput::make('cakupan_2_4')
-                    ->numeric(),
-                Forms\Components\TextInput::make('cakupan_5_14')
-                    ->numeric(),
-                Forms\Components\TextInput::make('cakupan_14')
-                    ->numeric(),
-                Forms\Components\TextInput::make('cakupan_total')
-                    ->numeric(),
+                Fieldset::make('')->schema([
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                        ->required()->label('Nama Puskesmas'),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                ]),
+                Fieldset::make('2. PENGENDALIAN FILARIASIS')->schema([
+                    Fieldset::make('a. Jumlah Penderita Kronis Filariasis')->schema([
+                        Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
+                            ->relationship('desaKelurahanPuskesmas', 'name')
+                            ->required()->label('Nama Desa/Kelurahan Puskesmas'),
+                        Fieldset::make('Sasaran')->schema([
+                            Forms\Components\TextInput::make('sasaran_2_4')
+                                ->numeric()->label('2-4'),
+                            Forms\Components\TextInput::make('sasaran_5_14')
+                                ->numeric()->label('5-14'),
+                            Forms\Components\TextInput::make('sasaran_14')
+                                ->numeric()->label('>14'),
+                            Forms\Components\TextInput::make('sasaran_total')
+                                ->numeric()->label('Total'),
+                        ])->columns(4),
+                        Fieldset::make('Mendapat Obat')->schema([
+                            Forms\Components\TextInput::make('mendapat_obat_2_4')
+                                ->numeric()->label('2-4'),
+                            Forms\Components\TextInput::make('mendapat_obat_5_14')
+                                ->numeric()->label('5-14'),
+                            Forms\Components\TextInput::make('mendapat_obat_14')
+                                ->numeric()->label('>14'),
+                            Forms\Components\TextInput::make('mendapat_obat_total')
+                                ->numeric()->label('Total'),
+                        ])->columns(4),
+                        Fieldset::make('Cakupan')->schema([
+                            Forms\Components\TextInput::make('cakupan_2_4')
+                                ->numeric()->label('2-4'),
+                            Forms\Components\TextInput::make('cakupan_5_14')
+                                ->numeric()->label('5-14'),
+                            Forms\Components\TextInput::make('cakupan_14')
+                                ->numeric()->label('>14'),
+                            Forms\Components\TextInput::make('cakupan_total')
+                                ->numeric()->label('Total'),
+                        ])->columns(4)
+                    ]),
+                ]),
             ]);
     }
 
@@ -67,59 +82,15 @@ class CakupanPOMPFilariasisResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable()->label('Nama Puskesmas'),
+                Tables\Columns\TextColumn::make('desaKelurahanPuskesmas.name')
+                    ->numeric()
+                    ->sortable()->label('Nama Desa/Kelurahan Puskesmas'),
                 Tables\Columns\TextColumn::make('bulan_tahun')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('desa_kelurahan_puskesmas_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sasaran_2_4')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sasaran_5_14')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sasaran_14')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sasaran_total')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('mendapat_obat_2_4')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('mendapat_obat_5_14')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('mendapat_obat_14')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('mendapat_obat_total')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cakupan_2_4')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cakupan_5_14')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cakupan_14')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cakupan_total')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

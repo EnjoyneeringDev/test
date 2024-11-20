@@ -135,7 +135,7 @@ class IdentitasPuskesmas extends Model
 
     public function ukbmDiwilayahKerjaPuskesmas(): HasMany
     {
-        return $this->hasMany(UKBMDiWilayahKerjaPuskesmas::class);
+        return $this->hasMany(UkbmDiWilayahKerjaPuskesmas::class);
     }
 
     public function kemitraanKesehatan(): HasMany

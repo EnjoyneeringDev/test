@@ -80,10 +80,6 @@ class JenisPenyakitResource extends Resource
         ];
     }
 
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
-    }
 
     public static function getPages(): array
     {

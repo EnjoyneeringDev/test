@@ -16,7 +16,7 @@ class CakupanPOMPFilariasis extends Model
     {
         return $this->belongsTo(IdentitasPuskesmas::class);
     }
-    public function desa_kelurahan_puskesmas_id(): BelongsTo
+    public function desaKelurahanPuskesmas(): BelongsTo
     {
         return $this->belongsTo(DesaKelurahanPuskesmas::class);
     }

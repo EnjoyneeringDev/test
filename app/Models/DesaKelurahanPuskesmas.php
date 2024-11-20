@@ -43,9 +43,9 @@ class DesaKelurahanPuskesmas extends Model
         return $this->hasMany(DesaDanaUKBM::class);
     }
 
-    public function ukbmDiwilayahKerjaPuskesmas(): HasMany
+    public function ukbmDiWilayahKerjaPuskesmas(): HasMany
     {
-        return $this->hasMany(UKBMDiWilayahKerjaPuskesmas::class);
+        return $this->hasMany(UkbmDiWilayahKerjaPuskesmas::class);
     }
 
     public function penderitaKronisFilariasis(): HasMany
