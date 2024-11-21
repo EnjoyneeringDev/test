@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SasaranProgramResource extends Resource
 {
+    protected static ?int $navigationSort = 7;
+
+    protected static ?string $navigationLabel = 'V. SASARAN PROGRAM';
+
+    protected static ?string $navigationGroup = 'A. DATA DASAR';
+
     protected static ?string $model = SasaranProgram::class;
 
     protected static ?int $navigationSort = 7;
