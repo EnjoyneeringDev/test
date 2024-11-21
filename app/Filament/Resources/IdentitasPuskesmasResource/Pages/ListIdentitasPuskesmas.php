@@ -5,6 +5,7 @@ namespace App\Filament\Resources\IdentitasPuskesmasResource\Pages;
 use App\Filament\Resources\IdentitasPuskesmasResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Support\Facades\Auth;
 
 class ListIdentitasPuskesmas extends ListRecords
 {
@@ -25,7 +26,9 @@ class ListIdentitasPuskesmas extends ListRecords
                 ->label('Download PDF')
                 ->color('primary')
                 ->action(function () {
-                    return redirect()->route('download.identitas.puskesmas.pdf', ['id' => 1]);
+                    $userId = Auth::id(); 
+
+                    return redirect()->route('download.identitas.puskesmas.pdf', ['id' => $userId]);
                 }),
         ];
     }

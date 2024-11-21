@@ -62,7 +62,7 @@ class PdfController extends Controller
 
         $identitasPuskesmas = (object) [
             'dataDasar' => $dataDasarPuskesmas,
-            'wilayahKerja' => $wilayahKerja[0],
+            'wilayahKerja' => $wilayahKerja->isNotEmpty() ? $wilayahKerja[0] : null,
             'sumber_daya_puskesmas' => $sumberDayaPuskesmas,
             'ruangan_puskesmas' => $ruanganPuskesmas,
             'sdm' => $sdm,

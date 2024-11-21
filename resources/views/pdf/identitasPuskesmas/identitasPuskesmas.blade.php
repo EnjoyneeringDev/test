@@ -145,7 +145,7 @@
                 <td class="column5">3</td>
                 <td class="column40">Status akreditasi </td>
                 <td class="column55">
-                    @if ($identitasPuskesmas->dataDasar->status_akreditasi === "telah_terakreditasi")
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->dataDasar->status_akreditasi === "telah_terakreditasi")
                         Telah akreditasi
                     @elseif ($identitasPuskesmas->dataDasar->status_akreditasi === "sedang_proses_akreditasi")
                         Sedang dalam proses akreditasi
@@ -213,7 +213,7 @@
                 <td class="column5">5</td>
                 <td class="column40">Kategori puskesmas berdasarkan karakteristik wilayah</td>
                 <td class="column55">
-                    @if ($identitasPuskesmas->dataDasar->kategori_puskesmas === "perkotaan")
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->dataDasar->kategori_puskesmas === "perkotaan")
                         Perkotaan
                     @elseif ($identitasPuskesmas->dataDasar->kategori_puskesmas === "pedesaan")
                         Perdesaan
@@ -228,7 +228,7 @@
                 <td class="column5">6</td>
                 <td class="column40">Kategori puskesmas berdasarkan kemampuan penyelenggaraan</td>
                 <td class="column55">
-                    @if ($identitasPuskesmas->dataDasar->kemampuan_penyelenggaraan_puskesmas === "rawat_inap")
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->dataDasar->kemampuan_penyelenggaraan_puskesmas === "rawat_inap")
                         Rawat Inap
                     @else
                         No Rawat Inap
@@ -291,7 +291,7 @@
                 <td class="column5"></td>
                 <td class="column55">a.  Perumnas</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->wilayahKerja->perumnas === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->wilayahKerja->perumnas === 1)
                         Ada
                     @else
                         Tidak ada
@@ -302,7 +302,7 @@
                 <td class="column5"></td>
                 <td class="column55">b.  Kawasan transmigrasi</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->wilayahKerja->kawasan_transmigrasi === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->wilayahKerja->kawasan_transmigrasi === 1)
                         Ada
                     @else
                         Tidak ada
@@ -313,7 +313,7 @@
                 <td class="column5"></td>
                 <td class="column55">c.  Kawasan perkebunan inti rakyat</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->wilayahKerja->kawasan_perkebunan_inti_rakyat === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->wilayahKerja->kawasan_perkebunan_inti_rakyat === 1)
                         Ada
                     @else
                         Tidak ada
@@ -324,7 +324,7 @@
                 <td class="column5"></td>
                 <td class="column55">d.  Kawasan nelayan</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->wilayahKerja->kawasan_nelayan === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->wilayahKerja->kawasan_nelayan === 1)
                         Ada
                     @else
                         Tidak ada
@@ -335,7 +335,7 @@
                 <td class="column5"></td>
                 <td class="column55">e.  Kawasan industri</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->wilayahKerja->kawasan_industri === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->wilayahKerja->kawasan_industri === 1)
                         Ada
                     @else
                         Tidak ada
@@ -346,7 +346,7 @@
                 <td class="column5"></td>
                 <td class="column55">f.  Pariwisata</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->wilayahKerja->pariwisata === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->wilayahKerja->pariwisata === 1)
                         Ada
                     @else
                         Tidak ada
@@ -357,7 +357,7 @@
                 <td class="column5"></td>
                 <td class="column55">g.  Kawasan kepulauan</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->wilayahKerja->kawasan_kepulauan === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->wilayahKerja->kawasan_kepulauan === 1)
                         Ada
                     @else
                         Tidak ada
@@ -368,7 +368,7 @@
                 <td class="column5"></td>
                 <td class="column55">h.  Kawasan perbatasan negara</td>
                 <td class="column40" colspan="2">
-                    @if ($identitasPuskesmas->wilayahKerja->kawasan_perbatasan_negara === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->wilayahKerja->kawasan_perbatasan_negara === 1)
                         Ada
                     @else
                         Tidak ada
@@ -436,7 +436,7 @@
                 <td class="column55">a.   Rencana lima tahunan</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_lima_tahunan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_lima_tahunan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_lima_tahunan'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -451,7 +451,7 @@
                 <td class="column55">b.   Rencana Usulan Kegiatan (RUK)</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_usulan_kegiatan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_usulan_kegiatan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_usulan_kegiatan'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -466,7 +466,7 @@
                 <td class="column55">c.   Rencana Pelaksanaan Kegiatan (RPK) Tahunan</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_pelaksanaan_kegiatan_tahunan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_pelaksanaan_kegiatan_tahunan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_pelaksanaan_kegiatan_tahunan'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -486,7 +486,7 @@
                 <td class="column55">a. Rencana Pelaksanaan Kegiatan (RPK) Bulanan </td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_pelaksanaan_kegiatan_bulanan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_pelaksanaan_kegiatan_bulanan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['rencana_pelaksanaan_kegiatan_bulanan'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -501,7 +501,7 @@
                 <td class="column55">b. Lokakarya mini bulanan</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['lokakarya_mini_bulanan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['lokakarya_mini_bulanan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['lokakarya_mini_bulanan'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -516,7 +516,7 @@
                 <td class="column55">c. Lokakarya mini triwulan</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['lokakarya_mini_triwulan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['lokakarya_mini_triwulan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['lokakarya_mini_triwulan'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -531,7 +531,7 @@
                 <td class="column55">Dokumen Penilaian Kinerja Puskesmas (PKP)</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -541,14 +541,14 @@
                     @endif
                 </td>
             </tr>
-            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp'] === 1)
+            @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp']) && $identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp'] === 1)
                 ada
                 <tr>
                     <td class="column5"></td>
                     <td class="column55">a. Hasil pelayanan kesehatan</td>
                     <td class="column40" colspan="2">
                         @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan']))
-                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan'] === 'baik')
+                            @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan'] === 'baik')
                                 Baik
                             @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan'] === 'cukup')
                                 Cukup
@@ -565,7 +565,7 @@
                     <td class="column55">b. Hasil manajemen</td>
                     <td class="column40" colspan="2">
                         @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen']))
-                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen'] === 'baik')
+                            @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen'] === 'baik')
                                 Baik
                             @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen'] === 'cukup')
                                 Cukup
@@ -583,7 +583,7 @@
                 <td class="column55">Umpan balik dari Dinas Kesehatan Kabupaten/Kota yang diterima puskesmas</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['feedback_dinkes_yang_diterima']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['feedback_dinkes_yang_diterima'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['feedback_dinkes_yang_diterima'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -598,7 +598,7 @@
                 <td class="column55">Dokumen Penilaian Kinerja Puskesmas (PKP) yang ditetapkan oleh Dinas Kesehatan kabupaten/kota</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -608,13 +608,13 @@
                     @endif
                 </td>
             </tr>
-            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota'] === 1)
+            @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota']) && $identitasPuskesmas->sumber_daya_puskesmas[0]['dokumen_pkp_dinkes_kota'] === 1)
                 <tr>
                     <td class="column5"></td>
                     <td class="column55">a. Hasil pelayanan kesehatan</td>
                     <td class="column40" colspan="2">
                         @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_dinkes_kota']))
-                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_dinkes_kota'] === 'baik')
+                            @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_dinkes_kota'] === 'baik')
                                 Baik
                             @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_pelayanan_kesehatan_dinkes_kota'] === 'cukup')
                                 Cukup
@@ -631,7 +631,7 @@
                     <td class="column55">b. Hasil manajemen</td>
                     <td class="column40" colspan="2">
                         @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_dinkes_kota']))
-                            @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_dinkes_kota'] === 'baik')
+                            @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_dinkes_kota'] === 'baik')
                                 Baik
                             @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['hasil_manajemen_dinkes_kota'] === 'cukup')
                                 Cukup
@@ -659,7 +659,7 @@
                 <td class="column55">a. Pelayanan promosi kesehatan</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_promosi_kesehatan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_promosi_kesehatan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_promosi_kesehatan'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -674,7 +674,7 @@
                 <td class="column55">b. Pelayanan kesehatan lingkungan</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_lingkungan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_lingkungan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_lingkungan'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -689,7 +689,7 @@
                 <td class="column55">c. Pelayanan kesehatan ibu, anak dan Keluarga Berencana, termasuk pelayanan usia sekolah dan remaja</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kia']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kia'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kia'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -704,7 +704,7 @@
                 <td class="column55">d. Pelayanan gizi</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_gizi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_gizi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_gizi'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -719,7 +719,7 @@
                 <td class="column55">e. Pelayanan pencegahan dan pengendalian penyakit</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_pencegahan_pengendalian_penyakit']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_pencegahan_pengendalian_penyakit'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_pencegahan_pengendalian_penyakit'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -739,7 +739,7 @@
                 <td class="column55">a. Pelayanan kesehatan gigi masyarakat</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_gigi_masyarakat']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_gigi_masyarakat'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_gigi_masyarakat'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -754,7 +754,7 @@
                 <td class="column55">b. Pelayanan kesehatan tradisional </td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_tradisional']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_tradisional'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_tradisional'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -769,7 +769,7 @@
                 <td class="column55">c. Pelayanan kesehatan olah raga</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_olahraga']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_olahraga'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_olahraga'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -784,7 +784,7 @@
                 <td class="column55">d. Pelayanan kesehatan indera</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_indera']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_indera'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_indera'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -799,7 +799,7 @@
                 <td class="column55">e. Pelayanan kesehatan kerja</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_kerja']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_kerja'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_kerja'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -814,7 +814,7 @@
                 <td class="column55">f. Pelayanan kesehatan haji</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_haji']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_haji'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_haji'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -829,7 +829,7 @@
                 <td class="column55">g. ... lainnya</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_lainnya']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_lainnya'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_lainnya'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -854,7 +854,7 @@
                 <td class="column55"><span>&nbsp;&nbsp;</span>1) Pelayanan pemeriksaan umum</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_pemeriksaan_umum']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_pemeriksaan_umum'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_pemeriksaan_umum'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -869,7 +869,7 @@
                 <td class="column55"><span>&nbsp;&nbsp;</span>2) Pelayanan kesehatan gigi dan mulut</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_gigi_mulut']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_gigi_mulut'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_gigi_mulut'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -884,7 +884,7 @@
                 <td class="column55">b. Pelayanan gawat darurat</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_gawat_darurat']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_gawat_darurat'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_gawat_darurat'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -899,7 +899,7 @@
                 <td class="column55">c. Pelayanan rawat inap</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_rawat_inap']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_rawat_inap'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_rawat_inap'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -914,7 +914,7 @@
                 <td class="column55">d. Pelayanan satu hari (one day care)</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_satu_hari']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_satu_hari'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_satu_hari'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -929,7 +929,7 @@
                 <td class="column55">e. Perawatan di rumah (home care) </td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_dirumah']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_dirumah'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_dirumah'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -949,7 +949,7 @@
                 <td class="column55">a. Pelayanan kefarmasian</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kefamasian']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kefamasian'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kefamasian'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -964,7 +964,7 @@
                 <td class="column55">b. Pelayanan keperawatan kesehatan masyarakat</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_keperawatan_kesehatan_masyarakat']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_keperawatan_kesehatan_masyarakat'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_keperawatan_kesehatan_masyarakat'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -979,7 +979,7 @@
                 <td class="column55">c. Pelayanan laboratorium</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_laboratorium']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_laboratorium'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_laboratorium'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -994,7 +994,7 @@
                 <td class="column55">d.   Kunjungan keluarga</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['kunjungan_keluarga']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['kunjungan_keluarga'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['kunjungan_keluarga'] === 1)
                             Ada
                         @else
                             Tidak ada
@@ -1062,7 +1062,7 @@
                 <td class="column55">Status Puskesmas BLUD</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['status_puskesma_blud']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_puskesma_blud'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['status_puskesma_blud'] === 1)
                             BLUD
                         @else
                             Bukan BLUD
@@ -1087,7 +1087,7 @@
                 <td class="column55"><span>&nbsp;&nbsp;</span>1) Puskesmas telah bekerjasama dengan BPJS </td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['puskesmas_kerjasama_bpjs']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['puskesmas_kerjasama_bpjs'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['puskesmas_kerjasama_bpjs'] === 1)
                             Ya
                         @else
                             Tidak
@@ -1225,7 +1225,7 @@
                 <td class="column55">c. Sertifikat tanah </td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 'shm')
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 'shm')
                             SHM
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sertifikat_tanah'] === 'shgu_shgb')
                             SHGU/SHGB 
@@ -1244,7 +1244,7 @@
                 <td class="column55">d. Kepemilikan tanah</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 'pemerintah')
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 'pemerintah')
                             Pemerintah
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['kepemilikan_tanah'] === 'adat')
                             Adat
@@ -1398,7 +1398,7 @@
                 <td class="column55">n. Akses jalan depan gedung puskesmas</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 'aspal_beton')
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 'aspal_beton')
                             Aspal/Beton
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['akses_jalan_depan_puskesmas'] === 'tanah')
                             Tanah
@@ -1417,7 +1417,7 @@
                 <td class="column55">o. Status jalan raya terdekat menuju ke puskesmas</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 'jalan_pusat')
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 'jalan_pusat')
                             Jalan pusat
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['status_jalan_terdekat_puskesmas'] === 'jalan_provinsi')
                             Jalan provinsi
@@ -1464,7 +1464,7 @@
                 <td class="column55">r. Sumber dana rehabilitasi puskesmas</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi'] === 'apbn')
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi'] === 'apbn')
                             APBN
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_dana_rehabilitasi'] === 'apbd_provinsi')
                             APBD propinsi 
@@ -1485,7 +1485,7 @@
                 <td class="column55">s. Keadaan bangunan puskesmas   (Kondisi bangunan sesuai Peraturan Menteri PU No. 45 tahun 2000)</td>
                 <td class="column40" colspan="2">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['keadaan_bangunan_puskesmas']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['keadaan_bangunan_puskesmas'] === 'baik')
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['keadaan_bangunan_puskesmas'] === 'baik')
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['keadaan_bangunan_puskesmas'] === 'rusak_ringan')
                             Rusak ringan
@@ -1617,7 +1617,7 @@
                         <td class="column30">{{ $label }}) {{ $data['nama_ruangan'] }}</td>
                         <td class="column15">
                             @if (isset($ketersediaan->ketersediaan))
-                                @if ($ketersediaan->ketersediaan === 1)
+                                @if (isset($identitasPuskesmas->wilayahKerja) && $ketersediaan->ketersediaan === 1)
                                     Ada
                                 @else
                                     Rusak berat
@@ -1630,7 +1630,7 @@
                         <td class="column12-5">{{ $ketersediaan->tahun_renovasi ?? "" }}</td>
                         <td class="column25">
                             @if (isset($ketersediaan->kondisi))
-                                @if ($ketersediaan->kondisi === 'baik')
+                                @if (isset($identitasPuskesmas->wilayahKerja) && $ketersediaan->kondisi === 'baik')
                                     Baik
                                 @elseif ($ketersediaan->kondisi === 'rusak_ringan')
                                     Rusak ringan
@@ -1651,7 +1651,7 @@
                 <td class="column30">a) Ruangan pendaftaran dan rekam medik</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rekam_medik'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rekam_medik'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rekam_medik'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1664,7 +1664,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rekam_medik'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rekam_medik'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rekam_medik'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rekam_medik'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rekam_medik'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1683,7 +1683,7 @@
                 <td class="column30">b) Ruangan tunggu</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tunggu'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tunggu'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tunggu'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1696,7 +1696,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tunggu'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tunggu'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tunggu'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tunggu'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tunggu'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1715,7 +1715,7 @@
                 <td class="column30">c) Ruangan pemeriksaan umum</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_periksa_umum'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_periksa_umum'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_periksa_umum'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1728,7 +1728,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_periksa_umum'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_periksa_umum'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_periksa_umum'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_periksa_umum'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_periksa_umum'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1747,7 +1747,7 @@
                 <td class="column30">d) Ruangan tindakan</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tindakan'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tindakan'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tindakan'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1760,7 +1760,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tindakan'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tindakan'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tindakan'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tindakan'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tindakan'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1779,7 +1779,7 @@
                 <td class="column30">e) Ruangan Gawat Darurat</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gawat_darurat'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gawat_darurat'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gawat_darurat'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1792,7 +1792,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gawat_darurat'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gawat_darurat'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gawat_darurat'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gawat_darurat'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gawat_darurat'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1811,7 +1811,7 @@
                 <td class="column30">f) Ruangan KIA, KB dan imunisasi</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kia'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kia'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kia'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1824,7 +1824,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kia'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kia'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kia'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kia'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kia'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1843,7 +1843,7 @@
                 <td class="column30">g) Ruangan kesehatan anak & imunisasi </td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_anak_imunisasi'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_anak_imunisasi'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_anak_imunisasi'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1856,7 +1856,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_anak_imunisasi'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_anak_imunisasi'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_anak_imunisasi'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_anak_imunisasi'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_anak_imunisasi'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1875,7 +1875,7 @@
                 <td class="column30">h) Ruangan kesehatan ibu dan KB</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_ibu_kb'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_ibu_kb'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_ibu_kb'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1888,7 +1888,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_ibu_kb'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_ibu_kb'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_ibu_kb'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_ibu_kb'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_ibu_kb'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1907,7 +1907,7 @@
                 <td class="column30">i) Ruangan kesehatan gigi & mulut</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gigi_mulut'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gigi_mulut'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gigi_mulut'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1920,7 +1920,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gigi_mulut'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gigi_mulut'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gigi_mulut'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gigi_mulut'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gigi_mulut'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1939,7 +1939,7 @@
                 <td class="column30">j) Ruangan ASI</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_asi'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_asi'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_asi'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1952,7 +1952,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_asi'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_asi'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_asi'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_asi'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_asi'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -1971,7 +1971,7 @@
                 <td class="column30">k) Ruangan promosi kesehatan</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_promosi_kesehatan'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_promosi_kesehatan'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_promosi_kesehatan'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -1984,7 +1984,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_promosi_kesehatan'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_promosi_kesehatan'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_promosi_kesehatan'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_promosi_kesehatan'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_promosi_kesehatan'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2003,7 +2003,7 @@
                 <td class="column30">l) Ruangan farmasi</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_farmasi'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_farmasi'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_farmasi'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2016,7 +2016,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_farmasi'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_farmasi'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_farmasi'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_farmasi'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_farmasi'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2035,7 +2035,7 @@
                 <td class="column30">m) Ruangan persalinan</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_persalinan'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_persalinan'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_persalinan'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2048,7 +2048,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_persalinan'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_persalinan'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_persalinan'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_persalinan'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_persalinan'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2067,7 +2067,7 @@
                 <td class="column30">n) Ruangan rawat pasca persalinan</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_pasca_persalinan'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_pasca_persalinan'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_pasca_persalinan'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2080,7 +2080,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_pasca_persalinan'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_pasca_persalinan'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_pasca_persalinan'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_pasca_persalinan'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_pasca_persalinan'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2099,7 +2099,7 @@
                 <td class="column30">o) Ruangan rawat inap anak </td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_anak'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_anak'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_anak'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2112,7 +2112,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_anak'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_anak'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_anak'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_anak'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_anak'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2131,7 +2131,7 @@
                 <td class="column30">p) Ruangan rawat inap pria</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_pria'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_pria'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_pria'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2144,7 +2144,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_pria'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_pria'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_pria'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_pria'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_pria'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2163,7 +2163,7 @@
                 <td class="column30">q) Ruangan rawat inap wanita</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_wanita'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_wanita'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_wanita'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2176,7 +2176,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_wanita'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_wanita'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_wanita'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_wanita'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rawat_inap_wanita'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2195,7 +2195,7 @@
                 <td class="column30">r) Ruangan gudang umum</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gudang_umum'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gudang_umum'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gudang_umum'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2208,7 +2208,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gudang_umum'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gudang_umum'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gudang_umum'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gudang_umum'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_gudang_umum'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2227,7 +2227,7 @@
                 <td class="column30">s) KM/WC pasien (laki dan wanita terpisah)</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_pasien'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_pasien'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_pasien'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2240,7 +2240,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_pasien'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_pasien'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_pasien'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_pasien'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_pasien'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2259,7 +2259,7 @@
                 <td class="column30">t) Laboratorium</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['laboratorium'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['laboratorium'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['laboratorium'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2272,7 +2272,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['laboratorium'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['laboratorium'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['laboratorium'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['laboratorium'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['laboratorium'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2291,7 +2291,7 @@
                 <td class="column30">u) Ruangan cuci linen</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_cuci_linen'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_cuci_linen'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_cuci_linen'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2304,7 +2304,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_cuci_linen'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_cuci_linen'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_cuci_linen'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_cuci_linen'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_cuci_linen'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2323,7 +2323,7 @@
                 <td class="column30">v) Ruangan sterilisasi</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_sterilisasi'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_sterilisasi'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_sterilisasi'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2336,7 +2336,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_sterilisasi'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_sterilisasi'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_sterilisasi'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_sterilisasi'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_sterilisasi'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2355,7 +2355,7 @@
                 <td class="column30">w) Ruangan penyelenggaraan makanan</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_penyelenggaraan_makanan'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_penyelenggaraan_makanan'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_penyelenggaraan_makanan'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2368,7 +2368,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_penyelenggaraan_makanan'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_penyelenggaraan_makanan'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_penyelenggaraan_makanan'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_penyelenggaraan_makanan'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_penyelenggaraan_makanan'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2387,7 +2387,7 @@
                 <td class="column30">x) KM/WC untuk rawat inap</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_rawat_inap'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_rawat_inap'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_rawat_inap'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2400,7 +2400,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_rawat_inap'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_rawat_inap'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_rawat_inap'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_rawat_inap'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_rawat_inap'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2419,7 +2419,7 @@
                 <td class="column30">y) KM/WC petugas</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_petugas'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_petugas'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_petugas'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2432,7 +2432,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_petugas'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_petugas'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_petugas'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['wc_petugas'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['wc_petugas'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2451,7 +2451,7 @@
                 <td class="column30">z) Ruangan jaga petugas</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_jaga_petugas'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_jaga_petugas'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_jaga_petugas'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2464,7 +2464,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_jaga_petugas'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_jaga_petugas'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_jaga_petugas'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_jaga_petugas'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_jaga_petugas'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2483,7 +2483,7 @@
                 <td class="column30">aa) Gudang umum</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['gudang_umum'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['gudang_umum'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['gudang_umum'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2496,7 +2496,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['gudang_umum'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['gudang_umum'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['gudang_umum'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['gudang_umum'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['gudang_umum'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2520,7 +2520,7 @@
                 <td class="column30">a) Ruang Kepala Puskesmas</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kepala_puskesmas'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kepala_puskesmas'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kepala_puskesmas'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2533,7 +2533,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kepala_puskesmas'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kepala_puskesmas'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kepala_puskesmas'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kepala_puskesmas'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_kepala_puskesmas'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2552,7 +2552,7 @@
                 <td class="column30">b) Ruang rapat/diskusi</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rapat'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rapat'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rapat'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2565,7 +2565,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rapat'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rapat'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rapat'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rapat'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_rapat'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2584,7 +2584,7 @@
                 <td class="column30">c) Ruangan administrasi kantor/tata usaha</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tata_usaha'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tata_usaha'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tata_usaha'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2597,7 +2597,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tata_usaha'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tata_usaha'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tata_usaha'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tata_usaha'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ruang_tata_usaha'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2621,7 +2621,7 @@
                 <td class="column30">a) Parkir kendaraan roda 4</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_4'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_4'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_4'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2634,7 +2634,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_4'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_4'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_4'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_4'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_4'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2653,7 +2653,7 @@
                 <td class="column30">a) Parkir kendaraan roda 2</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_2'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_2'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_2'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2666,7 +2666,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_2'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_2'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_2'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_2'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_roda_2'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2685,7 +2685,7 @@
                 <td class="column30">c) Parkir ambulance</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_ambulance'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_ambulance'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_ambulance'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2698,7 +2698,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_ambulance'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_ambulance'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_ambulance'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_ambulance'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_ambulance'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2717,7 +2717,7 @@
                 <td class="column30">d) Parkir puskesmas keliling</td>
                 <td class="column15">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_puskesmas_keliling'][0]['ketersediaan']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_puskesmas_keliling'][0]['ketersediaan'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_puskesmas_keliling'][0]['ketersediaan'] === 1)
                             Ada
                         @else
                             Rusak berat
@@ -2730,7 +2730,7 @@
                 <td class="column12-5">{{ $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_puskesmas_keliling'][0]['renovasi'] ?? "" }}</td>
                 <td class="column25">
                     @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_puskesmas_keliling'][0]['kondisi']))
-                        @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_puskesmas_keliling'][0]['kondisi'] === 1)
+                        @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_puskesmas_keliling'][0]['kondisi'] === 1)
                             Baik
                         @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['parkir_puskesmas_keliling'][0]['kondisi'] === 1)
                             Rusak ringan
@@ -2791,7 +2791,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Waktu ketersediaan listrik</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['waktu_ketersediaan_listrik']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['waktu_ketersediaan_listrik'] === '24_jam')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['waktu_ketersediaan_listrik'] === '24_jam')
                         24 jam/hari
                     @else
                         <24 jam/hari
@@ -2829,7 +2829,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Telepon kabel</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_kabel']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_kabel'] === 'ada_dan_baik')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_kabel'] === 'ada_dan_baik')
                         Ada dan baik
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_kabel'] === 'ada_tapi_tidak_bisa_dipakai')
                         Ada, tetapi tidak bisa dipakai/rusak
@@ -2846,7 +2846,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Telepon seluler</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_seluler']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_seluler'] === 'ada_dan_baik')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_seluler'] === 'ada_dan_baik')
                         Ada dan baik
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['telepon_seluler'] === 'ada_tapi_tidak_bisa_dipakai')
                         Ada, tetapi tidak bisa dipakai/rusak
@@ -2863,7 +2863,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Radio komunikasi</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['radio_komunikasi']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['radio_komunikasi'] === 'ada_dan_baik')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['radio_komunikasi'] === 'ada_dan_baik')
                         Ada dan baik
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['radio_komunikasi'] === 'ada_tapi_tidak_bisa_dipakai')
                         Ada, tetapi tidak bisa dipakai/rusak
@@ -2880,7 +2880,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>4) Alat komunikasi lain</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['alat_komunikasi_lain']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['alat_komunikasi_lain'] === 'ada_dan_baik')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['alat_komunikasi_lain'] === 'ada_dan_baik')
                         Ada dan baik
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['alat_komunikasi_lain'] === 'ada_tapi_tidak_bisa_dipakai')
                         Ada, tetapi tidak bisa dipakai/rusak
@@ -2897,7 +2897,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>5) Jaringan internet</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['jaringan_internet']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['jaringan_internet'] === 'ada_dan_baik')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['jaringan_internet'] === 'ada_dan_baik')
                         Ada dan baik
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['jaringan_internet'] === 'ada_tapi_tidak_bisa_dipakai')
                         Ada, tetapi tidak bisa dipakai/rusak
@@ -3068,7 +3068,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Air bersih</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih'] === 'ada_memenuhi_syarat')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih'] === 'ada_memenuhi_syarat')
                         Ada memenuhi syarat
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih'] === 'ada_tidak_memenuhi_syarat')
                         Ada, tidak memenuhi syarat
@@ -3085,7 +3085,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Air bersih tersedia 24 jam</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih_tersedia_24_jam']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih_tersedia_24_jam'] === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['air_bersih_tersedia_24_jam'] === 1)
                         Ya
                     @else
                         Tidak
@@ -3100,7 +3100,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Sumber air bersih     (bisa lebih dari satu)</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_air_bersih']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_air_bersih'] === 'ada_memenuhi_syarat')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_air_bersih'] === 'ada_memenuhi_syarat')
                         Ada memenuhi syarat
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['sumber_air_bersih'] === 'ada_tidak_memenuhi_syarat')
                         Ada, tidak memenuhi syarat
@@ -3117,7 +3117,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>4) Jamban</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_memenuhi_syarat')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_memenuhi_syarat')
                         Ada memenuhi syarat
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_tidak_memenuhi_syarat')
                         Ada, tidak memenuhi syarat
@@ -3139,7 +3139,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>1) Limbah padat (insenerator)</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_memenuhi_syarat')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_memenuhi_syarat')
                         Ada memenuhi syarat
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['insenerator'] === 'ada_tidak_memenuhi_syarat')
                         Ada, tidak memenuhi syarat
@@ -3156,7 +3156,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>2) Limbah cair (IPAL)</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ipal']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ipal'] === 'ada_memenuhi_syarat')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ipal'] === 'ada_memenuhi_syarat')
                         Ada memenuhi syarat
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['ipal'] === 'ada_tidak_memenuhi_syarat')
                         Ada, tidak memenuhi syarat
@@ -3173,7 +3173,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>3) Septiktank</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['septitank']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['septitank'] === 'ada_memenuhi_syarat')
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['septitank'] === 'ada_memenuhi_syarat')
                         Ada memenuhi syarat
                     @elseif ($identitasPuskesmas->sumber_daya_puskesmas[0]['septitank'] === 'ada_tidak_memenuhi_syarat')
                         Ada, tidak memenuhi syarat
@@ -3190,7 +3190,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>4) MOU limbah padat/B3 ke pihak lain</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_padat_b3_ke_pihak_lain']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_padat_b3_ke_pihak_lain'] === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_padat_b3_ke_pihak_lain'] === 1)
                         Ada
                     @else
                         Tidak ada
@@ -3205,7 +3205,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>5) MOU limbah cair ke pihak berizin</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_cair_ke_pihak_berizin']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_cair_ke_pihak_berizin'] === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['mou_limbah_cair_ke_pihak_berizin'] === 1)
                         Ada
                     @else
                         Tidak ada
@@ -3276,7 +3276,7 @@
             <td class="column55">j. Sistem proteksi petir</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['sistem_proteksi_petir']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['sistem_proteksi_petir'] === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['sistem_proteksi_petir'] === 1)
                         Ada
                     @else
                         Tidak ada
@@ -3407,7 +3407,7 @@
             <td class="column55"><span>&nbsp;&nbsp;</span>l. Ada program kerja sama antara puskesmas, UTD dan rumah sakit dalam pelayanan darah untuk menurunkan Angka Kematian Ibu (AKI) </td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['ada_program_kerjasama_penurunan_aki']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['ada_program_kerjasama_penurunan_aki'] === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['ada_program_kerjasama_penurunan_aki'] === 1)
                         Ada
                     @else
                         Tidak ada
@@ -3709,7 +3709,7 @@
             <td class="column55">Puskesmas dimanfaatkan sebagai wahana pendidikan tenaga kesehatan</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['puskesmas_sebagai_pendidikan_nakes']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['puskesmas_sebagai_pendidikan_nakes'] === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['puskesmas_sebagai_pendidikan_nakes'] === 1)
                         Ya
                     @else
                         Tidak
@@ -3724,7 +3724,7 @@
             <td class="column55">Pelayanan kesehatan bergerak</td>
             <td class="column40" colspan="2">
                 @if (isset($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_bergerak']))
-                    @if ($identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_bergerak'] === 1)
+                    @if (isset($identitasPuskesmas->wilayahKerja) && $identitasPuskesmas->sumber_daya_puskesmas[0]['pelayanan_kesehatan_bergerak'] === 1)
                         Ya
                     @else
                         Tidak
