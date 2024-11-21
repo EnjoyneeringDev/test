@@ -33,8 +33,12 @@ class ProgramKesehatanLingkunganResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                        $query->where('id', auth()->user()->identitas_puskesmas_id);
+                    })
+                    ->default(auth()->user()->identitas_puskesmas_id)
+                    ->required()
+                    ->label('Nama Puskesmas'),
                 Forms\Components\Select::make('sarana_prasarana_prokes_id')
                     ->relationship('saranaPrasaranaProkes', 'id')
                     ->required(),
@@ -112,7 +116,7 @@ class ProgramKesehatanLingkunganResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array

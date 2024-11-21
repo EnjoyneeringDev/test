@@ -34,7 +34,8 @@ class AnakPegawaiResource extends Resource
             ->schema([
                 Forms\Components\Select::make('sumber_daya_manusia_id')
                     ->relationship('sumberDayaManusia', 'nama_lengkap')
-                    ->required(),
+                    ->required()
+                    ->label('Nama Pegawai'),
                 Forms\Components\TextInput::make('nama')
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('tanggal_lahir'),
@@ -85,7 +86,16 @@ class AnakPegawaiResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        $query = parent::getEloquentQuery();
+
+        // Only filter when not creating or editing
+        if (!request()->is('resources/anak-pegawai/create') || request()->is('resources/anak-pegawai/*/edit')) {
+            return $query->whereHas('sumberDayaManusia', function ($subQuery) {
+                $subQuery->where('id', Auth::user()->identitas_puskesmas_id);
+            });
+        }
+
+        return $query;
     }
 
     public static function getPages(): array

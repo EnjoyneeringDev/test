@@ -33,8 +33,12 @@ class PelaksanaanK3PuskesmasResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'id')
-                    ->required(),
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                        $query->where('id', auth()->user()->identitas_puskesmas_id);
+                    })
+                    ->default(auth()->user()->identitas_puskesmas_id)
+                    ->required()
+                    ->label('Nama Puskesmas'),
                 Forms\Components\Toggle::make('terdapat_kebijakan_tertulis_k3'),
                 Forms\Components\Toggle::make('tim_k3_puskesmas'),
                 Forms\Components\Toggle::make('penerapan_kewaspadaan_standar_puskesmas'),
@@ -85,7 +89,7 @@ class PelaksanaanK3PuskesmasResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
     }
 
     public static function getPages(): array
