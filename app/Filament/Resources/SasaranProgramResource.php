@@ -27,12 +27,6 @@ class SasaranProgramResource extends Resource
 
     protected static ?string $model = SasaranProgram::class;
 
-    protected static ?int $navigationSort = 7;
-
-    protected static ?string $navigationLabel = 'IV. SASARAN PROGRAM';
-
-    protected static ?string $navigationGroup = 'A. DATA DASAR';
-
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -92,7 +86,31 @@ class SasaranProgramResource extends Resource
                                 TextInput::make('jumlah')->numeric(),
                             ])
                         ])
-                    ])
+                    ]),
+                    Fieldset::make('D. UKBM')->schema([
+                        Repeater::make('ukbm')->schema([
+                            TextInput::make('jenis_ukbm'),
+                            TextInput::make('jumlah')->numeric(),
+                        ]),
+                    ]),
+                    Fieldset::make('E. Desa/Kelurahan/Daerah/ Kawasan Bermasalah Kesehatan')->schema([
+                        Repeater::make('ukbm')->schema([
+                            TextInput::make('jenis_ukbm'),
+                            TextInput::make('jumlah')->numeric(),
+                        ])
+                    ]),
+                    Fieldset::make('F. Institusi')->schema([
+                        Repeater::make('institusi')->schema([
+                            TextInput::make('jenis_institusi'),
+                            TextInput::make('jumlah')->numeric(),
+                        ])
+                    ]),
+                    Fieldset::make('G. Sarana')->schema([
+                        Repeater::make('saran')->schema([
+                            TextInput::make('jenis_sarana'),
+                            TextInput::make('jumlah')->numeric(),
+                        ])
+                    ]),
                 ]),
             ]);
     }
