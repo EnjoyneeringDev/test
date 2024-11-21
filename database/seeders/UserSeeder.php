@@ -16,9 +16,9 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         db::table('users')->insert([
-            'name' => 'Puskesmas Wernas',
+            'name' => 'Puskesmas Percobaan',
             'identitas_puskesmas_id' => 1,
-            'email' => 'wernas@mail.com',
+            'email' => 'percobaan@mail.com',
             'password' => hash::make('password1234')
         ]);
 
@@ -124,6 +124,13 @@ class UserSeeder extends Seeder
             'name' => 'Puskesmas fkour',
             'identitas_puskesmas_id' => 16,
             'email' => 'fkour@mail.com',
+            'password' => hash::make('password1234')
+        ]);
+
+        db::table('users')->insert([
+            'name' => 'Puskesmas Wernas',
+            'identitas_puskesmas_id' => 17,
+            'email' => 'wernas@mail.com',
             'password' => hash::make('password1234')
         ]);
     }

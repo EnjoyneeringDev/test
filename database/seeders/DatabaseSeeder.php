@@ -97,7 +97,8 @@ class DatabaseSeeder extends Seeder
             PengendalianPenyakitMenularSeeder::class,
             PelayananPuskesmasSeeder::class,
             ProgramUsahaKesehatanSekolahSeeder::class,
-            KesakitanBerdasarkanGejalaSeeder::class
+            KesakitanBerdasarkanGejalaSeeder::class,
+            SasaranProgramSeeder::class
         ]);
     }
 }

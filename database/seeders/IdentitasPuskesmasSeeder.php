@@ -14,7 +14,7 @@ class IdentitasPuskesmasSeeder extends Seeder
     public function run(): void
     {
         DB::table('identitas_puskesmas')->insert([
-            'nama_puskesmas' => 'Puskesmas Wernas',
+            'nama_puskesmas' => 'Puskesmas Percobaan',
             'kode_registrasi_puskesmas' => 'ABC',
         ]);
 
@@ -90,6 +90,11 @@ class IdentitasPuskesmasSeeder extends Seeder
 
         DB::table('identitas_puskesmas')->insert([
             'nama_puskesmas' => 'Puskesmas Fkour',
+            'kode_registrasi_puskesmas' => 'ABC',
+        ]);
+
+        DB::table('identitas_puskesmas')->insert([
+            'nama_puskesmas' => 'Puskesmas Wernas',
             'kode_registrasi_puskesmas' => 'ABC',
         ]);
     }
