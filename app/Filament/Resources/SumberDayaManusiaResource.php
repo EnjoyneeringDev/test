@@ -34,9 +34,9 @@ class SumberDayaManusiaResource extends Resource
             ->schema([
                 Fieldset::make('F. Sumber Daya Manusia Kesehatan')->schema([
                     Fieldset::make('1. Identitas Pribadi')->schema([
-                        Forms\Components\TextInput::make('identitas_puskesmas_id')
-                            ->required()
-                            ->numeric(),
+                        Forms\Components\Select::make('identitas_puskesmas_id')
+                            ->relationship('identitasPuskesmas', 'nama_puskesmas')
+                            ->required()->label('Nama Puskesmas'),
                         Forms\Components\TextInput::make('nama_lengkap')
                             ->required()
                             ->maxLength(255),
