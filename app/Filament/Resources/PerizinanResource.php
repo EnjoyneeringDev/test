@@ -29,7 +29,7 @@ class PerizinanResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('sumber_daya_manusia_id')
-                    ->relationship('sumberDayaManusia', 'id')
+                    ->relationship('sumberDayaManusia', 'nama_lengkap')
                     ->required(),
                 Forms\Components\TextInput::make('sip')
                     ->maxLength(255),
@@ -41,7 +41,7 @@ class PerizinanResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('sumberDayaManusia.id')
+                Tables\Columns\TextColumn::make('sumberDayaManusia.nama_lengkap')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sip')
