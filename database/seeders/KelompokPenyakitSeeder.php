@@ -14,25 +14,25 @@ class KelompokPenyakitSeeder extends Seeder
     public function run(): void
     {
         $lists = [
-            array("kode" => "a", "nama" => "kelompok umum"),
-            array("kode" => "b", "nama" => "darah, pembentukan darah dan sistem imun"),
-            array("kode" => "c", "nama" => "digestive"),
-            array("kode" => "d", "nama" => "mata"),
-            array("kode" => "e", "nama" => "telinga"),
-            array("kode" => "f", "nama" => "kardiovaskuler"),
-            array("kode" => "g", "nama" => "muskuloskeletal"),
-            array("kode" => "h", "nama" => "neurologi"),
-            array("kode" => "i", "nama" => "psikiatri"),
-            array("kode" => "j", "nama" => "respirasi"),
-            array("kode" => "k", "nama" => "kulit"),
-            array("kode" => "l", "nama" => "metabolik endokrin dan nutrisi"),
-            array("kode" => "m", "nama" => "ginjal dan saluran kemih"),
-            array("kode" => "n", "nama" => "kesehatan wanita"),
-            array("kode" => "o", "nama" => "penyakit kelamin"),
+            array("kode" => "a", "nama" => "KOLOMPOK UMUM"),
+            array("kode" => "b", "nama" => "DARAH, PEMBENTUKAN DARAH DAN SISTEM IMUN"),
+            array("kode" => "c", "nama" => "DIGESTIVE"),
+            array("kode" => "d", "nama" => "MATA"),
+            array("kode" => "e", "nama" => "TELINGA"),
+            array("kode" => "f", "nama" => "KARDIOVASKULER"),
+            array("kode" => "g", "nama" => "MUSKULOSKELETAL"),
+            array("kode" => "h", "nama" => "NEUROLOGI"),
+            array("kode" => "i", "nama" => "PSIKIATRI"),
+            array("kode" => "j", "nama" => "RESPIRASI"),
+            array("kode" => "k", "nama" => "KULIT"),
+            array("kode" => "l", "nama" => "METABOLIK ENDOKRIN DAN NUTRISI"),
+            array("kode" => "m", "nama" => "GINJAL DAN SALURAN KEMIH"),
+            array("kode" => "n", "nama" => "KESEHATAN WANITA"),
+            array("kode" => "o", "nama" => "PENYAKIT KELAMIN"),
         ];
 
         foreach ($lists as $list) {
-            DB::table('kelompok_penyakits')->insert([
+            DB::table('kelompok_penyakits')->updateOrInsert([
                 'kode' => $list["kode"],
                 'nama' => $list["nama"],
             ]);
