@@ -26,6 +26,10 @@ class PelaksanaanKegiatanPromosiKesehatanResource extends Resource
 
     protected static ?int $navigationSort = 1;
 
+    protected static ?string $label = 'Promosi Kesehatan Umum';
+
+    protected static ?string $pluralLabel = 'Promosi Kesehatan Umum';
+
     public static function form(Form $form): Form
     {
         return $form

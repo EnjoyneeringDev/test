@@ -27,7 +27,9 @@ class UkbmDiWilayahKerjaPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'UKBM di Wilayah Kerja Puskesmas';
 
+    protected static ?string $pluralLabel = 'UKBM di Wilayah Kerja Puskesmas';
 
     public static function form(Form $form): Form
     {

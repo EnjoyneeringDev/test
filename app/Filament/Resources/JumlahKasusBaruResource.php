@@ -27,6 +27,10 @@ class JumlahKasusBaruResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Jumlah Kasus Baru';
+
+    protected static ?string $pluralLabel = 'Jumlah Kasus Baru';
+
     public static function form(Form $form): Form
     {
         return $form

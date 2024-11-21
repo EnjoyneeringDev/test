@@ -28,6 +28,10 @@ class IdentitasPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Identitas Puskesmas';
+
+    protected static ?string $pluralLabel = 'Identitas Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

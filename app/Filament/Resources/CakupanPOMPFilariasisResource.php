@@ -27,6 +27,10 @@ class CakupanPOMPFilariasisResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Cakupan POMP Filariasis';
+
+    protected static ?string $pluralLabel = 'Cakupan POMP Filariasis';
+
     public static function form(Form $form): Form
     {
         return $form

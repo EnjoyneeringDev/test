@@ -26,6 +26,10 @@ class PromosiKesehatanPenyakitMenularResource extends Resource
 
     protected static ?int $navigationSort = 3;
 
+    protected static ?string $label = 'Promkes Penyakit Menular';
+
+    protected static ?string $pluralLabel = 'Promkes Penyakit Menular';
+
     public static function form(Form $form): Form
     {
         return $form

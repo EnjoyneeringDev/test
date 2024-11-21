@@ -25,6 +25,10 @@ class PelayananPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Laporan Pelayanan Puskesmas';
+
+    protected static ?string $pluralLabel = 'Laporan Pelayanan Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

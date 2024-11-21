@@ -18,11 +18,15 @@ class AnakPegawaiResource extends Resource
 {
     protected static ?string $model = AnakPegawai::class;
 
-    protected static ?string $navigationLabel = 'III. AnakPegawai';
+    protected static ?string $navigationLabel = 'III. Anak Pegawai';
 
     protected static ?string $navigationGroup = 'A. DATA DASAR KEPEGAWAIAN';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $label = 'Anak Pegawai';
+
+    protected static ?string $pluralLabel = 'Anak Pegawai';
 
     public static function form(Form $form): Form
     {

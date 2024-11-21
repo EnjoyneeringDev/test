@@ -26,6 +26,10 @@ class PromosiKesehatanKIAResource extends Resource
 
     protected static ?int $navigationSort = 5;
 
+    protected static ?string $label = 'Promkes KIA, Termasuk Remaja';
+
+    protected static ?string $pluralLabel = 'Promkes KIA, Termasuk Remaja';
+
     public static function form(Form $form): Form
     {
         return $form

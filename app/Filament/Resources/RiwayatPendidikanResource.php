@@ -24,6 +24,10 @@ class RiwayatPendidikanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Riwayat Pendidikan';
+
+    protected static ?string $pluralLabel = 'Riwayat Pendidikan';
+
     public static function form(Form $form): Form
     {
         return $form

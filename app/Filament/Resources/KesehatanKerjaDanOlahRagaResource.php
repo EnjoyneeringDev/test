@@ -27,6 +27,10 @@ class KesehatanKerjaDanOlahRagaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Laporan Kesehatan Kerja dan Olah Raga';
+
+    protected static ?string $pluralLabel = 'Laporan Kesehatan Kerja dan Olah Raga';
+
     public static function form(Form $form): Form
     {
         return $form

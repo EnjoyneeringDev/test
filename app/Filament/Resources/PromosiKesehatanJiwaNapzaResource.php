@@ -26,6 +26,10 @@ class PromosiKesehatanJiwaNapzaResource extends Resource
 
     protected static ?int $navigationSort = 8;
 
+    protected static ?string $label = 'Promkes Jiwa dan NAPZA';
+
+    protected static ?string $pluralLabel = 'Promkes Jiwa dan NAPZA';
+
     public static function form(Form $form): Form
     {
         return $form

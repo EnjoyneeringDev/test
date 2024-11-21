@@ -25,6 +25,10 @@ class GiziIbuAnakResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Laporan Bulanan Kesehatan Ibu dan Anak';
+
+    protected static ?string $pluralLabel = 'Laporan Bulanan Kesehatan Ibu dan Anak';
+
     public static function form(Form $form): Form
     {
         return $form

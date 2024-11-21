@@ -24,6 +24,10 @@ class ProgramUsahaKesehatanSekolahResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Program Usaha Kesehatan Sekolah';
+
+    protected static ?string $pluralLabel = 'Program Usaha Kesehatan Sekolah';
+
     public static function form(Form $form): Form
     {
         return $form

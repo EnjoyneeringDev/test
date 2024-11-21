@@ -26,6 +26,10 @@ class JenisPenyakitResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Jenis Penyakit';
+
+    protected static ?string $pluralLabel = 'Jenis Penyakit';
+
     public static function form(Form $form): Form
     {
         return $form

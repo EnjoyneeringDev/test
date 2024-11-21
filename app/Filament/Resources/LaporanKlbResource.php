@@ -25,6 +25,10 @@ class LaporanKlbResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'KLB 24 Jam';
+
+    protected static ?string $pluralLabel = 'KLB 24 Jam';
+
     public static function form(Form $form): Form
     {
         return $form

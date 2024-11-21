@@ -21,11 +21,15 @@ class SpmPuskesmasResource extends Resource
 {
     protected static ?string $model = SpmPuskesmas::class;
 
-    protected static ?string $navigationLabel = 'SPM PUSKESMAS';
+    protected static ?string $navigationLabel = 'SPM KESEHATAN DAERAH KABUPATEN';
 
     protected static ?string $navigationGroup = 'Form 21. SPM';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $label = 'SPM Kesehatan Daerah Kabupaten';
+
+    protected static ?string $pluralLabel = 'SPM Kesehatan Daerah Kabupaten';
 
     public static function form(Form $form): Form
     {

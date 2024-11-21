@@ -25,6 +25,10 @@ class KematianDiPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Data Kematian di Puskesmas';
+
+    protected static ?string $pluralLabel = 'Data Kematian di Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

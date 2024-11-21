@@ -24,6 +24,10 @@ class DesaKelurahanPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Desa/Kelurahan Puskesmas';
+
+    protected static ?string $pluralLabel = 'Desa/Kelurahan Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

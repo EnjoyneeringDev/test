@@ -25,6 +25,10 @@ class KelahiranDiPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Kelahiran di Puskesmas';
+
+    protected static ?string $pluralLabel = 'Kelahiran di Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

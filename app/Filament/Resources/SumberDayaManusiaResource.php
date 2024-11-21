@@ -28,6 +28,10 @@ class SumberDayaManusiaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Sumber Daya Manusia';
+
+    protected static ?string $pluralLabel = 'Sumber Daya Manusia';
+
     public static function form(Form $form): Form
     {
         return $form

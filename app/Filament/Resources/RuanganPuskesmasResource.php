@@ -27,6 +27,10 @@ class RuanganPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Ruangan Puskesmas';
+
+    protected static ?string $pluralLabel = 'Ruangan Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

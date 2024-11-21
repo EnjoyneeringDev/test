@@ -24,6 +24,10 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Imunisasi DT dan Campak Anak Sekolah Kelas 1 SD';
+
+    protected static ?string $pluralLabel = 'Imunisasi DT dan Campak Anak Sekolah Kelas 1 SD';
+
     public static function form(Form $form): Form
     {
         return $form

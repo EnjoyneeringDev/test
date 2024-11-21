@@ -28,6 +28,10 @@ class WilayahKerjaPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Wilayah Kerja Puskesmas';
+
+    protected static ?string $pluralLabel = 'Wilayah Kerja Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

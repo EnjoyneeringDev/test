@@ -26,6 +26,10 @@ class PromosiKesehatanSekolahDasarResource extends Resource
 
     protected static ?int $navigationSort = 6;
 
+    protected static ?string $label = 'Promosi Kesehatan';
+
+    protected static ?string $pluralLabel = 'Promosi Kesehatan';
+
     public static function form(Form $form): Form
     {
         return $form

@@ -28,6 +28,10 @@ class PemakaianPermintaanObatResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Pemakaian Dan Lembar Permintaan Obat';
+
+    protected static ?string $pluralLabel = 'Pemakaian Dan Lembar Permintaan Obat';
+
     public static function form(Form $form): Form
     {
         return $form

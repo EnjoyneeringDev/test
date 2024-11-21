@@ -27,6 +27,10 @@ class KetersediaanRuanganPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Ketersediaan Ruangan Puskesmas';
+
+    protected static ?string $pluralLabel = 'Ketersediaan Ruangan Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

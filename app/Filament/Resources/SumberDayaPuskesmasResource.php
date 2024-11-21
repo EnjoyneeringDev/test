@@ -31,6 +31,10 @@ class SumberDayaPuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Sumber Daya Puskesmas';
+
+    protected static ?string $pluralLabel = 'Sumber Daya Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

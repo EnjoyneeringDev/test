@@ -26,6 +26,10 @@ class KeperawatanKesehatanMasyarakatResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Laporan Keperawatan Kesehatan Masyarakat';
+
+    protected static ?string $pluralLabel = 'Laporan Keperawatan Kesehatan Masyarakat';
+
     public static function form(Form $form): Form
     {
         return $form

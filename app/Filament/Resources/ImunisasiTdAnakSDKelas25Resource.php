@@ -24,6 +24,10 @@ class ImunisasiTdAnakSDKelas25Resource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Imunisasi Td Anak Sekolah Dasar (Sederajat) Kelas 2 dan 5';
+
+    protected static ?string $pluralLabel = 'Imunisasi Td Anak Sekolah Dasar (Sederajat) Kelas 2 dan 5';
+
     public static function form(Form $form): Form
     {
         return $form

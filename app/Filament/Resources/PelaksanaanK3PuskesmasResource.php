@@ -24,6 +24,10 @@ class PelaksanaanK3PuskesmasResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Pelaksanaan K3 di Lingkungan Puskesmas';
+
+    protected static ?string $pluralLabel = 'Pelaksanaan K3 di Lingkungan Puskesmas';
+
     public static function form(Form $form): Form
     {
         return $form

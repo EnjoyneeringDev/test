@@ -25,6 +25,10 @@ class KelompokPenyakitResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Kelompok Penyakit';
+
+    protected static ?string $pluralLabel = 'Kelompok Penyakit';
+
     public static function form(Form $form): Form
     {
         return $form

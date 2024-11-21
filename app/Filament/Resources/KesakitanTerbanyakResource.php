@@ -26,6 +26,10 @@ class KesakitanTerbanyakResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Laporan Bulanan Kesakitan Terbanyak';
+
+    protected static ?string $pluralLabel = 'Laporan Bulanan Kesakitan Terbanyak';
+
     public static function form(Form $form): Form
     {
         return $form

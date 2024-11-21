@@ -30,6 +30,10 @@ class KemitraanKesehatanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Kemitraan Kesehatan';
+
+    protected static ?string $pluralLabel = 'Kemitraan Kesehatan';
+
     public static function form(Form $form): Form
     {
         return $form

@@ -25,6 +25,10 @@ class ImunisasiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Imunisasi';
+
+    protected static ?string $pluralLabel = 'Imunisasi';
+
     public static function form(Form $form): Form
     {
         return $form

@@ -25,6 +25,10 @@ class KesakitanBerdasarkanGejalaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Laporan Kesakitan Berdasarkan Gejala, Penyebab Penyakit atau Kondisi Pasien';
+
+    protected static ?string $pluralLabel = 'Laporan Kesakitan Berdasarkan Gejala, Penyebab Penyakit atau Kondisi Pasien';
+
     public static function form(Form $form): Form
     {
         return $form

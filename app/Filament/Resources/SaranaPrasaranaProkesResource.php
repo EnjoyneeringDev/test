@@ -23,6 +23,10 @@ class SaranaPrasaranaProkesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Sarana Prasarana Prokes';
+
+    protected static ?string $pluralLabel = 'Sarana Prasarana Prokes';
+
     public static function form(Form $form): Form
     {
         return $form

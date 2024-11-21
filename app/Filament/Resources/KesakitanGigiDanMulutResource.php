@@ -25,6 +25,10 @@ class KesakitanGigiDanMulutResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Kesakitan Gigi dan Mulut';
+
+    protected static ?string $pluralLabel = 'Kesakitan Gigi dan Mulut';
+
     public static function form(Form $form): Form
     {
         return $form

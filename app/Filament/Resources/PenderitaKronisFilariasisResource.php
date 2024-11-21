@@ -27,6 +27,10 @@ class PenderitaKronisFilariasisResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Jumlah Penderita Kronis Filariasis';
+
+    protected static ?string $pluralLabel = 'Jumlah Penderita Kronis Filariasis';
+
     public static function form(Form $form): Form
     {
         return $form

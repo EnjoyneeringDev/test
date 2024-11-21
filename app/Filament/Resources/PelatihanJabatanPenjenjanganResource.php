@@ -24,6 +24,10 @@ class PelatihanJabatanPenjenjanganResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Pelatihan Jabatan/Penjenjangan';
+
+    protected static ?string $pluralLabel = 'Pelatihan Jabatan/Penjenjangan';
+
     public static function form(Form $form): Form
     {
         return $form

@@ -29,6 +29,10 @@ class SasaranProgramResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Sasaran Program';
+
+    protected static ?string $pluralLabel = 'Sasaran Program';
+
     public static function form(Form $form): Form
     {
         return $form

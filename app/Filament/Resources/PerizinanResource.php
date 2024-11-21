@@ -24,6 +24,10 @@ class PerizinanResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Perizinan';
+
+    protected static ?string $pluralLabel = 'Perizinan';
+
     public static function form(Form $form): Form
     {
         return $form

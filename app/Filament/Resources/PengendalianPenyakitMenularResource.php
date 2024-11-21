@@ -25,6 +25,10 @@ class PengendalianPenyakitMenularResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Laporan Pengendalian Penyakit Menular';
+
+    protected static ?string $pluralLabel = 'Laporan Pengendalian Penyakit Menular';
+
     public static function form(Form $form): Form
     {
         return $form

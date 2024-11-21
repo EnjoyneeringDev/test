@@ -24,6 +24,10 @@ class ProgramPelayananKesehatanTradisionalResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Program Pelayanan Kesehatan Tradisional';
+
+    protected static ?string $pluralLabel = 'Program Pelayanan Kesehatan Tradisional';
+
     public static function form(Form $form): Form
     {
         return $form

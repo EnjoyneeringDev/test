@@ -24,6 +24,10 @@ class RegistrasiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Registrasi';
+
+    protected static ?string $pluralLabel = 'Registrasi';
+
     public static function form(Form $form): Form
     {
         return $form

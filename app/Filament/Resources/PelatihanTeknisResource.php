@@ -24,6 +24,10 @@ class PelatihanTeknisResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Pelatihan Teknis/Fungsional';
+
+    protected static ?string $pluralLabel = 'Pelatihan Teknis/Fungsional';
+
     public static function form(Form $form): Form
     {
         return $form

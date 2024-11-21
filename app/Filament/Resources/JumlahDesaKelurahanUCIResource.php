@@ -24,6 +24,10 @@ class JumlahDesaKelurahanUCIResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Jumlah Desa/Kelurahan UCI (Imunisasi Dasar Lengkap)';
+
+    protected static ?string $pluralLabel = 'Jumlah Desa/Kelurahan UCI (Imunisasi Dasar Lengkap)';
+
     public static function form(Form $form): Form
     {
         return $form

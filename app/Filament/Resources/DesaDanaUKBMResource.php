@@ -26,6 +26,10 @@ class DesaDanaUKBMResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $label = 'Desa Yang Memanfaatkan Dana Desa Untuk UKBM';
+
+    protected static ?string $pluralLabel = 'Desa Yang Memanfaatkan Dana Desa Untuk UKBM';
+
     public static function form(Form $form): Form
     {
         return $form
