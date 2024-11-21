@@ -35,8 +35,12 @@ class PelaksanaanKegiatanPromosiKesehatanResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required()->label('Nama Puskemas'),
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                        $query->where('id', auth()->user()->identitas_puskesmas_id);
+                    })
+                    ->default(auth()->user()->identitas_puskesmas_id)
+                    ->required()
+                    ->label('Nama Puskesmas'),
                 Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
                     ->relationship('desaKelurahanPuskesmas', 'name')
                     ->required()->label('Nama Desa/Kelurahan Puskesmas'),

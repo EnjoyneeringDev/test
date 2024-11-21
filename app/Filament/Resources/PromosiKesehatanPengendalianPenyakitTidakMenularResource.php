@@ -35,8 +35,12 @@ class PromosiKesehatanPengendalianPenyakitTidakMenularResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required()->label('Nama Puskesmas'),
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                        $query->where('id', auth()->user()->identitas_puskesmas_id);
+                    })
+                    ->default(auth()->user()->identitas_puskesmas_id)
+                    ->required()
+                    ->label('Nama Puskesmas'),
                 Forms\Components\DatePicker::make('bulan_tahun')
                     ->required()->label('Tanggal'),
                 Forms\Components\Select::make('topik_promosi_kesehatan_id')

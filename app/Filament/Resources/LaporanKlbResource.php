@@ -37,8 +37,12 @@ class LaporanKlbResource extends Resource
                     Forms\Components\DatePicker::make('bulan_tahun')
                         ->required()->label('Tanggal'),
                     Forms\Components\Select::make('identitas_puskesmas_id')
-                        ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                        ->required(),
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                            $query->where('id', auth()->user()->identitas_puskesmas_id);
+                        })
+                        ->default(auth()->user()->identitas_puskesmas_id)
+                        ->required()
+                        ->label('Nama Puskesmas'),
                     Forms\Components\TextInput::make('kepada')
                         ->maxLength(255),
                     Forms\Components\TextInput::make('tanggal')

@@ -37,8 +37,12 @@ class PromosiKesehatanJiwaNapzaResource extends Resource
                 Forms\Components\DatePicker::make('bulan_tahun')
                     ->required()->label('Tanggal'),
                 Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas')
-                    ->required()->label('Nama Puskesmas'),
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                        $query->where('id', auth()->user()->identitas_puskesmas_id);
+                    })
+                    ->default(auth()->user()->identitas_puskesmas_id)
+                    ->required()
+                    ->label('Nama Puskesmas'),
                 Forms\Components\TextInput::make('jumlah_kegiatan_penyuluhan')
                     ->numeric()->label('Jumlah kegiatan penyuluhan kesehatan jiwa masyarakat dan NAPZA di puskesmas dan jaringannya'),
             ]);

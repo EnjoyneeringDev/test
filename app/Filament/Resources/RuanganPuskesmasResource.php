@@ -35,7 +35,13 @@ class RuanganPuskesmasResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('identitas_puskesmas_id')->relationship(name: 'identitasPuskesmas', titleAttribute: 'nama_puskesmas')->label('Puskesmas'),
+                Forms\Components\Select::make('identitas_puskesmas_id')
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                        $query->where('id', auth()->user()->identitas_puskesmas_id);
+                    })
+                    ->default(auth()->user()->identitas_puskesmas_id)
+                    ->required()
+                    ->label('Nama Puskesmas'),
                 Forms\Components\TextInput::make('nama_ruangan')
                     ->maxLength(255),
             ]);
