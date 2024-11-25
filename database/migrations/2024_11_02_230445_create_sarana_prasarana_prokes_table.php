@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('sarana_prasarana_prokes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('identitas_puskesmas_id');
             $table->enum('jenis', ['sarana', 'prasarana']);
             $table->string('nama');
             $table->timestamps();

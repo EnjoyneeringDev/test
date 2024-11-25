@@ -84,6 +84,17 @@ class JenisPenyakitResource extends Resource
         ];
     }
 
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'user';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public static function getPages(): array
     {

@@ -13,6 +13,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class ProgramUsahaKesehatanSekolahResource extends Resource
 {
@@ -112,6 +113,28 @@ class ProgramUsahaKesehatanSekolahResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $superAdmin = Auth::user()->identitas_puskesmas_id == null;
+
+        if ($superAdmin) {
+            return parent::getEloquentQuery();
+        } else {
+            return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
+        }
+    }
+
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'user';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function getPages(): array

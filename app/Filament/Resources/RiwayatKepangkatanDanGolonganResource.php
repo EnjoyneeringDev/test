@@ -14,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class RiwayatKepangkatanDanGolonganResource extends Resource
 {
@@ -90,6 +91,31 @@ class RiwayatKepangkatanDanGolonganResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+        $superAdmin = Auth::user()->identitas_puskesmas_id == null;
+
+        if ($superAdmin) {
+            return $query;
+        } else {
+            return $query->whereHas('sumberDayaManusia', function ($subQuery) {
+                $subQuery->where('id', Auth::user()->identitas_puskesmas_id);
+            });
+        }
+    }
+
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'user';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function getPages(): array

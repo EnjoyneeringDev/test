@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class KelompokPenyakitResource extends Resource
 {
@@ -76,6 +77,18 @@ class KelompokPenyakitResource extends Resource
             //
         ];
     }
+
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public static function getPages(): array
     {

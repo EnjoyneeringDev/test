@@ -6,6 +6,7 @@ use App\Filament\Resources\ImunisasiDTDanCampakAnakKelas1Resource\Pages;
 use App\Filament\Resources\ImunisasiDTDanCampakAnakKelas1Resource\RelationManagers;
 use App\Models\ImunisasiDTDanCampakAnakKelas1;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -32,34 +33,56 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
-                        $query->where('id', auth()->user()->identitas_puskesmas_id);
-                    })
-                    ->default(auth()->user()->identitas_puskesmas_id)
-                    ->required()
-                    ->label('Nama Puskesmas'),
-                Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
-                    ->relationship('desaKelurahanPuskesmas', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('sasaran_l')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('sasaran_p')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_dt_hasil_l')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_dt_hasil_p')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_dt_cakupan_l')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_dt_cakupan_p')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_dt_cakupan_t')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_campak_hasil_l')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_campak_hasil_p')
-                    ->maxLength(255),
+                Fieldset::make('')->schema([
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                            $query->where('id', auth()->user()->identitas_puskesmas_id);
+                        })
+                        ->default(auth()->user()->identitas_puskesmas_id)
+                        ->required()
+                        ->label('Nama Puskesmas'),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                ]),
+                Fieldset::make('3. IMUNISASI')->schema([
+                    Fieldset::make('a. Imunisasi DT dan Campak Anak Sekolah Kelas 1 SD (BIAS DT dan Campak/MR)')->schema([
+                        Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
+                            ->relationship('desaKelurahanPuskesmas', 'name')
+                            ->required()->label('Nama Desa/Kelurahan Puskesmas'),
+                        Fieldset::make('Sasaran')->schema([
+                            Forms\Components\TextInput::make('sasaran_l')
+                                ->maxLength(255)->label('L'),
+                            Forms\Components\TextInput::make('sasaran_p')
+                                ->maxLength(255)->label('P'),
+                        ]),
+                        Fieldset::make('Imunisasi DT')->schema([
+                            Fieldset::make('Hasil')->schema([
+                                Forms\Components\TextInput::make('imunisasi_dt_hasil_l')
+                                    ->maxLength(255)->label('L'),
+                                Forms\Components\TextInput::make('imunisasi_dt_hasil_p')
+                                    ->maxLength(255)->label('P'),
+                            ]),
+                            Fieldset::make('%Cakupan')->schema([
+                                Forms\Components\TextInput::make('imunisasi_dt_cakupan_l')
+                                    ->maxLength(255)->label('L'),
+                                Forms\Components\TextInput::make('imunisasi_dt_cakupan_p')
+                                    ->maxLength(255)->label('P'),
+                                Forms\Components\TextInput::make('imunisasi_dt_cakupan_t')
+                                    ->maxLength(255)->label('T'),
+                            ])
+                        ]),
+                        Fieldset::make('Imunisasi Campak/MR')->schema([
+                            Fieldset::make('Hasil')->schema([
+                                Forms\Components\TextInput::make('imunisasi_campak_hasil_l')
+                                    ->maxLength(255)->label('L'),
+                                Forms\Components\TextInput::make('imunisasi_campak_hasil_p')
+                                    ->maxLength(255)->label('P'),
+                            ]),
+
+                        ])
+
+                    ])
+                ]),
                 Forms\Components\TextInput::make('imunisasi_campak_cakupan_l')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('imunisasi_campak_cakupan_p')
@@ -73,44 +96,15 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('desaKelurahanPuskesmas.name')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sasaran_l')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('sasaran_p')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_dt_hasil_l')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_dt_hasil_p')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_dt_cakupan_l')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_dt_cakupan_p')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_dt_cakupan_t')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_campak_hasil_l')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_campak_hasil_p')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_campak_cakupan_l')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_campak_cakupan_p')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('imunisasi_campak_cakupan_t')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Nama Desa/Kelurahan Puskesmas'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //
@@ -134,7 +128,24 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
+        $superAdmin = Auth::user()->identitas_puskesmas_id == null;
+
+        if ($superAdmin) {
+            return parent::getEloquentQuery();
+        } else {
+            return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
+        }
+    }
+
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'user';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function getPages(): array

@@ -43,11 +43,19 @@ class IdentitasPuskesmasResource extends Resource
                     Forms\Components\TextInput::make('kode_registrasi_puskesmas')
                         ->required()
                         ->maxLength(255)->columnSpanFull()->label('2. Kode Registrasi Puskesmas'),
-                    Select::make('status_akreditasi')->options([
-                        'telah_terakreditasi' => 'Telah Terakreditasi',
-                        'sedang_proses_akreditasi' => 'Sedang Proses Akreditasi',
-                        'belum_proses_akreditasi' => 'Belum Proses Akreditasi'
-                    ])->label('3. Status Akreditasi'),
+                    Fieldset::make('3. Status Akreditasi')->schema([
+                        Select::make('status_akreditasi')->options([
+                            'telah_terakreditasi' => 'Telah Terakreditasi',
+                            'sedang_proses_akreditasi' => 'Sedang Proses Akreditasi',
+                            'belum_proses_akreditasi' => 'Belum Proses Akreditasi'
+                        ])->label('Status Akreditasi'),
+                        Select::make('jenis_akreditasi')->options([
+                            'dasar' => 'a. terakreditasi dasar',
+                            'madya' => 'b. terakreditasi madya',
+                            'utama' => 'c. terakreditasi utama',
+                            'paripurna' => 'd. terakreditasi paripurna',
+                        ])->label('Jenis Akreditasi'),
+                    ]),
                     Fieldset::make('4. Alamat Puskesmas')->schema([
                         Forms\Components\TextInput::make('jalan')
                             ->maxLength(255)->columnSpanFull()->label('a. Jalan/Komplek'),
@@ -122,7 +130,24 @@ class IdentitasPuskesmasResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        $superAdmin = Auth::user()->identitas_puskesmas_id == null;
+
+        if ($superAdmin) {
+            return parent::getEloquentQuery();
+        } else {
+            return parent::getEloquentQuery()->where('id', Auth::user()->identitas_puskesmas_id);
+        }
+    }
+
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'user';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function getPages(): array

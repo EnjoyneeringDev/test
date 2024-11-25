@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('imunisasi_d_t_dan_campak_anak_kelas1s', function (Blueprint $table) {
             $table->id();
+            $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
             $table->foreignId('desa_kelurahan_puskesmas_id');
             $table->integer('sasaran_l')->nullable();

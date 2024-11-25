@@ -31,6 +31,13 @@ class SaranaPrasaranaProkesResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('identitas_puskesmas_id')
+                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                        $query->where('id', auth()->user()->identitas_puskesmas_id);
+                    })
+                    ->default(auth()->user()->identitas_puskesmas_id)
+                    ->required()
+                    ->label('Nama Puskesmas'),
                 Forms\Components\TextInput::make('jenis')
                     ->required(),
                 Forms\Components\TextInput::make('nama')
@@ -42,18 +49,14 @@ class SaranaPrasaranaProkesResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
             ->columns([
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
+                    ->numeric()
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('jenis'),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
@@ -73,6 +76,17 @@ class SaranaPrasaranaProkesResource extends Resource
         return [
             //
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'user';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function getPages(): array

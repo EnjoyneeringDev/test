@@ -58,13 +58,13 @@ class SpmPuskesmasResource extends Resource
                             TextInput::make('pemeriksaan_glukoprotein_urin')
                                 ->numeric()->label('d. pemeriksaan glukoprotein urin'),
                         ])
-                        ->label('3. Alat deteksi risiko ibu hamil'),
+                            ->label('3. Alat deteksi risiko ibu hamil'),
                         TextInput::make('kartu_ibu')
                             ->numeric()->label('4. Kartu ibu/rekam medis ibu'),
                         TextInput::make('buku_kia')
                             ->numeric()->label('5. Buku KIA'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_ibu_hamil')
                             ->numeric()->label('Dokter/ dokter spesialis kebidanan'),
@@ -73,7 +73,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('perawat_ibu_hamil')
                             ->numeric()->label('Perawat'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_ibu_hamil')
                             ->numeric(),
@@ -82,9 +82,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('ibu_hamil_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('A. Pelayanan Kesehatan Ibu Hamil'),
+                    ->label('A. Pelayanan Kesehatan Ibu Hamil'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('formulir_partograf')
@@ -94,7 +94,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('buku_kia_bersalin')
                             ->numeric()->label('3. Buku KIA'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_ibu_bersalin')
                             ->numeric()->label('Dokter/ dokter spesialis kebidanan'),
@@ -103,7 +103,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('perawat_ibu_bersalin')
                             ->numeric()->label('Perawat'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_ibu_bersalin')
                             ->numeric(),
@@ -112,9 +112,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('ibu_bersalin_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('B. Pelayanan Kesehatan Ibu Bersalin'),
+                    ->label('B. Pelayanan Kesehatan Ibu Bersalin'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('vaksin_hepatitis_b0')
@@ -130,7 +130,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('buku_kia_bayi_lahir')
                             ->numeric()->label('6. Buku KIA'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_bayi_lahir')
                             ->numeric()->label('Dokter/ dokter spesialis kebidanan'),
@@ -139,7 +139,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('perawat_bayi_lahir')
                             ->numeric()->label('Perawat'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_bayi_lahir')
                             ->numeric(),
@@ -148,9 +148,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('bayi_lahir_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('C. Pelayanan Kesehatan Bayi Baru Lahir'),
+                    ->label('C. Pelayanan Kesehatan Bayi Baru Lahir'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('kpsp_yang_berlaku')
@@ -177,20 +177,20 @@ class SpmPuskesmasResource extends Resource
                             TextInput::make('vaksin_imunisasi_dasar_campak')
                                 ->numeric()->label('f. Campak Rubell'),
                         ])
-                        ->label('6. Vaksin imunisasi dasar'),
+                            ->label('6. Vaksin imunisasi dasar'),
                         Fieldset::make('')->schema([
                             TextInput::make('vaksin_imunisasi_lanjutan_dpt')
                                 ->numeric()->label('a. DPT-HB-Hib'),
                             TextInput::make('vaksin_imunisasi_lanjutan_campak')
                                 ->numeric()->label('b. Campak Rubell'),
                         ])
-                        ->label('7. Vaksin imunisasi lanjutan'),
+                            ->label('7. Vaksin imunisasi lanjutan'),
                         TextInput::make('jaruk_sntik_bhp')
                             ->numeric()->label('8. Jarum suntik dan BHP'),
                         TextInput::make('peralatan_anafilatik')
                             ->numeric()->label('9. Peralatan anafilaktik'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_balita')
                             ->numeric()->label('Dokter/ dokter spesialis kebidanan'),
@@ -205,7 +205,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('kader_kesehatan_balita')
                             ->numeric()->label('Kader kesehatan'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_balita')
                             ->numeric(),
@@ -214,9 +214,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('balita_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('D. Pelayanan Kesehatan Balita'),
+                    ->label('D. Pelayanan Kesehatan Balita'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('buku_raport_kesehatanku')
@@ -230,7 +230,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('formulir_rekapitulasi_pelayanan_luar_sekolah')
                             ->numeric()->label('5. Formulir Rekapitulasi Hasil Pelayanan kesehatan usia sekolah dan remaja di luar sekolah'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_pendidikan_dasar')
                             ->numeric()->label('Dokter/ dokter gigi'),
@@ -247,7 +247,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('kader_kesehatan_pendidikan_dasar')
                             ->numeric()->label('Kader kesehatan/ dokter kecil/ peer conselor'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_pendidikan_dasar')
                             ->numeric(),
@@ -256,9 +256,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('pendidikan_dasar_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('E. Pelayanan Kesehatan Pada Usia Pendidikan Dasar'),
+                    ->label('E. Pelayanan Kesehatan Pada Usia Pendidikan Dasar'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('pedoman_dan_media_kie')
@@ -284,7 +284,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('si_ptm')
                             ->numeric()->label('11. Formulir pencatatan dan pelaporan Aplikasi Sistem Informasi Penyakit Tidak Menular (SI PTM)'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_usia_produktif')
                             ->numeric()->label('Dokter'),
@@ -299,7 +299,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('tenaga_non_kesehatan_terlatiah_usia_produktif')
                             ->numeric()->label('Tenaga non kesehatan terlatih atau mempunyai kualifikasi tertentu'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_usia_produktif')
                             ->numeric(),
@@ -308,9 +308,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('usia_produktif_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('F. Pelayanan Kesehatan Pada Usia Produktif'),
+                    ->label('F. Pelayanan Kesehatan Pada Usia Produktif'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('strip_uji_gula_darah')
@@ -322,7 +322,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('buku_kesehatan_lansia')
                             ->numeric()->label('4. Buku Kesehatan Lansia'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_usia_lanjut')
                             ->numeric()->label('Dokter'),
@@ -337,7 +337,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('tenaga_non_kesehatan_terlatiah_usia_lanjut')
                             ->numeric()->label('Tenaga non kesehatan terlatih atau mempunyai kualifikasi tertentu'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_usia_lanjut')
                             ->numeric(),
@@ -346,9 +346,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('usia_lanjut_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('G. Pelayanan Kesehatan Pada Usia Lanjut'),
+                    ->label('G. Pelayanan Kesehatan Pada Usia Lanjut'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('pengendalian_hipertensi_dan_media_kie')
@@ -358,7 +358,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('formulir_pencatatan_dan_pelaporan_app_ptm')
                             ->numeric()->label('3. Formulir pencatatan dan Pelaporan Aplikasi Sistem Informasi PTM'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_hipertensi')
                             ->numeric()->label('Dokter'),
@@ -369,7 +369,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('nakes_masyarakat_hipertensi')
                             ->numeric()->label('Tenaga kesehatan masyarakat'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_hipertensi')
                             ->numeric(),
@@ -378,9 +378,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('hipertensi_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('H. Pelayanan Kesehatan Penderita Hipertensi'),
+                    ->label('H. Pelayanan Kesehatan Penderita Hipertensi'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('glukometer_diabetes_melitus')
@@ -396,7 +396,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('media_kie_diabetes_melitus')
                             ->numeric()->label('6. Pedoman dan media KIE'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_diabetes_melitus')
                             ->numeric()->label('Dokter'),
@@ -407,7 +407,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('nakes_masyarakat_diabetes_melitus')
                             ->numeric()->label('Tenaga kesehatan masyarakat'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_diabetes_melitus')
                             ->numeric(),
@@ -416,9 +416,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('diabetes_melitus_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('I. Pelayanan Kesehatan Penderita Diabetes Melitus'),
+                    ->label('I. Pelayanan Kesehatan Penderita Diabetes Melitus'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('ppdgj_3')
@@ -430,7 +430,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('media_kie')
                             ->numeric()->label('4. Media KIE'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_odgj')
                             ->numeric(),
@@ -439,9 +439,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('odgj_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('J. Pelayanan Kesehatan Orang Dengan Gangguan Jiwa (ODGJ) Berat'),
+                    ->label('J. Pelayanan Kesehatan Orang Dengan Gangguan Jiwa (ODGJ) Berat'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('media_kie_tuberkulosis')
@@ -459,7 +459,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('pedoman_operasional_tuberkolosis')
                             ->numeric()->label('7. Pedoman/ standar operasional prosedur'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_tuberkolosis')
                             ->numeric()->label('Dokter/ dokter spesialis penyakit dalam/ dokter spesialis paru'),
@@ -474,7 +474,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('tenaga_non_kesehatan_terlatiah_tuberkolosis')
                             ->numeric()->label('Tenaga non kesehatan terlatih atau mempunyai kualifikasi tertentu'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_tuberkolosis')
                             ->numeric(),
@@ -483,9 +483,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('tuberkolosis_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('K. Pelayanan Kesehatan Orang Terduga Tuberkulosis'),
+                    ->label('K. Pelayanan Kesehatan Orang Terduga Tuberkulosis'),
                 Fieldset::make('')->schema([
                     Fieldset::make('')->schema([
                         TextInput::make('media_kie_virus')
@@ -504,13 +504,13 @@ class SpmPuskesmasResource extends Resource
                             TextInput::make('vacutainer_dan_jarum_sesuai')
                                 ->numeric()->label('e. Jarum+spuit yang sesuai/vacutainer dan jarum sesuai'),
                         ])
-                        ->label('3. Bahan medis habis pakai'),
+                            ->label('3. Bahan medis habis pakai'),
                         TextInput::make('alat_tulis_virus')
                             ->numeric()->label('4. Alat tulis'),
                         TextInput::make('rekam_medis_virus')
                             ->numeric()->label('5. Rekam medis berisi nomor rekam medis, Nomor fasilitas pelayanan kesehatan pelaksana, nomor KTP/NIK'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
+                        ->label('Standar Jumlah dan Kualitas Barang dan/atau Jasa'),
                     Fieldset::make('')->schema([
                         TextInput::make('dokter_virus')
                             ->numeric()->label('Dokter/ dokter spesialis penyakit dalam/ dokter spesialis kulit dan kelamin'),
@@ -527,7 +527,7 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('penjangkauan_virus')
                             ->numeric()->label('Penjangkauan'),
                     ])
-                    ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
+                        ->label('Standar Jumlah dan Kualitas Personil/Sumber Daya Manusia Kesehatan'),
                     Fieldset::make('')->schema([
                         TextInput::make('proyeksi_virus')
                             ->numeric(),
@@ -536,9 +536,9 @@ class SpmPuskesmasResource extends Resource
                         TextInput::make('virus_mendapat_pelayanan_tidak_sesuai_standar')
                             ->numeric(),
                     ])
-                    ->label('Pelayanan Kesehatan'),
+                        ->label('Pelayanan Kesehatan'),
                 ])
-                ->label('L. Pelayanan Kesehatan Orang Dengan Risiko Terinfeksi Virus yang Melemahkan Daya Tahan Tubuh Manusia (Human Immunodeficiency Virus = HIV)'),
+                    ->label('L. Pelayanan Kesehatan Orang Dengan Risiko Terinfeksi Virus yang Melemahkan Daya Tahan Tubuh Manusia (Human Immunodeficiency Virus = HIV)'),
             ]);
     }
 
@@ -599,9 +599,16 @@ class SpmPuskesmasResource extends Resource
         ];
     }
 
-    public static function getEloquentQuery(): Builder
+
+    public static function canViewAny(): bool
     {
-        return parent::getEloquentQuery()->where('identitas_puskesmas_id', Auth::user()->identitas_puskesmas_id);
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'admin';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function getPages(): array

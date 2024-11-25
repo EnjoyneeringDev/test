@@ -87,15 +87,26 @@ class AnakPegawaiResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         $query = parent::getEloquentQuery();
+        $superAdmin = Auth::user()->identitas_puskesmas_id == null;
 
-        // Only filter when not creating or editing
-        if (!request()->is('resources/anak-pegawai/create') || request()->is('resources/anak-pegawai/*/edit')) {
+        if ($superAdmin) {
+            return $query;
+        } else {
             return $query->whereHas('sumberDayaManusia', function ($subQuery) {
                 $subQuery->where('id', Auth::user()->identitas_puskesmas_id);
             });
         }
+    }
 
-        return $query;
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'user';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public static function getPages(): array

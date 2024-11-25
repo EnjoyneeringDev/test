@@ -27,6 +27,7 @@ class SaranaPrasaranaProsesSeeder extends Seeder
 
         foreach ($saranaPrasarana as $sp) {
             DB::table('sarana_prasarana_prokes')->insert([
+                'identitas_puskesmas_id' => 1,
                 'jenis' => $sp['jenis'],
                 'nama' => $sp['nama'],
             ]);
