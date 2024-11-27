@@ -17,13 +17,15 @@ class SaranaPrasaranaProkesResource extends Resource
 {
     protected static ?string $model = SaranaPrasaranaProkes::class;
 
-    protected static ?int $navigationSort = 11;
+    // protected static ?int $navigationSort = 11;
 
-    protected static ?string $navigationLabel = '5. Sarana Prasarana Prokes';
+    // protected static ?string $navigationLabel = '5. Sarana Prasarana Prokes';
 
-    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+    // protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    // protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $label = 'Sarana Prasarana Prokes';
 

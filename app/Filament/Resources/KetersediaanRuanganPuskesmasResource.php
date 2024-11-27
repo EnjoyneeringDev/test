@@ -60,7 +60,7 @@ class KetersediaanRuanganPuskesmasResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('ruanganPuskesmas.nama_ruangan')
                     ->numeric()
                     ->sortable(),

@@ -43,7 +43,7 @@ class RuanganPuskesmasResource extends Resource
                     ->required()
                     ->label('Nama Puskesmas'),
                 Forms\Components\TextInput::make('nama_ruangan')
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Nama Ruangan'),
             ]);
     }
 
@@ -53,17 +53,9 @@ class RuanganPuskesmasResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('nama_ruangan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable()->label('Nama Ruangan'),
             ])
             ->filters([
                 //

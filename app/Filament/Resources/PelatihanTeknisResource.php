@@ -34,7 +34,7 @@ class PelatihanTeknisResource extends Resource
             ->schema([
                 Forms\Components\Select::make('sumber_daya_manusia_id')
                     ->relationship('sumberDayaManusia', 'nama_lengkap')
-                    ->required(),
+                    ->required()->label('Nama Pegawai'),
                 Forms\Components\TextInput::make('nama_pelatihan')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('kode_pelatihan')
@@ -58,7 +58,7 @@ class PelatihanTeknisResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('sumberDayaManusia.nama_lengkap')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Pegawai'),
                 Tables\Columns\TextColumn::make('nama_pelatihan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('kode_pelatihan')
@@ -73,14 +73,6 @@ class PelatihanTeknisResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('penyelenggara')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

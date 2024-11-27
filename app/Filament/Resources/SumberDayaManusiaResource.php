@@ -141,13 +141,13 @@ class SumberDayaManusiaResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('nik')
-                    ->searchable(),
+                    ->searchable()->label('NIK'),
                 Tables\Columns\TextColumn::make('nip_nrp')
-                    ->searchable(),
+                    ->searchable()->label('NIP/NRP'),
                 Tables\Columns\TextColumn::make('no_seri_kartu_pegawai')
-                    ->searchable(),
+                    ->searchable()->label('No. Seri Kartu Pegawai'),
             ])
             ->filters([
                 //

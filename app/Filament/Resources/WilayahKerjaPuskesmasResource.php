@@ -88,7 +88,7 @@ class WilayahKerjaPuskesmasResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskemas'),
                 Tables\Columns\TextColumn::make('luas_wilayah_kerja')
                     ->numeric()
                     ->sortable(),

@@ -18,17 +18,19 @@ class ProgramKesehatanLingkunganResource extends Resource
 {
     protected static ?string $model = ProgramKesehatanLingkungan::class;
 
-    protected static ?int $navigationSort = 12;
+    // protected static ?int $navigationSort = 12;
 
-    protected static ?string $navigationLabel = '5. Program Kesehatan Lingkungan';
+    // protected static ?string $navigationLabel = '5. Program Kesehatan Lingkungan';
 
-    protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+    // protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
+
+    protected static bool $shouldRegisterNavigation = false;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $label = 'Program Kesehatan Lingkungan';
 
-    protected static ?string $pluralLabel = 'Program Kesehatan Lingkungan';
+    // protected static ?string $pluralLabel = 'Program Kesehatan Lingkungan';
 
     public static function form(Form $form): Form
     {

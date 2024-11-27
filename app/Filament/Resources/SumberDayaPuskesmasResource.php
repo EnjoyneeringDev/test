@@ -526,7 +526,7 @@ class SumberDayaPuskesmasResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\IconColumn::make('rencana_lima_tahunan')
                     ->boolean(),
                 Tables\Columns\IconColumn::make('rencana_usulan_kegiatan')

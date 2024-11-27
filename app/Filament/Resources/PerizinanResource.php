@@ -34,10 +34,10 @@ class PerizinanResource extends Resource
             ->schema([
                 Forms\Components\Select::make('sumber_daya_manusia_id')
                     ->relationship('sumberDayaManusia', 'nama_lengkap')
-                    ->required(),
+                    ->required()->label('Nama Pegawai'),
                 Forms\Components\TextInput::make('sip')
-                    ->maxLength(255),
-                Forms\Components\DatePicker::make('tanggal_penerbitan_sip'),
+                    ->maxLength(255)->label('SIP'),
+                Forms\Components\DatePicker::make('tanggal_penerbitan_sip')->label('Tanggal Penerbitan SIP'),
             ]);
     }
 
@@ -49,18 +49,10 @@ class PerizinanResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('sip')
-                    ->searchable(),
+                    ->searchable()->label('SIP'),
                 Tables\Columns\TextColumn::make('tanggal_penerbitan_sip')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal Penerbitan SIP'),
             ])
             ->filters([
                 //

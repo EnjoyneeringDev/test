@@ -37,7 +37,7 @@ class AnakPegawaiResource extends Resource
                     ->required()
                     ->label('Nama Pegawai'),
                 Forms\Components\TextInput::make('nama')
-                    ->maxLength(255),
+                    ->maxLength(255)->label('Nama Anak'),
                 Forms\Components\DatePicker::make('tanggal_lahir'),
                 Forms\Components\Select::make('jenis_kelamin')->options([
                     'male' => "Laki-Laki",
@@ -52,17 +52,9 @@ class AnakPegawaiResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('sumberDayaManusia.nama_lengkap')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Pegawai'),
                 Tables\Columns\TextColumn::make('nama')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable()->label('Nama Anak'),
             ])
             ->filters([
                 //

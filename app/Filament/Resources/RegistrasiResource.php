@@ -34,10 +34,10 @@ class RegistrasiResource extends Resource
             ->schema([
                 Forms\Components\Select::make('sumber_daya_manusia_id')
                     ->relationship('sumberDayaManusia', 'nama_lengkap')
-                    ->required(),
+                    ->required()->label('Nama Pegawai'),
                 Forms\Components\TextInput::make('str')
-                    ->maxLength(255),
-                Forms\Components\DatePicker::make('tanggal_penerbitan_str'),
+                    ->maxLength(255)->label('STR'),
+                Forms\Components\DatePicker::make('tanggal_penerbitan_str')->label('Tanggal Penerbitan STR'),
             ]);
     }
 
@@ -47,20 +47,12 @@ class RegistrasiResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('sumberDayaManusia.nama_lengkap')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Pegawai'),
                 Tables\Columns\TextColumn::make('str')
-                    ->searchable(),
+                    ->searchable()->label('STR'),
                 Tables\Columns\TextColumn::make('tanggal_penerbitan_str')
                     ->date()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Tanggal Penerbitan STR'),
             ])
             ->filters([
                 //

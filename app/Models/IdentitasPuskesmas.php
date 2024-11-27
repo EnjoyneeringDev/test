@@ -207,4 +207,14 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(SaranaPrasaranaProkes::class);
     }
+
+    public function saranaMenurutTingkatRisikoPencemaran(): HasMany
+    {
+        return $this->hasMany(SaranaMenurutTingkatRisikoPencemaran::class);
+    }
+
+    public function saranaMenurutKlasifikasiStandarKesehatan(): HasMany
+    {
+        return $this->hasMany(SaranaMenurutKlasifikasiStandarKesehatan::class);
+    }
 }

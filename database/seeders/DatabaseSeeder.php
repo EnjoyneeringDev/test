@@ -99,7 +99,9 @@ class DatabaseSeeder extends Seeder
             ProgramUsahaKesehatanSekolahSeeder::class,
             KesakitanBerdasarkanGejalaSeeder::class,
             SasaranProgramSeeder::class,
-            SekolahPuskesmasSeeder::class
+            SekolahPuskesmasSeeder::class,
+            SaranaMenurutTingkatRisikoPencemaranSeeder::class,
+            SaranaMenurutKlasifikasiStandarKesehatanSeeder::class
         ]);
     }
 }
