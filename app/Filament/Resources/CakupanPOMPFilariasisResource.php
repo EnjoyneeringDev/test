@@ -25,11 +25,11 @@ class CakupanPOMPFilariasisResource extends Resource
 
     protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
     protected static ?string $label = 'Cakupan POMP Filariasis';
 
     protected static ?string $pluralLabel = 'Cakupan POMP Filariasis';
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {

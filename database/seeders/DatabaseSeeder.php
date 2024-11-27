@@ -98,7 +98,8 @@ class DatabaseSeeder extends Seeder
             PelayananPuskesmasSeeder::class,
             ProgramUsahaKesehatanSekolahSeeder::class,
             KesakitanBerdasarkanGejalaSeeder::class,
-            SasaranProgramSeeder::class
+            SasaranProgramSeeder::class,
+            SekolahPuskesmasSeeder::class
         ]);
     }
 }

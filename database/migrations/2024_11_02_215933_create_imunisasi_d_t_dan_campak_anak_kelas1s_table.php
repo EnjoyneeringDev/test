@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
+            $table->foreignId('sekolah_puskesmas_id');
             $table->foreignId('desa_kelurahan_puskesmas_id');
             $table->integer('sasaran_l')->nullable();
             $table->integer('sasaran_p')->nullable();

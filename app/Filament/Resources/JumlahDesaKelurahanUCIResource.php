@@ -6,6 +6,7 @@ use App\Filament\Resources\JumlahDesaKelurahanUCIResource\Pages;
 use App\Filament\Resources\JumlahDesaKelurahanUCIResource\RelationManagers;
 use App\Models\JumlahDesaKelurahanUCI;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 class JumlahDesaKelurahanUCIResource extends Resource
 {
     protected static ?string $model = JumlahDesaKelurahanUCI::class;
+
+    protected static ?int $navigationSort = 9;
 
     protected static ?string $navigationLabel = '3c. Jumlah Desa/Kelurahan UCI (Imunisasi Dasar Lengkap)';
 
@@ -32,22 +35,28 @@ class JumlahDesaKelurahanUCIResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
-                        $query->where('id', auth()->user()->identitas_puskesmas_id);
-                    })
-                    ->default(auth()->user()->identitas_puskesmas_id)
-                    ->required()
-                    ->label('Nama Puskesmas'),
-                Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
-                    ->relationship('desaKelurahanPuskesmas', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('sasaran')
-                    ->numeric(),
-                Forms\Components\TextInput::make('bayi_mendapatkan_idl')
-                    ->numeric(),
-                Forms\Components\TextInput::make('cakupan_bayi_mendapatkan_idl')
-                    ->numeric(),
+                Fieldset::make('IMUNISASI')->schema([
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                            $query->where('id', auth()->user()->identitas_puskesmas_id);
+                        })
+                        ->default(auth()->user()->identitas_puskesmas_id)
+                        ->required()
+                        ->label('Nama Puskesmas'),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                    Fieldset::make('c. Jumlah Desa/Kelurahan UCI (Imunisasi Dasar lengkap)')->schema([
+                        Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
+                            ->relationship('desaKelurahanPuskesmas', 'name')
+                            ->required()->label('Nama Desa/Kelurahan'),
+                        Forms\Components\TextInput::make('sasaran')
+                            ->numeric()->label('Sasaran'),
+                        Forms\Components\TextInput::make('bayi_mendapatkan_idl')
+                            ->numeric()->label('Bayi Mendapatkan IDL'),
+                        Forms\Components\TextInput::make('cakupan_bayi_mendapatkan_idl')
+                            ->numeric()->label('%Cakupan IDL'),
+                    ])
+                ]),
             ]);
     }
 
@@ -55,29 +64,15 @@ class JumlahDesaKelurahanUCIResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
                 Tables\Columns\TextColumn::make('desaKelurahanPuskesmas.name')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sasaran')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('bayi_mendapatkan_idl')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cakupan_bayi_mendapatkan_idl')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Nama Desa/Kelurahan'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

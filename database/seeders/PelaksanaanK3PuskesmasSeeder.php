@@ -14,6 +14,7 @@ class PelaksanaanK3PuskesmasSeeder extends Seeder
     public function run(): void
     {
         DB::table('pelaksanaan_k3_puskesmas')->insert([
+            'bulan_tahun' => '2024-10-10',
             'identitas_puskesmas_id' => 1,
         ]);
     }

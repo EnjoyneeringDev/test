@@ -15,6 +15,7 @@ class ProgramKesehatanAnakSeeder extends Seeder
     {
         //
         DB::table('program_kesehatan_anaks')->insert([
+            'bulan_tahun' => '2024-10-10',
             'identitas_puskesmas_id' => 1,
         ]);
     }

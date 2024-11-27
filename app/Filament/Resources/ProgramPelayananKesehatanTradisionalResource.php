@@ -6,6 +6,7 @@ use App\Filament\Resources\ProgramPelayananKesehatanTradisionalResource\Pages;
 use App\Filament\Resources\ProgramPelayananKesehatanTradisionalResource\RelationManagers;
 use App\Models\ProgramPelayananKesehatanTradisional;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 class ProgramPelayananKesehatanTradisionalResource extends Resource
 {
     protected static ?string $model = ProgramPelayananKesehatanTradisional::class;
+
+    protected static ?int $navigationSort = 14;
 
     protected static ?string $navigationLabel = '6. Program Pelayanan Kesehatan Tradisional';
 
@@ -32,17 +35,24 @@ class ProgramPelayananKesehatanTradisionalResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
-                        $query->where('id', auth()->user()->identitas_puskesmas_id);
-                    })
-                    ->default(auth()->user()->identitas_puskesmas_id)
-                    ->required()
-                    ->label('Nama Puskesmas'),
-                Forms\Components\TextInput::make('jumlah_hattra_stpt')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_posyandu_asuhan_kesehatan_tradisional')
-                    ->numeric(),
+                Fieldset::make('6. Program Pelayanan Kesehatan Tradisional')->schema([
+                    Fieldset::make('')->schema([
+
+                        Forms\Components\Select::make('identitas_puskesmas_id')
+                            ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                                $query->where('id', auth()->user()->identitas_puskesmas_id);
+                            })
+                            ->default(auth()->user()->identitas_puskesmas_id)
+                            ->required()
+                            ->label('Nama Puskesmas'),
+                        Forms\Components\DatePicker::make('bulan_tahun')
+                            ->required()->label('Tanggal'),
+                    ]),
+                    Forms\Components\TextInput::make('jumlah_hattra_stpt')
+                        ->numeric()->label('a. Jumlah tenaga Penyehat Tradisional (Hattra) di wilayah puskesmas terdaftar (STPT)'),
+                    Forms\Components\TextInput::make('jumlah_posyandu_asuhan_kesehatan_tradisional')
+                        ->numeric()->label('b. Jumlah posyandu yang melaksanakan asuhan Mandiri Kesehatan Tradisional'),
+                ]),
             ]);
     }
 
@@ -50,23 +60,12 @@ class ProgramPelayananKesehatanTradisionalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_hattra_stpt')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_posyandu_asuhan_kesehatan_tradisional')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Nama Puskesmas'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

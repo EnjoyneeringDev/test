@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pelaksanaan_k3_puskesmas', function (Blueprint $table) {
             $table->id();
+            $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
             $table->boolean('terdapat_kebijakan_tertulis_k3')->nullable();
             $table->boolean('tim_k3_puskesmas')->nullable();

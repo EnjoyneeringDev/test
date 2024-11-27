@@ -21,4 +21,9 @@ class ImunisasiTdAnakSDKelas25 extends Model
     {
         return $this->belongsTo(DesaKelurahanPuskesmas::class);
     }
+
+    public function sekolahPuskesmas(): BelongsTo
+    {
+        return $this->belongsTo(SekolahPuskesmas::class);
+    }
 }

@@ -16,6 +16,7 @@ class ImunisasiDTDanCampakAnakKelas1Seeder extends Seeder
         DB::table('imunisasi_d_t_dan_campak_anak_kelas1s')->insert([
             'bulan_tahun' => '2024-10-10',
             'identitas_puskesmas_id' => 1,
+            'sekolah_puskesmas_id' => 1,
             'desa_kelurahan_puskesmas_id' => 1,
         ]);
     }

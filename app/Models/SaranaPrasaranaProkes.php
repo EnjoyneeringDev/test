@@ -17,4 +17,9 @@ class SaranaPrasaranaProkes extends Model
     {
         return $this->hasMany(ProgramKesehatanLingkungan::class);
     }
+
+    public function identitasPuskesmas(): BelongsTo
+    {
+        return $this->belongsTo(IdentitasPuskesmas::class);
+    }
 }

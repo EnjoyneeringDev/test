@@ -6,6 +6,7 @@ use App\Filament\Resources\ProgramKesehatanAnakResource\Pages;
 use App\Filament\Resources\ProgramKesehatanAnakResource\RelationManagers;
 use App\Models\ProgramKesehatanAnak;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 class ProgramKesehatanAnakResource extends Resource
 {
     protected static ?string $model = ProgramKesehatanAnak::class;
+
+    protected static ?int $navigationSort = 10;
 
     protected static ?string $navigationLabel = '4. Program Kesehatan Anak';
 
@@ -32,18 +35,24 @@ class ProgramKesehatanAnakResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
-                        $query->where('id', auth()->user()->identitas_puskesmas_id);
-                    })
-                    ->default(auth()->user()->identitas_puskesmas_id)
-                    ->required()
-                    ->label('Nama Puskesmas'),
-                Forms\Components\TextInput::make('jumlah_balita_dapat_SDIDTK_2x_setahun')
-                    ->numeric(),
-                Forms\Components\TextInput::make('jumlah_anak_prasekolah_periksa_indeks_karies')
-                    ->numeric(),
-                Forms\Components\Toggle::make('puskesmas_mampu_tata_laksana_kekerasan'),
+                Fieldset::make('4. Program Kesehatan Anak')->schema([
+                    Fieldset::make('')->schema([
+                        Forms\Components\Select::make('identitas_puskesmas_id')
+                            ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                                $query->where('id', auth()->user()->identitas_puskesmas_id);
+                            })
+                            ->default(auth()->user()->identitas_puskesmas_id)
+                            ->required()
+                            ->label('Nama Puskesmas'),
+                        Forms\Components\DatePicker::make('bulan_tahun')
+                            ->required()->label('Tanggal'),
+                    ]),
+                    Forms\Components\TextInput::make('jumlah_balita_dapat_SDIDTK_2x_setahun')
+                        ->numeric()->label('a. Jumlah Balita yang telah mendapatkan pelayanan stimulasi deteksi dan intervensi dini tumbuh kembang (SDIDTK) sebanyak 2 kali dalam tahun ini.'),
+                    Forms\Components\TextInput::make('jumlah_anak_prasekolah_periksa_indeks_karies')
+                        ->numeric()->label('b. Jumlah anak prasekolah yang dilakukan pemeriksaan indeks karies'),
+                    Forms\Components\Toggle::make('puskesmas_mampu_tata_laksana_kekerasan')->label('c. Puskesmas mampu tata laksana kekerasan terhadap perempuan dan anak'),
+                ]),
             ]);
     }
 
@@ -51,25 +60,12 @@ class ProgramKesehatanAnakResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_balita_dapat_SDIDTK_2x_setahun')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jumlah_anak_prasekolah_periksa_indeks_karies')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('puskesmas_mampu_tata_laksana_kekerasan')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Nama Puskesmas'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

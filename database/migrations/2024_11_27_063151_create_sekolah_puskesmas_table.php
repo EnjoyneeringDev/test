@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jumlah_desa_kelurahan_u_c_i_s', function (Blueprint $table) {
+        Schema::create('sekolah_puskesmas', function (Blueprint $table) {
             $table->id();
-            $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
-            $table->foreignId('desa_kelurahan_puskesmas_id');
-            $table->integer('sasaran')->nullable();
-            $table->integer('bayi_mendapatkan_idl')->nullable();
-            $table->float('cakupan_bayi_mendapatkan_idl')->nullable();
+            $table->string('nama_sekolah');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jumlah_desa_kelurahan_u_c_i_s');
+        Schema::dropIfExists('sekolah_puskesmas');
     }
 };

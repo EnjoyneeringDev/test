@@ -6,6 +6,7 @@ use App\Filament\Resources\PelaksanaanK3PuskesmasResource\Pages;
 use App\Filament\Resources\PelaksanaanK3PuskesmasResource\RelationManagers;
 use App\Models\PelaksanaanK3Puskesmas;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 class PelaksanaanK3PuskesmasResource extends Resource
 {
     protected static ?string $model = PelaksanaanK3Puskesmas::class;
+
+    protected static ?int $navigationSort = 15;
 
     protected static ?string $navigationLabel = '7. Pelaksanaan K3 Di Lingkungan Puskesmas';
 
@@ -32,16 +35,22 @@ class PelaksanaanK3PuskesmasResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
-                        $query->where('id', auth()->user()->identitas_puskesmas_id);
-                    })
-                    ->default(auth()->user()->identitas_puskesmas_id)
-                    ->required()
-                    ->label('Nama Puskesmas'),
-                Forms\Components\Toggle::make('terdapat_kebijakan_tertulis_k3'),
-                Forms\Components\Toggle::make('tim_k3_puskesmas'),
-                Forms\Components\Toggle::make('penerapan_kewaspadaan_standar_puskesmas'),
+                Fieldset::make('7. Pelaksanaan K3 Di Lingkungan Puskesmas')->schema([
+                    Fieldset::make('')->schema([
+                        Forms\Components\Select::make('identitas_puskesmas_id')
+                            ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                                $query->where('id', auth()->user()->identitas_puskesmas_id);
+                            })
+                            ->default(auth()->user()->identitas_puskesmas_id)
+                            ->required()
+                            ->label('Nama Puskesmas'),
+                        Forms\Components\DatePicker::make('bulan_tahun')
+                            ->required()->label('Tanggal'),
+                    ]),
+                    Forms\Components\Toggle::make('terdapat_kebijakan_tertulis_k3')->label('a. Terdapat kebijakan tertulis pelaksanaan K3 di Lingkungan Sekolah'),
+                    Forms\Components\Toggle::make('tim_k3_puskesmas')->label('b. Tim K3 di Puskesmas (SK Kepala Puskesmas)'),
+                    Forms\Components\Toggle::make('penerapan_kewaspadaan_standar_puskesmas')->label('c. Penerapan Kewaspadaan Standar di Lingkungan Puskesmas'),
+                ]),
             ]);
     }
 
@@ -49,23 +58,12 @@ class PelaksanaanK3PuskesmasResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\IconColumn::make('terdapat_kebijakan_tertulis_k3')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('tim_k3_puskesmas')
-                    ->boolean(),
-                Tables\Columns\IconColumn::make('penerapan_kewaspadaan_standar_puskesmas')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Nama Puskesmas'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

@@ -6,6 +6,7 @@ use App\Filament\Resources\ImunisasiTdAnakSDKelas25Resource\Pages;
 use App\Filament\Resources\ImunisasiTdAnakSDKelas25Resource\RelationManagers;
 use App\Models\ImunisasiTdAnakSDKelas25;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 class ImunisasiTdAnakSDKelas25Resource extends Resource
 {
     protected static ?string $model = ImunisasiTdAnakSDKelas25::class;
+
+    protected static ?int $navigationSort = 8;
 
     protected static ?string $navigationLabel = '3b. Imunisasi Td Anak Sekolah Dasar (sederajat) Kelas 2 Dan 5';
 
@@ -32,30 +35,51 @@ class ImunisasiTdAnakSDKelas25Resource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('identitas_puskesmas_id')
-                    ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
-                        $query->where('id', auth()->user()->identitas_puskesmas_id);
-                    })
-                    ->default(auth()->user()->identitas_puskesmas_id)
-                    ->required()
-                    ->label('Nama Puskesmas'),
-                Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
-                    ->relationship('desaKelurahanPuskesmas', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('sasaran_l')
-                    ->numeric(),
-                Forms\Components\TextInput::make('sasaran_p')
-                    ->numeric(),
-                Forms\Components\TextInput::make('hasil_l')
-                    ->numeric(),
-                Forms\Components\TextInput::make('hasil_p')
-                    ->numeric(),
-                Forms\Components\TextInput::make('cakupan_l')
-                    ->numeric(),
-                Forms\Components\TextInput::make('cakupan_p')
-                    ->numeric(),
-                Forms\Components\TextInput::make('cakupan_t')
-                    ->numeric(),
+                Fieldset::make('IMUNISASI')->schema([
+                    Forms\Components\Select::make('identitas_puskesmas_id')
+                        ->relationship('identitasPuskesmas', 'nama_puskesmas', function ($query) {
+                            $query->where('id', auth()->user()->identitas_puskesmas_id);
+                        })
+                        ->default(auth()->user()->identitas_puskesmas_id)
+                        ->required()
+                        ->label('Nama Puskesmas'),
+                    Forms\Components\DatePicker::make('bulan_tahun')
+                        ->required()->label('Tanggal'),
+                    Fieldset::make('b. Imunisasi Td Anak Sekolah Dasar (sederajat) kelas 2 dan 5')->schema([
+                        Forms\Components\Select::make('sekolah_puskesmas_id')
+                            ->relationship('sekolahPuskesmas', 'nama_sekolah', function ($query) {
+                                $query->where('id', auth()->user()->identitas_puskesmas_id);
+                            })
+                            ->default(auth()->user()->identitas_puskesmas_id)
+                            ->required()
+                            ->label('Nama Sekolah'),
+                        Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
+                            ->relationship('desaKelurahanPuskesmas', 'name')
+                            ->required()->label('Nama Desa/Kelurahan'),
+                        Fieldset::make('Sasaran')->schema([
+                            Forms\Components\TextInput::make('sasaran_l')
+                                ->numeric()->label('L'),
+                            Forms\Components\TextInput::make('sasaran_p')
+                                ->numeric()->label('P'),
+                        ]),
+                        Fieldset::make('Imunisasi Td')->schema([
+                            Fieldset::make('Hasil')->schema([
+                                Forms\Components\TextInput::make('hasil_l')
+                                    ->numeric()->label('L'),
+                                Forms\Components\TextInput::make('hasil_p')
+                                    ->numeric()->label('P'),
+                            ]),
+                            Fieldset::make('%Cakupan')->schema([
+                                Forms\Components\TextInput::make('cakupan_l')
+                                    ->numeric()->label('L'),
+                                Forms\Components\TextInput::make('cakupan_p')
+                                    ->numeric()->label('P'),
+                                Forms\Components\TextInput::make('cakupan_t')
+                                    ->numeric()->label('T'),
+                            ])->columns(3)
+                        ])
+                    ])
+                ]),
             ]);
     }
 
@@ -63,41 +87,18 @@ class ImunisasiTdAnakSDKelas25Resource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()->label('Nama Puskesmas'),
+                Tables\Columns\TextColumn::make('sekolahPuskesmas.nama_sekolah')
+                    ->numeric()
+                    ->sortable()->label('Nama Sekolah'),
                 Tables\Columns\TextColumn::make('desaKelurahanPuskesmas.name')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sasaran_l')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sasaran_p')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('hasil_l')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('hasil_p')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cakupan_l')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cakupan_p')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('cakupan_t')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Nama Desa/Kelurahan'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

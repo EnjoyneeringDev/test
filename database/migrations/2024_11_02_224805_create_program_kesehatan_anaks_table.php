@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('program_kesehatan_anaks', function (Blueprint $table) {
             $table->id();
+            $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
             $table->integer('jumlah_balita_dapat_SDIDTK_2x_setahun')->nullable();
             $table->integer('jumlah_anak_prasekolah_periksa_indeks_karies')->nullable();

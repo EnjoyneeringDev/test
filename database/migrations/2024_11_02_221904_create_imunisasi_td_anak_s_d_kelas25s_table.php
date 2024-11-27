@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('imunisasi_td_anak_s_d_kelas25s', function (Blueprint $table) {
             $table->id();
+            $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
+            $table->foreignId('sekolah_puskesmas_id');
             $table->foreignId('desa_kelurahan_puskesmas_id');
             $table->integer('sasaran_l')->nullable();
             $table->integer('sasaran_p')->nullable();

@@ -197,4 +197,14 @@ class IdentitasPuskesmas extends Model
     {
         return $this->hasMany(SasaranProgram::class);
     }
+
+    public function sekolahPuskesmas(): HasMany
+    {
+        return $this->hasMany(SekolahPuskesmas::class);
+    }
+
+    public function saranaPrasaranaProkes(): HasMany
+    {
+        return $this->hasMany(SaranaPrasaranaProkes::class);
+    }
 }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('program_pelayanan_kesehatan_tradisionals', function (Blueprint $table) {
             $table->id();
+            $table->date('bulan_tahun');
             $table->foreignId('identitas_puskesmas_id');
             $table->integer('jumlah_hattra_stpt')->nullable();
             $table->integer('jumlah_posyandu_asuhan_kesehatan_tradisional')->nullable();

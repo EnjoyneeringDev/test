@@ -18,6 +18,8 @@ class ProgramKesehatanLingkunganResource extends Resource
 {
     protected static ?string $model = ProgramKesehatanLingkungan::class;
 
+    protected static ?int $navigationSort = 12;
+
     protected static ?string $navigationLabel = '5. Program Kesehatan Lingkungan';
 
     protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
@@ -39,6 +41,8 @@ class ProgramKesehatanLingkunganResource extends Resource
                     ->default(auth()->user()->identitas_puskesmas_id)
                     ->required()
                     ->label('Nama Puskesmas'),
+                Forms\Components\DatePicker::make('bulan_tahun')
+                    ->required()->label('Tanggal'),
                 Forms\Components\Select::make('sarana_prasarana_prokes_id')
                     ->relationship('saranaPrasaranaProkes', 'id')
                     ->required(),
@@ -61,38 +65,15 @@ class ProgramKesehatanLingkunganResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('identitasPuskesmas.id')
+                Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('saranaPrasaranaProkes.id')
+                    ->sortable()->label('Nama Puskemas'),
+                Tables\Columns\TextColumn::make('saranaPrasaranaProkes.nama')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('belum_ikl')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('rendah')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sedang')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('tinggi')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('amat_tinggi')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('sertifikat')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->sortable()->label('Sarana'),
+                Tables\Columns\TextColumn::make('bulan_tahun')
+                    ->date()
+                    ->sortable()->label('Tanggal'),
             ])
             ->filters([
                 //

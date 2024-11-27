@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ImunisasiDTDanCampakAnakKelas1 extends Model
+class SekolahPuskesmas extends Model
 {
     use HasFactory;
 
@@ -17,13 +18,13 @@ class ImunisasiDTDanCampakAnakKelas1 extends Model
         return $this->belongsTo(IdentitasPuskesmas::class);
     }
 
-    public function sekolahPuskesmas(): BelongsTo
+    public function imunisasiDTDanCampakAnakKelas1(): HasMany
     {
-        return $this->belongsTo(SekolahPuskesmas::class);
+        return $this->hasMany(ImunisasiDTDanCampakAnakKelas1::class);
     }
 
-    public function desaKelurahanPuskesmas(): BelongsTo
+    public function imunisasiTdAnakSDKelas25(): HasMany
     {
-        return $this->belongsTo(DesaKelurahanPuskesmas::class);
+        return $this->hasMany(ImunisasiTdAnakSDKelas25::class);
     }
 }

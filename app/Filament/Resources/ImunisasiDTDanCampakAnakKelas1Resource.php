@@ -19,6 +19,8 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
 {
     protected static ?string $model = ImunisasiDTDanCampakAnakKelas1::class;
 
+    protected static ?int $navigationSort = 7;
+
     protected static ?string $navigationLabel = '3a. Imunisasi DT dan Campak Anak Sekolah Kelas 1 SD';
 
     protected static ?string $navigationGroup = 'Form 20. LAPORAN TAHUNAN PROGRAM';
@@ -46,6 +48,9 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
                 ]),
                 Fieldset::make('3. IMUNISASI')->schema([
                     Fieldset::make('a. Imunisasi DT dan Campak Anak Sekolah Kelas 1 SD (BIAS DT dan Campak/MR)')->schema([
+                        Forms\Components\Select::make('sekolah_puskesmas_id')
+                            ->relationship('sekolahPuskesmas', 'nama_sekolah')
+                            ->required()->label('Nama Sekolah'),
                         Forms\Components\Select::make('desa_kelurahan_puskesmas_id')
                             ->relationship('desaKelurahanPuskesmas', 'name')
                             ->required()->label('Nama Desa/Kelurahan Puskesmas'),
@@ -61,7 +66,7 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
                                     ->maxLength(255)->label('L'),
                                 Forms\Components\TextInput::make('imunisasi_dt_hasil_p')
                                     ->maxLength(255)->label('P'),
-                            ]),
+                            ])->columns(2),
                             Fieldset::make('%Cakupan')->schema([
                                 Forms\Components\TextInput::make('imunisasi_dt_cakupan_l')
                                     ->maxLength(255)->label('L'),
@@ -69,7 +74,7 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
                                     ->maxLength(255)->label('P'),
                                 Forms\Components\TextInput::make('imunisasi_dt_cakupan_t')
                                     ->maxLength(255)->label('T'),
-                            ])
+                            ])->columns(3)
                         ]),
                         Fieldset::make('Imunisasi Campak/MR')->schema([
                             Fieldset::make('Hasil')->schema([
@@ -77,18 +82,18 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
                                     ->maxLength(255)->label('L'),
                                 Forms\Components\TextInput::make('imunisasi_campak_hasil_p')
                                     ->maxLength(255)->label('P'),
-                            ]),
-
+                            ])->columns(2),
+                            Fieldset::make('%Cakupan')->schema([
+                                Forms\Components\TextInput::make('imunisasi_campak_cakupan_l')
+                                    ->maxLength(255)->label('L'),
+                                Forms\Components\TextInput::make('imunisasi_campak_cakupan_p')
+                                    ->maxLength(255)->label('P'),
+                                Forms\Components\TextInput::make('imunisasi_campak_cakupan_t')
+                                    ->maxLength(255)->label('T'),
+                            ])->columns(3)
                         ])
-
                     ])
                 ]),
-                Forms\Components\TextInput::make('imunisasi_campak_cakupan_l')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_campak_cakupan_p')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('imunisasi_campak_cakupan_t')
-                    ->maxLength(255),
             ]);
     }
 
@@ -99,6 +104,9 @@ class ImunisasiDTDanCampakAnakKelas1Resource extends Resource
                 Tables\Columns\TextColumn::make('identitasPuskesmas.nama_puskesmas')
                     ->numeric()
                     ->sortable()->label('Nama Puskesmas'),
+                Tables\Columns\TextColumn::make('sekolahPuskesmas.nama_sekolah')
+                    ->numeric()
+                    ->sortable()->label('Nama Sekolah'),
                 Tables\Columns\TextColumn::make('desaKelurahanPuskesmas.name')
                     ->numeric()
                     ->sortable()->label('Nama Desa/Kelurahan Puskesmas'),

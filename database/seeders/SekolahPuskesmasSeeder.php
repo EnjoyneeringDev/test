@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ProgramPelayananKesehatanTradisionalSeeder extends Seeder
+class SekolahPuskesmasSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +14,9 @@ class ProgramPelayananKesehatanTradisionalSeeder extends Seeder
     public function run(): void
     {
         //
-        DB::table('program_pelayanan_kesehatan_tradisionals')->insert([
+        DB::table('sekolah_puskesmas')->insert([
             'identitas_puskesmas_id' => 1,
-            'bulan_tahun' => '2024-10-10',
+            'nama_sekolah' => 'Sekolah A',
         ]);
     }
 }
