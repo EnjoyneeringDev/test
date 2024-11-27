@@ -62,12 +62,12 @@ class KelompokPenyakitResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                // Tables\Actions\DeleteBulkAction::make(),
+                // ]),
             ]);
     }
 
@@ -78,10 +78,21 @@ class KelompokPenyakitResource extends Resource
         ];
     }
 
-    public static function canViewAny(): bool
+    public static function canCreate(): bool
     {
         $role = auth()->user()->role;
         $isAllowed = $role == 'super_admin';
+        if ($isAllowed) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function canViewAny(): bool
+    {
+        $role = auth()->user()->role;
+        $isAllowed = $role == 'super_admin' || $role == 'user';
         if ($isAllowed) {
             return true;
         } else {
