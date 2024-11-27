@@ -62,12 +62,12 @@ class KelompokPenyakitResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(fn() => Auth::user()?->role === 'super_admin'),
             ])
             ->bulkActions([
-                // Tables\Actions\BulkActionGroup::make([
-                // Tables\Actions\DeleteBulkAction::make(),
-                // ]),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make()->visible(fn() => Auth::user()?->role === 'super_admin'),
+                ]),
             ]);
     }
 
