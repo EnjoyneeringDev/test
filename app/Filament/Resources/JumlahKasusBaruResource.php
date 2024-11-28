@@ -49,7 +49,7 @@ class JumlahKasusBaruResource extends Resource
                 Fieldset::make('')->schema([
                     Forms\Components\Select::make('jenis_penyakit_id')
                         ->relationship('jenisPenyakit', 'nama')
-                        ->required()->label('Jenis Penyakit'),
+                        ->required()->label('Jenis Penyakit')->searchable()->preload(),
                     Fieldset::make('JUMLAH KASUS BARU (Umur dan Jenis Kelamin) ')->schema([
                         Forms\Components\TextInput::make('0_7_hari')
                             ->numeric()->label('0-7 hari'),
